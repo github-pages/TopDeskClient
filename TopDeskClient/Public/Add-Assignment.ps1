@@ -48,7 +48,7 @@ function Add-Assignment {
         # The id of the asset being assigned to.
         [Parameter(Mandatory = $true,
             ValueFromPipelineByPropertyName = $true)]
-        [ValidateNotNullOrEmpty()]
+        [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [Alias('unid')]
         [string[]]
         $AssetID,
@@ -57,7 +57,7 @@ function Add-Assignment {
         [Parameter(Mandatory = $true,
             ParameterSetName = 'Default',
             ValueFromPipelineByPropertyName = $true)]
-        [ValidateNotNullOrEmpty()]
+        [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [Alias('id')]
         [string]
         $TargetID,
@@ -74,7 +74,7 @@ function Add-Assignment {
         [Parameter(Mandatory = $true,
             ParameterSetName = 'location',
             ValueFromPipelineByPropertyName = $true)]
-            [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
+        [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
         $LocationID,
 
