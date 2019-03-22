@@ -3,19 +3,37 @@ function Add-Assignment {
     <#
     .Synopsis
 
-      Short description
+        Add an assignment to asset.
 
     .DESCRIPTION
 
-      Long description
+        This command will add an additional assignment to an asset. Assignements are one of person, personGroup, Incident, Branch, location. 
 
-    .PARAMETER <Parameter-Name>
+    .PARAMETER AssetID
 
-      The description of a parameter.
+        The id (unid) of the asset being assigned to.
+
+    .PARAMETER TargetID
+
+        The id (unid) of the entity to assign to the asset.
+
+    .PARAMETER TargetType
+
+        The type of entity being assigned - possible values person, personGroup, Incident, Branch.
+
+    .PARAMETER LocationID
+
+        The id (unid) of the location to assign to the asset.
+
+    .PARAMETER BranchID
+
+        The id (unid) of the branch containing the location.
 
     .EXAMPLE
 
-      Example of how to use this cmdlet
+        Add-Assignment -AssetID '7ac3e7e6-ac6c-5f74-a0fd-d508793adf51' -TargetID '8d446c8c-1379-4864-a682-559a9dd055b5' -TargetType 'incident'
+
+        Add a link to asset with unid '7ac3e7e6-ac6c-5f74-a0fd-d508793adf51' for Incident with unid '8d446c8c-1379-4864-a682-559a9dd055b5'.
 
     .INPUTS
 
