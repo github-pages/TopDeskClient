@@ -57,7 +57,7 @@ function Get-Incident {
         ValueFromPipelineByPropertyName = $true,
         ParameterSetName = 'ByAssetName')]
         [ValidateNotNullOrEmpty()]
-        [Alias('name')]
+        [Alias('AssetID','name')]
         [string]
         $AssetName
 
