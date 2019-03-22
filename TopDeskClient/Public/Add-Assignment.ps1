@@ -168,8 +168,6 @@ function Add-Assignment {
 
     }
 
-    end {
-
-    }
+    end {}
 
 }
