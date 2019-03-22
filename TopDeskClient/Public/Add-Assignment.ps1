@@ -120,13 +120,9 @@ function Add-Assignment {
                             'linkType' = $TargetType
                             'linkToId' = $TargetID
                         }
-
                         $_body = ConvertTo-Json -InputObject $_body
-
                         Write-Verbose -Message ("Setting assignment with body {0}" -f $_body)
-
                         Get-APIResponse -Method 'PUT' -APIUrl $_uri -Body $_body -Headers $_headerstring -tdCredential $script:tdCredential;
-
                         break
 
                     }
