@@ -47,7 +47,7 @@
             ParameterSetName = 'Simple',
             ValueFromPipelineByPropertyName = $true)]
         [ValidateNotNullOrEmpty()]
-        [Alias('ID')]
+        [Alias('unid','ID')]
         [string[]]
         $PersonID,
 
