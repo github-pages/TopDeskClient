@@ -2,16 +2,16 @@
 
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-$script:tdCredential = [pscredential]::Empty;
-$script:tdAPIVersion = 0;
-$script:tdConnected = $false;
-$script:tdURI = '';
+$script:tdCredential = [pscredential]::Empty
+$script:tdAPIVersion = 0
+$script:tdConnected = $false
+$script:tdURI = ''
 
 $functionFolders = @('Private', 'Public', 'Classes')
 ForEach ($folder in $functionFolders)
 {
     $folderPath = Join-Path -Path $PSScriptRoot -ChildPath $folder
-    Write-Verbose -Message "Prossing folder $folderPath";
+    Write-Verbose -Message "Prossing folder $folderPath"
     If (Test-Path -Path $folderPath)
     {
         Write-Verbose -Message "Importing from $folder"
