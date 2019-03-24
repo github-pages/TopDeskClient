@@ -92,7 +92,12 @@
         [Parameter(Mandatory = $true,
             ParameterSetName = 'Impact')]
         [switch]
-        $Impact
+        $Impact,
+
+        # Suppress confirmation prompt?
+        [Parameter(Mandatory = $false)]
+        [switch]
+        $Force
     )
 
     begin {
