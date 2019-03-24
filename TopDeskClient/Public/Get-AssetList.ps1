@@ -37,7 +37,6 @@ function Get-AssetList
       Repeat the ".LINK" keyword for each related topic.
   #>
     [CmdletBinding(DefaultParameterSetName='Default',
-                SupportsShouldProcess=$true,
                 PositionalBinding=$false,
                 HelpUri = 'https://github.com/rbury/Docs/Get-AssetList.md',
                 ConfirmImpact='Medium')]
