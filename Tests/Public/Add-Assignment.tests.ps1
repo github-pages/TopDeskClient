@@ -205,7 +205,7 @@ Describe "Add-Assignment" {
                         (Get-Command $FunctionName).Parameters['AssetID'].Aliases.Contains('unid') | Should -Be $true
                     }
     
-                    It "Should accept on or more strings" {
+                    It "Should accept one or more strings" {
                         (Get-Command $FunctionName).Parameters['AssetID'].ParameterType.Name | Should -Be String[]
                     }
     
