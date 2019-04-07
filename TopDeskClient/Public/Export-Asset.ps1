@@ -101,7 +101,7 @@
         $_fileName = Split-Path $FilePath -Leaf
 
         if(-not(Test-Path -Path $_path -PathType Container)) {
-            New-Item -Path $_path -ItemType Container -Force
+            $null = New-Item -Path $_path -ItemType Container -Force
         }
 
     }
