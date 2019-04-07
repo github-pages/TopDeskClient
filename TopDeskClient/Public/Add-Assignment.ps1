@@ -65,6 +65,10 @@ function Add-Assignment {
 
         # The id of the asset being assigned to.
         [Parameter(Mandatory = $true,
+            ParameterSetName = 'Default',
+            ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Mandatory = $true,
+            ParameterSetName = 'location',
             ValueFromPipelineByPropertyName = $true)]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [Alias('unid')]
@@ -168,6 +172,7 @@ function Add-Assignment {
 
     }
 
-    end {}
+    end {
+    }
 
 }
