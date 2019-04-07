@@ -46,7 +46,6 @@
 
         # Get all resons and ids
         [Parameter(Mandatory = $false,
-            ValueFromPipelineByPropertyName = $true,
             ParameterSetName = 'Default')]
         [switch]
         $All,
