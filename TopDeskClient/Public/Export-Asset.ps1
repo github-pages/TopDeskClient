@@ -117,7 +117,7 @@
             }
             'csv' {
 
-                foreach ($item in $Assets.dataSet) {
+                foreach ($item in $Assets) {
                     Export-Csv -Path $FilePath -InputObject $item -Append -NoTypeInformation
                 }
 
