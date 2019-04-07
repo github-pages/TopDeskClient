@@ -47,17 +47,7 @@
 
         # Path to file
         [Parameter(Mandatory = $true,
-            ValueFromPipelineByPropertyName = $true,
-            ValueFromPipeline = $true,
-            ParameterSetName = 'Default')]
-        [Parameter(Mandatory = $true,
-            ValueFromPipelineByPropertyName = $true,
-            ValueFromPipeline = $true,
-            ParameterSetName = 'json')]
-        [Parameter(Mandatory = $true,
-            ValueFromPipelineByPropertyName = $true,
-            ValueFromPipeline = $true,
-            ParameterSetName = 'csv')]
+            ValueFromPipelineByPropertyName = $true)]
         [ValidateNotNullOrEmpty()]
         [Alias('Path', 'File')]
         [string]
@@ -65,17 +55,7 @@
 
         # Assets to export
         [Parameter(Mandatory = $true,
-            ValueFromPipelineByPropertyName = $true,
-            ValueFromPipeline = $true,
-            ParameterSetName = 'Default')]
-        [Parameter(Mandatory = $true,
-            ValueFromPipelineByPropertyName = $true,
-            ValueFromPipeline = $true,
-            ParameterSetName = 'json')]
-        [Parameter(Mandatory = $true,
-            ValueFromPipelineByPropertyName = $true,
-            ValueFromPipeline = $true,
-            ParameterSetName = 'csv')]
+            ValueFromPipelineByPropertyName = $true)]
         [ValidateNotNullOrEmpty()]
         [Alias('object')]
         [psobject]
