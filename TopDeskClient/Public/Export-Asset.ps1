@@ -100,6 +100,10 @@
         $_path = Split-Path $FilePath
         $_fileName = Split-Path $FilePath -Leaf
 
+        if(-not(Test-Path -Path $_path -PathType Container)) {
+            New-Item -Path $_path -ItemType Container -Force
+        }
+
     }
 
     process {
