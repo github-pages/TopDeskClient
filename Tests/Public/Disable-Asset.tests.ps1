@@ -246,7 +246,7 @@ Describe Disable-Asset {
                     }
 
                     It "Should only be in one parameterset" {
-                        (Get-Command Disable-Asset).Parameters['Archive'].ParameterSets.Count
+                        (Get-Command $FunctionName).Parameters['Archive'].ParameterSets.Count | Should -HaveCount 1
                     }
     
                 }
