@@ -80,7 +80,7 @@
         switch ($PSCmdlet.ParameterSetName) {
             'ByName' {
 
-                (Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers $_headerslist -tdCredential $script:tdCredential).Where( {$_.name -eq $ReasonName}).id
+                ((Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers $_headerslist -tdCredential $script:tdCredential) | Where-Object {$_.name -eq $ReasonName}).id
                 # $_response.name.Where({$_ -eq $ReasonName})
                 # $_response.name.Where({$_ -eq $ReasonName}).id
 
