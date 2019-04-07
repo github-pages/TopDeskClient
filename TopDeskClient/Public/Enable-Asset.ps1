@@ -92,7 +92,7 @@
                 
                $_uri = $Script:tdURI + '/tas/api/assetmgmt/assets/' + $AssetID + '/unarchive'
 
-                Get-APIResponse -Method 'POST' -APIUrl $_uri -Headers $_headerslist -tdCredential $script:tdCredential
+               $result = Get-APIResponse -Method 'POST' -APIUrl $_uri -Headers $_headerslist -tdCredential $script:tdCredential
 
             }
         }
@@ -113,7 +113,7 @@
     
                 $_body = ConvertTo-Json -InputObject $_body
     
-                $null = Get-APIResponse -Method 'POST' -APIUrl $_uri -body $_body -Headers $_headerslist -tdCredential $script:tdCredential
+                $result = Get-APIResponse -Method 'POST' -APIUrl $_uri -body $_body -Headers $_headerslist -tdCredential $script:tdCredential
 
             }
         }
@@ -122,6 +122,8 @@
                 Write-Error ("Problem unarchiving asset {0}" -f $_.Exception.Message)
     
         }
+
+        return $result
     }
 
     end {}
