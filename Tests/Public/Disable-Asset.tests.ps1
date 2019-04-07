@@ -262,7 +262,7 @@ Describe Disable-Asset {
                     }
 
                     It "Should only be in one parameterset" {
-                        (Get-Command Disable-Asset).Parameters['ReasonID'].ParameterSets.Count
+                        (Get-Command $FunctionName).Parameters['ReasonID'].ParameterSets.Count | Should -HaveCount 1
                     }
     
                 }
@@ -278,7 +278,7 @@ Describe Disable-Asset {
                     }
 
                     It "Should only be in one parameterset" {
-                        (Get-Command Disable-Asset).Parameters['Impact'].ParameterSets.Count
+                        (Get-Command $FunctionName).Parameters['Impact'].ParameterSets.Count | Should -HaveCount 1
                     }
     
                 }
