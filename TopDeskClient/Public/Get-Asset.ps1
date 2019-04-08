@@ -289,7 +289,7 @@ function Get-Asset {
                     }
                     else {
 
-                        Write-Error ("Problem retrieving assets")
+                        Write-Error ("Problem retrieving assets with uri {0}" -f $_uri)
 
                     }
                 }
