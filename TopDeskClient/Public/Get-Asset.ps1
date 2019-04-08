@@ -76,8 +76,7 @@ function Get-Asset {
 
         # Limit to archived only
         [Parameter(Mandatory = $false,
-            ParameterSetName = 'ArchivedAssets',
-            ValueFromPipelineByPropertyName = $true)]
+            ParameterSetName = 'ArchivedAssets')]
         [switch]
         $ArchivedOnly,
 
