@@ -70,8 +70,7 @@ function Get-Asset {
 
         # Limit to active only
         [Parameter(Mandatory = $false,
-            ParameterSetName = 'AllAssets',
-            ValueFromPipelineByPropertyName = $true)]
+            ParameterSetName = 'AllAssets')]
         [switch]
         $ActiveOnly,
 
