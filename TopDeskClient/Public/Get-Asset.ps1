@@ -333,6 +333,8 @@ function Get-Asset {
 
                 }
 
+                Write-Verbose $_uri
+
                 $null = $_returnval.Add((Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers @{'Content-Type' = 'application/json'} -tdCredential $script:tdCredential))
 
             }
