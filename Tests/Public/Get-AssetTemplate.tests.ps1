@@ -1,61 +1,36 @@
-function Get-AssetTemplate
-{
-  <#
-    .Synopsis
+Import-Module $PSScriptRoot\..\..\TopDeskClient\TopDeskClient.psd1 -Force
 
-      Short description
+Describe "Get-AssetTemplate" {
 
-    .DESCRIPTION
+    InModuleScope -ModuleName TopDeskClient {
 
-      Long description
+        $FunctionName = 'Get-AssetTemplate'
 
-    .PARAMETER <Parameter-Name>
+        Mock -CommandName  Get-APIResponse -MockWith { return 'catch-all' }
 
-      The description of a parameter.
+        Context "Connection State" {
+            
+            It "Should throw when client is disconnected" {
+                $script:TDConnected = $false
+                { Get-AssetTemplate } | Should -Throw
+            }
 
-    .EXAMPLE
+            It "Should NOT have performed any API calls" {
+                Assert-MockCalled -CommandName Get-APIResponse -Times 0
+            }
 
-      Example of how to use this cmdlet
+        }
 
-    .INPUTS
+        Context "Function Call" {
 
-      The Microsoft .NET Framework types of objects that can be piped to the function or script.
-      You can also include a description of the input objects.
+            $script:TDConnected = $true
+            Mock -CommandName Get-APIResponse -MockWith {return 'CardTypes'} -ParameterFilter { $_uri -and $_uri -eq '/tas/api/assetmgmt/cardTypes/' } -Verifiable
+            $AsssetTemplate = Get-AssetTemplate
 
-    .OUTPUTS
-
-      The .NET Framework type of the objects that the cmdlet returns.
-      You can also include a description of the returned objects.
-
-    .NOTES
-
-      Additional information about the function or script.
-
-    .LINK
-    
-      The name of a related topic. The value appears on the line below the ".LINK" keyword and must be preceded by a comment symbol # or included in the comment block.
-      Repeat the ".LINK" keyword for each related topic.
-  #>
-    [CmdletBinding(DefaultParameterSetName='Default',
-                SupportsShouldProcess=$true,
-                PositionalBinding=$false,
-                HelpUri = 'https://github.com/rbury/',
-                ConfirmImpact='Medium')]
-    [OutputType([String], ParameterSetName = "Default")]
-    Param
-    (
-
-    )
-    begin
-    {
-
-    }
-    process
-    {
-
-    }
-    end
-    {
-
+            It "Should call API to get cardTypes" {
+                $AsssetTemplate | Should -Be 'cardTypes'
+                Assert-VerifiableMock
+            }
+        }
     }
 }
