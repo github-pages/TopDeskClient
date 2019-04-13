@@ -566,7 +566,7 @@ Describe "Get-Asset" {
                         (Get-Command $FunctionName).ParameterSets.Where( { $_.Name -eq 'AllAssets' }).IsDefault | Should -Be $true
                     }
 
-                    It "Should have 1 parameter in AllAssets" {
+                    It "Should have 5 parameters in AllAssets" {
                         (Get-Command $FunctionName).ParameterSets.Where( { $_.Name -eq 'AllAssets' }).Parameters.Name | Should -Contain 'AssetType'
                         (Get-Command $FunctionName).ParameterSets.Where( { $_.Name -eq 'AllAssets' }).Parameters.Name | Should -Contain 'OperationalStatus'
                         (Get-Command $FunctionName).ParameterSets.Where( { $_.Name -eq 'AllAssets' }).Parameters.Name | Should -Contain 'ActiveOnly'

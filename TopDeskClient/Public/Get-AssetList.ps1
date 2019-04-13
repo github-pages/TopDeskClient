@@ -70,6 +70,14 @@ function Get-AssetList
 
         }
 
+        $_headerslist = @{
+            'Content-Type' = 'application/json'
+        }
+
+    }
+
+    process {
+
         $_uri = $script:tdURI + '/tas/api/assetmgmt/assets/templateId/' + $TemplateID
 
         if($PSBoundParameters.ContainsKey('Fields')) {
@@ -102,14 +110,6 @@ function Get-AssetList
             }
 
         }
-
-        $_headerslist = @{
-            'Content-Type' = 'application/json'
-        }
-
-    }
-
-    process {
 
         Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers $_headerslist -tdCredential $script:tdCredential
 

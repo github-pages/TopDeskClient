@@ -1,61 +1,149 @@
-function Get-AssetList
-{
-  <#
-    .Synopsis
+Import-Module $PSScriptRoot\..\..\TopDeskClient\TopDeskClient.psd1 -Force
 
-      Short description
+Describe "Get-AssetList" {
 
-    .DESCRIPTION
+    InModuleScope -ModuleName TopDeskClient {
 
-      Long description
+        $FunctionName = 'Get-AssetList'
 
-    .PARAMETER <Parameter-Name>
+        Mock -CommandName Get-APIResponse -MockWith { return 'catch-all'}
 
-      The description of a parameter.
+        Context "Connection state" {
 
-    .EXAMPLE
+            It "Should throw when client is disconnected" {
+                $script:TDConnected = $false
+                { Get-AssetList -TemplateID 'D7DD7924-D6C7-465E-A811-06D51C5595C2' } | Should -Throw
+            }
 
-      Example of how to use this cmdlet
+            It "Should NOT have performed any API calls" {
+                Assert-MockCalled -CommandName Get-APIResponse -Times 0
+            }
+            
+        }
 
-    .INPUTS
+        Context "Pipeline input" {
 
-      The Microsoft .NET Framework types of objects that can be piped to the function or script.
-      You can also include a description of the input objects.
+            $script:TDConnected = $true
 
-    .OUTPUTS
+            Context "AssetList by TemplateID" {
+                $Template = [PSCustomObject]@{
+                    TemplateID = [string]'D7DD7924-D6C7-465E-A811-06D51C5595C2'
+                }
+                $param1 = $Template.TemplateID
+                Mock -CommandName Get-APIResponse -MockWith { return 'SampleList' } -ParameterFilter { $_uri -and $_uri -eq '/tas/api/assetmgmt/assets/templateId/' + $param1 } -Verifiable
+                $AssetList = ($Template | Get-AssetList)
 
-      The .NET Framework type of the objects that the cmdlet returns.
-      You can also include a description of the returned objects.
+                It "Returns a value when piped a TemplateID" {
+                    $AssetList | Should -Not -BeNullOrEmpty
+                }
 
-    .NOTES
+                It "Performs 1 API call" {
+                    $AssetList | Should -Be 'SampleList'
+                    Assert-VerifiableMock
+                }
 
-      Additional information about the function or script.
+                Context "with fields" {
 
-    .LINK
-    
-      The name of a related topic. The value appears on the line below the ".LINK" keyword and must be preceded by a comment symbol # or included in the comment block.
-      Repeat the ".LINK" keyword for each related topic.
-  #>
-    [CmdletBinding(DefaultParameterSetName='Default',
-                SupportsShouldProcess=$true,
-                PositionalBinding=$false,
-                HelpUri = 'https://github.com/rbury/',
-                ConfirmImpact='Medium')]
-    [OutputType([String], ParameterSetName = "Default")]
-    Param
-    (
+                    $Template = [PSCustomObject]@{
+                        TemplateID = [string]'D7DD7924-D6C7-465E-A811-06D51C5595C2'
+                        Fields = @('name','unid')
+                    }
 
-    )
-    begin
-    {
+                    $param1 = $Template.TemplateID
+                    $param2 = $Template.Fields
+                    Mock -CommandName Get-APIResponse -MockWith {return 'SampleList_fields'} -ParameterFilter { $_uri -and $_uri -eq '/tas/api/assetmgmt/assets/templateId/' + $param1 + '?field=' + $param2[0] + '&field=' + $param2[1] } -Verifiable
+                    $AssetList = ($Template | Get-AssetList)
 
-    }
-    process
-    {
+                    It "Returns a value when piped a TemplateID and Fields" {
+                        $AssetList | Should -Not -BeNullOrEmpty
+                    }
 
-    }
-    end
-    {
+                    It "Performs 1 API call" {
+                        $AssetList | Should -Be 'SampleList_fields'
+                        Assert-VerifiableMock
+                    }
+                }
+            }
+        }
+
+        Context "Calling with parameters" {
+            $script:TDConnected = $true
+            Mock -CommandName Get-APIResponse -MockWith { return 'catch-all' }
+
+            Context "Get AssetList by TemplateID" {
+                [string]$param1 = 'D7DD7924-D6C7-465E-A811-06D51C5595C2'
+                Mock -CommandName Get-APIResponse -MockWith { return 'SampleList' } -ParameterFilter { $_uri -and $_uri -eq '/tas/api/assetmgmt/assets/templateId/' + $param1 } -Verifiable
+
+                $AssetList = (Get-AssetList -TemplateID $param1)
+
+                It "Returns a value" {
+                    $AssetList | Should -Not -BeNullOrEmpty
+                    $AssetList | Should -Be 'SampleList'
+                }
+
+                It "Performs 1 API call" {
+                    $AssetList | Should -Be 'SampleList'
+                    Assert-VerifiableMock
+                }
+            }
+
+            Context "Get AssetList with fields" {
+                $param1 = 'D7DD7924-D6C7-465E-A811-06D51C5595C2'
+                $param2 = @('name','unid')
+
+                Mock -CommandName Get-APIResponse -MockWith {return 'SampleList_fields'} -ParameterFilter { $_uri -and $_uri -eq '/tas/api/assetmgmt/assets/templateId/' + $param1 + '?field=' + $param2[0] + '&field=' + $param2[1] } -Verifiable
+                $AssetList = Get-AssetList -TemplateID $param1 -Fields $param2
+
+                It "Returns a value with fields" {
+                    $AssetList | Should -Not -BeNullOrEmpty
+                    $AssetList | Should -Be 'SampleList_fields'
+                }
+
+                It "Performs 1 API call" {
+                    Assert-VerifiableMock
+                }
+
+            }
+
+        }
+
+        Context "Parameters" {
+
+            Context "ParameterSets" {
+
+                Context "Default" {
+
+                    It "Should have a default parameterset named Deafault" {
+                        (Get-Command $FunctionName).ParameterSets.Name -icontains 'Default' | Should -Be $true
+                        (Get-Command $FunctionName).ParameterSets.Where( { $_.Name -eq 'Default' }).IsDefault | Should -Be $true
+                    }
+
+                    It "Should have 3 parameters in AllAssets" {
+                        (Get-Command $FunctionName).ParameterSets.Where( { $_.Name -eq 'Default' }).Parameters.Name | Should -Contain 'TemplateID'
+                        (Get-Command $FunctionName).ParameterSets.Where( { $_.Name -eq 'Default' }).Parameters.Name | Should -Contain 'Fields'
+                        (Get-Command $FunctionName).ParameterSets.Where( { $_.Name -eq 'Default' }).Parameters.Name | Should -Contain 'Archive'
+                    }
+
+                }
+            }
+
+            Context "Mandatory parameters" {
+
+                It "TemplateID should be mandatory" {
+                    Get-Command $FunctionName | Should -HaveParameter -ParameterName 'TemplateID' -Type [string] -Mandatory
+                }
+
+                It "Fields should NOT be mandatory" {
+                    Get-Command $FunctionName | Should -HaveParameter -ParameterName 'Fields'  -Type [string[]]
+                }
+
+                It "Archive should NOT be mandatory" {
+                    Get-Command $FunctionName | Should -HaveParameter -ParameterName 'Archive'  -Type [switch]
+                }
+                    
+            }
+
+        }
 
     }
 }
