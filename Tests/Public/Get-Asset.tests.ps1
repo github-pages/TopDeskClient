@@ -413,6 +413,12 @@ Describe "Get-Asset" {
                 Name = 'Filtered Asset'
             }
 
+            $LinkListSearch = [PSCustomObject]@{
+                LinkList = [Hashtable]@{
+                    'person' = '1234567'
+                }
+            }
+
             Context "Get Assets by Type" {
                 $param1 = 'Computer'
                 Mock -CommandName Get-APIResponse -MockWith { return $returnobj } -ParameterFilter { $_uri -and $_uri -eq '/tas/api/assetmgmt/assets?templateName=' + $param1 + '&fields=name&showAssignments=$true' } -Verifiable
