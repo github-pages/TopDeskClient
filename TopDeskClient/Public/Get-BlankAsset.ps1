@@ -52,7 +52,8 @@
 
         # Asset template name (case sensitive)
         [Parameter(Mandatory = $true,
-            ValueFromPipelineByPropertyName = $true)]
+            ValueFromPipelineByPropertyName = $true,
+            ParameterSetName = 'Default')]
         [Alias('Name')]
         [string]
         $TemplateName
