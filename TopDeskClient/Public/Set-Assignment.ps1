@@ -138,7 +138,10 @@
 
                 $_body = ConvertTo-Json -InputObject $_body
 
-                Get-APIResponse -Method 'PUT' -APIUrl $_uri -Body $_body -Headers $_headerstring -tdCredential $script:tdCredential;
+                if ($PSBoundParameters.ContainsKey('Force') -or ($PSCmdlet.ShouldProcess('Set Asset Assignment', 'Set this assignment on the Asset?', "Set assignment id $TargetID and asset id $AssetID"))) {
+
+                    Get-APIResponse -Method 'PUT' -APIUrl $_uri -Body $_body -Headers $_headerstring -tdCredential $script:tdCredential;
+                }
 
                 break
 
@@ -156,7 +159,9 @@
 
             $_body = ConvertTo-Json -InputObject $_body
 
-            Get-APIResponse -Method 'PUT' -APIUrl $_uri -Body $_body -Headers $_headerstring -tdCredential $script:tdCredential;
+            if ($PSBoundParameters.ContainsKey('Force') -or ($PSCmdlet.ShouldProcess('Set Asset Assignment', 'Set this assignment on the Asset?', "Set assignment id $TargetID and asset id $AssetID"))) {
+                Get-APIResponse -Method 'PUT' -APIUrl $_uri -Body $_body -Headers $_headerstring -tdCredential $script:tdCredential;
+            }
 
             break
 
@@ -174,7 +179,9 @@
 
             $_body = ConvertTo-Json -InputObject $_body
 
-            Get-APIResponse -Method 'PUT' -APIUrl $_uri -Body $_body -Headers $_headerstring -tdCredential $script:tdCredential
+            if ($PSBoundParameters.ContainsKey('Force') -or ($PSCmdlet.ShouldProcess('Set Asset Assignment', 'Set this assignment on the Asset?', "Set assignment id $TargetID and asset id $AssetID"))) {
+                Get-APIResponse -Method 'PUT' -APIUrl $_uri -Body $_body -Headers $_headerstring -tdCredential $script:tdCredential
+            }
 
             break
 
@@ -192,7 +199,9 @@
 
             $_body = ConvertTo-Json -InputObject $_body
 
-            Get-APIResponse -Method 'PUT' -APIUrl $_uri -Body $_body -Headers $_headerstring -tdCredential $script:tdCredential
+            if ($PSBoundParameters.ContainsKey('Force') -or ($PSCmdlet.ShouldProcess('Set Asset Assignment', 'Set this assignment on the Asset?', "Set assignment id $TargetID and asset id $AssetID"))) {
+                Get-APIResponse -Method 'PUT' -APIUrl $_uri -Body $_body -Headers $_headerstring -tdCredential $script:tdCredential
+            }
 
             break
 
