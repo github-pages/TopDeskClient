@@ -59,21 +59,24 @@
     Param (
 
         # The id of the asset to assign to.
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true,
+        ValueFromPipelineByPropertyName = $true)]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [Alias('unid')]
         [string]
         $AssetID,
 
         # The template id specifying the type of the asset.
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true,
+        ValueFromPipelineByPropertyName = $true)]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [Alias('type_id')]
         [string]
         $TemplateID,
 
         # The id of the target to be assigned to.
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true,
+        ValueFromPipelineByPropertyName = $true)]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [Alias('id')]
         [string[]]
