@@ -45,6 +45,8 @@
         # ID of person to retrieve
         [Parameter(Mandatory = $true,
             ParameterSetName = 'Simple',
+            ValueFromPipeline = $false,
+            ValueFromRemainingArguments = $false,
             ValueFromPipelineByPropertyName = $true)]
         [ValidateNotNullOrEmpty()]
         [Alias('unid','ID')]
@@ -53,13 +55,18 @@
 
         # Get a list of all persons
         [Parameter(Mandatory = $true,
-            ParameterSetName = 'List')]
+            ParameterSetName = 'List',
+            ValueFromPipeline = $false,
+            ValueFromRemainingArguments = $false,
+            ValueFromPipelineByPropertyName = $true)]
         [switch]
         $List,
 
         # SSP login name to lookup for person
         [Parameter(Mandatory = $true,
             ParameterSetName = 'BySSP',
+            ValueFromPipeline = $false,
+            ValueFromRemainingArguments = $false,
             ValueFromPipelineByPropertyName = $true)]
         [ValidateNotNullOrEmpty()]
         [string[]]
@@ -68,6 +75,8 @@
         # Network login name to lookup for person
         [Parameter(Mandatory = $true,
             ParameterSetName = 'ByNetworkLogin',
+            ValueFromPipeline = $false,
+            ValueFromRemainingArguments = $false,
             ValueFromPipelineByPropertyName = $true)]
         [ValidateNotNullOrEmpty()]
         [string[]]
@@ -76,6 +85,8 @@
         # Email address to lookup for person
         [Parameter(Mandatory = $true,
             ParameterSetName = 'ByEmail',
+            ValueFromPipeline = $false,
+            ValueFromRemainingArguments = $false,
             ValueFromPipelineByPropertyName = $true)]
         [ValidateNotNullOrEmpty()]
         [string[]]
@@ -84,6 +95,8 @@
         # Last name to lookup for person
         [Parameter(Mandatory = $true,
             ParameterSetName = 'ByLastName',
+            ValueFromPipeline = $false,
+            ValueFromRemainingArguments = $false,
             ValueFromPipelineByPropertyName = $true)]
         [ValidateNotNullOrEmpty()]
         [string[]]
@@ -92,6 +105,8 @@
         # First name to lookup for person
         [Parameter(Mandatory = $true,
             ParameterSetName = 'ByFirstName',
+            ValueFromPipeline = $false,
+            ValueFromRemainingArguments = $false,
             ValueFromPipelineByPropertyName = $true)]
         [ValidateNotNullOrEmpty()]
         [string[]]
@@ -99,6 +114,8 @@
 
         # Include archived records?
         [Parameter(Mandatory = $false,
+            ValueFromPipeline = $false,
+            ValueFromRemainingArguments = $false,
             ValueFromPipelineByPropertyName = $true)]
         [bool]
         $Archived = $false
