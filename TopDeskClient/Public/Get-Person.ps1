@@ -135,7 +135,7 @@
                 break
             }
 
-            'Details' {
+            'Simple' {
 
                 foreach ($_person in $PersonID) {
 
