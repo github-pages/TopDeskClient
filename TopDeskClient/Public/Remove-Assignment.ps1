@@ -47,13 +47,9 @@
         # ID of the Asset
         [Parameter(Mandatory = $true,
             ParameterSetName = 'Confirm',
-            ValueFromPipeline = $false,
-            ValueFromRemainingArguments = $false,
             ValueFromPipelineByPropertyName = $true)]
         [Parameter(Mandatory = $true,
             ParameterSetName = 'Force',
-            ValueFromPipeline = $false,
-            ValueFromRemainingArguments = $false,
             ValueFromPipelineByPropertyName = $true)]
         [ValidateNotNullOrEmpty()]
         [Alias('unid')]
