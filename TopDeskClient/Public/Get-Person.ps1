@@ -160,13 +160,14 @@
 
                     if ($Archived) {
 
-                        $_uri += '&archived=$true'
+                        $_uri += "&archived=$true"
 
                     }
 
                     $_headerslist = @{
                         'Content-Type' = 'application/json'
                     }
+
                     Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers $_headerslist -tdCredential $script:tdCredential
 
                 }
@@ -182,7 +183,7 @@
 
                     if ($Archived) {
 
-                        $_uri += '&archived=$true'
+                        $_uri += "&archived=$true"
 
                     }
 
@@ -205,7 +206,7 @@
 
                     if ($Archived) {
 
-                        $_uri += '&archived=$true'
+                        $_uri += "&archived=$true"
 
                     }
 
@@ -229,7 +230,7 @@
 
                     if ($Archived) {
 
-                        $_uri += '&archived=$true'
+                        $_uri += "&archived=$true"
 
                     }
 
@@ -253,7 +254,7 @@
 
                     if ($Archived) {
 
-                        $_uri += '&archived=$true'
+                        $_uri += "&archived=$true"
 
                     }
 
@@ -277,7 +278,7 @@
 
                     if ($Archived) {
 
-                        $_uri += '&archived=$true'
+                        $_uri += "&archived=$true"
 
                     }
 
