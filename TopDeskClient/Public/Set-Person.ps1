@@ -40,212 +40,212 @@ function Set-Person
                 PositionalBinding=$false,
                 HelpUri = 'https://github.com/rbury/',
                 ConfirmImpact='Medium')]
-    [OutputType([String], ParameterSetName = "Default")]
+    [OutputType([psobject], ParameterSetName = "Default")]
     Param (
-        
+
         # ID of person to modify
         [Parameter(Mandatory = $true,
         ValueFromPipelineByPropertyName = $true)]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
-        [string]
+        [string[]]
         $PersonID,
 
         # LastName of person
         [Parameter(Mandatory = $false,
         ValueFromPipelineByPropertyName = $true)]
         [ValidateLength(1,50)]
-        [string]
+        [string[]]
         $surName,
 
         # FirstName of person
         [Parameter(Mandatory = $false)]
         [ValidateLength(1,30)]
-        [string]
+        [string[]]
         $firstName,
 
         # Person initials
         [Parameter(Mandatory = $false)]
         [ValidateLength(1,10)]
-        [string]
+        [string[]]
         $firstInitials,
 
         # Person prefix
         [Parameter(Mandatory = $false)]
         [ValidateLength(1,10)]
-        [string]
+        [string[]]
         $prefixes,
 
         # Person gender
         [Parameter(Mandatory = $false)]
         [ValidateSet('UNDEFINED','MALE','FEMALE')]
-        [string]
+        [string[]]
         $gender,
 
         # Person employee number
         [Parameter(Mandatory = $false)]
         [ValidateLength(1,20)]
-        [string]
+        [string[]]
         $employeeNumber,
 
         # Network login name
         [Parameter(Mandatory = $false)]
         [ValidateLength(1,100)]
-        [string]
+        [string[]]
         $networkLoginName,
 
         # Branch
         [Parameter(Mandatory = $false)]
-        [string]
+        [string[]]
         $branch,
 
         # Location
         [Parameter(Mandatory = $false)]
-        [string]
+        [string[]]
         $location,
 
         # Department
         [Parameter(Mandatory = $false)]
-        [string]
+        [string[]]
         $department,
 
         # Language
         [Parameter(Mandatory = $false)]
-        [string]
+        [string[]]
         $language,
 
         # Department (only when set to text field)
         [Parameter(Mandatory = $false)]
         [ValidateLength(1,60)]
-        [string]
+        [string[]]
         $departmentFree,
 
         # Person login name
         [Parameter(Mandatory = $false)]
         [ValidateLength(1,100)]
-        [string]
+        [string[]]
         $tasLoginName,
 
         # Person password (5-200 characters)
         [Parameter(Mandatory = $false)]
         [ValidateNotNullOrEmpty()]
-        [securestring]
+        [securestring[]]
         $password,
 
         # phone number
         [Parameter(Mandatory = $false)]
         [ValidateLength(1,25)]
-        [string]
+        [string[]]
         $phoneNumber,
 
         # Mobile number
         [Parameter(Mandatory = $false)]
         [ValidateLength(1,25)]
-        [string]
+        [string[]]
         $mobileNumber,
 
         # Fax
         [Parameter(Mandatory = $false)]
         [ValidateLength(1,25)]
-        [string]
+        [string[]]
         $fax,
 
         # Email address
         [Parameter(Mandatory = $false)]
         [ValidateLength(1,100)]
-        [string]
+        [string[]]
         $email,
 
         # Job Title
         [Parameter(Mandatory = $false)]
         [ValidateLength(1,100)]
-        [string]
+        [string[]]
         $jobTitle,
 
         # View all requests under own budget holder
         [Parameter(Mandatory = $false)]
-        [bool]
+        [bool[]]
         $showBudgetholder,
 
         # View all requests under own department
         [Parameter(Mandatory = $false)]
-        [bool]
+        [bool[]]
         $showDepartment,
 
         # View all requests under own branch
         [Parameter(Mandatory = $false)]
-        [bool]
+        [bool[]]
         $showBranch,
 
         # View all requests under own sub-branch (requires showBranch = $true)
         [Parameter(Mandatory = $false)]
-        [bool]
+        [bool[]]
         $showSubsidiaries,
 
         # Access all branches on forms
         [Parameter(Mandatory = $false)]
-        [bool]
+        [bool[]]
         $showAllBranches,
 
         # Authorize requests for own department/budgetholder/branch/subsidury (requires Manager = $true)
         [Parameter(Mandatory = $false)]
-        [bool]
+        [bool[]]
         $authorizeAll,
 
         # Authorize requests for own department (requires Manager = $true)
         [Parameter(Mandatory = $false)]
-        [bool]
+        [bool[]]
         $authorizeDepartment,
 
         # Authorize requests for own budget holder (requires Manager = $true)
         [Parameter(Mandatory = $false)]
-        [bool]
+        [bool[]]
         $authorizeBudgetHolder,
 
         # Authorize requests for own branch (requires Manager = $true)
         [Parameter(Mandatory = $false)]
-        [bool]
+        [bool[]]
         $authorizeBranch,
 
         # Authorize requests for subsidury locations (requires Manager & Branch = $true)
         [Parameter(Mandatory = $false)]
-        [bool]
+        [bool[]]
         $authorizeSubsidiaryBranches,
 
         # Optional fields 1
         [Parameter(Mandatory = $false)]
-        [psobject]
+        [psobject[]]
         $optionalFields1,
 
         # Optional fields 2
         [Parameter(Mandatory = $false)]
-        [psobject]
+        [psobject[]]
         $optionalFields2,
 
         # Budget Holder
         [Parameter(Mandatory = $false)]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
-        [string]
+        [string[]]
         $budgetHolder,
 
         # Extra field A
         [Parameter(Mandatory = $false)]
-        [string]
+        [string[]]
         $personExtraFieldA,
 
         # Extra field B
         [Parameter(Mandatory = $false)]
-        [string]
+        [string[]]
         $personExtraFieldB,
 
         # Person is a Manager
         [Parameter(Mandatory = $false)]
-        [bool]
+        [bool[]]
         $isManager,
 
         # Manager
         [Parameter(Mandatory = $false)]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
-        [string]
+        [string[]]
         $manager
     )
 
@@ -261,6 +261,21 @@ function Set-Person
     
     process {
 
+        foreach ($person in $PersonID) {
+            #$pid = $person
+            $persontoset = [PSCustomObject]@{
+                unid = $person
+            }
+            for ($i = 0; $i -lt $psboundParameters.Count; $i++) {
+                if($psboundParameters[$i] -eq 'PersonID') { continue }
+
+                $persontoset.$psboundParameters[$i].key = $psboundParameters[$i].value
+
+            }
+
+            Write-Output ("person: {0}" -f $persontoset)
+            Write-Output ("Person-json: {0}" -f $persontoset)
+        }
     }
     
     end {
