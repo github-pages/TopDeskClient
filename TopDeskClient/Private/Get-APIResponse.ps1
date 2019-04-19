@@ -8,7 +8,7 @@
 
         # Parameter help description
         [Parameter(Mandatory = $true)]
-        [ValidateSet('GET', 'PUT', 'POST', 'DELETE')]
+        [ValidateSet('GET', 'PUT', 'POST', 'PATCH', 'DELETE')]
         [string]
         $Method,
 
