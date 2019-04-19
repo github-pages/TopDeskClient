@@ -36,11 +36,10 @@ function Set-Person
       The name of a related topic. The value appears on the line below the ".LINK" keyword and must be preceded by a comment symbol # or included in the comment block.
       Repeat the ".LINK" keyword for each related topic.
   #>
-    [CmdletBinding(DefaultParameterSetName='Default',
-                PositionalBinding=$false,
+    [CmdletBinding(PositionalBinding=$false,
                 HelpUri = 'https://github.com/rbury/',
                 ConfirmImpact='Medium')]
-    [OutputType([psobject], ParameterSetName = "Default")]
+    [OutputType([psobject])]
     Param (
 
         # ID of person to modify
