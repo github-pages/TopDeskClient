@@ -270,13 +270,13 @@ function Set-Person
         # Extra field A
         [Parameter(Mandatory = $false,
         ValueFromPipelineByPropertyName = $true)]
-        [string]
+        [hashtable]
         $personExtraFieldA,
 
         # Extra field B
         [Parameter(Mandatory = $false,
         ValueFromPipelineByPropertyName = $true)]
-        [string]
+        [hashtable]
         $personExtraFieldB,
 
         # Person is a Manager

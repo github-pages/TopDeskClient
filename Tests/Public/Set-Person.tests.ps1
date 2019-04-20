@@ -590,7 +590,7 @@ Describe "Set-Person" {
                     $param.ParameterSets.Keys | Should -Contain '__AllParametersets'
                     $param.ParameterSets.__AllParameterSets.IsMandatory | Should -Be $false
                     $param.ParameterSets.__AllParameterSets.ValueFromPipelineByPropertyName | Should -Be $true
-                    $param.ParameterType.Name | Should -Be 'string'
+                    $param.ParameterType.Name | Should -Be 'hashtable'
                     
                 }
 
@@ -605,7 +605,7 @@ Describe "Set-Person" {
                     $param.ParameterSets.Keys | Should -Contain '__AllParametersets'
                     $param.ParameterSets.__AllParameterSets.IsMandatory | Should -Be $false
                     $param.ParameterSets.__AllParameterSets.ValueFromPipelineByPropertyName | Should -Be $true
-                    $param.ParameterType.Name | Should -Be 'string'
+                    $param.ParameterType.Name | Should -Be 'hashtable'
                     
                 }
 
