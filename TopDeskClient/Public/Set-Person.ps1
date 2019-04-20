@@ -270,14 +270,12 @@ function Set-Person
         # Extra field A
         [Parameter(Mandatory = $false,
         ValueFromPipelineByPropertyName = $true)]
-        [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
         $personExtraFieldA,
 
         # Extra field B
         [Parameter(Mandatory = $false,
         ValueFromPipelineByPropertyName = $true)]
-        [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
         $personExtraFieldB,
 
