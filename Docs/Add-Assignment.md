@@ -163,9 +163,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### Input - PSCustomObject
+
 [PSCustomObject]
 
 ## OUTPUTS
+
+### Output - PSCustomObject
 
 [PSCustomObject]
 

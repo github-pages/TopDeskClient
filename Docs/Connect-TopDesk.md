@@ -130,9 +130,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### None
+
 This function does not accept pipeline input
 
 ## OUTPUTS
+
+### Output - Boolean
 
 [Boolean]
 

@@ -39,11 +39,15 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### None
+
 This command does not accept input.
 
 ## OUTPUTS
 
-[System.Boolean]
+### Output - Boolean
+
+[Boolean]
 
 ## NOTES
 

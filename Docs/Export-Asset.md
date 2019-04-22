@@ -126,9 +126,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### Input - PSObject
+
 [PSObject]
 
 ## OUTPUTS
+
+### None
 
 This command does not return any output.
 

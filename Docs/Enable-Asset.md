@@ -63,14 +63,18 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-[System.Management.Automation.PSCustomObject]
+### Input - PSCustomObject
+
+[PSCustomObject]
 
 This command will accept pipeline objects with an AssetID [string] property.
 When retrieving assets from TopDesk using Get-Asset, pass the returned dataSet property (see examples).
 
 ## OUTPUTS
 
-[System.Management.Automation.PSCustomObject]
+### Output - PSCustomObject
+
+[PSCustomObject]
 
 PSObject will represent modified asset including the following properties: settings, metadata, data, fields, functionalities.
 
