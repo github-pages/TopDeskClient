@@ -19,6 +19,6 @@ Describe "General project validation: $env:BHProjectName" {
     }
 
     It "Module '$env:BHProjectName' can import cleanly" {
-        {Import-Module (Join-Path $env:BHBuildOutput "$env:BHProjectName.psd1") -force } | Should Not Throw
+        {Import-Module "$env:BHBuildOutput/$env:BHProjectName/$env:BHProjectName.psd1" -force } | Should Not Throw
     }
 }

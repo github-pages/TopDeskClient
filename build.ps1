@@ -12,7 +12,7 @@ $Policy = (Get-PSRepository PSGallery).InstallationPolicy
 Set-PSRepository PSGallery -InstallationPolicy Trusted
 
 try {
-    $RequiredModules | Install-Module -Scope $Scope -Repository PSGallery -SkipPublisherCheck -Verbose
+    $RequiredModules | Install-Module -Scope $Scope -Repository PSGallery -SkipPublisherCheck
 }
 finally {
     Set-PSRepository PSGallery -InstallationPolicy $Policy
