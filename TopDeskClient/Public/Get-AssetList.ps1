@@ -33,8 +33,7 @@ function Get-AssetList
 
     .LINK
     
-      The name of a related topic. The value appears on the line below the ".LINK" keyword and must be preceded by a comment symbol # or included in the comment block.
-      Repeat the ".LINK" keyword for each related topic.
+      Get-Asset (https://github.com/rbury/TopDeskClient/Docs/Get-AssetList.md)
   #>
     [CmdletBinding(DefaultParameterSetName='Default',
                 PositionalBinding=$false,

@@ -32,7 +32,7 @@
 
     .LINK
 
-        [Get-Assignment](https://github.com/rbury/TopDeskClient/Docs/Get-Assignment.md)
+        [Get-Assignment] (https://github.com/rbury/TopDeskClient/Docs/Get-Assignment.md)
 
   #>
     [CmdletBinding(DefaultParameterSetName = 'Default',

@@ -32,7 +32,7 @@
 
   .LINK
 
-    [Get-AssetTemplate](https://github.com/rbury/TopDeskClient/Docs/Get-AssetTemplate.md)
+    [Get-AssetTemplate] (https://github.com/rbury/TopDeskClient/Docs/Get-AssetTemplate.md)
 
   #>
     [CmdletBinding(DefaultParameterSetName = 'Default',

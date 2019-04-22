@@ -32,7 +32,7 @@
 
     .LINK
 
-      Get-Asset(https://github.com/rbury/TopDeskClient/Docs/Get-Asset.md)
+      Get-Asset (https://github.com/rbury/TopDeskClient/Docs/Get-Asset.md)
   #>
     [CmdletBinding(DefaultParameterSetName = 'AllAssets',
         PositionalBinding = $false,
