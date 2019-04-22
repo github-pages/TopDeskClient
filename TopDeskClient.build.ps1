@@ -92,7 +92,7 @@ task Build {
         $null = New-Item -Path  "$env:BHBuildOutput/$env:BHProjectName" -ItemType Directory -Force
     }
 
-    Copy-Item -Path "$env:BHModuleManifest" -Destination "$env:BHBuildOutput/$env:BHProjectName/" -Force
+    Copy-Item -Path "$env:BHPSModuleManifest" -Destination "$env:BHBuildOutput/$env:BHProjectName/" -Force
     $null = New-Item -Path  "$env:BHBuildOutput/$env:BHProjectName/$env:BHProjectName.psm1" -Force
     Get-ChildItem -Path "$env:BHModulePath/Private/*.ps1" -Recurse | Get-Content | Add-Content "$env:BHBuildOutput/$env:BHProjectName/$env:BHProjectName.psm1" -Force
     $Public = @( Get-ChildItem -Path "$env:BHModulePath/Public/*.ps1" -Force )
