@@ -24,9 +24,10 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 
 **Desktop (please complete the following information):**
- - OS: [e.g. Win10]
- - PS Edition [e.g. Desktop, Core]
- - Version [e.g. 5.1.17134.590 ]
+
+- OS: [e.g. Win10]
+- PS Edition [e.g. Desktop, Core]
+- Version [e.g. 5.1.17134.590 ]
 
 **Additional context**
 Add any other context about the problem here.
