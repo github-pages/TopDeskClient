@@ -33,7 +33,7 @@ function Set-Person
 
     .LINK
     
-      [Set-Person] (https://github.com/rbury/TopDeskClient/Docs/Set-Person.md)
+      [Set-Person] (<https://github.com/rbury/TopDeskClient/Docs/Set-Person.md>)
   #>
     [CmdletBinding(PositionalBinding=$false,
                 HelpUri = 'https://github.com/rbury/',
