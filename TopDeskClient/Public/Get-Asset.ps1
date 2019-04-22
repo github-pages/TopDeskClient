@@ -1,6 +1,4 @@
-﻿using namespace System.Collections
-
-function Get-Asset {
+﻿function Get-Asset {
     <#
     .Synopsis
 
