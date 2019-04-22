@@ -38,6 +38,7 @@ function Set-Person
   #>
     [CmdletBinding(PositionalBinding=$false,
                 HelpUri = 'https://github.com/rbury/',
+                SupportsShouldProcess = $true,
                 ConfirmImpact='Medium')]
     [OutputType([psobject])]
     Param (
@@ -312,21 +313,23 @@ function Set-Person
 
         foreach ($person in $PersonID) {
 
-            if($psboundParameters.Keys.Count -gt 1) {
+            if ($PSBoundParameters.ContainsKey('Force') -or ($PSCmdlet.ShouldProcess('Modify Person', 'Modify this person in TopDesk?', "Modify person in TopDesk [id: $person]"))) {
+                if($psboundParameters.Keys.Count -gt 1) {
 
-                $_uri = $script:TDURI + '/tas/api/persons/id/' + $person
-                $persontoset = [PSCustomObject]@{}
+                    $_uri = $script:TDURI + '/tas/api/persons/id/' + $person
+                    $persontoset = [PSCustomObject]@{}
 
-                foreach ($item in $psboundParameters.GetEnumerator()) {
+                    foreach ($item in $psboundParameters.GetEnumerator()) {
 
-                    if($item.key -eq 'PersonID') { continue }
-                    if($null -ne $item.value) {
-                        $persontoset | Add-Member -MemberType NoteProperty -Name $item.key -Value $item.value
+                        if($item.key -eq 'PersonID') { continue }
+                        if($null -ne $item.value) {
+                            $persontoset | Add-Member -MemberType NoteProperty -Name $item.key -Value $item.value
+                        }
                     }
-                }
 
-                $_body = ($persontoset | ConvertTo-Json)
-                Get-APIResponse -Method 'PUT' -APIUrl $_uri -Body $_body -Headers $_headerstring -tdCredential $script:tdCredential;
+                    $_body = ($persontoset | ConvertTo-Json)
+                    Get-APIResponse -Method 'PUT' -APIUrl $_uri -Body $_body -Headers $_headerstring -tdCredential $script:tdCredential;
+                }
             }
         }
     }
