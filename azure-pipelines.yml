@@ -1,0 +1,42 @@
+
+trigger:
+- master
+
+pool:
+  vmImage: 'vs2017-win2016'
+
+steps:
+- powershell: |
+   $vernum = & GitVersion.exe /output json /showvariable MajorMinorPatch
+   Write-Host "##vso[task.setvariable variable=PIPEVERSION]$($vernum)"
+  displayName: SetVersion
+
+- powershell: |
+   Write-Host '##vso[build.addbuildtag]$(PIPEVERSION)'
+   Write-Host '##vso[build.updatebuildnumber]$(PIPEVERSION)'
+  displayName: 'Set Build Tag and Number'
+
+- powershell: .\build.ps1
+  displayName: 'Run Build'
+
+- task: PublishTestResults@2
+  displayName: 'Publish Test Results'
+  condition: always()
+  inputs:
+    testResultsFiles: '**/TEST-*.xml'
+    testResultsFormat: NUnit
+    searchFolder: '$(Common.TestResultsDirectory)'
+    mergeTestResults: true
+
+#- task: CopyFiles@2
+#  displayName: 'Copy Files to: Build '
+#  inputs:
+#    Contents: '**/*.zip'
+#    SourceFolder: Output
+#    TargetFolder: $(Build.StagingDirectory)
+#    CleanTargetFolder: true
+
+#- task: PublishPipelineArtifact@0
+#  inputs:
+#    artifactName: 'TopDesk Client'
+#    targetPath: $(Build.StagingDirectory)/TopDeskClient.zip
