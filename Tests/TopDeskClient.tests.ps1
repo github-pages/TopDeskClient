@@ -1,9 +1,9 @@
-﻿$moduleRoot = Resolve-Path "$PSScriptRoot"
-$moduleName = Split-Path $moduleRoot -Leaf
+﻿#$moduleRoot = Resolve-Path "$PSScriptRoot"
+#$moduleName = Split-Path $moduleRoot -Leaf
 
 Describe "General project validation: $env:BHProjectName" {
 
-    $scripts = Get-ChildItem $env:BHModulePath -Include *.ps1, *.psm1, *.psd1 -Recurse
+    $scripts = Get-ChildItem $env:BHBuildOutput/$env:BHProjectName -Include *.ps1, *.psm1, *.psd1 -Recurse
 
     # TestCases are splatted to the script so we need hashtables
     $testCase = $scripts | Foreach-Object {@{file = $_}}
@@ -19,6 +19,6 @@ Describe "General project validation: $env:BHProjectName" {
     }
 
     It "Module '$env:BHProjectName' can import cleanly" {
-        {Import-Module (Join-Path $env:BHModulePath "$env:BHProjectName.psm1") -force } | Should Not Throw
+        {Import-Module (Join-Path $env:BHBuildOutput "$env:BHProjectName.psd1") -force } | Should Not Throw
     }
 }
