@@ -133,7 +133,7 @@
 
         }
 
-        [ArrayList] $_returnval = [ArrayList]::new()
+        [System.Collections.ArrayList] $_returnval = [System.Collections.ArrayList]::new()
 
     }
     
@@ -339,7 +339,7 @@
 
             'LinkSearch' {
 
-                [ArrayList] $linkSearch = [ArrayList]::new()
+                [System.Collections.ArrayList] $linkSearch = [System.Collections.ArrayList]::new()
 
                 foreach ($link in $LinkList.GetEnumerator()) {
 
