@@ -110,9 +110,7 @@ task Build {
 task Help {
     Remove-Module $env:BHProjectName -ErrorAction SilentlyContinue
     Import-Module "$env:BHBuildOutPut/$env:BHProjectName/$env:BHProjectName.psd1" -Force
-    #New-MarkdownHelp -Module $env:BHProjectName -Force -OutputFolder "$env:BHBuildOutPut/docs" -ErrorAction SilentlyContinue
     Update-MarkdownHelp "$env:BHBuildOutput/docs" -ErrorAction SilentlyContinue
-    #New-ExternalHelp -Path "$env:BHBuildOutPut/docs" -OutputPath "$env:BHBuildOutput/$env:ProjectName/en-US" -Force -ErrorAction SilentlyContinue
 }
 
 task Archive {
