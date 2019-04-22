@@ -1,27 +1,32 @@
 $Compliance = 1
 
-if($env:BHBuildSystem -eq 'Unknown') {
+Set-BuildEnvironment -ErrorAction Stop
+
+if ($env:BHBuildSystem -eq 'Unknown') {
     $env:Common_TestResultsDirectory = "$env:BHProjectPath/Tests/Results"
 }
 
 task Clean {
 
-    if(Get-Module $env:BHProjectName) {
-
+    if (Get-Module $env:BHProjectName) {
         Remove-Module $env:BHProjectName
-
     }
-    if(Test-Path -Path "$env:BHBuildOutput/$env:BHProjectName" ) {
-
+    
+    if (Test-Path -Path "$env:BHBuildOutput/$env:BHProjectName" ) {
         $null = Remove-Item "$env:BHBuildOutput/$env:BHProjectName" -Recurse -Force
-
     }
+    $null = New-Item "$env:BHBuildOutput/$env:BHProjectName" -ItemType Directory -Force
+
+    if (Test-Path -Path "$env:BHProjectPath/Tests/Results") {
+        $null = Remove-Item "$env:BHProjectPath/Tests/Results" -Recurse -Force
+    }
+    $null = New-Item "$env:BHProjectPath/Tests/Results" -ItemType Directory -Force
 
 }
 
-task GenDocs Help {
+task GenDocs {
 
-    New-ExternalHelp "$env:BHProjectPath\Docs" -OutputPath "$env:BHBuildOutput/$env:BHProjectName/en-US" -Force -ErrorAction SilentlyContinue
+    New-ExternalHelp "$env:BHProjectPath/Docs" -OutputPath "$env:BHBuildOutput/$env:BHProjectName/en-US" -Force -ErrorAction SilentlyContinue
 
 }
 
@@ -56,7 +61,7 @@ task PreTest {
         Verbose      = $false
         EnableExit   = $false
         CodeCoverage = (Get-ChildItem $env:BHModulePath -Recurse -Include '*.psm1', '*.ps1' -Exclude '*.Tests.*').FullName
-        Script       = (Get-ChildItem -Path "$env:BHModulePath/Tests" -Recurse -Include '*.tests.ps1' -Depth 5 -Force)
+        Script       = (Get-ChildItem -Path "$env:BHProjectPath/Tests" -Recurse -Include '*.tests.ps1' -Depth 5 -Force)
     }
 
     # Save Test Results as NUnitXml
@@ -83,7 +88,7 @@ task Test {
 }
 
 task Build {
-    if(-not(Test-Path "$env:BHBuildOutput/$env:BHProjectName")) {
+    if (-not(Test-Path "$env:BHBuildOutput/$env:BHProjectName")) {
         $null = New-Item -Path  "$env:BHBuildOutput/$env:BHProjectName" -ItemType Directory -Force
     }
 
