@@ -33,8 +33,7 @@ function Set-Person
 
     .LINK
     
-      The name of a related topic. The value appears on the line below the ".LINK" keyword and must be preceded by a comment symbol # or included in the comment block.
-      Repeat the ".LINK" keyword for each related topic.
+      [Set-Person] (https://github.com/rbury/TopDeskClient/Docs/Set-Person.md)
   #>
     [CmdletBinding(PositionalBinding=$false,
                 HelpUri = 'https://github.com/rbury/',
