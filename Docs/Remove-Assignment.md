@@ -1,40 +1,46 @@
 ---
 external help file: TopDeskClient-help.xml
 Module Name: TopDeskClient
-online version:
+online version: https://github.com/rbury/TopDeskClient/blob/master/docs/Remove-Assignment.md
 schema: 2.0.0
 ---
 
 # Remove-Assignment
 
 ## SYNOPSIS
-Short description
+
+Remove existing assignemnts from assets in TopDesk
 
 ## SYNTAX
 
 ### Confirm (Default)
-```
+
+``` Powershell
 Remove-Assignment -AssetID <String> -LinkID <String> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### Force
-```
+
+``` Powershell
 Remove-Assignment -AssetID <String> -LinkID <String> [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
+
 Long description
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+
+``` Powershell
 Example of how to use this cmdlet
 ```
 
 ## PARAMETERS
 
 ### -AssetID
+
 ID of the Asset
 
 ```yaml
@@ -50,6 +56,7 @@ Accept wildcard characters: False
 ```
 
 ### -LinkID
+
 ID of the Link
 
 ```yaml
@@ -65,6 +72,7 @@ Accept wildcard characters: False
 ```
 
 ### -Force
+
 Force removal without prompting
 
 ```yaml
@@ -80,6 +88,7 @@ Accept wildcard characters: False
 ```
 
 ### -WhatIf
+
 Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
@@ -96,6 +105,7 @@ Accept wildcard characters: False
 ```
 
 ### -Confirm
+
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
@@ -111,20 +121,23 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### The Microsoft .NET Framework types of objects that can be piped to the function or script.
-### You can also include a description of the input objects.
+The Microsoft .NET Framework types of objects that can be piped to the function or script.
+You can also include a description of the input objects.
+
 ## OUTPUTS
 
-### The .NET Framework type of the objects that the cmdlet returns.
-### You can also include a description of the returned objects.
+The .NET Framework type of the objects that the cmdlet returns.
+You can also include a description of the returned objects.
+
 ## NOTES
+
 Additional information about the function or script.
 
 ## RELATED LINKS
 
-[[Remove-Assignment](https://github.com/rbury/TopDeskClient/Docs/Remove-Assignment.md)]()
-
+[Remove-Assignment](https://github.com/rbury/TopDeskClient/blob/master/docs/Remove-Assignment.md)

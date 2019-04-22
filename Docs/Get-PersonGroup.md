@@ -1,45 +1,52 @@
 ---
 external help file: TopDeskClient-help.xml
 Module Name: TopDeskClient
-online version:
+online version: https://github.com/rbury/TopDeskClient/blob/master/docs/Get-PersonGroup.md
 schema: 2.0.0
 ---
 
 # Get-PersonGroup
 
 ## SYNOPSIS
-Short description
+
+Retrieve information on person groups from TopDesk
 
 ## SYNTAX
 
 ### Default (Default)
-```
+
+``` Powershell
 Get-PersonGroup [<CommonParameters>]
 ```
 
 ### Details
-```
+
+``` Powershell
 Get-PersonGroup -GroupID <String[]> [<CommonParameters>]
 ```
 
 ### List
-```
+
+``` Powershell
 Get-PersonGroup [-List] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
+
 Long description
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+
+``` Powershell
 Example of how to use this cmdlet
 ```
 
 ## PARAMETERS
 
 ### -GroupID
+
 ID of person group to retrieve details for
 
 ```yaml
@@ -55,6 +62,7 @@ Accept wildcard characters: False
 ```
 
 ### -List
+
 Get list of person groups
 
 ```yaml
@@ -70,20 +78,23 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### The Microsoft .NET Framework types of objects that can be piped to the function or script.
-### You can also include a description of the input objects.
+The Microsoft .NET Framework types of objects that can be piped to the function or script.
+You can also include a description of the input objects.
+
 ## OUTPUTS
 
-### The .NET Framework type of the objects that the cmdlet returns.
-### You can also include a description of the returned objects.
+The .NET Framework type of the objects that the cmdlet returns.
+You can also include a description of the returned objects.
+
 ## NOTES
+
 Additional information about the function or script.
 
 ## RELATED LINKS
 
-[[Get-BlankAsset](https://github.com/rbury/TopDeskClient/Docs/Get-BlankAsset.md)]()
-
+[Get-BlankAsset](https://github.com/rbury/TopDeskClient/blob/master/docs/Get-BlankAsset.md)

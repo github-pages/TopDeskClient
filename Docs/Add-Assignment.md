@@ -1,37 +1,42 @@
 ---
 external help file: TopDeskClient-help.xml
 Module Name: TopDeskClient
-online version:
+online version: https://github.com/rbury/TopDeskClient/blob/master/docs/Add-Assignment.md
 schema: 2.0.0
 ---
 
 # Add-Assignment
 
 ## SYNOPSIS
+
 Add an assignment to asset.
 
 ## SYNTAX
 
 ### Default (Default)
-```
+
+``` Powershell
 Add-Assignment -AssetID <String[]> -TargetID <String> -TargetType <String> [-WhatIf] [-Confirm]
  [<CommonParameters>]
 ```
 
 ### location
-```
+
+``` Powershell
 Add-Assignment -AssetID <String[]> -LocationID <String> -BranchID <String> [-WhatIf] [-Confirm]
  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
+
 This command will add an additional assignment to an asset.
 Assignements are one of person, personGroup, Incident, Branch, location.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+
+``` Powershell
 Add-Assignment -AssetID '7ac3e7e6-ac6c-5f74-a0fd-d508793adf51' -TargetID '8d446c8c-1379-4864-a682-559a9dd055b5' -TargetType 'incident'
 ```
 
@@ -40,6 +45,7 @@ Add a link to asset with unid '7ac3e7e6-ac6c-5f74-a0fd-d508793adf51' for Inciden
 ## PARAMETERS
 
 ### -AssetID
+
 The id (unid) of the asset being assigned to.
 
 ```yaml
@@ -55,6 +61,7 @@ Accept wildcard characters: False
 ```
 
 ### -TargetID
+
 The id (unid) of the entity to assign to the asset.
 
 ```yaml
@@ -70,6 +77,7 @@ Accept wildcard characters: False
 ```
 
 ### -TargetType
+
 The type of entity being assigned - possible values person, personGroup, Incident, Branch.
 
 ```yaml
@@ -85,6 +93,7 @@ Accept wildcard characters: False
 ```
 
 ### -LocationID
+
 The id (unid) of the location to assign to the asset.
 
 ```yaml
@@ -100,6 +109,7 @@ Accept wildcard characters: False
 ```
 
 ### -BranchID
+
 The id (unid) of the branch containing the location.
 
 ```yaml
@@ -115,6 +125,7 @@ Accept wildcard characters: False
 ```
 
 ### -WhatIf
+
 Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
@@ -131,6 +142,7 @@ Accept wildcard characters: False
 ```
 
 ### -Confirm
+
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
@@ -146,20 +158,21 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### The Microsoft .NET Framework types of objects that can be piped to the function or script.
-### You can also include a description of the input objects.
+[PSCustomObject]
+
 ## OUTPUTS
 
-### The .NET Framework type of the objects that the cmdlet returns.
-### You can also include a description of the returned objects.
+[PSCustomObject]
+
 ## NOTES
-Additional information about the function or script.
+
+Add additional assignments, to replace existing assigments use Set-Assignment
 
 ## RELATED LINKS
 
-[[Set-Assignment](https://github.com/rbury/TopDeskClient/Docs/Add-Assignment.md)]()
-
+[Set-Assignment](https://github.com/rbury/TopDeskClient/blob/master/docs/Add-Assignment.md)

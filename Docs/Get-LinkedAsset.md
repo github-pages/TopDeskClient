@@ -1,34 +1,38 @@
 ---
 external help file: TopDeskClient-help.xml
 Module Name: TopDeskClient
-online version:
+online version: https://github.com/rbury/TopDeskClient/blob/master/docs/Get-LinkedAsset.md
 schema: 2.0.0
 ---
 
 # Get-LinkedAsset
 
 ## SYNOPSIS
-Short description
+
+Retrieve assets from TopDesk that are related to a specified card
 
 ## SYNTAX
 
-```
+``` Powershell
 Get-LinkedAsset -Type <String> -ID <String> [-AssetFields <String[]>] [-NoAssignments] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
+
 Long description
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+
+``` Powershell
 Example of how to use this cmdlet
 ```
 
 ## PARAMETERS
 
 ### -Type
+
 Type of item linked (incident, person, persongroup, branch, location)
 
 ```yaml
@@ -44,6 +48,7 @@ Accept wildcard characters: False
 ```
 
 ### -ID
+
 Id of linked item
 
 ```yaml
@@ -59,6 +64,7 @@ Accept wildcard characters: False
 ```
 
 ### -AssetFields
+
 Fields to retrieve
 
 ```yaml
@@ -74,6 +80,7 @@ Accept wildcard characters: False
 ```
 
 ### -NoAssignments
+
 Exclude Assignments?
 
 ```yaml
@@ -89,20 +96,23 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### The Microsoft .NET Framework types of objects that can be piped to the function or script.
-### You can also include a description of the input objects.
+The Microsoft .NET Framework types of objects that can be piped to the function or script.
+You can also include a description of the input objects.
+
 ## OUTPUTS
 
-### The .NET Framework type of the objects that the cmdlet returns.
-### You can also include a description of the returned objects.
+The .NET Framework type of the objects that the cmdlet returns.
+You can also include a description of the returned objects.
+
 ## NOTES
+
 Additional information about the function or script.
 
 ## RELATED LINKS
 
-[[Get-LinkedAsset](https://github.com/rbury/TopDeskClient/Docs/Get-LinkedAsset.md)]()
-
+[Get-LinkedAsset](https://github.com/rbury/TopDeskClient/blob/master/docs/Get-LinkedAsset.md)

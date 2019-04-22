@@ -1,65 +1,76 @@
 ---
 external help file: TopDeskClient-help.xml
 Module Name: TopDeskClient
-online version:
+online version: https://github.com/rbury/TopDeskClient/blob/master/docs/Get-Person.md
 schema: 2.0.0
 ---
 
 # Get-Person
 
 ## SYNOPSIS
-Short description
+
+Retrieve information on persons from Topdesk
 
 ## SYNTAX
 
 ### Simple (Default)
-```
+
+``` Powershell
 Get-Person -PersonID <String[]> [-Archived <Boolean>] [<CommonParameters>]
 ```
 
 ### List
-```
+
+``` Powershell
 Get-Person [-List] [-Archived <Boolean>] [<CommonParameters>]
 ```
 
 ### BySSP
-```
+
+``` Powershell
 Get-Person -SSPLoginName <String[]> [-Archived <Boolean>] [<CommonParameters>]
 ```
 
 ### ByNetworkLogin
-```
+
+``` Powershell
 Get-Person -NetworkLoginName <String[]> [-Archived <Boolean>] [<CommonParameters>]
 ```
 
 ### ByEmail
-```
+
+``` Powershell
 Get-Person -Email <String[]> [-Archived <Boolean>] [<CommonParameters>]
 ```
 
 ### ByLastName
-```
+
+``` Powershell
 Get-Person -LastName <String[]> [-Archived <Boolean>] [<CommonParameters>]
 ```
 
 ### ByFirstName
-```
+
+``` Powershell
 Get-Person -FirstName <String[]> [-Archived <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
+
 Long description
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
+
+``` Powershell
 Example of how to use this cmdlet
 ```
 
 ## PARAMETERS
 
 ### -PersonID
+
 ID of person to retrieve
 
 ```yaml
@@ -75,6 +86,7 @@ Accept wildcard characters: False
 ```
 
 ### -List
+
 Get a list of all persons
 
 ```yaml
@@ -90,6 +102,7 @@ Accept wildcard characters: False
 ```
 
 ### -SSPLoginName
+
 SSP login name to lookup for person
 
 ```yaml
@@ -105,6 +118,7 @@ Accept wildcard characters: False
 ```
 
 ### -NetworkLoginName
+
 Network login name to lookup for person
 
 ```yaml
@@ -120,6 +134,7 @@ Accept wildcard characters: False
 ```
 
 ### -Email
+
 Email address to lookup for person
 
 ```yaml
@@ -135,6 +150,7 @@ Accept wildcard characters: False
 ```
 
 ### -LastName
+
 Last name to lookup for person
 
 ```yaml
@@ -150,6 +166,7 @@ Accept wildcard characters: False
 ```
 
 ### -FirstName
+
 First name to lookup for person
 
 ```yaml
@@ -165,6 +182,7 @@ Accept wildcard characters: False
 ```
 
 ### -Archived
+
 Include archived records?
 
 ```yaml
@@ -180,20 +198,23 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### The Microsoft .NET Framework types of objects that can be piped to the function or script.
-### You can also include a description of the input objects.
+The Microsoft .NET Framework types of objects that can be piped to the function or script.
+You can also include a description of the input objects.
+
 ## OUTPUTS
 
-### The .NET Framework type of the objects that the cmdlet returns.
-### You can also include a description of the returned objects.
+The .NET Framework type of the objects that the cmdlet returns.
+You can also include a description of the returned objects.
+
 ## NOTES
+
 Additional information about the function or script.
 
 ## RELATED LINKS
 
-[[Get-Person](https://github.com/rbury/TopDeskClient/Docs/Get-Person.md)]()
-
+[Get-Person](https://github.com/rbury/TopDeskClient/blob/master/docs/Get-Person.md)
