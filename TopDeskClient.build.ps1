@@ -119,4 +119,4 @@ task Archive {
 
 task regularBuild Clean, PreTest, Build, Analyze, Test
 
-task fullBuild Clean, PreTest, Build, Analyze, Test, Help, GenDocs, Archive
+task fullBuild Clean, PreTest, Build, Analyze, Test, GenDocs, Archive
