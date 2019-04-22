@@ -34,7 +34,7 @@
 
     .LINK
 
-        [Export-Asset](https://github.com/rbury/TopDeskClient/Docs/Export-Asset.md)
+        Export-Asset(https://github.com/rbury/TopDeskClient/Docs/Export-Asset.md)
       
   #>
     [CmdletBinding(DefaultParameterSetName = 'Default',
