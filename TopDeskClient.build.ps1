@@ -109,7 +109,6 @@ task Build {
 
 task Help {
     Remove-Module $env:BHProjectName -ErrorAction SilentlyContinue
-    Remove-Item "$env:BHProjectPath/Docs/" -Recurse -Include *.md -Force
     Import-Module "$env:BHBuildOutPut/$env:BHProjectName/$env:BHProjectName.psd1" -Force
     New-MarkdownHelp -Module $env:BHProjectName -Force -OutputFolder "$env:BHBuildOutPut/docs" -ErrorAction SilentlyContinue
     Update-MarkdownHelp "$env:BHBuildOutput/docs" -ErrorAction SilentlyContinue
