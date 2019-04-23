@@ -1,13 +1,13 @@
 $Compliance = 1
 
+Get-Item env:BH* | Remove-Item -ErrorAction SilentlyContinue
+Set-BuildEnvironment -ErrorAction Stop
+
 if ($env:BHBuildSystem -eq 'Unknown') {
     $env:Common_TestResultsDirectory = "$env:BHProjectPath/Tests/Results"
 }
 
 task Clean {
-
-    Get-Item env:BH* | Remove-Item -ErrorAction SilentlyContinue
-    Set-BuildEnvironment -ErrorAction Stop
 
     if (Get-Module $env:BHProjectName) {
         Remove-Module $env:BHProjectName
@@ -119,4 +119,4 @@ task Archive {
 
 task regularBuild Clean, PreTest, Build, Analyze, Test
 
-task fullBuild Clean, PreTest, Build, Analyze, Test, Help, GenDocs, Archive
+task fullBuild Clean, PreTest, Build, Analyze, Test, GenDocs, Archive
