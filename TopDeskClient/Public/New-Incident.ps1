@@ -408,7 +408,7 @@ function New-Incident {
 
         #TODO: If mainIncident is specified, it must be an accessable, open, unarchived second line incident. This can only be specified for partial incidents.
         #TODO: objectName or objectLocationID - parameters are mutually exclusive, providing both will ignore objectlocation parameter
-        #TODO: majorCall - indicates this is a major incident, therefore cannot be used with mainIncident or majorCall parameters
+        #TODO: majorCallObjectID - indicates this is a major incident, therefore cannot be used with mainIncident or majorCall parameters
         #TODO: publishToSsd requires majorCall as only major incidents can be published
         #TODO: freeFields1/2 - provide function for creating these objects to be passed to new-incident (5x each boolean, number, date, text, memo, searchlist)
         #TODO: if providing externalLinkID then externalLinkType is required
