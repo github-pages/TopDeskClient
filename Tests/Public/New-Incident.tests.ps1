@@ -1,61 +1,50 @@
-function New-Incident
-{
-  <#
-    .Synopsis
+Import-Module $PSScriptRoot\..\..\TopDeskClient\TopDeskClient.psd1 -Force
 
-      Short description
+Describe "New-Incident" {
 
-    .DESCRIPTION
+    InModuleScope -ModuleName TopDeskClient {
 
-      Long description
+        $FunctionName = 'New-Incident'
 
-    .PARAMETER <Parameter-Name>
+        Mock -CommandName  Get-APIResponse -MockWith { return 'catch-all' }
 
-      The description of a parameter.
+        Context "Connection state" {
 
-    .EXAMPLE
+            It "Should throw when client is disconnected" {
+                $script:TDConnected = $false
+                { New-Incident -callerLookupEmail 'test@test.testing' } | Should -Throw
+            }
 
-      Example of how to use this cmdlet
+            It "Should NOT have performed any API calls" {
+                Assert-MockCalled -CommandName Get-APIResponse -Times 0
+            }
 
-    .INPUTS
+        }
 
-      The Microsoft .NET Framework types of objects that can be piped to the function or script.
-      You can also include a description of the input objects.
+        Context "Pipeline input" {
+            $script:TDConnected = $true
 
-    .OUTPUTS
+        }
 
-      The .NET Framework type of the objects that the cmdlet returns.
-      You can also include a description of the returned objects.
+        Context "Calling with parameters" {
+            
+            $script:TDConnected = $true
 
-    .NOTES
+        }
 
-      Additional information about the function or script.
+        Context "Parameters" {
 
-    .LINK
-    
-      The name of a related topic. The value appears on the line below the ".LINK" keyword and must be preceded by a comment symbol # or included in the comment block.
-      Repeat the ".LINK" keyword for each related topic.
-  #>
-    [CmdletBinding(DefaultParameterSetName='Default',
-                SupportsShouldProcess=$true,
-                PositionalBinding=$false,
-                HelpUri = 'https://github.com/rbury/',
-                ConfirmImpact='Medium')]
-    [OutputType([String], ParameterSetName = "Default")]
-    Param
-    (
+            Context "callerLookupEmail" {
 
-    )
-    begin
-    {
+                $param = (Get-Command $FunctionName).Parameters['callerLookupEmail']
 
-    }
-    process
-    {
-
-    }
-    end
-    {
-
+                It "Should maintain compatiblity" {
+                    $param.ParameterSets.Keys | Should -Contain 'byEmail'
+                    $param.ParameterSets.byEmail.IsMandatory | Should -Be $true
+                    $param.ParameterSets.byEmail.ValueFromPipelineByPropertyName | Should -Be $false
+                    $param.ParameterType.Name | Should -Be 'string'
+                }
+            }
+        }
     }
 }
