@@ -1,6 +1,5 @@
-function New-Incident
-{
-  <#
+function New-Incident {
+    <#
     .Synopsis
 
       Short description
@@ -36,10 +35,10 @@ function New-Incident
       The name of a related topic. The value appears on the line below the ".LINK" keyword and must be preceded by a comment symbol # or included in the comment block.
       Repeat the ".LINK" keyword for each related topic.
   #>
-    [CmdletBinding(DefaultParameterSetName='byEmail',
-                PositionalBinding=$false,
-                HelpUri = 'https://github.com/rbury/New-Incident.md',
-                ConfirmImpact='Medium')]
+    [CmdletBinding(DefaultParameterSetName = 'byEmail',
+        PositionalBinding = $false,
+        HelpUri = 'https://github.com/rbury/New-Incident.md',
+        ConfirmImpact = 'Medium')]
     [OutputType([PSCustomObject])]
 
     Param (
@@ -54,35 +53,35 @@ function New-Incident
         # The email of the Person to fill in as this incident's caller
         [Parameter(Mandatory = $true,
             ParameterSetName = 'byEmail')]
-        [ValidateLength(1,100)]
+        [ValidateLength(1, 100)]
         [string]
         $callerLookupEmail,
 
         # The employee number of the Person to fill in as this incident's caller
         [Parameter(Mandatory = $true,
             ParameterSetName = 'byEmployee')]
-        [ValidateLength(1,20)]
+        [ValidateLength(1, 20)]
         [string]
         $callerLookupEmployeeNumber,
 
         # The network login name of the Person to fill in as this incident's caller
         [Parameter(Mandatory = $true,
             ParameterSetName = 'byNetwork')]
-        [ValidateLength(1,100)]
+        [ValidateLength(1, 100)]
         [string]
         $callerLookupNetworkLoginName,
 
         # The login name of the Person to fill in as this incident's caller
         [Parameter(Mandatory = $true,
             ParameterSetName = 'byLogin')]
-        [ValidateLength(1,100)]
+        [ValidateLength(1, 100)]
         [string]
         $callerLookupLoginName,
 
         # Unregistered - Dynamic Name of the caller
         [Parameter(Mandatory = $true,
             ParameterSetName = 'Unregistered')]
-        [ValidateLength(1,109)]
+        [ValidateLength(1, 109)]
         [string]
         $dynamicName,
 
@@ -96,21 +95,21 @@ function New-Incident
         # Unregistered - Phone number of the caller
         [Parameter(Mandatory = $false,
             ParameterSetName = 'Unregistered')]
-        [ValidateLength(1,25)]
+        [ValidateLength(1, 25)]
         [string]
         $phoneNumber,
 
         # Unregistered - Mobile phone number of the caller
         [Parameter(Mandatory = $false,
             ParameterSetName = 'Unregistered')]
-        [ValidateLength(1,25)]
+        [ValidateLength(1, 25)]
         [string]
         $mobileNumber,
 
         # Unregistered - Email of the caller
         [Parameter(Mandatory = $false,
             ParameterSetName = 'Unregistered')]
-        [ValidateLength(1,100)]
+        [ValidateLength(1, 100)]
         [string]
         $email,
 
@@ -151,13 +150,13 @@ function New-Incident
 
         # status of incident (firstLine, secondLine, partial), Default = firstline
         [Parameter(Mandatory = $false)]
-        [ValidateSet('firstLine','secondLine','partial')]
+        [ValidateSet('firstLine', 'secondLine', 'partial')]
         [string]
         $status,
 
         # brief Description of incident
         [Parameter(Mandatory = $false)]
-        [ValidateLength(1,80)]
+        [ValidateLength(1, 80)]
         [string]
         $briefDescription,
 
@@ -212,7 +211,7 @@ function New-Incident
 
         # External number
         [Parameter(Mandatory = $false)]
-        [ValidateLength(1,60)]
+        [ValidateLength(1, 60)]
         [string]
         $externalNumber,
 
@@ -346,7 +345,7 @@ function New-Incident
 
         # Rate incident, only available for closed incidents
         [Parameter(Mandatory = $false)]
-        [ValidateSet(1,2,3,4,5)]
+        [ValidateSet(1, 2, 3, 4, 5)]
         [int]
         $feedbackRating,
 
@@ -414,6 +413,16 @@ function New-Incident
         #TODO: freeFields1/2 - provide function for creating these objects to be passed to new-incident (5x each boolean, number, date, text, memo, searchlist)
         #TODO: if providing externalLinkID then externalLinkType is required
         
+        #TODO! ---------------- Helper Functions -------------------
+        #TODO:  /budgetholders - list of Budget Holders
+        #TODO:  /incidents/call_types - list of call types
+        #TODO:  /incidents/categories - list of categories
+        #TODO:  /incidents/subcategories - list of subcategories
+        #TODO:  /incidents/closure_codes - list of closure codes
+        #TODO:  /incidents/entry_types - list of entry types
+        #TODO:  /incidents/impacts - list of impacts
+        #TODO:  /incidents/priorities - list of priorities
+        #TODO:  /incidents/processing_status - list of processing status
     }
 
     process {
