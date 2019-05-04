@@ -80,7 +80,7 @@ function New-Incident {
         $callerLookupLoginName,
 
         # Unregistered - Dynamic Name of the caller
-        [Parameter(Mandatory = $true, ParameterSetName = 'Unregistered')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'unregistered')]
         [Parameter(Mandatory = $true, ParameterSetName = 'unregisteredMajor')]
         [ValidateLength(1, 109)]
         [string]
@@ -847,7 +847,7 @@ function New-Incident {
         $feedbackMessage,
 
         # Whether the incident is a major call
-        [Parameter(Mandatory = $false, ParameterSetName = 'byIDMajor')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'byIDMajor')]
         [Parameter(Mandatory = $false, ParameterSetName = 'byEmailMajor')]
         [Parameter(Mandatory = $false, ParameterSetName = 'byEmployeeMajor')]
         [Parameter(Mandatory = $false, ParameterSetName = 'byNetworkMajor')]
@@ -1289,6 +1289,13 @@ function New-Incident {
                     } else {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'externalLink' -Value @{ 'id' = $externalLinkID; 'type' = $externalLinkType }
                     }
+                }
+
+                $_headerslist = @{ 'Content-Type' = 'application/json' }
+                $_uri = $script:tdURI + '/tas/api/incidents/'
+
+                if($PSCmdlet.ShouldProcess) {
+                    Get-APIResponse -Method 'POST' -APIurl $_uri -Body (ConvertTo-Json -InputObject $newIncident -Depth 8 -Compress) -Headers $_headerslist -tdCredential $script:tdCredential
                 }
 
                 break
