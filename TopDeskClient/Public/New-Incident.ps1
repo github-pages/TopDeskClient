@@ -93,7 +93,7 @@ function New-Incident {
         [Parameter(Mandatory = $true,
             ParameterSetName = 'Unregistered')]
         [Parameter(Mandatory = $true,
-            ParameterSetName = 'unregisterMajor')]
+            ParameterSetName = 'unregisteredMajor')]
         [ValidateLength(1, 109)]
         [string]
         $dynamicName,
@@ -102,7 +102,7 @@ function New-Incident {
         [Parameter(Mandatory = $false,
             ParameterSetName = 'Unregistered')]
         [Parameter(Mandatory = $false,
-            ParameterSetName = 'unregisterMajor')]
+            ParameterSetName = 'unregisteredMajor')]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
         $branchID,
@@ -111,7 +111,7 @@ function New-Incident {
         [Parameter(Mandatory = $false,
             ParameterSetName = 'Unregistered')]
         [Parameter(Mandatory = $false,
-            ParameterSetName = 'unregisterMajor')]
+            ParameterSetName = 'unregisteredMajor')]
         [ValidateLength(1, 25)]
         [string]
         $phoneNumber,
@@ -120,7 +120,7 @@ function New-Incident {
         [Parameter(Mandatory = $false,
             ParameterSetName = 'Unregistered')]
         [Parameter(Mandatory = $false,
-            ParameterSetName = 'unregisterMajor')]
+            ParameterSetName = 'unregisteredMajor')]
         [ValidateLength(1, 25)]
         [string]
         $mobileNumber,
@@ -129,7 +129,7 @@ function New-Incident {
         [Parameter(Mandatory = $false,
             ParameterSetName = 'Unregistered')]
         [Parameter(Mandatory = $false,
-            ParameterSetName = 'unregisterMajor')]
+            ParameterSetName = 'unregisteredMajor')]
         [ValidateLength(1, 100)]
         [string]
         $email,
@@ -138,7 +138,7 @@ function New-Incident {
         [Parameter(Mandatory = $false,
             ParameterSetName = 'Unregistered')]
         [Parameter(Mandatory = $false,
-            ParameterSetName = 'unregisterMajor')]
+            ParameterSetName = 'unregisteredMajor')]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
         $departmentID,
@@ -147,7 +147,7 @@ function New-Incident {
         [Parameter(Mandatory = $false,
             ParameterSetName = 'Unregistered')]
         [Parameter(Mandatory = $false,
-            ParameterSetName = 'unregisterMajor')]
+            ParameterSetName = 'unregisteredMajor')]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
         $locationID,
@@ -156,7 +156,7 @@ function New-Incident {
         [Parameter(Mandatory = $false,
             ParameterSetName = 'Unregistered')]
         [Parameter(Mandatory = $false,
-            ParameterSetName = 'unregisterMajor')]
+            ParameterSetName = 'unregisteredMajor')]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
         $budgetHolderID,
@@ -165,7 +165,7 @@ function New-Incident {
         [Parameter(Mandatory = $false,
             ParameterSetName = 'Unregistered')]
         [Parameter(Mandatory = $false,
-            ParameterSetName = 'unregisterMajor')]
+            ParameterSetName = 'unregisteredMajor')]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
         $personExtraFieldAID,
@@ -174,7 +174,7 @@ function New-Incident {
         [Parameter(Mandatory = $false,
             ParameterSetName = 'Unregistered')]
         [Parameter(Mandatory = $false,
-            ParameterSetName = 'unregisterMajor')]
+            ParameterSetName = 'unregisteredMajor')]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
         $personExtraFieldBID,
