@@ -38,7 +38,8 @@ function New-Incident {
     [CmdletBinding(DefaultParameterSetName = 'byEmail',
         PositionalBinding = $false,
         HelpUri = 'https://github.com/rbury/New-Incident.md',
-        ConfirmImpact = 'Medium')]
+        ConfirmImpact = 'Medium',
+        SupportsShouldProcess = $true)]
     [OutputType([PSCustomObject])]
 
     Param (
@@ -377,7 +378,7 @@ function New-Incident {
         [string]
         $externalNumber,
 
-        # Main incident id, required for creating a partial incident
+        # Main incident id, required for creating a partial incident. Must be accessable, open, unarchived second line incident.
         [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
         [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
         [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
@@ -786,8 +787,13 @@ function New-Incident {
         $feedbackMessage,
 
         # Whether the incident is a major call
-        [Parameter(Mandatory = $false)]
-        [bool]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byIDMajor')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmailMajor')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployeeMajor')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetworkMajor')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLoginMajor')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregisteredMajor')]
+        [switch]
         $majorCall,
 
         # Major call by ID
@@ -898,27 +904,16 @@ function New-Incident {
 
         if (!($script:tdConnected)) {
 
-            $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("Cannot use TopDesk Client when disconnected.", $null, [System.Management.Automation.ErrorCategory]::InvalidOperation, $null))
+            $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("Cannot use TopDesk Client when disconnected.", $null, [System.Management.Automation.ErrorCategory]::ConnectionError, $null))
 
         }
 
-        #TODO: If mainIncident is specified, it must be an accessable, open, unarchived second line incident. This can only be specified for partial incidents.
-        #TODO: objectName or objectLocationID - parameters are mutually exclusive, providing both will ignore objectlocation parameter
-        #TODO: majorCallObjectID - indicates this is a major incident, therefore cannot be used with mainIncident or majorCall parameters
-        #TODO: publishToSsd requires majorCall as only major incidents can be published
-        #TODO: freeFields1/2 - provide function for creating these objects to be passed to new-incident (5x each boolean, number, date, text, memo, searchlist)
-        #TODO: if providing externalLinkID then externalLinkType is required
+        if (($PSBoundParameters.ContainsKey('externalLinkID')) -and (!($PSBoundParameters.ContainsKey('externalLinkType')))) {
+
+            $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("externalLinkType must be provided when using externalLinkID", $null, [System.Management.Automation.ErrorCategory]::InvalidOperation, $null))
+
+        }
         
-        #TODO! ---------------- Helper Functions -------------------
-        #TODO:  /budgetholders - list of Budget Holders
-        #TODO:  /incidents/call_types - list of call types
-        #TODO:  /incidents/categories - list of categories
-        #TODO:  /incidents/subcategories - list of subcategories
-        #TODO:  /incidents/closure_codes - list of closure codes
-        #TODO:  /incidents/entry_types - list of entry types
-        #TODO:  /incidents/impacts - list of impacts
-        #TODO:  /incidents/priorities - list of priorities
-        #TODO:  /incidents/processing_status - list of processing status
     }
 
     process {
