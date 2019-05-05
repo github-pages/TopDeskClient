@@ -12,7 +12,7 @@ Describe "New-MajorIncident" {
 
             It "Should throw when client is disconnected" {
                 $script:TDConnected = $false
-                { New-Incident -callerLookupEmail 'test@test.testing' } | Should -Throw
+                { New-MajorIncident -callerLookupEmail 'test@test.testing' } | Should -Throw
             }
 
             It "Should NOT have performed any API calls" {
