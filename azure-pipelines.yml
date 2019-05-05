@@ -13,8 +13,8 @@ steps:
 
 - powershell: |
    Write-Host '##vso[build.addbuildtag]$(PIPEVERSION)'
-   Write-Host '##vso[build.updatebuildnumber]$(PIPEVERSION)'
-  displayName: 'Set Build Tag and Number'
+#   Write-Host '##vso[build.updatebuildnumber]$(PIPEVERSION)'
+  displayName: 'Set Build Tag'
 
 - powershell: .\build.ps1
   displayName: 'Run Build'
