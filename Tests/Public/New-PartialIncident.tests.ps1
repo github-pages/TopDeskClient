@@ -365,7 +365,7 @@ Import-Module $PSScriptRoot\..\..\TopDeskClient\TopDeskClient.psd1 -Force
                         $param.ParameterSets.Keys | Should -Contain 'Default'
                         $param.ParameterSets.Default.IsMandatory | Should -Be $false
                         $param.ParameterSets.Default.ValueFromPipelineByPropertyName | Should -Be $false
-                        $param.ParameterType.Name | Should -Be 'int'
+                        $param.ParameterType.Name | Should -Be 'int32'
                     }
 
                 }
@@ -443,7 +443,7 @@ Import-Module $PSScriptRoot\..\..\TopDeskClient\TopDeskClient.psd1 -Force
                         $param.ParameterSets.Keys | Should -Contain 'Default'
                         $param.ParameterSets.Default.IsMandatory | Should -Be $false
                         $param.ParameterSets.Default.ValueFromPipelineByPropertyName | Should -Be $false
-                        $param.ParameterType.Name | Should -Be 'int'
+                        $param.ParameterType.Name | Should -Be 'int32'
                     }
 
                 }
