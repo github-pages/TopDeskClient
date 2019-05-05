@@ -641,7 +641,9 @@ function New-MajorIncident
 
     process {
 
-        [PSCustomObject] $newIncident = @{}
+        [PSCustomObject] $newIncident = @{
+            'majorCall' = $true
+        }
         [System.Collections.ArrayList] $callerList = @{}
         [bool] $callerSet = $false
 
@@ -687,7 +689,7 @@ function New-MajorIncident
             foreach ($item in $PSBoundParameters.GetEnumerator()) {            
                 switch ($item) {
 
-                    'Branch' {
+                    'branch' {
                         if($callerSet) {
                             $null = $callerList.caller.Add( 'branch',$branch )
                         } else {
