@@ -75,6 +75,10 @@ task PreTest {
     $overallCoverage = [Math]::Floor(($testResults.CodeCoverage.NumberOfCommandsExecuted / $testResults.CodeCoverage.NumberOfCommandsAnalyzed) * 100)
     assert($overallCoverage -ge $Compliance) ('Code Coverage: "{0}", build requirement: "{1}"' -f $overallCoverage, $Compliance)
 
+    if ($testResults.FailedCount -gt 0) {
+        throw "$($testResults.FailedCount) tests failed."
+    }
+
 }
 
 task Test {
