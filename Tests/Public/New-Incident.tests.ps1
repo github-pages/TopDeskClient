@@ -56,10 +56,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.byID.IsMandatory | Should -Be $true
                     $param.ParameterSets.byID.ValueFromPipelineByPropertyName | Should -Be $false
 
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $true
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
                     $param.ParameterType.Name | Should -Be 'string'
                 }
             }
@@ -73,10 +69,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'byEmployee'
                     $param.ParameterSets.byEmployee.IsMandatory | Should -Be $true
                     $param.ParameterSets.byEmployee.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $true
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
                     
                     $param.ParameterType.Name | Should -Be 'string'
 
@@ -93,10 +85,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.byNetwork.IsMandatory | Should -Be $true
                     $param.ParameterSets.byNetwork.ValueFromPipelineByPropertyName | Should -Be $false
 
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $true
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
                     $param.ParameterType.Name | Should -Be 'string'
 
                 }
@@ -111,10 +99,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'byLogin'
                     $param.ParameterSets.byLogin.IsMandatory | Should -Be $true
                     $param.ParameterSets.byLogin.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $true
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
 
                     $param.ParameterType.Name | Should -Be 'string'
 
@@ -131,10 +115,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Unregistered.IsMandatory | Should -Be $true
                     $param.ParameterSets.Unregistered.ValueFromPipelineByPropertyName | Should -Be $false
 
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.UnregisteredMajor.IsMandatory | Should -Be $true
-                    $param.ParameterSets.UnregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
                     $param.ParameterType.Name | Should -Be 'string'
 
                 }
@@ -150,10 +130,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.Unregistered.ValueFromPipelineByPropertyName | Should -Be $false
 
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.UnregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.UnregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
                     $param.ParameterType.Name | Should -Be 'string'
 
                 }
@@ -168,10 +144,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.Unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.Unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.UnregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.UnregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
                     
                     $param.ParameterType.Name | Should -Be 'string'
 
@@ -187,10 +159,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.Unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.Unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.UnregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.UnregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
                     
                     $param.ParameterType.Name | Should -Be 'string'
 
@@ -206,10 +174,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.Unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.Unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.UnregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.UnregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
                     
                     $param.ParameterType.Name | Should -Be 'string'
 
@@ -225,10 +189,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.Unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.Unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.UnregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.UnregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
                     
                     $param.ParameterType.Name | Should -Be 'string'
 
@@ -244,10 +204,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.Unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.Unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.UnregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.UnregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
                     
                     $param.ParameterType.Name | Should -Be 'string'
 
@@ -263,10 +219,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.Unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.Unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.UnregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.UnregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
                     
                     $param.ParameterType.Name | Should -Be 'string'
 
@@ -282,10 +234,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.Unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.Unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.UnregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.UnregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
                     
                     $param.ParameterType.Name | Should -Be 'string'
 
@@ -301,10 +249,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.Unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.Unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.UnregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.UnregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
                     
                     $param.ParameterType.Name | Should -Be 'string'
 
@@ -341,30 +285,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
 
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
                     $param.ParameterType.Name | Should -Be 'string'
 
                 }
@@ -398,30 +318,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
 
                     $param.ParameterType.Name | Should -Be 'string'
 
@@ -458,30 +354,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
 
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
                     $param.ParameterType.Name | Should -Be 'string'
 
                 }
@@ -516,30 +388,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
 
                     $param.ParameterType.Name | Should -Be 'string'
 
@@ -576,30 +424,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
 
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
                     $param.ParameterType.Name | Should -Be 'boolean'
 
                 }
@@ -634,30 +458,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
 
                     $param.ParameterType.Name | Should -Be 'string'
 
@@ -694,30 +494,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
 
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
                     $param.ParameterType.Name | Should -Be 'string'
 
                 }
@@ -752,30 +528,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
 
                     $param.ParameterType.Name | Should -Be 'string'
 
@@ -812,30 +564,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
 
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
                     $param.ParameterType.Name | Should -Be 'string'
 
                 }
@@ -870,30 +598,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
 
                     $param.ParameterType.Name | Should -Be 'string'
 
@@ -930,30 +634,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
 
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
                     $param.ParameterType.Name | Should -Be 'string'
 
                 }
@@ -962,65 +642,6 @@ Describe "New-Incident" {
             Context "externalNumber" {
 
                 $param = (Get-Command $FunctionName).Parameters['externalNumber']
-
-                It "Should maintain compatibility" {
-
-                    $param.ParameterSets.Keys | Should -Contain 'byID'
-                    $param.ParameterSets.byID.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byID.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmail'
-                    $param.ParameterSets.byEmail.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmail.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployee'
-                    $param.ParameterSets.byEmployee.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployee.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetwork'
-                    $param.ParameterSets.byNetwork.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetwork.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLogin'
-                    $param.ParameterSets.byLogin.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLogin.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregistered'
-                    $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterType.Name | Should -Be 'string'
-
-                }
-            }
-
-            Context "mainIncidentID" {
-
-                $param = (Get-Command $FunctionName).Parameters['mainIncidentID']
 
                 It "Should maintain compatibility" {
 
@@ -1083,30 +704,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
 
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
                     $param.ParameterType.Name | Should -Be 'string'
 
                 }
@@ -1141,30 +738,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
 
                     $param.ParameterType.Name | Should -Be 'string'
 
@@ -1201,30 +774,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
 
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
                     $param.ParameterType.Name | Should -Be 'string'
 
                 }
@@ -1259,30 +808,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
 
                     $param.ParameterType.Name | Should -Be 'string'
 
@@ -1319,30 +844,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
 
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
                     $param.ParameterType.Name | Should -Be 'string'
 
                 }
@@ -1377,30 +878,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
 
                     $param.ParameterType.Name | Should -Be 'string'
 
@@ -1437,30 +914,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
 
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
                     $param.ParameterType.Name | Should -Be 'string'
 
                 }
@@ -1495,30 +948,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
 
                     $param.ParameterType.Name | Should -Be 'datetime'
 
@@ -1555,30 +984,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
 
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
                     $param.ParameterType.Name | Should -Be 'string'
 
                 }
@@ -1613,30 +1018,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
 
                     $param.ParameterType.Name | Should -Be 'boolean'
 
@@ -1673,30 +1054,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
 
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
                     $param.ParameterType.Name | Should -Be 'string'
 
                 }
@@ -1731,30 +1088,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
 
                     $param.ParameterType.Name | Should -Be 'string'
 
@@ -1791,30 +1124,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
 
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
                     $param.ParameterType.Name | Should -Be 'string'
 
                 }
@@ -1849,30 +1158,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
 
                     $param.ParameterType.Name | Should -Be 'string'
 
@@ -1909,30 +1194,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
 
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
                     $param.ParameterType.Name | Should -Be 'boolean'
 
                 }
@@ -1967,30 +1228,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
 
                     $param.ParameterType.Name | Should -Be 'datetime'
 
@@ -2027,30 +1264,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
 
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
                     $param.ParameterType.Name | Should -Be 'boolean'
 
                 }
@@ -2085,30 +1298,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
 
                     $param.ParameterType.Name | Should -Be 'datetime'
 
@@ -2145,30 +1334,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
 
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
                     $param.ParameterType.Name | Should -Be 'boolean'
 
                 }
@@ -2203,30 +1368,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
 
                     $param.ParameterType.Name | Should -Be 'datetime'
 
@@ -2263,30 +1404,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
 
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
                     $param.ParameterType.Name | Should -Be 'string'
 
                 }
@@ -2321,30 +1438,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
 
                     $param.ParameterType.Name | Should -Be 'single'
 
@@ -2381,30 +1474,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
 
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
                     $param.ParameterType.Name | Should -Be 'int32'
 
                 }
@@ -2440,136 +1509,7 @@ Describe "New-Incident" {
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
 
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
                     $param.ParameterType.Name | Should -Be 'string'
-
-                }
-            }
-
-            Context "majorCall" {
-
-                $param = (Get-Command $FunctionName).Parameters['majorCall']
-
-                It "Should maintain compatibility" {
-
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterType.Name | Should -Be 'switchparameter'
-
-                }
-            }
-
-            Context "majorCallObjectID" {
-
-                $param = (Get-Command $FunctionName).Parameters['majorCallObjectID']
-
-                It "Should maintain compatibility" {
-
-                    $param.ParameterSets.Keys | Should -Contain 'byID'
-                    $param.ParameterSets.byID.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byID.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmail'
-                    $param.ParameterSets.byEmail.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmail.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployee'
-                    $param.ParameterSets.byEmployee.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployee.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetwork'
-                    $param.ParameterSets.byNetwork.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetwork.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLogin'
-                    $param.ParameterSets.byLogin.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLogin.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregistered'
-                    $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterType.Name | Should -Be 'string'
-
-                }
-            }
-
-            Context "publishToSsd" {
-
-                $param = (Get-Command $FunctionName).Parameters['publishToSsd']
-
-                It "Should maintain compatibility" {
-
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterType.Name | Should -Be 'boolean'
 
                 }
             }
@@ -2604,31 +1544,7 @@ Describe "New-Incident" {
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
 
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterType.Name | Should -Be 'PSObject'
+                    $param.ParameterType.Name | Should -Be 'hashtable'
                     
                 }
             }
@@ -2663,31 +1579,7 @@ Describe "New-Incident" {
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
 
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterType.Name | Should -Be 'PSObject'
+                    $param.ParameterType.Name | Should -Be 'hashtable'
 
                 }
             }
@@ -2721,30 +1613,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
 
                     $param.ParameterType.Name | Should -Be 'string'
 
@@ -2781,30 +1649,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
 
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
                     $param.ParameterType.Name | Should -Be 'int32'
 
                 }
@@ -2839,30 +1683,6 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byIDMajor'
-                    $param.ParameterSets.byIDMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byIDMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmailMajor'
-                    $param.ParameterSets.byEmailMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmailMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployeeMajor'
-                    $param.ParameterSets.byEmployeeMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployeeMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetworkMajor'
-                    $param.ParameterSets.byNetworkMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetworkMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLoginMajor'
-                    $param.ParameterSets.byLoginMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLoginMajor.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregisteredMajor'
-                    $param.ParameterSets.unregisteredMajor.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregisteredMajor.ValueFromPipelineByPropertyName | Should -Be $false
 
                     $param.ParameterType.Name | Should -Be 'datetime'
 
