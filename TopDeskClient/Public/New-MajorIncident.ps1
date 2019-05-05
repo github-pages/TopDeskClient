@@ -797,58 +797,72 @@ function New-MajorIncident
 
                     'status' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'status' -Value $status
+                        break
                     }
 
                     'briefDescription' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'briefDescription' -Value $briefDescription
+                        break
                     }
 
                     'request' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'request' -Value $request
+                        break
                     }
 
                     'action' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'action' -Value $action
+                        break
                     }
 
                     'actionInvisibleForCaller' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'actionInvisibleForCaller' -Value $actionInvisibleForCaller
+                        break
                     }
 
                     'entryType' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'entryType' -Value $entryType
+                        break
                     }
 
                     'callType' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'callType' -Value $callType
+                        break
                     }
 
                     'categoryName' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'category' -Value @{ 'name' = $categoryName }
+                        break
                     }
 
                     'categoryID' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'category' -Value @{ 'id' = $categoryID } -Force
+                        break
                     }
 
                     'subcategoryName' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'subcategory' -Value @{ 'name' = $subcategoryName }
+                        break
                     }
 
                     'subcategoryID' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'subcategory' -Value @{ 'id' = $subcategoryID } -Force
+                        break
                     }
 
                     'externalNumber' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'externalNumber' -Value $externalNumber
+                        break
                     }
 
                     'objectName' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'object' -Value @{ 'name' = $objectName }
+                        break
                     }
 
                     'objectID' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'object' -Value @{ 'id' = $objectID } -Force
+                        break
                     }
 
                     'objectLocationID' {
@@ -857,102 +871,126 @@ function New-MajorIncident
                         } else {
                             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'location' -Value @{ 'id' = $objectLocationID }
                         }
+                        break
                     }
 
                     'impact' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'impact' -Value $impact
+                        break
                     }
 
                     'urgency' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'urgency' -Value $urgency
+                        break
                     }
 
                     'priority' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'priority' -Value $priority
+                        break
                     }
 
                     'duration' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'duration' -Value $duration
+                        break
                     }
 
                     'targetDate' {
                         [string] $_newTargetDate = ($targetDate | ConvertTo-ISODate)
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'targetDate' -Value $_newTargetDate
+                        break
                     }
 
                     'sla' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'sla' -Value $sla
+                        break
                     }
 
                     'onHold' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'onHold' -Value $onHold
+                        break
                     }
 
                     'operator' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'operator' -Value @{ 'id' = $operator }
+                        break
                     }
 
                     'operatorGroup' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'operatorGroup' -Value @{ 'id' = $operatorGroup }
+                        break
                     }
 
                     'supplier' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'supplier' -Value @{ 'id' = $supplier }
+                        break
                     }
 
                     'processingStatus' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'processingStatus' -Value @{ 'id' = $processingStatus }
+                        break
                     }
 
                     'responded' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'responded' -Value $responded
+                        break
                     }
 
                     'responseDate' {
                         $_newResponseDate = ($responseDate | ConvertTo-ISODate)
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'responseDate' -Value $_newResponseDate
+                        break
                     }
 
                     'completed' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'completed' -Value $completed
+                        break
                     }
 
                     'completedDate' {
                         $_newCompletedDate = ($completedDate | ConvertTo-ISODate)
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'completedDate' -Value $_newCompletedDate
+                        break
                     }
 
                     'closed' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'closed' -Value $closed
+                        break
                     }
 
                     'closedDate' {
                         $_newClosedDate = ($closedDate | ConvertTo-ISODate)
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'closedDate' -Value $_newClosedDate
+                        break
                     }
 
                     'closureCode' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'closureCode' -Value $closureCode
+                        break
                     }
 
                     'costs' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'costs' -Value $costs
+                        break
                     }
 
                     'feedbackRating' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'feedbackRating' -Value $feedbackRating
+                        break
                     }
 
                     'feedbackMessage' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'feedbackMessage' -Value $feedbackMessage
+                        break
                     }
 
                     'optionalFields1' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'optionalFields1' -Value $optionalFields1
+                        break
                     }
 
                     'optionalFields2' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'optionalFields2' -Value $optionalFields2
+                        break
                     }
 
                     'externalLinkID' {
@@ -963,6 +1001,7 @@ function New-MajorIncident
                                 Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'externalLink' -Value @{ 'id' = $externalLinkID; 'type' = $externalLinkType }
                             }
                         }
+                        break
                     }
                     
                     Default {}
