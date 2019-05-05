@@ -21,7 +21,7 @@ Describe "ConvertTo-ISODate" {
 
             It "Should convert using local timezone" {
                 $ISODate2 | Should -BeOfType [string]
-                $ISODate2 | Should -Be '2019-01-11T00:00:00.000-0500'
+                $ISODate2 | Should -Be '2019-01-11T00:00:00.000' + $testDate2.ToString('zzz').Replace(':','')
             }
         }
 
@@ -40,7 +40,7 @@ Describe "ConvertTo-ISODate" {
 
             It "Should convert using local timezone" {
                 $ISODate2 | Should -BeOfType [string]
-                $ISODate2 | Should -Be '2019-01-11T00:00:00.000-0500'
+                $ISODate2 | Should -Be '2019-01-11T00:00:00.000' + $testDate2.ToString('zzz').Replace(':','')
             }
 
         }

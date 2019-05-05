@@ -58,7 +58,9 @@ function ConvertTo-ISODate {
 
     process {
         foreach ($item in $Date) {
-            return [string] ($item.ToString('o').SubString(0,23) + $item.ToString('zzz').Replace(':',''))
+            if($PSCmdlet.ShouldProcess($item,'Convert to ISO8601 format')) {
+                return [string] ($item.ToString('o').SubString(0,23) + $item.ToString('zzz').Replace(':',''))
+            }
         }
     }
 
