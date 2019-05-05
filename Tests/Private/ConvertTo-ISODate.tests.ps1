@@ -1,34 +1,64 @@
-Describe ConvertTo-ISODate {
-    Context 'True' {
-        It "should know true from false" {
-            $true | Should -be $true
+Import-Module $PSScriptRoot\..\..\TopDeskClient\TopDeskClient.psd1 -Force
+
+Describe "ConvertTo-ISODate" {
+
+    InModuleScope -ModuleName TopDeskClient {
+
+        $FunctionName = 'ConvertTo-ISODate'
+
+        Context "Pipeline input" {
+            $testDate1 = [datetime]::Now
+            $testRes1 = $testDate1.ToString('o').SubString(0,23) + $testDate1.ToString('zzz').Replace(':','')
+            $testDate2 = [datetime] '2019-Jan-11'
+            $ISODate1 = $testDate1 | ConvertTo-ISODate
+            $ISODate2 = $testDate2 | ConvertTo-ISODate
+
+
+            It "Should convert the date to TopDesk compatible ISO8601 format string" {
+                $ISODate1 | Should -BeOfType [string]
+                $ISODate1 | Should -Be $testRes1
+            }
+
+            It "Should convert using local timezone" {
+                $ISODate2 | Should -BeOfType [string]
+                $ISODate2 | Should -Be '2019-01-11T00:00:00.000-0500'
+            }
         }
-    }
 
-    Context 'Numbers' {
-        It "Should compare nubmers" {
-            2 | Should -be 2
-            2 | Should -be -gt 1
+        Context "Calling with Parameters" {
+
+            $testDate1 = [datetime]::Now
+            $testRes1 = $testDate1.ToString('o').SubString(0,23) + $testDate1.ToString('zzz').Replace(':','')
+            $TestDate2 = [datetime] '2019-Jan-11'
+            $ISODate1 = (ConvertTo-ISODate -Date $testDate1)
+            $ISODate2 = (ConvertTo-ISODate -Date $TestDate2)
+
+            It "Should convert the date to TopDesk compatible ISO8601 format string" {
+                $ISODate1 | Should -BeOfType [string]
+                $ISODate1 | Should -Be $testRes1
+            }
+
+            It "Should convert using local timezone" {
+                $ISODate2 | Should -BeOfType [string]
+                $ISODate2 | Should -Be '2019-01-11T00:00:00.000-0500'
+            }
+
         }
-    }
 
-    Context 'Strings' {
-        It "Should compare strings" {
-            'Test' | Should -BeExactly 'Test'
-            'Test'.Length | Should -be 4
-        }
-    }
+        Context "Parameters" {
+            Context "Date" {
 
-    Context 'Arrays' {
-        It "Should compare arrays" {
-            $array = 1..2
-            $result = $array * 2
+                $param = (Get-Command $FunctionName).Parameters['Date']
 
-            $result.Count | Should -be 4
-            $result[0] | Should -be 1
-            $result[1] | Should -be 2
-            $result[2] | Should -be 3
-            $result[3] | Should -be 4
+                It "Should maintain compatiblity" {
+
+                    $param.ParameterSets.Keys | Should -Contain 'Default'
+                    $param.ParameterSets.Default.IsMandatory | Should -Be $true
+                    $param.ParameterSets.Default.ValueFromPipeline | Should -Be $true
+                    $param.ParameterType.Name | Should -Be 'DateTime'
+                    
+                }
+            }
         }
     }
 }

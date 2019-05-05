@@ -58,7 +58,7 @@ function ConvertTo-ISODate {
 
     process {
         foreach ($item in $Date) {
-            return [string] ($item.ToString('o').SubString(0,23) + $item.ToString('zzz'))
+            return [string] ($item.ToString('o').SubString(0,23) + $item.ToString('zzz').Replace(':',''))
         }
     }
 
