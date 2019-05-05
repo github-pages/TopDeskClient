@@ -10,6 +10,7 @@ Describe "ConvertTo-ISODate" {
             $testDate1 = [datetime]::Now
             $testRes1 = $testDate1.ToString('o').SubString(0,23) + $testDate1.ToString('zzz').Replace(':','')
             $testDate2 = [datetime] '2019-Jan-11'
+            $testRes2 = '2019-01-11T00:00:00.000' + $testDate2.ToString('zzz').Replace(':','')
             $ISODate1 = $testDate1 | ConvertTo-ISODate
             $ISODate2 = $testDate2 | ConvertTo-ISODate
 
@@ -21,7 +22,7 @@ Describe "ConvertTo-ISODate" {
 
             It "Should convert using local timezone" {
                 $ISODate2 | Should -BeOfType [string]
-                $ISODate2 | Should -Be '2019-01-11T00:00:00.000' + $testDate2.ToString('zzz').Replace(':','')
+                $ISODate2 | Should -Be $testRes2
             }
         }
 
@@ -30,6 +31,7 @@ Describe "ConvertTo-ISODate" {
             $testDate1 = [datetime]::Now
             $testRes1 = $testDate1.ToString('o').SubString(0,23) + $testDate1.ToString('zzz').Replace(':','')
             $TestDate2 = [datetime] '2019-Jan-11'
+            $testRes2 = '2019-01-11T00:00:00.000' + $testDate2.ToString('zzz').Replace(':','')
             $ISODate1 = (ConvertTo-ISODate -Date $testDate1)
             $ISODate2 = (ConvertTo-ISODate -Date $TestDate2)
 
@@ -40,7 +42,7 @@ Describe "ConvertTo-ISODate" {
 
             It "Should convert using local timezone" {
                 $ISODate2 | Should -BeOfType [string]
-                $ISODate2 | Should -Be '2019-01-11T00:00:00.000' + $testDate2.ToString('zzz').Replace(':','')
+                $ISODate2 | Should -Be $testRes2
             }
 
         }
