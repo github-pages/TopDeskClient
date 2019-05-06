@@ -240,7 +240,7 @@ function New-Incident {
         [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $entryTypeID,
+        $entryType,
 
         # Call type by id
         [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
@@ -251,7 +251,7 @@ function New-Incident {
         [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $callTypeID,
+        $callType,
 
         # Category by id
         [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
@@ -347,7 +347,7 @@ function New-Incident {
         [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $impactID,
+        $impact,
 
         # urgency by ID
         [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
@@ -358,7 +358,7 @@ function New-Incident {
         [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $urgencyID,
+        $urgency,
 
         # priority by ID
         [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
@@ -369,7 +369,7 @@ function New-Incident {
         [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $priorityID,
+        $priority,
 
         # duration by ID
         [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
@@ -380,7 +380,7 @@ function New-Incident {
         [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $durationID,
+        $duration,
 
         # Target Date
         [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
@@ -401,7 +401,7 @@ function New-Incident {
         [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $slaID,
+        $sla,
 
         # On hold. On hold date will be filled accordingly
         [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
@@ -422,7 +422,7 @@ function New-Incident {
         [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $operatorID,
+        $operator,
 
         # operatorGroup by ID
         [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
@@ -433,7 +433,7 @@ function New-Incident {
         [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $operatorGroupID,
+        $operatorGroup,
 
         # supplier by ID
         [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
@@ -444,7 +444,7 @@ function New-Incident {
         [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $supplierID,
+        $supplier,
 
         # processingStatus by ID
         [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
@@ -455,7 +455,7 @@ function New-Incident {
         [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $processingStatusID,
+        $processingStatus,
 
         # Whether the incident is responded
         [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
@@ -526,7 +526,7 @@ function New-Incident {
         [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $closureCodeID,
+        $closureCode,
 
         # Costs
         [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
@@ -567,7 +567,7 @@ function New-Incident {
         [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
         [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
         [hashtable]
-        $freeFields1,
+        $optionalFields1,
 
         # Free fields Tab 2
         [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
@@ -577,7 +577,7 @@ function New-Incident {
         [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
         [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
         [hashtable]
-        $freeFields2,
+        $optionalFields2,
 
         # Link to an external system - Identifier as supplied by the external system
         [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
@@ -927,12 +927,12 @@ function New-Incident {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'feedbackMessage' -Value $feedbackMessage
         }
 
-        if($PSBoundParameters.ContainsKey('freeFields1')) { 
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'optionalFields1' -Value $freeFields1
+        if($PSBoundParameters.ContainsKey('optionalFields1')) { 
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'optionalFields1' -Value $optionalFields1
         }
 
-        if($PSBoundParameters.ContainsKey('freeFields2')) { 
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'optionalFields1' -Value $freeFields2
+        if($PSBoundParameters.ContainsKey('optionalFields2')) { 
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'optionalFields1' -Value $optionalFields2
         }
 
         if(($PSBoundParameters.ContainsKey('externalLinkID')) -and ($PSBoundParameters.ContainsKey('externalLinkType'))) {
