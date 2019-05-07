@@ -89,7 +89,7 @@ function New-Incident {
         [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $branchID,
+        $branch,
 
         # Unregistered / override registered - Phone number of the caller
         [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
@@ -133,7 +133,7 @@ function New-Incident {
         [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $departmentID,
+        $department,
 
         # Unregistered / override registered - Location of the caller by id
         [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
@@ -144,7 +144,7 @@ function New-Incident {
         [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $locationID,
+        $location,
 
         # Unregistered / override registered - Budget holder of the caller by id
         [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
@@ -155,7 +155,7 @@ function New-Incident {
         [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $budgetHolderID,
+        $budgetHolder,
 
         # Unregistered / override registered - Person extra a of the caller by id
         [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
@@ -166,7 +166,7 @@ function New-Incident {
         [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $personExtraFieldAID,
+        $personExtraFieldA,
 
         # Unregistered / override registered - Person extra b of the caller by id
         [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
@@ -177,7 +177,7 @@ function New-Incident {
         [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $personExtraFieldBID,
+        $personExtraFieldB,
 
         # status of incident (firstLine, secondLine, partial), Default = firstline
         [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
@@ -738,34 +738,34 @@ function New-Incident {
             }
         }
 
-        if($PSBoundParameters.ContainsKey('budgetHolderID')) {
+        if($PSBoundParameters.ContainsKey('budgetHolder')) {
             if($callerSet) {
-                $null = $callerList.caller.Add('budgetHolder',$budgetHolderID)
+                $null = $callerList.caller.Add('budgetHolder',$budgetHolder)
             } else {
                 $null = $callerList.Add([PSCustomObject]@{
-                    'caller' = @{'budgetHolder'=$budgetHolderID}
+                    'caller' = @{'budgetHolder'=$budgetHolder}
                 })
                 $callerSet = $true
             }
         }
 
-        if($PSBoundParameters.ContainsKey('personExtraFieldAID')) {
+        if($PSBoundParameters.ContainsKey('personExtraFieldA')) {
             if($callerSet) {
-                $null = $callerList.caller.Add('personExtraFieldA',$personExtraFieldAID)
+                $null = $callerList.caller.Add('personExtraFieldA',$personExtraFieldA)
             } else {
                 $null = $callerList.Add([PSCustomObject]@{
-                    'caller' = @{'personExtraFieldA'=$personExtraFieldAID}
+                    'caller' = @{'personExtraFieldA'=$personExtraFieldA}
                 })
                 $callerSet = $true
             }
         }
 
-        if($PSBoundParameters.ContainsKey('personExtraFieldBID')) {
+        if($PSBoundParameters.ContainsKey('personExtraFieldB')) {
             if($callerSet) {
-                $null = $callerList.caller.Add('personExtraFieldB',$personExtraFieldBID)
+                $null = $callerList.caller.Add('personExtraFieldB',$personExtraFieldB)
             } else {
                 $null = $callerList.Add([PSCustomObject]@{
-                    'caller' = @{'personExtraFieldB'=$personExtraFieldBID}
+                    'caller' = @{'personExtraFieldB'=$personExtraFieldB}
                 })
                 $callerSet = $true
             }
@@ -795,11 +795,11 @@ function New-Incident {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'actionInvisibleForCaller' -Value $actionInvisibleForCaller
         }
 
-        if($PSBoundParameters.ContainsKey('entryTypeID')) {
+        if($PSBoundParameters.ContainsKey('entryType')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'entryType' -Value $entryTypeID
         }
 
-        if($PSBoundParameters.ContainsKey('callTypeID')) {
+        if($PSBoundParameters.ContainsKey('callType')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'callType' -Value $callTypeID
         }
 
@@ -839,15 +839,15 @@ function New-Incident {
             }
         }
 
-        if($PSBoundParameters.ContainsKey('impactID')) {
+        if($PSBoundParameters.ContainsKey('impact')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'impact' -Value $impactID
         }
 
-        if($PSBoundParameters.ContainsKey('urgencyID')) {
+        if($PSBoundParameters.ContainsKey('urgency')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'urgency' -Value $urgencyID
         }
 
-        if($PSBoundParameters.ContainsKey('priorityID')) {
+        if($PSBoundParameters.ContainsKey('priority')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'priority' -Value $priorityID
         }
 
@@ -860,7 +860,7 @@ function New-Incident {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'targetDate' -Value $_newTargetDate
         }
 
-        if($PSBoundParameters.ContainsKey('slaID')) { 
+        if($PSBoundParameters.ContainsKey('sla')) { 
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'sla' -Value $slaID
         }
 
@@ -868,19 +868,19 @@ function New-Incident {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'onHold' -Value $onHold
         }
 
-        if($PSBoundParameters.ContainsKey('operatorID')) { 
+        if($PSBoundParameters.ContainsKey('operator')) { 
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'operator' -Value @{ 'id' = $operatorID }
         }
 
-        if($PSBoundParameters.ContainsKey('operatorgroupID')) { 
+        if($PSBoundParameters.ContainsKey('operatorgroup')) { 
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'operatorGroup' -Value @{ 'id' = $operatorGroupID }
         }
 
-        if($PSBoundParameters.ContainsKey('supplierID')) { 
+        if($PSBoundParameters.ContainsKey('supplier')) { 
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'supplier' -Value @{ 'id' = $supplierID }
         }
 
-        if($PSBoundParameters.ContainsKey('processingStatusID')) { 
+        if($PSBoundParameters.ContainsKey('processingStatus')) { 
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'processingStatus' -Value @{ 'id' = $processingStatusID }
         }
 
@@ -911,7 +911,7 @@ function New-Incident {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'closedDate' -Value $_newClosedDate
         }
 
-        if($PSBoundParameters.ContainsKey('closureCodeID')) { 
+        if($PSBoundParameters.ContainsKey('closureCode')) { 
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'closureCode' -Value $closureCodeID
         }
 
