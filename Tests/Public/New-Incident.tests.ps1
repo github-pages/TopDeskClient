@@ -29,14 +29,58 @@ Describe "New-Incident" {
             
             $script:TDConnected = $true
             $param1 = 'A1234567-4444-4444-4444-121212121212'
+            $param2 = 'secondLine'
+            $param3 = 'myoperator@mytest.test'
             $baseURI = '/tas/api/incidents/'
 
             Context "CallerbyID" {
-                Mock -CommandName Get-APIResponse -MockWith { return $null } -ParameterFilter { $_uri -eq $baseURI } -Verifiable
-                New-Incident -callerLookupID $param1
+                
+                $body = @{
+                    'callerLookup' = @{ 'id' = $param1 }
+                    'status' = $param2
+                }
+                $jsonbody = (ConvertTo-Json -InputObject $body -Depth 8 -Compress)
+
+                Mock -CommandName Get-APIResponse -MockWith { return $null } -ParameterFilter { ($_uri -eq '/tas/api/incidents/'  -and $_body -eq '{"callerLookup":{"id":"A1234567-4444-4444-4444-121212121212"},"status":"secondLine"}' ) } -Verifiable
+                $result = New-Incident -callerLookupID $param1 -status $param2
 
                 It "Should perform an API call" {
                     Assert-VerifiableMock
+                    $result | Should -Be $null
+                }
+            }
+
+            Context "CallerbyEmail" {
+                
+                $body = @{
+                    'callerLookup' = @{ 'email' = $param3 }
+                    'status' = $param2
+                    'briefDescription' = 'By email test'
+                }
+                
+                Mock -CommandName Get-APIResponse -MockWith { return $null } -ParameterFilter { $_uri -and '/tas/api/incidents/' -eq $baseURI;  $_body -and $_body -eq '{"status":"secondLine","briefDescription":"By email test","callerLookup":{"email":"myoperator@mytest.test"}}' } -Verifiable
+                $result = New-Incident -callerLookupEmail $param3 -status $param2
+
+                It "Should perform an API call" {
+                    Assert-VerifiableMock
+                    $result | Should -Be $null
+                }
+            }
+
+            Context "CallerbyEmployeeNumber" {
+
+                $body = @{
+                    'callerLookup' = @{ 'employeeNumber' = '1234567' }
+                    'status' = 'firstline'
+                    'externalNumber' = '131313'
+                }
+
+                Mock -CommandName Get-APIResponse -MockWith {} -ParameterFilter { ($_uri -eq $baseURI) -and ($_body -eq '{"callerLookup":{"employeeNumber":"1234567"},"status":"firstline","externalNumber":"131313"}') } -Verifiable
+                $result = New-Incident -callerLookupEmployeeNumber 1234567 -status 'firstline' -externalNumber '131313'
+
+                It "Should perform an API call" {
+                    Assert-VerifiableMock 
+                    $result | Should -be $null
                 }
             }
 
