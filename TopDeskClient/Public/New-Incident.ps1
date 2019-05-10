@@ -674,10 +674,10 @@ function New-Incident {
 
         if($PSBoundParameters.ContainsKey('BranchID')) {
             if($callerSet) {
-                $null = $callerlist.caller.Add( 'branch',$branchID )
+                $null = $callerlist.caller.Add( 'branch',$branch )
             } else {
                 $null = $callerList.Add( [PSCustomObject]@{
-                    'caller' = @{ 'branch' = $branchID }
+                    'caller' = @{ 'branch' = $branch }
                 } )
                 $callerSet = $true
             }
@@ -716,23 +716,23 @@ function New-Incident {
             }
         }
 
-        if($PSBoundParameters.ContainsKey('departmentID')) {
+        if($PSBoundParameters.ContainsKey('department')) {
             if($callerSet) {
-                $null = $callerList.caller.Add('department',$departmentID)
+                $null = $callerList.caller.Add('department',$department)
             } else {
                 $null = $callerList.Add([PSCustomObject]@{
-                    'caller' = @{'department'=$departmentID}
+                    'caller' = @{'department'=$department}
                 })
                 $callerSet = $true
             }
         }
         
-        if($PSBoundParameters.ContainsKey('locationID')) {
+        if($PSBoundParameters.ContainsKey('location')) {
             if($callerSet) {
-                $null = $callerList.caller.Add('location',$locationID)
+                $null = $callerList.caller.Add('location',$location)
             } else {
                 $null = $callerList.Add([PSCustomObject]@{
-                    'caller' = @{'location'=$locationID}
+                    'caller' = @{'location'=$location}
                 })
                 $callerSet = $true
             }
@@ -796,11 +796,11 @@ function New-Incident {
         }
 
         if($PSBoundParameters.ContainsKey('entryType')) {
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'entryType' -Value $entryTypeID
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'entryType' -Value $entryType
         }
 
         if($PSBoundParameters.ContainsKey('callType')) {
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'callType' -Value $callTypeID
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'callType' -Value $callType
         }
 
         if($PSBoundParameters.ContainsKey('categoryName')) {
@@ -851,8 +851,8 @@ function New-Incident {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'priority' -Value $priorityID
         }
 
-        if($PSBoundParameters.ContainsKey('durationID')) {
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'duration' -Value $durationID
+        if($PSBoundParameters.ContainsKey('duration')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'duration' -Value $duration
         }
 
         if($PSBoundParameters.ContainsKey('targetDate')) {
@@ -869,7 +869,7 @@ function New-Incident {
         }
 
         if($PSBoundParameters.ContainsKey('operator')) { 
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'operator' -Value @{ 'id' = $operatorID }
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'operator' -Value @{ 'id' = $operator }
         }
 
         if($PSBoundParameters.ContainsKey('operatorgroup')) { 
