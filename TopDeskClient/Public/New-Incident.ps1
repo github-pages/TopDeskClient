@@ -807,11 +807,11 @@ function New-Incident {
         }
 
         if($PSBoundParameters.ContainsKey('entryType')) {
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'entryType' -Value $entryType
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'entryType' -Value @{ 'id' = $entryType }
         }
 
         if($PSBoundParameters.ContainsKey('callType')) {
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'callType' -Value $callType
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'callType' -Value @{ 'id' = $callType }
         }
 
         if($PSBoundParameters.ContainsKey('categoryName')) {
@@ -851,19 +851,19 @@ function New-Incident {
         }
 
         if($PSBoundParameters.ContainsKey('impact')) {
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'impact' -Value $impactID
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'impact' -Value @{'id' = $impact }
         }
 
         if($PSBoundParameters.ContainsKey('urgency')) {
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'urgency' -Value $urgencyID
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'urgency' -Value @{'id' = $urgency }
         }
 
         if($PSBoundParameters.ContainsKey('priority')) {
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'priority' -Value $priorityID
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'priority' -Value @{ 'id' = $priority }
         }
 
         if($PSBoundParameters.ContainsKey('duration')) {
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'duration' -Value $duration
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'duration' -Value @{ 'id' = $duration }
         }
 
         if($PSBoundParameters.ContainsKey('targetDate')) {
@@ -872,7 +872,7 @@ function New-Incident {
         }
 
         if($PSBoundParameters.ContainsKey('sla')) { 
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'sla' -Value $slaID
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'sla' -Value @{ 'id' = $sla }
         }
 
         if($PSBoundParameters.ContainsKey('onHold')) { 
@@ -923,7 +923,7 @@ function New-Incident {
         }
 
         if($PSBoundParameters.ContainsKey('closureCode')) { 
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'closureCode' -Value $closureCodeID
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'closureCode' -Value @{ 'id' = $closureCode }
         }
 
         if($PSBoundParameters.ContainsKey('costs')) { 
