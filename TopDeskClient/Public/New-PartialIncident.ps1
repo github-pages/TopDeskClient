@@ -331,13 +331,8 @@ function New-PartialIncident
                         break
                     }
 
-                    'mainIncident' {
-                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'mainIncident ' -Value $mainIncident
-                        break
-                    }
-
                     'duration' {
-                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'duration' -Value $duration
+                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'duration' -Value @{ 'id' = $duration }
                         break
                     }
 
@@ -348,7 +343,7 @@ function New-PartialIncident
                     }
 
                     'sla' {
-                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'sla' -Value $sla
+                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'sla' -Value @{ 'id' = $sla }
                         break
                     }
 
@@ -400,7 +395,7 @@ function New-PartialIncident
                     }
 
                     'closureCode' {
-                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'closureCode' -Value $closureCode
+                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'closureCode' -Value @{ 'id' = $closureCode }
                         break
                     }
 
