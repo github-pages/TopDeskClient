@@ -273,7 +273,8 @@ function New-PartialIncident
 
         if($PSBoundParameters.Keys.Count -gt 1) {
             foreach ($item in $PSBoundParameters.GetEnumerator()) {
-                switch ($item) {
+
+                switch ($item.Key) {                    
 
                     'mainIncident' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'mainIncident' -Value $mainIncident
