@@ -275,6 +275,11 @@ function New-PartialIncident
             foreach ($item in $PSBoundParameters.GetEnumerator()) {
                 switch ($item) {
 
+                    'mainIncident' {
+                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'mainIncident' -Value $mainIncident
+                        break
+                    }
+
                     'briefDescription' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'briefDescription' -Value $briefDescription
                         break
