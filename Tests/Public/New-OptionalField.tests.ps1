@@ -86,6 +86,19 @@ Describe New-OptionalFields {
 
         Context "Parameters" {
 
+            Context "optionalField" {
+
+                $param = (Get-Command $FunctionName).Parameters['optionalField']
+
+                It "Should maintain compatiblity" {
+                    $param.ParameterSets.Keys | Should -Contain 'Default'
+                    $param.parameterSets.Keys | Should -Contain 'byNumber'
+                    $param.ParameterSets.Default.IsMandatory | Should -Be $false
+                    $param.ParameterSets.Default.ValueFromPipelineByPropertyName | Should -Be $true
+                    $param.ParameterType.Name | Should -Be 'int32'
+                }
+            }
+
             Context "boolean" {
 
                 $param = (Get-Command $FunctionName).Parameters['boolean']
@@ -95,6 +108,149 @@ Describe New-OptionalFields {
                     $param.ParameterSets.Default.IsMandatory | Should -Be $false
                     $param.ParameterSets.Default.ValueFromPipelineByPropertyName | Should -Be $true
                     $param.ParameterType.Name | Should -Be 'boolean[]'
+                }
+
+            }
+
+            Context "booleanHash" {
+
+                $param = (Get-Command $FunctionName).Parameters['booleanHash']
+
+                It "Should maintain compatibility" {
+                    $param.ParameterSets.Keys | Should -Contain 'byNumber'
+                    $param.ParameterSets.byNumber.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byNumber.ValueFromPipelineByPropertyName | Should -Be $true
+                    $param.ParameterType.Name | Should -Be 'hashtable'
+                }
+
+            }
+
+            Context "number" {
+
+                $param = (Get-Command $FunctionName).Parameters['number']
+
+                It "Should maintain compatibility" {
+                    $param.ParameterSets.Keys | Should -Contain 'Default'
+                    $param.ParameterSets.Default.IsMandatory | Should -Be $false
+                    $param.ParameterSets.Default.ValueFromPipelineByPropertyName | Should -Be $true
+                    $param.ParameterType.Name | Should -Be 'single[]'
+                }
+
+            }
+
+            Context "numberHash" {
+
+                $param = (Get-Command $FunctionName).Parameters['numberHash']
+
+                It "Should maintain compatibility" {
+                    $param.ParameterSets.Keys | Should -Contain 'byNumber'
+                    $param.ParameterSets.byNumber.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byNumber.ValueFromPipelineByPropertyName | Should -Be $true
+                    $param.ParameterType.Name | Should -Be 'hashtable'
+                }
+
+            }
+
+            Context "date" {
+
+                $param = (Get-Command $FunctionName).Parameters['date']
+
+                It "Should maintain compatibility" {
+                    $param.ParameterSets.Keys | Should -Contain 'Default'
+                    $param.ParameterSets.Default.IsMandatory | Should -Be $false
+                    $param.ParameterSets.Default.ValueFromPipelineByPropertyName | Should -Be $true
+                    $param.ParameterType.Name | Should -Be 'datetime[]'
+                }
+
+            }
+
+            Context "DateHash" {
+
+                $param = (Get-Command $FunctionName).Parameters['DateHash']
+
+                It "Should maintain compatibility" {
+                    $param.ParameterSets.Keys | Should -Contain 'byNumber'
+                    $param.ParameterSets.byNumber.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byNumber.ValueFromPipelineByPropertyName | Should -Be $true
+                    $param.ParameterType.Name | Should -Be 'hashtable'
+                }
+
+            }
+
+            Context "text" {
+
+                $param = (Get-Command $FunctionName).Parameters['text']
+
+                It "Should maintain compatibility" {
+                    $param.ParameterSets.Keys | Should -Contain 'Default'
+                    $param.ParameterSets.Default.IsMandatory | Should -Be $false
+                    $param.ParameterSets.Default.ValueFromPipelineByPropertyName | Should -Be $true
+                    $param.ParameterType.Name | Should -Be 'string[]'
+                }
+
+            }
+
+            Context "textHash" {
+
+                $param = (Get-Command $FunctionName).Parameters['textHash']
+
+                It "Should maintain compatibility" {
+                    $param.ParameterSets.Keys | Should -Contain 'byNumber'
+                    $param.ParameterSets.byNumber.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byNumber.ValueFromPipelineByPropertyName | Should -Be $true
+                    $param.ParameterType.Name | Should -Be 'hashtable'
+                }
+
+            }
+
+            Context "memo" {
+
+                $param = (Get-Command $FunctionName).Parameters['memo']
+
+                It "Should maintain compatibility" {
+                    $param.ParameterSets.Keys | Should -Contain 'Default'
+                    $param.ParameterSets.Default.IsMandatory | Should -Be $false
+                    $param.ParameterSets.Default.ValueFromPipelineByPropertyName | Should -Be $true
+                    $param.ParameterType.Name | Should -Be 'string[]'
+                }
+
+            }
+
+            Context "memoHash" {
+
+                $param = (Get-Command $FunctionName).Parameters['memoHash']
+
+                It "Should maintain compatibility" {
+                    $param.ParameterSets.Keys | Should -Contain 'byNumber'
+                    $param.ParameterSets.byNumber.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byNumber.ValueFromPipelineByPropertyName | Should -Be $true
+                    $param.ParameterType.Name | Should -Be 'hashtable'
+                }
+
+            }
+
+            Context "searchlist" {
+
+                $param = (Get-Command $FunctionName).Parameters['searchlist']
+
+                It "Should maintain compatibility" {
+                    $param.ParameterSets.Keys | Should -Contain 'Default'
+                    $param.ParameterSets.Default.IsMandatory | Should -Be $false
+                    $param.ParameterSets.Default.ValueFromPipelineByPropertyName | Should -Be $true
+                    $param.ParameterType.Name | Should -Be 'string[]'
+                }
+
+            }
+
+            Context "searchlistHash" {
+
+                $param = (Get-Command $FunctionName).Parameters['searchlistHash']
+
+                It "Should maintain compatibility" {
+                    $param.ParameterSets.Keys | Should -Contain 'byNumber'
+                    $param.ParameterSets.byNumber.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byNumber.ValueFromPipelineByPropertyName | Should -Be $true
+                    $param.ParameterType.Name | Should -Be 'hashtable'
                 }
 
             }
