@@ -823,12 +823,12 @@ function New-MajorIncident
                     }
 
                     'entryType' {
-                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'entryType' -Value $entryType
+                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'entryType' -Value @{ 'id' = $entryType }
                         break
                     }
 
                     'callType' {
-                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'callType' -Value $callType
+                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'callType' -Value @{ 'id' = $callType }
                         break
                     }
 
@@ -877,22 +877,22 @@ function New-MajorIncident
                     }
 
                     'impact' {
-                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'impact' -Value $impact
+                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'impact' -Value @{ 'id' = $impact }
                         break
                     }
 
                     'urgency' {
-                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'urgency' -Value $urgency
+                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'urgency' -Value @{ 'id' = $urgency }
                         break
                     }
 
                     'priority' {
-                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'priority' -Value $priority
+                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'priority' -Value @{ 'id' = $priority }
                         break
                     }
 
                     'duration' {
-                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'duration' -Value $duration
+                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'duration' -Value @{ 'id' = $duration }
                         break
                     }
 
@@ -903,7 +903,7 @@ function New-MajorIncident
                     }
 
                     'sla' {
-                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'sla' -Value $sla
+                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'sla' -Value @{ 'id' = $sla }
                         break
                     }
 
@@ -966,7 +966,7 @@ function New-MajorIncident
                     }
 
                     'closureCode' {
-                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'closureCode' -Value $closureCode
+                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'closureCode' -Value @{ 'id' = $closureCode }
                         break
                     }
 
