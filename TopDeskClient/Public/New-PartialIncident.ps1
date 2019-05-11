@@ -277,7 +277,7 @@ function New-PartialIncident
                 switch ($item.Key) {                    
 
                     'mainIncident' {
-                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'mainIncident' -Value $mainIncident
+                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'mainIncident' -Value @{ 'id' = $mainIncident }
                         break
                     }
 
@@ -302,7 +302,7 @@ function New-PartialIncident
                     }
 
                     'entryType' {
-                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'entryType' -Value $entryType
+                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'entryType' -Value @{ 'id' = $entryType }
                         break
                     }
 
