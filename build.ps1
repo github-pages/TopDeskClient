@@ -12,6 +12,8 @@ $Policy = (Get-PSRepository PSGallery).InstallationPolicy
 Set-PSRepository PSGallery -InstallationPolicy Trusted
 
 try {
+    if(Get-Module TopDeskClient) {Remove-Module TopDeskClient -Force}
+    $RequiredModules | ForEach-Object { Remove-Module -Name $_.Name -Force -ErrorAction SilentlyContinue }
     $RequiredModules | Install-Module -Scope $Scope -Repository PSGallery -SkipPublisherCheck -Force
 }
 finally {
