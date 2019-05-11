@@ -44,6 +44,13 @@ function New-PartialIncident
     [OutputType([String], ParameterSetName = "Default")]
     Param (
 
+        # Main incident id, required for creating a partial incident. Must be accessable, open, unarchived second line incident.
+        [Parameter(Mandatory = $true, ParameterSetName = 'Default')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'byID')]
+        [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
+        [string]
+        $mainIncident,
+
         # brief Description of incident
         [Parameter(Mandatory = $false, ParameterSetName = 'Default')]
         [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
@@ -104,13 +111,6 @@ function New-PartialIncident
         [ValidateLength(1, 60)]
         [string]
         $externalNumber,
-
-        # Main incident id, required for creating a partial incident. Must be accessable, open, unarchived second line incident.
-        [Parameter(Mandatory = $true, ParameterSetName = 'Default')]
-        [Parameter(Mandatory = $true, ParameterSetName = 'byID')]
-        [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
-        [string]
-        $mainIncident,
 
         # duration by ID
         [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
