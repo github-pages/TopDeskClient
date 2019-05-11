@@ -36,6 +36,7 @@ function New-OptionalField {
       Repeat the ".LINK" keyword for each related topic.
   #>
     [CmdletBinding(DefaultParameterSetName = 'Default',
+        SupportsShouldProcess = $true,
         PositionalBinding = $false,
         HelpUri = 'https://github.com/rbury/TopDeskClient/Docs/New-OptionalFields.md',
         ConfirmImpact = 'Low')]
@@ -159,7 +160,7 @@ function New-OptionalField {
 
                     $dateName = 'date' + ( $datecount + 1 )
                     $newDate = ($dateItem | ConvertTo-ISODAte)
-                    $null = $return.Add( @{ $dateName = $dateItem } )
+                    $null = $return.Add( @{ $dateName = $newDate } )
                     $datecount += 1
 
                 }
@@ -293,14 +294,14 @@ function New-OptionalField {
 
         }
 
+        if($PSCmdlet.ShouldProcess($return, 'create')) {
+            $returnhash = [hashtable] @{ }
+            $_optionalFieldNum = 'optionalFields' + $optionalField
+            $returnhash.Add($_optionalFieldNum, $return)
+            return $returnhash
+        }
     }
 
     end {
-
-        $returnhash = [hashtable] @{ }
-        $_optionalFieldNum = 'optionalFields' + $optionalField
-        $returnhash.Add($_optionalFieldNum, $return)
-        return $returnhash
-
     }
 }
