@@ -107,7 +107,7 @@ function New-PartialIncident
 
         # Main incident id, required for creating a partial incident. Must be accessable, open, unarchived second line incident.
         [Parameter(Mandatory = $true, ParameterSetName = 'Default')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'byID')]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
         $mainIncident,
