@@ -44,6 +44,13 @@ function New-PartialIncident
     [OutputType([String], ParameterSetName = "Default")]
     Param (
 
+        # Main incident id, required for creating a partial incident. Must be accessable, open, unarchived second line incident.
+        [Parameter(Mandatory = $true, ParameterSetName = 'Default')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'byID')]
+        [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
+        [string]
+        $mainIncident,
+
         # brief Description of incident
         [Parameter(Mandatory = $false, ParameterSetName = 'Default')]
         [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
@@ -104,13 +111,6 @@ function New-PartialIncident
         [ValidateLength(1, 60)]
         [string]
         $externalNumber,
-
-        # Main incident id, required for creating a partial incident. Must be accessable, open, unarchived second line incident.
-        [Parameter(Mandatory = $true, ParameterSetName = 'Default')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
-        [string]
-        $mainIncident,
 
         # duration by ID
         [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
@@ -216,13 +216,6 @@ function New-PartialIncident
         [string]
         $feedbackMessage,
 
-        # Major call by ID
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'Default')]
-        [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
-        [string]
-        $majorCallObject,
-
         # Free fields Tab 1
         [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
         [Parameter(Mandatory = $false, ParameterSetName = 'Default')]
@@ -280,7 +273,13 @@ function New-PartialIncident
 
         if($PSBoundParameters.Keys.Count -gt 1) {
             foreach ($item in $PSBoundParameters.GetEnumerator()) {
-                switch ($item) {
+
+                switch ($item.Key) {                    
+
+                    'mainIncident' {
+                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'mainIncident' -Value @{ 'id' = $mainIncident }
+                        break
+                    }
 
                     'briefDescription' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'briefDescription' -Value $briefDescription
@@ -303,7 +302,7 @@ function New-PartialIncident
                     }
 
                     'entryType' {
-                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'entryType' -Value $entryType
+                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'entryType' -Value @{ 'id' = $entryType }
                         break
                     }
 
@@ -332,13 +331,8 @@ function New-PartialIncident
                         break
                     }
 
-                    'mainIncident' {
-                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'mainIncident ' -Value $mainIncident
-                        break
-                    }
-
                     'duration' {
-                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'duration' -Value $duration
+                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'duration' -Value @{ 'id' = $duration }
                         break
                     }
 
@@ -349,7 +343,7 @@ function New-PartialIncident
                     }
 
                     'sla' {
-                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'sla' -Value $sla
+                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'sla' -Value @{ 'id' = $sla }
                         break
                     }
 
@@ -401,7 +395,7 @@ function New-PartialIncident
                     }
 
                     'closureCode' {
-                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'closureCode' -Value $closureCode
+                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'closureCode' -Value @{ 'id' = $closureCode }
                         break
                     }
 
@@ -418,12 +412,7 @@ function New-PartialIncident
                     'feedbackMessage' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'feedbackMessage' -Value $feedbackMessage
                         break
-                    }
-
-                    'majorCallObject' {
-                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'majorCallObject' -Value $majorCallObject
-                        break
-                    }
+                    }                   
 
                     'optionalFields1' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'optionalFields1' -Value $optionalFields1
@@ -455,7 +444,7 @@ function New-PartialIncident
         $_uri = $script:tdURI + '/tas/api/incidents/'
         $_body = (ConvertTo-Json -InputObject $newIncident -Depth 8 -Compress)
 
-        if($PSCmdlet.ShouldProcess) {
+        if($PSCmdlet.ShouldProcess( $_body, 'Create' )) {
             Get-APIResponse -Method 'POST' -APIurl $_uri -Body $_body -Headers $_headerslist -tdCredential $script:tdCredential
         }
 

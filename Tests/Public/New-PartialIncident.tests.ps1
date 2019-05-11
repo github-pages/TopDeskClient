@@ -168,8 +168,11 @@ Import-Module $PSScriptRoot\..\..\TopDeskClient\TopDeskClient.psd1 -Force
     
                     It "Should maintain compatibility" {
                         $param.ParameterSets.Keys | Should -Contain 'Default'
+                        $param.ParameterSets.Keys | Should -Contain 'byID'
                         $param.ParameterSets.Default.IsMandatory | Should -Be $true
+                        $param.ParameterSets.byID.IsMandatory | Should -Be $true
                         $param.ParameterSets.Default.ValueFromPipelineByPropertyName | Should -Be $false
+                        $param.ParameterSets.byID.ValueFromPipelineByPropertyName | Should -Be $false
                         $param.ParameterType.Name | Should -Be 'string'
                     }
 
@@ -373,19 +376,6 @@ Import-Module $PSScriptRoot\..\..\TopDeskClient\TopDeskClient.psd1 -Force
                 Context "feedbackMessage" {
 
                     $param = (Get-Command $FunctionName).Parameters['feedbackMessage']
-    
-                    It "Should maintain compatibility" {
-                        $param.ParameterSets.Keys | Should -Contain 'Default'
-                        $param.ParameterSets.Default.IsMandatory | Should -Be $false
-                        $param.ParameterSets.Default.ValueFromPipelineByPropertyName | Should -Be $false
-                        $param.ParameterType.Name | Should -Be 'string'
-                    }
-
-                }
-
-                Context "majorCallObject" {
-
-                    $param = (Get-Command $FunctionName).Parameters['majorCallObject']
     
                     It "Should maintain compatibility" {
                         $param.ParameterSets.Keys | Should -Contain 'Default'
