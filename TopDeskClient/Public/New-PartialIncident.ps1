@@ -216,13 +216,6 @@ function New-PartialIncident
         [string]
         $feedbackMessage,
 
-        # Major call by ID
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'Default')]
-        [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
-        [string]
-        $majorCallObject,
-
         # Free fields Tab 1
         [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
         [Parameter(Mandatory = $false, ParameterSetName = 'Default')]
@@ -418,12 +411,7 @@ function New-PartialIncident
                     'feedbackMessage' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'feedbackMessage' -Value $feedbackMessage
                         break
-                    }
-
-                    'majorCallObject' {
-                        Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'majorCallObject' -Value $majorCallObject
-                        break
-                    }
+                    }                   
 
                     'optionalFields1' {
                         Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'optionalFields1' -Value $optionalFields1
