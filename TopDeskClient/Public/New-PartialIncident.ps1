@@ -443,7 +443,7 @@ function New-PartialIncident
         $_uri = $script:tdURI + '/tas/api/incidents/'
         $_body = (ConvertTo-Json -InputObject $newIncident -Depth 8 -Compress)
 
-        if($PSCmdlet.ShouldProcess) {
+        if($PSCmdlet.ShouldProcess( $_body, 'Create' )) {
             Get-APIResponse -Method 'POST' -APIurl $_uri -Body $_body -Headers $_headerslist -tdCredential $script:tdCredential
         }
 
