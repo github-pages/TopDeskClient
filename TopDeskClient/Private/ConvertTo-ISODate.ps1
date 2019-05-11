@@ -36,7 +36,6 @@ function ConvertTo-ISODate {
       Repeat the ".LINK" keyword for each related topic.
   #>
     [CmdletBinding(DefaultParameterSetName='Default',
-                SupportsShouldProcess=$true,
                 PositionalBinding=$false,
                 HelpUri = 'https://github.com/rbury/TopDeskClient/Docs/ConvertTo-ISODate.md',
                 ConfirmImpact='Medium')]
@@ -58,9 +57,7 @@ function ConvertTo-ISODate {
 
     process {
         foreach ($item in $Date) {
-            if($PSCmdlet.ShouldProcess($item,'Convert to ISO8601 format')) {
                 return [string] ($item.ToString('o').SubString(0,23) + $item.ToString('zzz').Replace(':',''))
-            }
         }
     }
 
