@@ -559,6 +559,17 @@ function New-Incident {
         [string]
         $feedbackMessage,
 
+        # Incident is attached to a Major Call
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
+        [string]
+        $majorCallObject,
+
         # Free fields Tab 1
         [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
         [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
