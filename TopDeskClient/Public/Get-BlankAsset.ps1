@@ -73,12 +73,12 @@
 
         if ($PSCmdlet.ParameterSetName -eq 'ByID') {
 
-            $_uri = $script:tdURI + '/tas/api/assetmgmt/assets/blank?templateId=$(' + $TemplateID + ')'
+            $_uri = $script:tdURI + '/tas/api/assetmgmt/assets/blank?templateId=' + $TemplateID
 
         }
         else {
 
-            $_uri = $script:tdURI + '/tas/api/assetmgmt/assets/blank?templateName=$(' + $TemplateName + ')'
+            $_uri = $script:tdURI + '/tas/api/assetmgmt/assets/blank?templateName=' + $TemplateName
 
         }
 
