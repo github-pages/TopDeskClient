@@ -30,7 +30,7 @@ Describe "Get-BlankAsset" {
                     TemplateName = 'Computer'
                 }
                 $param1 = $pobj1.TemplateName
-                Mock -CommandName Get-APIResponse -MockWith { return 'BlankAssetbyName' } -ParameterFilter { $_uri -and $_uri -eq '/tas/api/assetmgmt/assets/blank?templateName=$(' + $param1 + ')' } -Verifiable
+                Mock -CommandName Get-APIResponse -MockWith { return 'BlankAssetbyName' } -ParameterFilter { $_uri -and $_uri -eq '/tas/api/assetmgmt/assets/blank?templateName=' + $param1 } -Verifiable
                 $BlankAsset = ($pobj1 | Get-BlankAsset)
 
                 It "Should retrieve a blank asset by name" {
@@ -48,7 +48,7 @@ Describe "Get-BlankAsset" {
                     TemplateID = '12341234-1234-1234-1234-1234567890AB'
                 }
                 $param1 = $pobj1.TemplateID
-                Mock -CommandName Get-APIResponse -MockWith { return 'BlankAssetbyID' } -ParameterFilter { $_uri -and $_uri -eq '/tas/api/assetmgmt/assets/blank?templateId=$(' + $param1 + ')' } -Verifiable
+                Mock -CommandName Get-APIResponse -MockWith { return 'BlankAssetbyID' } -ParameterFilter { $_uri -and $_uri -eq '/tas/api/assetmgmt/assets/blank?templateId=' + $param1 } -Verifiable
                 $BlankAsset = ($pobj1 | Get-BlankAsset)
 
                 It "Retrieves a blank asset by ID" {
@@ -68,7 +68,7 @@ Describe "Get-BlankAsset" {
             
             Context "By Name" {
                 $param1 = 'Computer'
-                Mock -CommandName Get-APIResponse -MockWith { return 'BlankAssetbyName' } -ParameterFilter { $_uri -and $_uri -eq '/tas/api/assetmgmt/assets/blank?templateName=$(' + $param1 + ')'}
+                Mock -CommandName Get-APIResponse -MockWith { return 'BlankAssetbyName' } -ParameterFilter { $_uri -and $_uri -eq '/tas/api/assetmgmt/assets/blank?templateName=' + $param1 }
                 $BlankAsset = (Get-BlankAsset -TemplateName $param1)
 
                 It "Should retrieve a blank asset by name" {
@@ -83,7 +83,7 @@ Describe "Get-BlankAsset" {
 
             Context "By ID" {
                 $param1 = '12341234-1234-1234-1234-1234567890AB'
-                Mock -CommandName Get-APIResponse -MockWith { return 'BlankAssetbyID' } -ParameterFilter { $_uri -and $_uri -eq '/tas/api/assetmgmt/assets/blank?templateId=$(' + $param1 + ')' }
+                Mock -CommandName Get-APIResponse -MockWith { return 'BlankAssetbyID' } -ParameterFilter { $_uri -and $_uri -eq '/tas/api/assetmgmt/assets/blank?templateId=' + $param1 }
                 $BlankAsset = (Get-BlankAsset -TemplateID $param1)
 
                 It "Should retrieve a blank asset by id" {
