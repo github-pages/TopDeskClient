@@ -34,7 +34,7 @@ function Save-TDCSetting {
                 )
             }
 
-            Export-Object -Path $_savePath -ExportObject $_mySettings -Name 'settings'
+            Export-Object -Path $_savePath -ExportObject $_mySettings -Name 'settings.bin'
         }
         else {
 
