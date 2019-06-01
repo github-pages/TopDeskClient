@@ -1,6 +1,14 @@
 
 trigger:
-- master
+  branches:
+    include:
+    - master
+  paths:
+    exclude:
+    - README.md
+    - Extras/*
+    - Docs/*
+
 
 pr: none
 
