@@ -98,6 +98,17 @@ task Build {
     }
 
     $null = New-Item -Path  "$env:BHBuildOutput/$env:BHProjectName/$env:BHProjectName.psm1" -Force
+@'
+    Set-StrictMode -Version latest
+
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+    $script:tdCredential = [pscredential]::Empty
+    $script:tdAPIVersion = 0
+    $script:tdConnected = $false
+    $script:tdURI = ''
+
+'@ | Add-Content -Path "$env:BHBuildOutput/$env:BHProjectName/$env:BHProjectName.psm1" -Force
     Get-ChildItem -Path "$env:BHModulePath/Private/*.ps1" -Recurse | Get-Content | Add-Content "$env:BHBuildOutput/$env:BHProjectName/$env:BHProjectName.psm1" -Force
     $Public = @( Get-ChildItem -Path "$env:BHModulePath/Public/*.ps1" -Force )
     $Public | Get-Content | Add-Content "$env:BHBuildOutput/$env:BHProjectName/$env:BHProjectName.psm1" -Force
