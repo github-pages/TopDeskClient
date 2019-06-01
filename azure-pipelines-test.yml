@@ -1,0 +1,35 @@
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    exclude:
+    - README.md
+    - Extras/*
+    - Docs/*
+
+pool:
+  vmImage: 'vs2017-win2016'
+
+steps:
+- powershell: |
+   $vernum = & GitVersion.exe /output json /showvariable MajorMinorPatch
+   Write-Host "##vso[task.setvariable variable=PIPEVERSION]$($vernum)"
+  displayName: SetVersion
+
+- powershell: |
+   Write-Host '##vso[build.addbuildtag]$(PIPEVERSION)'
+   Write-Host '##vso[build.updatebuildnumber]$(PIPEVERSION)'
+  displayName: 'Set Build Tag'
+
+- powershell: .\build.ps1
+  displayName: 'Run Build'
+
+- task: PublishTestResults@2
+  displayName: 'Publish Test Results'
+  condition: always()
+  inputs:
+    testResultsFiles: '**/TEST-*.xml'
+    testResultsFormat: NUnit
+    searchFolder: '$(Common.TestResultsDirectory)'
+    mergeTestResults: true
