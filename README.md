@@ -2,8 +2,7 @@
 
 [![Build Status](https://raybury.visualstudio.com/TopDeskClient/_apis/build/status/rbury.TopDeskClient?branchName=master)](https://raybury.visualstudio.com/TopDeskClient/_build/latest?definitionId=14&branchName=master)
 
-[![Deployment Status](https://vsrm.dev.azure.com/raybury/_apis/public/Release/badge/7ad54d4e-c3df-4e0d-93f3-d0a4e0499227/2/2)]
-(https://vsrm.dev.azure.com/raybury/_apis/public/Release/badge/7ad54d4e-c3df-4e0d-93f3-d0a4e0499227/2/2)
+[Deployment Status](https://vsrm.dev.azure.com/raybury/_apis/public/Release/badge/7ad54d4e-c3df-4e0d-93f3-d0a4e0499227/2/2)
 
 ## TopDeskClient - *Alpha*
 
