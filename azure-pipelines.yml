@@ -2,6 +2,8 @@
 trigger:
 - master
 
+pr: none
+
 pool:
   vmImage: 'vs2017-win2016'
 
@@ -16,7 +18,7 @@ steps:
    Write-Host '##vso[build.updatebuildnumber]$(PIPEVERSION)'
   displayName: 'Set Build Tag'
 
-- powershell: .\build.ps1
+- powershell: .\build.ps1 -Task 'fullBuild'
   displayName: 'Run Build'
 
 - task: PublishTestResults@2
@@ -28,15 +30,15 @@ steps:
     searchFolder: '$(Common.TestResultsDirectory)'
     mergeTestResults: true
 
-#- task: CopyFiles@2
-#  displayName: 'Copy Files to: Build '
-#  inputs:
-#    Contents: '**/*.zip'
-#    SourceFolder: Output
-#    TargetFolder: $(Build.StagingDirectory)
-#    CleanTargetFolder: true
+- task: CopyFiles@2
+  displayName: 'Copy Files to: Build '
+  inputs:
+    Contents: '**/*.zip'
+    SourceFolder: Output
+    TargetFolder: $(Build.StagingDirectory)
+    CleanTargetFolder: true
 
-#- task: PublishPipelineArtifact@0
-#  inputs:
-#    artifactName: 'TopDesk Client'
-#    targetPath: $(Build.StagingDirectory)/TopDeskClient.zip
+- task: PublishPipelineArtifact@0
+  inputs:
+    artifactName: 'TopDesk Client'
+    targetPath: $(Build.StagingDirectory)/TopDeskClient.zip
