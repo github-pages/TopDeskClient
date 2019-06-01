@@ -34,7 +34,7 @@ steps:
   displayName: 'Copy Files to: Build '
   inputs:
     Contents: '**/*.zip'
-    SourceFolder: Output
+    SourceFolder: BuildOutput
     TargetFolder: $(Build.StagingDirectory)
     CleanTargetFolder: true
 
