@@ -1,8 +1,8 @@
 # Path to Log file
-$TLog = 'C:\scripts\Logs\iPadSync.log'
+$TLog = 'C:\TopDesk_Export\Logs\iPadSync.log'
 
 # Path to Export list
-$iPadExport = 'C:\scripts\TopDesk_Export\iPads.csv'
+$iPadExport = 'C:\TopDesk_Export\iPads.csv'
 
 # Number of iPads to load from AirWatch
 $lookupLimit = '15000'
@@ -135,7 +135,7 @@ if(($null -ne $AWiPads) -and ($AWiPads -ne "")) {
     Write-Verbose "$($TotalDevices) loaded from AirWatch";
 
     # Modify an values desired to be changed before exporting
-    $SupportdeskiPads = $AWiPads.Devices | Select-Object -Property @{Name='id';Expression={$_.SerialNumber}},
+    $iPads = $AWiPads.Devices | Select-Object -Property @{Name='id';Expression={$_.SerialNumber}},
                                                                     @{Name='iPad-Name';Expression={$_.DeviceFriendlyName}},
                                                                     @{Name='iPad-Model';Expression={$_.Model}},
                                                                     @{Name='iPad-Device-ID';Expression={$_.Id.Value}},
@@ -159,7 +159,7 @@ if(($null -ne $AWiPads) -and ($AWiPads -ne "")) {
                                                                     @{Name='Cloud-Backup-Enabled';Expression={if($_.IsCloudBackupEnabled){'TRUE'}}},
                                                                     @{Name='SEA';Expression={if($_.LocationGroupName.Trim() -eq "SEA"){'TRUE'}}}
 
-    $SupportdeskiPads | Export-Csv -Path $iPadExport -NoTypeInformation;
+    $iPads | Export-Csv -Path $iPadExport -NoTypeInformation;
     
     # Sync Log
     if($SyncLog.Count -gt 0) {
