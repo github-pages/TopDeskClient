@@ -538,11 +538,11 @@ function Get-Incident {
                         Default {}
                     }
                 }
+                $_uri += '&use_standard_response=true'
                 break
             }
         }
 
-        $_uri += '&use_standard_response=true'
         Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers $_headerslist -tdCredential $script:tdCredential
     }
 
