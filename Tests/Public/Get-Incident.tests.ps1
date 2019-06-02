@@ -181,7 +181,7 @@ Describe "Get-Incident" {
                     fields = 'Number','status'
                 }
                 $param1 = $pobj1.fields -join ','
-                Mock -CommandName Get-APIResponse -MockWith { return 'IncidentwithFields' } -ParameterFilter { $_uri -and $_uri -eq '/tas/api/incidents?&fields=' + $param1 + '&use_standard_response=true' } -Verifiable
+                Mock -CommandName Get-APIResponse -MockWith { return 'IncidentwithFields' } -ParameterFilter { $_uri -and $_uri -eq '/tas/api/incidents?&$fields=' + $param1 + '&use_standard_response=true' } -Verifiable
                 
                 $incident = ($pobj1 | Get-Incident)
 
@@ -331,7 +331,7 @@ Describe "Get-Incident" {
 
             Context "Incident by Fields" {
                 $param1 = 'Number','Status'
-                Mock -CommandName Get-APIResponse -MockWith { return 'IncidentbyFields' } -ParameterFilter { $_uri -and $_uri -eq '/tas/api/incidents?&fields=' + ($param1 -join ',') + '&use_standard_response=true' } -Verifiable
+                Mock -CommandName Get-APIResponse -MockWith { return 'IncidentbyFields' } -ParameterFilter { $_uri -and $_uri -eq '/tas/api/incidents?&$fields=' + ($param1 -join ',') + '&use_standard_response=true' } -Verifiable
                 $incident = (Get-Incident -fields $param1)
 
                 It "Should return a value" {
