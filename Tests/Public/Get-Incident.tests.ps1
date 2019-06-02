@@ -29,7 +29,7 @@ Describe "Get-Incident" {
                     Number = '1'
                 }
                 $param1 = $pobj1.Number
-                Mock -CommandName Get-APIResponse -MockWith { return 'IncidentbyNumber' } -ParameterFilter { $_uri -and $_uri -eq '/tas/api/incidents/number/' + $param1.Trim() + '&use_standard_response=true' } -Verifiable
+                Mock -CommandName Get-APIResponse -MockWith { return 'IncidentbyNumber' } -ParameterFilter { $_uri -and $_uri -eq '/tas/api/incidents/number/' + $param1.Trim() } -Verifiable
                 $Incident = ($pobj1 | Get-Incident)
 
                 It "Returns an incident when piped an Incident Number" {
@@ -204,7 +204,7 @@ Describe "Get-Incident" {
 
             Context "Incident by Number" {
                 $param1 = '1'
-                Mock -CommandName Get-APIResponse -MockWith { return 'IncidentbyNumber' } -ParameterFilter { $_uri -and $_uri -eq '/tas/api/incidents/number/' + $param1.Trim() + '&use_standard_response=true' } -Verifiable
+                Mock -CommandName Get-APIResponse -MockWith { return 'IncidentbyNumber' } -ParameterFilter { $_uri -and $_uri -eq '/tas/api/incidents/number/' + $param1.Trim() } -Verifiable
                 $Incident = (Get-Incident -Number $param1)
 
                 It "Should return a value" {
