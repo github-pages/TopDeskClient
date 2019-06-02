@@ -434,7 +434,7 @@ function Get-Incident {
                         }
         
                         'fields' {
-                            $_uri += '&fields=' + ($fields -join ',')
+                            $_uri += '&$fields=' + ($fields -join ',')
                             break
                         }
         
