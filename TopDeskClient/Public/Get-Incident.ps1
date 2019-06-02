@@ -43,7 +43,7 @@ function Get-Incident {
 
     Param (
 
-        # Incident number
+        # The incident number
         [Parameter(Mandatory = $true,
         ValueFromPipelineByPropertyName = $true,
         ParameterSetName = 'Number')]
@@ -52,7 +52,7 @@ function Get-Incident {
         [string]
         $Number,
 
-        # Asset Name
+        # Retrieve only incidents that have one of the specified objects set (by object name)
         [Parameter(Mandatory = $false,
         ValueFromPipelineByPropertyName = $true,
         ParameterSetName = 'ByQuery')]
@@ -83,13 +83,6 @@ function Get-Incident {
         [string[]]
         $operator,
 
-        # Retrieve only unassigned incidents
-        [Parameter(Mandatory = $false,
-        ValueFromPipelineByPropertyName = $true,
-        ParameterSetName = 'ByQuery')]
-        [bool]
-        $unassigned,
-
         # Retrieve only incidents with one of these processing status ids
         [Parameter(Mandatory = $false,
         ValueFromPipelineByPropertyName = $true,
@@ -109,7 +102,7 @@ function Get-Incident {
         ValueFromPipelineByPropertyName = $true,
         ParameterSetName = 'ByQuery')]
         [ValidateSet('firstLine', 'secondLine', 'partial')]
-        [string]
+        [string[]]
         $status,
 
         # Retrieve only incidents reported by callers from one of these branch ids
@@ -176,7 +169,7 @@ function Get-Incident {
         [int]
         $start,
 
-        # The amount of incidents to be returned per request
+        # The amount of incidents to be returned per request ( Default 10, Max 10 000 )
         [Parameter(Mandatory = $false,
         ValueFromPipelineByPropertyName = $true,
         ParameterSetName = 'ByQuery')]
@@ -441,7 +434,7 @@ function Get-Incident {
                         }
         
                         'fields' {
-                            $_uri += '&$fields=' + ($fields -join ',')
+                            $_uri += '&fields=' + ($fields -join ',')
                             break
                         }
         
@@ -481,7 +474,9 @@ function Get-Incident {
                         }
 
                         'status' {
-                            $_uri += '&status=' + $status
+                            foreach ( $item in $status ) {
+                                $_uri += '&status=' + $status
+                            }
                         }
                         
                         'caller_branch' {
@@ -548,7 +543,6 @@ function Get-Incident {
         }
 
         $_uri += '&use_standard_response=true'
-
         Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers $_headerslist -tdCredential $script:tdCredential
     }
 
