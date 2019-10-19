@@ -1,61 +1,118 @@
-function Get-BudgetHolder
-{
+function Get-BudgetHolder {
   <#
     .Synopsis
 
-      Short description
+      Get list of budget holders
 
     .DESCRIPTION
 
-      Long description
-
-    .PARAMETER <Parameter-Name>
-
-      The description of a parameter.
+      This command will return the list of budget holders names and ID.
 
     .EXAMPLE
 
-      Example of how to use this cmdlet
+      Get-BudgetHolder
 
     .INPUTS
 
-      The Microsoft .NET Framework types of objects that can be piped to the function or script.
-      You can also include a description of the input objects.
+      None.
 
     .OUTPUTS
 
-      The .NET Framework type of the objects that the cmdlet returns.
-      You can also include a description of the returned objects.
+      [PSCustomObject] {
+
+        id  string($uuid)
+        name  string
+
+        externalLinks	[
+          id*	string
+          The id of the entity in the external system
+          Size range: maximum 450 characters
+
+          type*	string
+          The type of the link
+          Range: A non-zero integer formatted as string. Each integration should use its own value. If multiple integrations use the same value, records could be shared between the integrations
+
+          date	string(datetime)
+          The date of the synchronization
+        ]
+
+      }
 
     .NOTES
 
-      Additional information about the function or script.
+      None.
 
     .LINK
     
-      The name of a related topic. The value appears on the line below the ".LINK" keyword and must be preceded by a comment symbol # or included in the comment block.
-      Repeat the ".LINK" keyword for each related topic.
+      [/budgetholders](https://developers.topdesk.com/explorer/?page=supporting-files#/Budget%20holders/getBudgetHolders)
   #>
-    [CmdletBinding(DefaultParameterSetName='Default',
-                SupportsShouldProcess=$true,
-                PositionalBinding=$false,
-                HelpUri = "https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-BudgetHolder.md",
-                ConfirmImpact='Medium')]
-    [OutputType([String], ParameterSetName = "Default")]
-    Param
-    (
+  
+  [CmdletBinding(DefaultParameterSetName = 'Default',
+    PositionalBinding = $false,
+    HelpUri = "https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-BudgetHolder.md",
+    ConfirmImpact = 'Medium')]
+  [OutputType([PSCustomObject], ParameterSetName = 'Default')]
+  [OutputType([PSCustomObject], ParameterSetName = 'ByLink')]
+    
+  Param(
 
-    )
-    begin
-    {
+    # Retrieve only budget holders with external link id equal to one of these values
+    [Parameter(Mandatory = $false,
+      ValueFromPipelineByPropertyName = $true,
+      ParameterSetName = 'ByLink')]
+    [string[]]
+    $external_link_id,
+
+    # Retrieve only budget holders with external link type equal to one of these values
+    [Parameter(Mandatory = $false,
+      ValueFromPipelineByPropertyName = $true,
+      ParameterSetName = 'ByLink')]
+    [string[]]
+    $external_link_type
+
+  )
+
+  begin {
+    if (!($script:tdConnected)) {
+
+      $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("Cannot use TopDesk Client when disconnected.", $null, [System.Management.Automation.ErrorCategory]::InvalidOperation, $null))
 
     }
-    process
-    {
+
+    $_headerslist = @{
+      'Content-Type' = 'application/json'
+    }
+
+  }
+
+  process {
+
+    switch ($PSCmdlet.ParameterSetName) {
+
+      'Default' {
+
+        $_uri = $script:tdURI + '/tas/api/budgetholders'
+        break
+
+      }
+
+      'ByLink' {
+
+        $_uri = $script:tdURI + '/tas/api/budgetholders?'
+
+        $_uri += '&external_link_id=' + ($external_link_id -join ",")
+
+        $_uri += '&external_link_type=' + ($external_link_type -join ",")
+
+        break
+
+      }
 
     }
-    end
-    {
 
-    }
+    Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers $_headerslist -tdCredential $script:tdCredential
+
+  }
+
+  end { }
 }
