@@ -26,6 +26,8 @@ Describe Get-BudgetHolder {
 
         Context "Call without parameters" {
 
+            $script:TDConnected = $true
+
             Mock -CommandName Get-APIResponse -MockWith { return $null } -Verifiable
 
             $result = Get-BudgetHolder
