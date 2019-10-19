@@ -38,20 +38,16 @@
       PSObject will represent modified asset including the following properties: settings, metadata, data, fields, functionalities.
 
     .LINK
-
-        [Enable-Asset](https://github.com/rbury/TopDeskClient/Docs/Enable-Asset.md)
-
-    .LINK
-        [Disable-Asset](https://github.com/rbury/TopDeskClient/Docs/Disable-Asset.md)
+        https://github.com/rbury/TopDeskClient/blob/master/Docs/Disable-Asset.md
 
     .LINK
-        [Get-Asset](https://github.com/rbury/TopDeskClient/Docs/Get-Asset.md)
+        https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Asset.md
 
   #>
 
     [CmdletBinding(DefaultParameterSetName = 'Default',
         PositionalBinding = $true,
-        HelpUri = 'https://github.com/rbury/TopDeskClient/Docs/Enable-Asset.md',
+        HelpUri = 'https://github.com/rbury/TopDeskClient/blob/master/Docs/Enable-Asset.md',
         ConfirmImpact = 'Medium')]
     [OutputType([PSObject])]
 
@@ -62,7 +58,7 @@
         [Parameter(Mandatory = $true,
             ValueFromPipelineByPropertyName = $true,
             ParameterSetName = 'Default',
-            Position=0)]
+            Position = 0)]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [Alias('unid')]
         [string]
@@ -77,7 +73,7 @@
 
         }
 
-        $_headerslist = @{'Content-Type' = 'application/json'}
+        $_headerslist = @{'Content-Type' = 'application/json' }
         
     }
 
@@ -88,11 +84,11 @@
             $_uri = $script:tdURI + '/tas/api/assetmgmt/assets/' + $AssetID
             $_status = Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers $_headerslist -tdCredential $script:tdCredential
 
-            if($_status.data.archived) {
+            if ($_status.data.archived) {
                 
-               $_uri = $Script:tdURI + '/tas/api/assetmgmt/assets/' + $AssetID + '/unarchive'
+                $_uri = $Script:tdURI + '/tas/api/assetmgmt/assets/' + $AssetID + '/unarchive'
 
-               $result = Get-APIResponse -Method 'POST' -APIUrl $_uri -Headers $_headerslist -tdCredential $script:tdCredential
+                $result = Get-APIResponse -Method 'POST' -APIUrl $_uri -Headers $_headerslist -tdCredential $script:tdCredential
 
             }
         }
@@ -119,13 +115,13 @@
         }
         catch {
         
-                Write-Error ("Problem unarchiving asset {0}" -f $_.Exception.Message)
+            Write-Error ("Problem unarchiving asset {0}" -f $_.Exception.Message)
     
         }
 
         return $result
     }
 
-    end {}
+    end { }
 
 }

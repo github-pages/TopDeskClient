@@ -1,7 +1,7 @@
 ---
 external help file: TopDeskClient-help.xml
 Module Name: TopDeskClient
-online version:
+online version: https://github.com/rbury/TopDeskClient/blob/master/Docs/Set-Incident.md
 schema: 2.0.0
 ---
 
@@ -584,5 +584,5 @@ Additional information about the function or script.
 
 ## RELATED LINKS
 
-[[Get-Incident](https://github.com/rbury/TopDeskClient/Docs/Get-Incident.md)]()
+[https://github.com/rbury/TopDeskClient/blob/master/Docs/Set-Incident.md](https://github.com/rbury/TopDeskClient/blob/master/Docs/Set-Incident.md)
 

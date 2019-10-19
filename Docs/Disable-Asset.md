@@ -1,7 +1,7 @@
 ---
 external help file: TopDeskClient-help.xml
 Module Name: TopDeskClient
-online version: https://github.com/rbury/TopDeskClient/Docs/Disable-Asset.md
+online version: https://github.com/rbury/TopDeskClient/blob/master/Docs/Enable-Asset.md
 schema: 2.0.0
 ---
 
@@ -171,7 +171,5 @@ If the attempt to disable the asset fails, the return object will contain the er
 
 ## RELATED LINKS
 
-[https://github.com/rbury/TopDeskClient/Docs/Disable-Asset.md](https://github.com/rbury/TopDeskClient/Docs/Disable-Asset.md)
-
-[https://github.com/rbury/TopDeskClient/Docs/Enable-Asset.md](https://github.com/rbury/TopDeskClient/Docs/Enable-Asset.md)
+[https://github.com/rbury/TopDeskClient/blob/master/Docs/Enable-Asset.md](https://github.com/rbury/TopDeskClient/blob/master/Docs/Enable-Asset.md)
 

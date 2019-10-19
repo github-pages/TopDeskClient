@@ -1,7 +1,7 @@
 ---
 external help file: TopDeskClient-help.xml
 Module Name: TopDeskClient
-online version:
+online version: https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-AssetList.md
 schema: 2.0.0
 ---
 
@@ -222,5 +222,13 @@ Additional information about the function or script.
 
 ## RELATED LINKS
 
-[Get-Asset (https://github.com/rbury/TopDeskClient/Docs/Get-Asset.md)]()
+[https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-AssetList.md](https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-AssetList.md)
+
+[https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-AssetTemplate.md](https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-AssetTemplate.md)
+
+[https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-AssetTemplateList.md](https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-AssetTemplateList.md)
+
+[https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-BlankAsset.md](https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-BlankAsset.md)
+
+[https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-LinkedAsset.md](https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-LinkedAsset.md)
 

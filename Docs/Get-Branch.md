@@ -99,6 +99,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 Additional information about the function or script.
 
 ## RELATED LINKS
-
-[[Get-Branch](https://github.com/rbury/TopDeskClient/Docs/Get-Branch.md)]()
-

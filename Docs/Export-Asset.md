@@ -1,7 +1,7 @@
 ---
 external help file: TopDeskClient-help.xml
 Module Name: TopDeskClient
-online version:
+online version: https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Asset.md
 schema: 2.0.0
 ---
 
@@ -122,5 +122,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Export-Asset(https://github.com/rbury/TopDeskClient/Docs/Export-Asset.md)]()
+[https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Asset.md](https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Asset.md)
 

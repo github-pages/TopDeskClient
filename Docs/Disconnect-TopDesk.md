@@ -1,7 +1,7 @@
 ---
 external help file: TopDeskClient-help.xml
 Module Name: TopDeskClient
-online version:
+online version: https://github.com/rbury/TopDeskClient/blob/master/Docs/Connect-TopDesk.md
 schema: 2.0.0
 ---
 
@@ -44,7 +44,5 @@ This command can be useful when connecting to multiple TopDesk instances or clea
 
 ## RELATED LINKS
 
-[[Disconnect-TopDesk](https://github.com/rbury/TopDeskClient/Docs/Disconnect-TopDesk.md)]()
-
-[[Connect-TopDesk](https://github.com/rbury/TopDeskClient/Docs/Connect-TopDesk.md)]()
+[https://github.com/rbury/TopDeskClient/blob/master/Docs/Connect-TopDesk.md](https://github.com/rbury/TopDeskClient/blob/master/Docs/Connect-TopDesk.md)
 

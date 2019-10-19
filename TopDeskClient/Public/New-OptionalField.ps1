@@ -32,13 +32,11 @@ function New-OptionalField {
 
     .LINK
     
-      The name of a related topic. The value appears on the line below the ".LINK" keyword and must be preceded by a comment symbol # or included in the comment block.
-      Repeat the ".LINK" keyword for each related topic.
   #>
     [CmdletBinding(DefaultParameterSetName = 'Default',
         SupportsShouldProcess = $true,
         PositionalBinding = $false,
-        HelpUri = 'https://github.com/rbury/TopDeskClient/Docs/New-OptionalFields.md',
+        HelpUri = 'https://github.com/rbury/TopDeskClient/blob/master/Docs/New-OptionalFields.md',
         ConfirmImpact = 'Low')]
     [OutputType([hashtable], ParameterSetName = "Default")]
 
@@ -47,7 +45,7 @@ function New-OptionalField {
         # OptionalFields to create ( 1 or 2 ) - Default 1
         [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'Default')]
         [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'byNumber')]
-        [ValidateSet(1,2)]
+        [ValidateSet(1, 2)]
         [int]
         $optionalField = 1,
 
@@ -294,7 +292,7 @@ function New-OptionalField {
 
         }
 
-        if($PSCmdlet.ShouldProcess($return, 'create')) {
+        if ($PSCmdlet.ShouldProcess($return, 'create')) {
             $returnhash = [hashtable] @{ }
             $_optionalFieldNum = 'optionalFields' + $optionalField
             $returnhash.Add($_optionalFieldNum, $return)

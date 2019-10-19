@@ -32,11 +32,27 @@
 
     .LINK
 
-      Get-Asset (https://github.com/rbury/TopDeskClient/Docs/Get-Asset.md)
+      https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-AssetList.md
+
+    .LINK
+
+        https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-AssetTemplate.md
+
+    .LINK
+
+        https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-AssetTemplateList.md
+
+    .LINK
+
+        https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-BlankAsset.md
+
+    .LINK
+
+        https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-LinkedAsset.md
   #>
     [CmdletBinding(DefaultParameterSetName = 'AllAssets',
         PositionalBinding = $false,
-        HelpUri = 'https://github.com/rbury/TopDeskClient/Docs/Get-Asset.md',
+        HelpUri = 'https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Asset.md',
         ConfirmImpact = 'Medium')]
     [OutputType([System.Collections.ArrayList])]
 
@@ -186,7 +202,7 @@
 
                 }
 
-                $_all_Devices = Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers @{'Content-Type' = 'application/json'} -tdCredential $script:tdCredential
+                $_all_Devices = Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers @{'Content-Type' = 'application/json' } -tdCredential $script:tdCredential
 
                 if (($null -ne $_all_Devices) -and (($_all_Devices | Get-Member).Name -icontains 'dataSet')) {
 
@@ -233,7 +249,7 @@
 
                         }
 
-                        $_all_Devices = Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers @{'Content-Type' = 'application/json'} -tdCredential $script:tdCredential
+                        $_all_Devices = Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers @{'Content-Type' = 'application/json' } -tdCredential $script:tdCredential
 
                         if (($null -ne $_all_Devices) -and (($_all_Devices | Get-Member).Name -icontains 'dataSet')) {
 
@@ -308,7 +324,7 @@
 
                 }
                 Write-Verbose $_uri
-                $null = $_returnval.Add((Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers @{'Content-Type' = 'application/json'} -tdCredential $script:tdCredential))
+                $null = $_returnval.Add((Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers @{'Content-Type' = 'application/json' } -tdCredential $script:tdCredential))
             }
 
             'FreeText' {
@@ -332,7 +348,7 @@
 
                 Write-Verbose $_uri
 
-                $null = $_returnval.Add((Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers @{'Content-Type' = 'application/json'} -tdCredential $script:tdCredential))
+                $null = $_returnval.Add((Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers @{'Content-Type' = 'application/json' } -tdCredential $script:tdCredential))
 
             }
 
@@ -365,7 +381,7 @@
 
                 }
 
-                $null = $_returnval.Add((Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers @{'Content-Type' = 'application/json'} -tdCredential $script:tdCredential))
+                $null = $_returnval.Add((Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers @{'Content-Type' = 'application/json' } -tdCredential $script:tdCredential))
             }
 
             'Filter' {
@@ -387,11 +403,11 @@
 
                 }
 
-                $null = $_returnval.Add((Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers @{'Content-Type' = 'application/json'} -tdCredential $script:tdCredential))
+                $null = $_returnval.Add((Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers @{'Content-Type' = 'application/json' } -tdCredential $script:tdCredential))
 
             }
 
-            Default {}
+            Default { }
 
         }
     }

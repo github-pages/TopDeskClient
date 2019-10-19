@@ -44,5 +44,5 @@ Additional information about the function or script.
 
 ## RELATED LINKS
 
-[Get-Asset (https://github.com/rbury/TopDeskClient/Docs/Get-AssetTemplate.md)]()
+[Get-Asset https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Asset.md]()
 

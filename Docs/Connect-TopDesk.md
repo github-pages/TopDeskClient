@@ -1,7 +1,7 @@
 ---
 external help file: TopDeskClient-help.xml
 Module Name: TopDeskClient
-online version:
+online version: https://github.com/rbury/TopDeskClient/blob/master/Docs/Disconnect-TopDesk.md
 schema: 2.0.0
 ---
 
@@ -130,7 +130,5 @@ Likewise User 1 copying thier profile to computer 2 will require User 1 to use C
 
 ## RELATED LINKS
 
-[[Connect-TopDesk](https://github.com/rbury/TopDeskClient/Docs/Connect-TopDesk.md)]()
-
-[[Disconnect-TopDesk](https://github.com/rbury/TopDeskClient/Docs/Disconnect-TopDesk.md)]()
+[https://github.com/rbury/TopDeskClient/blob/master/Docs/Disconnect-TopDesk.md](https://github.com/rbury/TopDeskClient/blob/master/Docs/Disconnect-TopDesk.md)
 

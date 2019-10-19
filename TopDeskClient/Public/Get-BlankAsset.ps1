@@ -1,5 +1,5 @@
 ﻿function Get-BlankAsset {
-    <#
+  <#
     .Synopsis
 
       Short description
@@ -32,59 +32,59 @@
 
     .LINK
 
-        [Get-BlankAsset](https://github.com/rbury/TopDeskClient/Docs/Get-BlankAsset.md)
+        https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Asset.md
 
   #>
-    [CmdletBinding(DefaultParameterSetName = 'Default',
-        PositionalBinding = $false,
-        HelpUri = 'https://github.com/rbury/TopDeskClient/Docs/Get-BlankAsset.md',
-        ConfirmImpact = 'Medium')]
+  [CmdletBinding(DefaultParameterSetName = 'Default',
+    PositionalBinding = $false,
+    HelpUri = 'https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-BlankAsset.md',
+    ConfirmImpact = 'Medium')]
 
-    Param (
+  Param (
 
-        # Asset template id
-        [Parameter(Mandatory = $true,
-            ValueFromPipelineByPropertyName = $true,
-            ParameterSetName = 'ByID')]
-        [Alias('ID')]
-        [string]
-        $TemplateID,
+    # Asset template id
+    [Parameter(Mandatory = $true,
+      ValueFromPipelineByPropertyName = $true,
+      ParameterSetName = 'ByID')]
+    [Alias('ID')]
+    [string]
+    $TemplateID,
 
-        # Asset template name (case sensitive)
-        [Parameter(Mandatory = $true,
-            ValueFromPipelineByPropertyName = $true,
-            ParameterSetName = 'Default')]
-        [Alias('Name')]
-        [string]
-        $TemplateName
+    # Asset template name (case sensitive)
+    [Parameter(Mandatory = $true,
+      ValueFromPipelineByPropertyName = $true,
+      ParameterSetName = 'Default')]
+    [Alias('Name')]
+    [string]
+    $TemplateName
 
-    )
+  )
 
-    begin {
+  begin {
 
-        if (!($script:tdConnected)) {
+    if (!($script:tdConnected)) {
 
-            $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("Cannot use TopDesk Client when disconnected.", $null, [System.Management.Automation.ErrorCategory]::InvalidOperation, $null))
+      $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("Cannot use TopDesk Client when disconnected.", $null, [System.Management.Automation.ErrorCategory]::InvalidOperation, $null))
 
-        }
     }
+  }
 
-    process {
+  process {
 
-        if ($PSCmdlet.ParameterSetName -eq 'ByID') {
+    if ($PSCmdlet.ParameterSetName -eq 'ByID') {
 
-            $_uri = $script:tdURI + '/tas/api/assetmgmt/assets/blank?templateId=' + $TemplateID
+      $_uri = $script:tdURI + '/tas/api/assetmgmt/assets/blank?templateId=' + $TemplateID
 
-        }
-        else {
+    }
+    else {
 
-            $_uri = $script:tdURI + '/tas/api/assetmgmt/assets/blank?templateName=' + $TemplateName
-
-        }
-
-        Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers @{'Content-Type' = 'application/json'} -tdCredential $script:tdCredential
+      $_uri = $script:tdURI + '/tas/api/assetmgmt/assets/blank?templateName=' + $TemplateName
 
     }
 
-    end {}
+    Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers @{'Content-Type' = 'application/json' } -tdCredential $script:tdCredential
+
+  }
+
+  end { }
 }

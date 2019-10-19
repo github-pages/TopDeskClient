@@ -278,7 +278,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 Additional information about the function or script.
 
 ## RELATED LINKS
-
-[The name of a related topic. The value appears on the line below the ".LINK" keyword and must be preceded by a comment symbol # or included in the comment block.
-Repeat the ".LINK" keyword for each related topic.]()
-

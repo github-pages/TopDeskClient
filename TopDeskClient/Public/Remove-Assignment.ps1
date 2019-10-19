@@ -1,5 +1,5 @@
 ﻿function Remove-Assignment {
-    <#
+  <#
     .Synopsis
 
       Short description
@@ -32,71 +32,71 @@
 
     .LINK
 
-        [Remove-Assignment](https://github.com/rbury/TopDeskClient/Docs/Remove-Assignment.md)
+        https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Assignment.md
 
   #>
-    [CmdletBinding(DefaultParameterSetName = 'Confirm',
-        SupportsShouldProcess = $true,
-        PositionalBinding = $false,
-        HelpUri = 'https://github.com/rbury/TopDeskClient/Docs/Remove-Assignment.md',
-        ConfirmImpact = 'High')]
-    [OutputType([string])]
+  [CmdletBinding(DefaultParameterSetName = 'Confirm',
+    SupportsShouldProcess = $true,
+    PositionalBinding = $false,
+    HelpUri = 'https://github.com/rbury/TopDeskClient/blob/master/Docs/Remove-Assignment.md',
+    ConfirmImpact = 'High')]
+  [OutputType([string])]
 
-    Param (
+  Param (
 
-        # ID of the Asset
-        [Parameter(Mandatory = $true,
-            ParameterSetName = 'Confirm',
-            ValueFromPipelineByPropertyName = $true)]
-        [Parameter(Mandatory = $true,
-            ParameterSetName = 'Force',
-            ValueFromPipelineByPropertyName = $true)]
-        [ValidateNotNullOrEmpty()]
-        [Alias('unid')]
-        [string]
-        $AssetID,
+    # ID of the Asset
+    [Parameter(Mandatory = $true,
+      ParameterSetName = 'Confirm',
+      ValueFromPipelineByPropertyName = $true)]
+    [Parameter(Mandatory = $true,
+      ParameterSetName = 'Force',
+      ValueFromPipelineByPropertyName = $true)]
+    [ValidateNotNullOrEmpty()]
+    [Alias('unid')]
+    [string]
+    $AssetID,
 
-        # ID of the Link
-        [Parameter(Mandatory = $true,
-            ParameterSetName = 'Confirm',
-            ValueFromPipeline = $false,
-            ValueFromRemainingArguments = $false,
-            ValueFromPipelineByPropertyName = $true)]
-        [Parameter(Mandatory = $true,
-            ParameterSetName = 'Force',
-            ValueFromPipeline = $false,
-            ValueFromRemainingArguments = $false,
-            ValueFromPipelineByPropertyName = $true)]
-        [ValidateNotNullOrEmpty()]
-        [Alias('id')]
-        [string]
-        $LinkID,
+    # ID of the Link
+    [Parameter(Mandatory = $true,
+      ParameterSetName = 'Confirm',
+      ValueFromPipeline = $false,
+      ValueFromRemainingArguments = $false,
+      ValueFromPipelineByPropertyName = $true)]
+    [Parameter(Mandatory = $true,
+      ParameterSetName = 'Force',
+      ValueFromPipeline = $false,
+      ValueFromRemainingArguments = $false,
+      ValueFromPipelineByPropertyName = $true)]
+    [ValidateNotNullOrEmpty()]
+    [Alias('id')]
+    [string]
+    $LinkID,
 
-        # Force removal without prompting
-        [Parameter(Mandatory = $true,
-            ParameterSetName = 'Force')]
-        [switch]
-        $Force
-    )
+    # Force removal without prompting
+    [Parameter(Mandatory = $true,
+      ParameterSetName = 'Force')]
+    [switch]
+    $Force
+  )
 
-    begin {
+  begin {
 
-        if (!($script:tdConnected)) {
+    if (!($script:tdConnected)) {
 
-            $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("Cannot use TopDesk Client when disconnected.", $null, [System.Management.Automation.ErrorCategory]::InvalidOperation, $null))
+      $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("Cannot use TopDesk Client when disconnected.", $null, [System.Management.Automation.ErrorCategory]::InvalidOperation, $null))
 
-        }
     }
+  }
 
-    process {
+  process {
 
-        if ($PSBoundParameters.ContainsKey('Force') -or ($PSCmdlet.ShouldProcess('Remove Asset Assignment', 'Remove this assignment from the Asset?', "Remove assignment id $LinkID from asset id $AssetID"))) {
+    if ($PSBoundParameters.ContainsKey('Force') -or ($PSCmdlet.ShouldProcess('Remove Asset Assignment', 'Remove this assignment from the Asset?', "Remove assignment id $LinkID from asset id $AssetID"))) {
 
-            $_uri = $script:tdURI + '/tas/api/assetmgmt/assets/' + $AssetID + '/assignments/' + $LinkID
-            Get-APIResponse -Method 'DELETE' -APIUrl $_uri -Headers @{'Content-Type' = 'application/json'} -tdCredential $script:tdCredential
+      $_uri = $script:tdURI + '/tas/api/assetmgmt/assets/' + $AssetID + '/assignments/' + $LinkID
+      Get-APIResponse -Method 'DELETE' -APIUrl $_uri -Headers @{'Content-Type' = 'application/json' } -tdCredential $script:tdCredential
 
-        }
     }
+  }
 
-    end {}
+  end { }
 }

@@ -1,7 +1,7 @@
 ---
 external help file: TopDeskClient-help.xml
 Module Name: TopDeskClient
-online version:
+online version: https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-AssetTemplate.md
 schema: 2.0.0
 ---
 
@@ -44,5 +44,7 @@ Additional information about the function or script.
 
 ## RELATED LINKS
 
-[[Get-AssetTemplate] (https://github.com/rbury/TopDeskClient/Docs/Get-AssetTemplate.md)]()
+[https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-AssetTemplate.md](https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-AssetTemplate.md)
+
+[https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Asset.md](https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Asset.md)
 

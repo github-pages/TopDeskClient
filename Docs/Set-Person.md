@@ -1,7 +1,7 @@
 ---
 external help file: TopDeskClient-help.xml
 Module Name: TopDeskClient
-online version:
+online version: https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Person.md
 schema: 2.0.0
 ---
 
@@ -640,5 +640,5 @@ Additional information about the function or script.
 
 ## RELATED LINKS
 
-[<https://github.com/rbury/TopDeskClient/Docs/Set-Person.md>]()
+[https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Person.md](https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Person.md)
 

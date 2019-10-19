@@ -1,5 +1,5 @@
 ﻿function Get-LinkedAsset {
-    <#
+  <#
     .Synopsis
 
       Short description
@@ -32,90 +32,90 @@
 
     .LINK
 
-        [Get-LinkedAsset](https://github.com/rbury/TopDeskClient/Docs/Get-LinkedAsset.md)
+        https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Asset.md
 
   #>
-    [CmdletBinding(DefaultParameterSetName = 'Type',
-        PositionalBinding = $false,
-        HelpUri = 'https://github.com/rbury/TopDeskClient/Docs/Get-LinkedAsset.md',
-        ConfirmImpact = 'Medium')]
-    [OutputType([PSobject])]
+  [CmdletBinding(DefaultParameterSetName = 'Type',
+    PositionalBinding = $false,
+    HelpUri = 'https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-LinkedAsset.md',
+    ConfirmImpact = 'Medium')]
+  [OutputType([PSobject])]
 
-    Param (
+  Param (
 
-        # Type of item linked (incident, person, persongroup, branch, location)
-        [Parameter(Mandatory = $true,
-            ParameterSetName = 'Type',
-            ValueFromPipelineByPropertyName = $true)]
-        [ValidateSet('incident', 'person', 'persongroup', 'branch', 'location')]
-        [string]
-        $Type,
+    # Type of item linked (incident, person, persongroup, branch, location)
+    [Parameter(Mandatory = $true,
+      ParameterSetName = 'Type',
+      ValueFromPipelineByPropertyName = $true)]
+    [ValidateSet('incident', 'person', 'persongroup', 'branch', 'location')]
+    [string]
+    $Type,
 
-        # Id of linked item
-        [Parameter(Mandatory = $true,
-            ParameterSetName = 'Type',
-            ValueFromPipelineByPropertyName = $true)]
-        [ValidateNotNullOrEmpty()]
-        [string]
-        $ID,
+    # Id of linked item
+    [Parameter(Mandatory = $true,
+      ParameterSetName = 'Type',
+      ValueFromPipelineByPropertyName = $true)]
+    [ValidateNotNullOrEmpty()]
+    [string]
+    $ID,
 
-        # Fields to retrieve
-        [Parameter(Mandatory = $false,
-            ValueFromPipelineByPropertyName = $true)]
-        [ValidateCount(0, 500)]
-        [Alias('fields')]
-        [string[]]
-        $AssetFields,
+    # Fields to retrieve
+    [Parameter(Mandatory = $false,
+      ValueFromPipelineByPropertyName = $true)]
+    [ValidateCount(0, 500)]
+    [Alias('fields')]
+    [string[]]
+    $AssetFields,
 
-        # Exclude Assignments?
-        [Parameter(Mandatory = $false)]
-        [switch]
-        $NoAssignments
-    )
+    # Exclude Assignments?
+    [Parameter(Mandatory = $false)]
+    [switch]
+    $NoAssignments
+  )
 
-    begin {
+  begin {
 
-        if (!($script:tdConnected)) {
+    if (!($script:tdConnected)) {
 
-            $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("Cannot use TopDesk Client when disconnected.", $null, [System.Management.Automation.ErrorCategory]::InvalidOperation, $null))
+      $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("Cannot use TopDesk Client when disconnected.", $null, [System.Management.Automation.ErrorCategory]::InvalidOperation, $null))
 
-        }
     }
+  }
 
-    process {
+  process {
 
-        if ($PSBoundParameters.ContainsKey("AssetFields")) {
+    if ($PSBoundParameters.ContainsKey("AssetFields")) {
 
-            $_fieldlist = [string]::Join(",", $AssetFields)
+      $_fieldlist = [string]::Join(",", $AssetFields)
 
-        }
-        else {
+    }
+    else {
 
-            $_fieldlist = ''
-
-        }
-
-        if ($_fieldlist -ne '') {
-
-            $_uri = $script:tdURI + '/tas/api/assetmgmt/assets?$filter=linkedTo eq ' + "$Type/$ID" + '&fields=' + $_fieldList
-
-        }
-        else {
-
-            $_uri = $script:tdURI + '/tas/api/assetmgmt/assets?$filter=linkedTo eq ' + "$Type/$ID" + '&fields=name'
-
-        }
-
-        if (!($PSBoundParameters.ContainsKey('NoAssignments'))) {
-
-            $_uri += '&showAssignments=$true'
-
-        }
-
-        Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers @{'Content-Type' = 'application/json'} -tdCredential $script:tdCredential
+      $_fieldlist = ''
 
     }
 
-    end {}
+    if ($_fieldlist -ne '') {
+
+      $_uri = $script:tdURI + '/tas/api/assetmgmt/assets?$filter=linkedTo eq ' + "$Type/$ID" + '&fields=' + $_fieldList
+
+    }
+    else {
+
+      $_uri = $script:tdURI + '/tas/api/assetmgmt/assets?$filter=linkedTo eq ' + "$Type/$ID" + '&fields=name'
+
+    }
+
+    if (!($PSBoundParameters.ContainsKey('NoAssignments'))) {
+
+      $_uri += '&showAssignments=$true'
+
+    }
+
+    Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers @{'Content-Type' = 'application/json' } -tdCredential $script:tdCredential
+
+  }
+
+  end { }
     
 }

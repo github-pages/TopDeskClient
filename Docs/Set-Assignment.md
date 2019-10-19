@@ -1,7 +1,7 @@
 ---
 external help file: TopDeskClient-help.xml
 Module Name: TopDeskClient
-online version:
+online version: https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Assignment.md
 schema: 2.0.0
 ---
 
@@ -228,5 +228,5 @@ Additional information about the function or script.
 
 ## RELATED LINKS
 
-[[Set-Assignment](https://github.com/rbury/TopDeskClient/Docs/Set-Assignment.md)]()
+[https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Assignment.md](https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Assignment.md)
 

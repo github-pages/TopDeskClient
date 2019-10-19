@@ -51,13 +51,13 @@ function Add-Assignment {
 
     .LINK
     
-        [Set-Assignment](https://github.com/rbury/TopDeskClient/Docs/Add-Assignment.md)
+        https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Assignment.md
   #>
 
     [CmdletBinding(DefaultParameterSetName = 'Default',
         SupportsShouldProcess = $true,
         PositionalBinding = $false,
-        HelpUri = 'https://github.com/rbury/TopDeskClient/Docs/Add-Assignment.md',
+        HelpUri = 'https://github.com/rbury/TopDeskClient/blob/master/Docs/Add-Assignment.md',
         ConfirmImpact = 'Medium')]
     [OutputType([PSObject])]
 

@@ -1,7 +1,7 @@
 ---
 external help file: TopDeskClient-help.xml
 Module Name: TopDeskClient
-online version:
+online version: https://github.com/rbury/TopDeskClient/blob/master/Docs/Disable-Asset.md
 schema: 2.0.0
 ---
 
@@ -69,9 +69,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[[Enable-Asset](https://github.com/rbury/TopDeskClient/Docs/Enable-Asset.md)]()
+[https://github.com/rbury/TopDeskClient/blob/master/Docs/Disable-Asset.md](https://github.com/rbury/TopDeskClient/blob/master/Docs/Disable-Asset.md)
 
-[[Disable-Asset](https://github.com/rbury/TopDeskClient/Docs/Disable-Asset.md)]()
-
-[[Get-Asset](https://github.com/rbury/TopDeskClient/Docs/Get-Asset.md)]()
+[https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Asset.md](https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Asset.md)
 
