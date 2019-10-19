@@ -1,48 +1,40 @@
 ---
 external help file: TopDeskClient-help.xml
 Module Name: TopDeskClient
-online version: https://github.com/rbury/TopDeskClient/blob/master/docs/Get-ArchiveReason.md
+online version:
 schema: 2.0.0
 ---
 
 # Get-ArchiveReason
 
 ## SYNOPSIS
-
-Retrieve a list of archive reasons
+Short description
 
 ## SYNTAX
 
 ### Default (Default)
-
-``` Powershell
+```
 Get-ArchiveReason [-All] [<CommonParameters>]
 ```
 
 ### ByName
-
-``` Powershell
+```
 Get-ArchiveReason -ReasonName <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-
 Long description
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-
-``` Powershell
-Get-ArchiveReason
 ```
-
-This example gets the list of all archive reasons and their corrisponding IDs.
+Example of how to use this cmdlet
+```
 
 ## PARAMETERS
 
 ### -All
-
 Get all resons and ids
 
 ```yaml
@@ -58,7 +50,6 @@ Accept wildcard characters: False
 ```
 
 ### -ReasonName
-
 Archive reason name (returns matching id)
 
 ```yaml
@@ -74,26 +65,17 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### None
-
-The Microsoft .NET Framework types of objects that can be piped to the function or script.
-You can also include a description of the input objects.
-
+### The Microsoft .NET Framework types of objects that can be piped to the function or script.
+### You can also include a description of the input objects.
 ## OUTPUTS
 
-### Output - PSCustomObject
-
-[PSCustomObject]
-
+### The .NET Framework type of the objects that the cmdlet returns.
+### You can also include a description of the returned objects.
 ## NOTES
-
 Additional information about the function or script.
 
 ## RELATED LINKS
-
-[Get-ArchiveReason](https://github.com/rbury/TopDeskClient/Docs/Get-ArchiveReason.md)

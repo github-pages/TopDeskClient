@@ -28,22 +28,18 @@
 
     .LINK
 
-        [Disconnect-TopDesk](https://github.com/rbury/TopDeskClient/Docs/Disconnect-TopDesk.md)
-
-    .LINK
-
-        [Connect-TopDesk](https://github.com/rbury/TopDeskClient/Docs/Connect-TopDesk.md)
+        https://github.com/rbury/TopDeskClient/blob/master/Docs/Connect-TopDesk.md
 
 #>
-    [CmdletBinding(HelpUri = 'https://github.com/rbury/TopDeskClient/Docs/Disconnect-TopDesk.md',
+    [CmdletBinding(HelpUri = 'https://github.com/rbury/TopDeskClient/blob/master/Docs/Disconnect-TopDesk.md',
         ConfirmImpact = 'Medium')]
     [OutputType([bool])]
     Param()
 
-        $script:tdCredential = [pscredential]::Empty
-        $script:tdAPIVersion = 0
-        $script:tdConnected = $false
-        $script:tdURI = ''
-        return $true
+    $script:tdCredential = [pscredential]::Empty
+    $script:tdAPIVersion = 0
+    $script:tdConnected = $false
+    $script:tdURI = ''
+    return $true
 
 }

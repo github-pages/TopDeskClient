@@ -32,12 +32,12 @@ function New-Incident {
 
     .LINK
     
-      The name of a related topic. The value appears on the line below the ".LINK" keyword and must be preceded by a comment symbol # or included in the comment block.
-      Repeat the ".LINK" keyword for each related topic.
+      https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Incident.md
+
   #>
     [CmdletBinding(DefaultParameterSetName = 'byEmail',
         PositionalBinding = $false,
-        HelpUri = 'https://github.com/rbury/TopDeskClient/Docs/New-Incident.md',
+        HelpUri = 'https://github.com/rbury/TopDeskClient/blob/master/Docs/New-Incident.md',
         ConfirmImpact = 'Medium',
         SupportsShouldProcess)]
     [OutputType([PSCustomObject])]
@@ -641,8 +641,8 @@ function New-Incident {
 
     process {
 
-        [PSCustomObject] $newIncident = @{}
-        [System.Collections.ArrayList] $callerList = @{}
+        [PSCustomObject] $newIncident = @{ }
+        [System.Collections.ArrayList] $callerList = @{ }
         [bool] $callerSet = $false
 
         switch ($PSCmdlet.ParameterSetName) {
@@ -674,8 +674,8 @@ function New-Incident {
             
             'Unregistered' {
                 $null = $callerlist.Add([PSCustomObject]@{
-                    'caller' = @{ 'dynamicName' = $dynamicName }
-                })
+                        'caller' = @{ 'dynamicName' = $dynamicName }
+                    })
                 [bool]$callerSet = $true
                 break
             }
@@ -683,273 +683,284 @@ function New-Incident {
             Default { }
         }
 
-        if($PSBoundParameters.ContainsKey('BranchID')) {
-            if($callerSet) {
-                $null = $callerlist.caller.Add( 'branch',$branch )
-            } else {
+        if ($PSBoundParameters.ContainsKey('BranchID')) {
+            if ($callerSet) {
+                $null = $callerlist.caller.Add( 'branch', $branch )
+            }
+            else {
                 $null = $callerList.Add( [PSCustomObject]@{
-                    'caller' = @{ 'branch' = $branch }
-                } )
+                        'caller' = @{ 'branch' = $branch }
+                    } )
                 $callerSet = $true
             }
         }
 
-        if($PSBoundParameters.ContainsKey('phoneNumber')) {
-            if($callerSet) {
-                $null = $callerList.caller.Add('phoneNumber',$phoneNumber)
-            } else {
+        if ($PSBoundParameters.ContainsKey('phoneNumber')) {
+            if ($callerSet) {
+                $null = $callerList.caller.Add('phoneNumber', $phoneNumber)
+            }
+            else {
                 $null = $callerList.Add([PSCustomObject]@{
-                    'caller' = @{'phoneNumber'=$phoneNumber}
-                })
+                        'caller' = @{'phoneNumber' = $phoneNumber }
+                    })
                 $callerSet = $true
             }
         }
 
-        if($PSBoundParameters.ContainsKey('mobileNumber')) {
-            if($callerSet) {
-                $null = $callerList.caller.Add('mobileNumber',$mobileNumber)
-            } else {
+        if ($PSBoundParameters.ContainsKey('mobileNumber')) {
+            if ($callerSet) {
+                $null = $callerList.caller.Add('mobileNumber', $mobileNumber)
+            }
+            else {
                 $null = $callerList.Add([PSCustomObject]@{
-                    'caller' = @{'mobileNumber'=$mobileNumber}
-                })
+                        'caller' = @{'mobileNumber' = $mobileNumber }
+                    })
                 $callerSet = $true
             }
         }
 
-        if($PSBoundParameters.ContainsKey('email')) {
-            if($callerSet) {
-                $null = $callerList.caller.Add('email',$email)
-            } else {
+        if ($PSBoundParameters.ContainsKey('email')) {
+            if ($callerSet) {
+                $null = $callerList.caller.Add('email', $email)
+            }
+            else {
                 $null = $callerList.Add([PSCustomObject]@{
-                    'caller' = @{'email'=$email}
-                })
+                        'caller' = @{'email' = $email }
+                    })
                 $callerSet = $true
             }
         }
 
-        if($PSBoundParameters.ContainsKey('department')) {
-            if($callerSet) {
-                $null = $callerList.caller.Add('department',$department)
-            } else {
+        if ($PSBoundParameters.ContainsKey('department')) {
+            if ($callerSet) {
+                $null = $callerList.caller.Add('department', $department)
+            }
+            else {
                 $null = $callerList.Add([PSCustomObject]@{
-                    'caller' = @{'department'=$department}
-                })
+                        'caller' = @{'department' = $department }
+                    })
                 $callerSet = $true
             }
         }
         
-        if($PSBoundParameters.ContainsKey('location')) {
-            if($callerSet) {
-                $null = $callerList.caller.Add('location',$location)
-            } else {
+        if ($PSBoundParameters.ContainsKey('location')) {
+            if ($callerSet) {
+                $null = $callerList.caller.Add('location', $location)
+            }
+            else {
                 $null = $callerList.Add([PSCustomObject]@{
-                    'caller' = @{'location'=$location}
-                })
+                        'caller' = @{'location' = $location }
+                    })
                 $callerSet = $true
             }
         }
 
-        if($PSBoundParameters.ContainsKey('budgetHolder')) {
-            if($callerSet) {
-                $null = $callerList.caller.Add('budgetHolder',$budgetHolder)
-            } else {
+        if ($PSBoundParameters.ContainsKey('budgetHolder')) {
+            if ($callerSet) {
+                $null = $callerList.caller.Add('budgetHolder', $budgetHolder)
+            }
+            else {
                 $null = $callerList.Add([PSCustomObject]@{
-                    'caller' = @{'budgetHolder'=$budgetHolder}
-                })
+                        'caller' = @{'budgetHolder' = $budgetHolder }
+                    })
                 $callerSet = $true
             }
         }
 
-        if($PSBoundParameters.ContainsKey('personExtraFieldA')) {
-            if($callerSet) {
-                $null = $callerList.caller.Add('personExtraFieldA',$personExtraFieldA)
-            } else {
+        if ($PSBoundParameters.ContainsKey('personExtraFieldA')) {
+            if ($callerSet) {
+                $null = $callerList.caller.Add('personExtraFieldA', $personExtraFieldA)
+            }
+            else {
                 $null = $callerList.Add([PSCustomObject]@{
-                    'caller' = @{'personExtraFieldA'=$personExtraFieldA}
-                })
+                        'caller' = @{'personExtraFieldA' = $personExtraFieldA }
+                    })
                 $callerSet = $true
             }
         }
 
-        if($PSBoundParameters.ContainsKey('personExtraFieldB')) {
-            if($callerSet) {
-                $null = $callerList.caller.Add('personExtraFieldB',$personExtraFieldB)
-            } else {
+        if ($PSBoundParameters.ContainsKey('personExtraFieldB')) {
+            if ($callerSet) {
+                $null = $callerList.caller.Add('personExtraFieldB', $personExtraFieldB)
+            }
+            else {
                 $null = $callerList.Add([PSCustomObject]@{
-                    'caller' = @{'personExtraFieldB'=$personExtraFieldB}
-                })
+                        'caller' = @{'personExtraFieldB' = $personExtraFieldB }
+                    })
                 $callerSet = $true
             }
         }
 
-        if($callerSet) {
+        if ($callerSet) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'caller' -Value $callerList.caller
         }
 
-        if($PSBoundParameters.ContainsKey('status')) {
+        if ($PSBoundParameters.ContainsKey('status')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'status' -Value $status
         }
 
-        if($PSBoundParameters.ContainsKey('briefDescription')) {
+        if ($PSBoundParameters.ContainsKey('briefDescription')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'briefDescription' -Value $briefDescription
         }
 
-        if($PSBoundParameters.ContainsKey('request')) {
+        if ($PSBoundParameters.ContainsKey('request')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'request' -Value $request
         }
 
-        if($PSBoundParameters.ContainsKey('action')) {
+        if ($PSBoundParameters.ContainsKey('action')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'action' -Value $action
         }
 
-        if($PSBoundParameters.ContainsKey('actionInvisibleForCaller')) {
+        if ($PSBoundParameters.ContainsKey('actionInvisibleForCaller')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'actionInvisibleForCaller' -Value $actionInvisibleForCaller
         }
 
-        if($PSBoundParameters.ContainsKey('entryType')) {
+        if ($PSBoundParameters.ContainsKey('entryType')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'entryType' -Value @{ 'id' = $entryType }
         }
 
-        if($PSBoundParameters.ContainsKey('callType')) {
+        if ($PSBoundParameters.ContainsKey('callType')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'callType' -Value @{ 'id' = $callType }
         }
 
-        if($PSBoundParameters.ContainsKey('categoryName')) {
+        if ($PSBoundParameters.ContainsKey('categoryName')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'category' -Value @{ 'name' = $categoryName }
         }
 
-        if($PSBoundParameters.ContainsKey('categoryID')) {
+        if ($PSBoundParameters.ContainsKey('categoryID')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'category' -Value @{ 'id' = $categoryID } -Force
         }
 
-        if($PSBoundParameters.ContainsKey('subcategoryName')) {
+        if ($PSBoundParameters.ContainsKey('subcategoryName')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'subcategory' -Value @{ 'name' = $subcategoryName }
         }
 
-        if($PSBoundParameters.ContainsKey('subcategoryID')) {
+        if ($PSBoundParameters.ContainsKey('subcategoryID')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'subcategory' -Value @{ 'id' = $subcategoryID } -Force
         }
 
-        if($PSBoundParameters.ContainsKey('externalNumber')) {
+        if ($PSBoundParameters.ContainsKey('externalNumber')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'externalNumber' -Value $externalNumber
         }
 
-        if($PSBoundParameters.ContainsKey('objectName')) {
+        if ($PSBoundParameters.ContainsKey('objectName')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'object' -Value @{ 'name' = $objectName }
         }
 
-        if($PSBoundParameters.ContainsKey('objectID')) {
+        if ($PSBoundParameters.ContainsKey('objectID')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'object' -Value @{ 'id' = $objectID } -Force
         }
 
-        if($PSBoundParameters.ContainsKey('objectLocationID')) {
-            if(($PSBoundParameters.ContainsKey('objectName')) -or ($PSBoundParameters.ContainsKey('objectID'))) {
+        if ($PSBoundParameters.ContainsKey('objectLocationID')) {
+            if (($PSBoundParameters.ContainsKey('objectName')) -or ($PSBoundParameters.ContainsKey('objectID'))) {
                 Write-Warning -Message "Ignoring objectLocationID parameter, objectID or objectName provided."
-            } else {
+            }
+            else {
                 Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'location' -Value @{ 'id' = $objectLocationID }
             }
         }
 
-        if($PSBoundParameters.ContainsKey('impact')) {
+        if ($PSBoundParameters.ContainsKey('impact')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'impact' -Value @{'id' = $impact }
         }
 
-        if($PSBoundParameters.ContainsKey('urgency')) {
+        if ($PSBoundParameters.ContainsKey('urgency')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'urgency' -Value @{'id' = $urgency }
         }
 
-        if($PSBoundParameters.ContainsKey('priority')) {
+        if ($PSBoundParameters.ContainsKey('priority')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'priority' -Value @{ 'id' = $priority }
         }
 
-        if($PSBoundParameters.ContainsKey('duration')) {
+        if ($PSBoundParameters.ContainsKey('duration')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'duration' -Value @{ 'id' = $duration }
         }
 
-        if($PSBoundParameters.ContainsKey('targetDate')) {
+        if ($PSBoundParameters.ContainsKey('targetDate')) {
             [string] $_newTargetDate = ($targetDate | ConvertTo-ISODate)
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'targetDate' -Value $_newTargetDate
         }
 
-        if($PSBoundParameters.ContainsKey('sla')) { 
+        if ($PSBoundParameters.ContainsKey('sla')) { 
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'sla' -Value @{ 'id' = $sla }
         }
 
-        if($PSBoundParameters.ContainsKey('onHold')) { 
+        if ($PSBoundParameters.ContainsKey('onHold')) { 
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'onHold' -Value $onHold
         }
 
-        if($PSBoundParameters.ContainsKey('operator')) { 
+        if ($PSBoundParameters.ContainsKey('operator')) { 
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'operator' -Value @{ 'id' = $operator }
         }
 
-        if($PSBoundParameters.ContainsKey('operatorgroup')) { 
+        if ($PSBoundParameters.ContainsKey('operatorgroup')) { 
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'operatorGroup' -Value @{ 'id' = $operatorGroupID }
         }
 
-        if($PSBoundParameters.ContainsKey('supplier')) { 
+        if ($PSBoundParameters.ContainsKey('supplier')) { 
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'supplier' -Value @{ 'id' = $supplierID }
         }
 
-        if($PSBoundParameters.ContainsKey('processingStatus')) { 
+        if ($PSBoundParameters.ContainsKey('processingStatus')) { 
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'processingStatus' -Value @{ 'id' = $processingStatusID }
         }
 
-        if($PSBoundParameters.ContainsKey('responded')) { 
+        if ($PSBoundParameters.ContainsKey('responded')) { 
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'responded' -Value $responded
         }
 
-        if($PSBoundParameters.ContainsKey('responseDate')) {
+        if ($PSBoundParameters.ContainsKey('responseDate')) {
             $_newResponseDate = ($responseDate | ConvertTo-ISODate)
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'responseDate' -Value $_newResponseDate
         }
 
-        if($PSBoundParameters.ContainsKey('completed')) { 
+        if ($PSBoundParameters.ContainsKey('completed')) { 
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'completed' -Value $completed
         }
 
-        if($PSBoundParameters.ContainsKey('completedDate')) {
+        if ($PSBoundParameters.ContainsKey('completedDate')) {
             $_newCompletedDate = ($completedDate | ConvertTo-ISODate)
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'completedDate' -Value $_newCompletedDate
         }
 
-        if($PSBoundParameters.ContainsKey('closed')) {
+        if ($PSBoundParameters.ContainsKey('closed')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'closed' -Value $closed
         }
 
-        if($PSBoundParameters.ContainsKey('closedDate')) {
+        if ($PSBoundParameters.ContainsKey('closedDate')) {
             $_newClosedDate = ($closedDate | ConvertTo-ISODate)
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'closedDate' -Value $_newClosedDate
         }
 
-        if($PSBoundParameters.ContainsKey('closureCode')) { 
+        if ($PSBoundParameters.ContainsKey('closureCode')) { 
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'closureCode' -Value @{ 'id' = $closureCode }
         }
 
-        if($PSBoundParameters.ContainsKey('costs')) { 
+        if ($PSBoundParameters.ContainsKey('costs')) { 
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'costs' -Value $costs
         }
 
-        if($PSBoundParameters.ContainsKey('feedbackRating')) {
+        if ($PSBoundParameters.ContainsKey('feedbackRating')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'feedbackRating' -Value $feedbackRating
         }
 
-        if($PSBoundParameters.ContainsKey('feedbackMessage')) { 
+        if ($PSBoundParameters.ContainsKey('feedbackMessage')) { 
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'feedbackMessage' -Value $feedbackMessage
         }
 
-        if($PSBoundParameters.ContainsKey('optionalFields1')) { 
+        if ($PSBoundParameters.ContainsKey('optionalFields1')) { 
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'optionalFields1' -Value $optionalFields1
         }
 
-        if($PSBoundParameters.ContainsKey('optionalFields2')) { 
+        if ($PSBoundParameters.ContainsKey('optionalFields2')) { 
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'optionalFields1' -Value $optionalFields2
         }
 
-        if(($PSBoundParameters.ContainsKey('externalLinkID')) -and ($PSBoundParameters.ContainsKey('externalLinkType'))) {
-            if($PSBoundParameters.ContainsKey('externalLinkDate')) {
+        if (($PSBoundParameters.ContainsKey('externalLinkID')) -and ($PSBoundParameters.ContainsKey('externalLinkType'))) {
+            if ($PSBoundParameters.ContainsKey('externalLinkDate')) {
                 Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'externalLink' -Value @{ 'id' = $externalLinkID; 'type' = $externalLinkType; 'date' = $externalLinkDate }
-            } else {
+            }
+            else {
                 Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'externalLink' -Value @{ 'id' = $externalLinkID; 'type' = $externalLinkType }
             }
         }
@@ -958,7 +969,7 @@ function New-Incident {
         $_uri = $script:tdURI + '/tas/api/incidents/'
         $_body = (ConvertTo-Json -InputObject $newIncident -Depth 8 -Compress)
 
-        if($PSCmdlet.ShouldProcess( $_body, 'Create' )) {
+        if ($PSCmdlet.ShouldProcess( $_body, 'Create' )) {
             Get-APIResponse -Method 'POST' -APIurl $_uri -Body $_body -Headers $_headerslist -tdCredential $script:tdCredential
         }
 

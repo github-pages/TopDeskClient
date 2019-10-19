@@ -1,5 +1,4 @@
-function Get-AssetList
-{
+function Get-AssetList {
   <#
     .Synopsis
 
@@ -33,86 +32,86 @@ function Get-AssetList
 
     .LINK
     
-      Get-Asset (https://github.com/rbury/TopDeskClient/Docs/Get-AssetList.md)
+      https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Asset.md
   #>
-    [CmdletBinding(DefaultParameterSetName='Default',
-                PositionalBinding=$false,
-                HelpUri = 'https://github.com/rbury/Docs/Get-AssetList.md',
-                ConfirmImpact='Medium')]
-    [OutputType([PSObject])]
+  [CmdletBinding(DefaultParameterSetName = 'Default',
+    PositionalBinding = $false,
+    HelpUri = 'https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-AssetList.md',
+    ConfirmImpact = 'Medium')]
+  [OutputType([PSObject])]
 
-    Param (
-        # Template ID of type of asset to retrieve
-        [Parameter(Mandatory = $true,
-        ParameterSetName = 'Default',
-        ValueFromPipelineByPropertyName = $true)]
-        [string]
-        $TemplateID,
+  Param (
+    # Template ID of type of asset to retrieve
+    [Parameter(Mandatory = $true,
+      ParameterSetName = 'Default',
+      ValueFromPipelineByPropertyName = $true)]
+    [string]
+    $TemplateID,
 
-        # List of fields to include for each asset
-        [Parameter(Mandatory = $false,
-        ValueFromPipelineByPropertyName = $true)]
-        [string[]]
-        $Fields,
+    # List of fields to include for each asset
+    [Parameter(Mandatory = $false,
+      ValueFromPipelineByPropertyName = $true)]
+    [string[]]
+    $Fields,
 
-        # Include archved assets?
-        [Parameter(Mandatory = $false)]
-        [switch]
-        $Archive
-    )
+    # Include archved assets?
+    [Parameter(Mandatory = $false)]
+    [switch]
+    $Archive
+  )
 
-    begin {
+  begin {
 
-        if (-not($script:tdConnected)) {
+    if (-not($script:tdConnected)) {
 
-            $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("Cannot use TopDesk Client when disconnected.", $null, [System.Management.Automation.ErrorCategory]::InvalidOperation, $null))
-
-        }
-
-        $_headerslist = @{
-            'Content-Type' = 'application/json'
-        }
+      $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("Cannot use TopDesk Client when disconnected.", $null, [System.Management.Automation.ErrorCategory]::InvalidOperation, $null))
 
     }
 
-    process {
+    $_headerslist = @{
+      'Content-Type' = 'application/json'
+    }
 
-        $_uri = $script:tdURI + '/tas/api/assetmgmt/assets/templateId/' + $TemplateID
+  }
 
-        if($PSBoundParameters.ContainsKey('Fields')) {
+  process {
+
+    $_uri = $script:tdURI + '/tas/api/assetmgmt/assets/templateId/' + $TemplateID
+
+    if ($PSBoundParameters.ContainsKey('Fields')) {
            
-            #$_fieldlist = [string]::Join(",", $Fields)
-            #$_fieldlist = ConvertTo-Json -InputObject $Fields -Compress
+      #$_fieldlist = [string]::Join(",", $Fields)
+      #$_fieldlist = ConvertTo-Json -InputObject $Fields -Compress
 
-            #$_uri += '?'
-            $i = 0
-            foreach ($field in $Fields) {
-                if($i -eq 0) {
-                    $i++
-                    $_uri += '?field=' + $field
-                }
-                else {
-                    $_uri += '&field=' + $field
-                }
-            }
-            #$_uri += '?field=' + $_fieldlist
-
+      #$_uri += '?'
+      $i = 0
+      foreach ($field in $Fields) {
+        if ($i -eq 0) {
+          $i++
+          $_uri += '?field=' + $field
         }
-
-        if ($Archive) {
-
-            if($_uri.Contains('?')) {
-                $_uri += '&includeArchived=true'
-            }
-            else {
-                $_uri += '?includeArchived=true'
-            }
-
+        else {
+          $_uri += '&field=' + $field
         }
-
-        Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers $_headerslist -tdCredential $script:tdCredential
+      }
+      #$_uri += '?field=' + $_fieldlist
 
     }
 
-    end {}
+    if ($Archive) {
+
+      if ($_uri.Contains('?')) {
+        $_uri += '&includeArchived=true'
+      }
+      else {
+        $_uri += '?includeArchived=true'
+      }
+
+    }
+
+    Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers $_headerslist -tdCredential $script:tdCredential
+
+  }
+
+  end { }
 }

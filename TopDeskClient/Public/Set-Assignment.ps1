@@ -45,22 +45,22 @@
 
     .LINK
 
-        [Set-Assignment](https://github.com/rbury/TopDeskClient/Docs/Set-Assignment.md)
+        https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Assignment.md
 
   #>
 
     [CmdletBinding(DefaultParameterSetName = 'Default',
         PositionalBinding = $false,
         SupportsShouldProcess = $true,
-        HelpUri = 'https://github.com/rbury/TopDeskClient/Docs/Set-Assignment.md',
+        HelpUri = 'https://github.com/rbury/TopDeskClient/blob/master/Docs/Set-Assignment.md',
         ConfirmImpact = 'Medium')]
-        [OutputType([PSObject])]
+    [OutputType([PSObject])]
 
     Param (
 
         # The id of the asset to assign to.
         [Parameter(Mandatory = $true,
-        ValueFromPipelineByPropertyName = $true)]
+            ValueFromPipelineByPropertyName = $true)]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [Alias('unid')]
         [string]
@@ -68,7 +68,7 @@
 
         # The template id specifying the type of the asset.
         [Parameter(Mandatory = $true,
-        ValueFromPipelineByPropertyName = $true)]
+            ValueFromPipelineByPropertyName = $true)]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [Alias('type_id')]
         [string]
@@ -76,7 +76,7 @@
 
         # The id of the target to be assigned to.
         [Parameter(Mandatory = $true,
-        ValueFromPipelineByPropertyName = $true)]
+            ValueFromPipelineByPropertyName = $true)]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [Alias('id')]
         [string[]]
@@ -84,71 +84,71 @@
 
         # Set target type to Branch
         [Parameter(Mandatory = $true,
-        ParameterSetName = 'branches')]
+            ParameterSetName = 'branches')]
         [switch]
         $Branch,
 
         # Set target type to Location
         [Parameter(Mandatory = $true,
-        ParameterSetName = 'locations')]
+            ParameterSetName = 'locations')]
         [switch]
         $Location,
 
         # Set target type to PersonGroup
         [Parameter(Mandatory = $true,
-        ParameterSetName = 'persongroups')]
+            ParameterSetName = 'persongroups')]
         [switch]
         $PersonGroup,
 
         # Set target type to Person
         [Parameter(Mandatory = $true,
-        ParameterSetName = 'persons')]
+            ParameterSetName = 'persons')]
         [Parameter(Mandatory = $false,
-        ParameterSetName = 'Default')]
+            ParameterSetName = 'Default')]
         [switch]
         $Person
 
     )
 
-        #region initialize
+    #region initialize
 
-        if (!($script:tdConnected)) {
+    if (!($script:tdConnected)) {
 
-            $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("Cannot use TopDesk Client when disconnected.", $null, [System.Management.Automation.ErrorCategory]::InvalidOperation, $null))
+        $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("Cannot use TopDesk Client when disconnected.", $null, [System.Management.Automation.ErrorCategory]::InvalidOperation, $null))
 
-        }
+    }
 
-        $_uri = $script:tdURI + "/tas/api/assetmgmt/assets/templateId/$TemplateID/$AssetID/assignment/"
-        $_headerstring = @{
-            'Content-Type' = 'application/json'
-        }
+    $_uri = $script:tdURI + "/tas/api/assetmgmt/assets/templateId/$TemplateID/$AssetID/assignment/"
+    $_headerstring = @{
+        'Content-Type' = 'application/json'
+    }
 
-        #endregion
+    #endregion
 
     #region hardwork
 
     switch ($PSCmdlet.ParameterSetName) {
 
-        {($_ -eq 'persons') -or ($_ -eq 'Default')} {
+        { ($_ -eq 'persons') -or ($_ -eq 'Default') } {
 
             $_uri += 'persons'
 
-                $_body = @{
-                    'ids' = @(
-                        $TargetID
-                    )
-                }
-
-                $_body = ConvertTo-Json -InputObject $_body
-
-                if ($PSBoundParameters.ContainsKey('Force') -or ($PSCmdlet.ShouldProcess('Set Asset Assignment', 'Set this assignment on the Asset?', "Set assignment id $TargetID and asset id $AssetID"))) {
-
-                    Get-APIResponse -Method 'PUT' -APIUrl $_uri -Body $_body -Headers $_headerstring -tdCredential $script:tdCredential;
-                }
-
-                break
-
+            $_body = @{
+                'ids' = @(
+                    $TargetID
+                )
             }
+
+            $_body = ConvertTo-Json -InputObject $_body
+
+            if ($PSBoundParameters.ContainsKey('Force') -or ($PSCmdlet.ShouldProcess('Set Asset Assignment', 'Set this assignment on the Asset?', "Set assignment id $TargetID and asset id $AssetID"))) {
+
+                Get-APIResponse -Method 'PUT' -APIUrl $_uri -Body $_body -Headers $_headerstring -tdCredential $script:tdCredential;
+            }
+
+            break
+
+        }
 
         'branches' {
 

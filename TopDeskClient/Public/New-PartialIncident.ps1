@@ -1,6 +1,5 @@
-function New-PartialIncident
-{
-  <#
+function New-PartialIncident {
+    <#
     .Synopsis
 
       Short description
@@ -33,14 +32,13 @@ function New-PartialIncident
 
     .LINK
     
-      The name of a related topic. The value appears on the line below the ".LINK" keyword and must be preceded by a comment symbol # or included in the comment block.
-      Repeat the ".LINK" keyword for each related topic.
+      https://github.com/rbury/TopDeskClient/blob/master/Docs/New-Incident.md
   #>
-    [CmdletBinding(DefaultParameterSetName='Default',
-                SupportsShouldProcess=$true,
-                PositionalBinding=$false,
-                HelpUri = 'https://github.com/rbury/TopDeskClient/Docs/New-PartialIncident.md',
-                ConfirmImpact='Medium')]
+    [CmdletBinding(DefaultParameterSetName = 'Default',
+        SupportsShouldProcess = $true,
+        PositionalBinding = $false,
+        HelpUri = 'https://github.com/rbury/TopDeskClient/blob/master/Docs/New-PartialIncident.md',
+        ConfirmImpact = 'Medium')]
     [OutputType([String], ParameterSetName = "Default")]
     Param (
 
@@ -271,7 +269,7 @@ function New-PartialIncident
             'status' = 'partial'
         }
 
-        if($PSBoundParameters.Keys.Count -gt 1) {
+        if ($PSBoundParameters.Keys.Count -gt 1) {
             foreach ($item in $PSBoundParameters.GetEnumerator()) {
 
                 switch ($item.Key) {                    
@@ -425,17 +423,18 @@ function New-PartialIncident
                     }
 
                     'externalLinkID' {
-                        if($PSBoundParameters.ContainsKey('externalLinkType')) {
-                            if($PSBoundParameters.ContainsKey('externalLinkDate')) {
+                        if ($PSBoundParameters.ContainsKey('externalLinkType')) {
+                            if ($PSBoundParameters.ContainsKey('externalLinkDate')) {
                                 Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'externalLink' -Value @{ 'id' = $externalLinkID; 'type' = $externalLinkType; 'date' = $externalLinkDate }
-                            } else {
+                            }
+                            else {
                                 Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'externalLink' -Value @{ 'id' = $externalLinkID; 'type' = $externalLinkType }
                             }
                         }
                         break
                     }
 
-                    Default {}
+                    Default { }
                 }
             }
         }
@@ -444,11 +443,11 @@ function New-PartialIncident
         $_uri = $script:tdURI + '/tas/api/incidents/'
         $_body = (ConvertTo-Json -InputObject $newIncident -Depth 8 -Compress)
 
-        if($PSCmdlet.ShouldProcess( $_body, 'Create' )) {
+        if ($PSCmdlet.ShouldProcess( $_body, 'Create' )) {
             Get-APIResponse -Method 'POST' -APIurl $_uri -Body $_body -Headers $_headerslist -tdCredential $script:tdCredential
         }
 
-<#         if($PSBoundParameters.ContainsKey('BranchID')) {
+        <#         if($PSBoundParameters.ContainsKey('BranchID')) {
 
             $null = $callerlist.Add([PSCustomObject]@{
                 'caller' = @{'branch'=$branchID}

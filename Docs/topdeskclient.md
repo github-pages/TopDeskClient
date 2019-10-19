@@ -1,99 +1,91 @@
 ---
-Module Name: topdeskclient
-Module Guid: 79d0a56d-ceec-4b91-9874-9e0009ac1e2a
+Module Name: TopDeskClient
+Module Guid: 79d0a56d-ceec-4b91-9874-9e0009ac1e2a 79d0a56d-ceec-4b91-9874-9e0009ac1e2a
 Download Help Link: {{ Update Download Link }}
-Help Version: 0.1.0
+Help Version: {{ Please enter version of help manually (X.X.X.X) format }}
 Locale: en-US
 ---
 
-# topdeskclient Module
-
+# TopDeskClient Module
 ## Description
+{{ Fill in the Description }}
 
-PowerShell module for interacting with TopDesk API
-
-## topdeskclient Cmdlets
-
+## TopDeskClient Cmdlets
 ### [Add-Assignment](Add-Assignment.md)
-
-Add an assignment to asset.
+{{ Fill in the Description }}
 
 ### [Connect-TopDesk](Connect-TopDesk.md)
-
-Connect to a TopDesk instance
+{{ Fill in the Description }}
 
 ### [Disable-Asset](Disable-Asset.md)
-
-Disable an asset in TopDesk
+{{ Fill in the Description }}
 
 ### [Disconnect-TopDesk](Disconnect-TopDesk.md)
-
-Disconnect from TopDesk instance
+{{ Fill in the Description }}
 
 ### [Enable-Asset](Enable-Asset.md)
-
-Enable a TopDesk asset
+{{ Fill in the Description }}
 
 ### [Export-Asset](Export-Asset.md)
-
-Export a list of assets
+{{ Fill in the Description }}
 
 ### [Get-ArchiveReason](Get-ArchiveReason.md)
-
-Retrieve a list of archive reasons
+{{ Fill in the Description }}
 
 ### [Get-Asset](Get-Asset.md)
-
-Retrieve one or more assets from TopDesk
+{{ Fill in the Description }}
 
 ### [Get-AssetList](Get-AssetList.md)
-
-Retrieve a list of assets from TopDesk
+{{ Fill in the Description }}
 
 ### [Get-AssetTemplate](Get-AssetTemplate.md)
-
-Retreive asset templates from TopDesk
+{{ Fill in the Description }}
 
 ### [Get-AssetTemplateList](Get-AssetTemplateList.md)
-
-Retrieve list of asset templates from TopDesk
+{{ Fill in the Description }}
 
 ### [Get-Assignment](Get-Assignment.md)
-
-Retrieve assignments for an asset
+{{ Fill in the Description }}
 
 ### [Get-BlankAsset](Get-BlankAsset.md)
-
-Retrieve a blank asset card from TopDesk
+{{ Fill in the Description }}
 
 ### [Get-Branch](Get-Branch.md)
+{{ Fill in the Description }}
 
-Retrieve branch information from TopDesk
+### [Get-BudgetHolder](Get-BudgetHolder.md)
+{{ Fill in the Description }}
 
 ### [Get-Incident](Get-Incident.md)
-
-Retrieve incident information from TopDesk
+{{ Fill in the Description }}
 
 ### [Get-LinkedAsset](Get-LinkedAsset.md)
-
-Retrieve assets from TopDesk that are related to a specified card
+{{ Fill in the Description }}
 
 ### [Get-Person](Get-Person.md)
-
-Retrieve information on persons from Topdesk
+{{ Fill in the Description }}
 
 ### [Get-PersonGroup](Get-PersonGroup.md)
+{{ Fill in the Description }}
 
-Retrieve information on person groups from TopDesk
+### [New-Incident](New-Incident.md)
+{{ Fill in the Description }}
+
+### [New-MajorIncident](New-MajorIncident.md)
+{{ Fill in the Description }}
+
+### [New-OptionalField](New-OptionalField.md)
+{{ Fill in the Description }}
+
+### [New-PartialIncident](New-PartialIncident.md)
+{{ Fill in the Description }}
 
 ### [Remove-Assignment](Remove-Assignment.md)
-
-Remove existing assignemnts from assets in TopDesk
+{{ Fill in the Description }}
 
 ### [Set-Assignment](Set-Assignment.md)
-
-Set asset assignments in TopDesk
+{{ Fill in the Description }}
 
 ### [Set-Person](Set-Person.md)
+{{ Fill in the Description }}
 
-Set information for a person in TopDesk

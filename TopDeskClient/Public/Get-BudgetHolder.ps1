@@ -18,25 +18,7 @@ function Get-BudgetHolder {
 
     .OUTPUTS
 
-      [PSCustomObject] {
-
-        id  string($uuid)
-        name  string
-
-        externalLinks	[
-          id*	string
-          The id of the entity in the external system
-          Size range: maximum 450 characters
-
-          type*	string
-          The type of the link
-          Range: A non-zero integer formatted as string. Each integration should use its own value. If multiple integrations use the same value, records could be shared between the integrations
-
-          date	string(datetime)
-          The date of the synchronization
-        ]
-
-      }
+      [PSCustomObject] - Properties include id (string), name (string), externalLinks (array) - id (string id from external system) : type (string type of link) : date (string datetime of synchronization)
 
     .NOTES
 
@@ -44,7 +26,8 @@ function Get-BudgetHolder {
 
     .LINK
     
-      [/budgetholders](https://developers.topdesk.com/explorer/?page=supporting-files#/Budget%20holders/getBudgetHolders)
+      https://developers.topdesk.com/explorer/?page=supporting-files#/Budget%20holders/getBudgetHolders
+
   #>
   
   [CmdletBinding(DefaultParameterSetName = 'Default',

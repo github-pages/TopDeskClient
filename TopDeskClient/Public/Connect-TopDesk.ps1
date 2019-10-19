@@ -61,17 +61,13 @@
 
     .LINK
 
-        [Connect-TopDesk](https://github.com/rbury/TopDeskClient/Docs/Connect-TopDesk.md)
-
-    .LINK
-
-        [Disconnect-TopDesk](https://github.com/rbury/TopDeskClient/Docs/Disconnect-TopDesk.md)
+        https://github.com/rbury/TopDeskClient/blob/master/Docs/Disconnect-TopDesk.md
 
 #>
 
     [CmdletBinding(DefaultParameterSetName = 'DefaultConnect',
         PositionalBinding = $false,
-        HelpUri = 'https://github.com/rbury/TopDeskClient/Docs/Connect-TopDesk.md',
+        HelpUri = 'https://github.com/rbury/TopDeskClient/blob/master/Docs/Connect-TopDesk.md',
         ConfirmImpact = 'Medium')]
     [OutputType([bool])]
 
@@ -88,7 +84,7 @@
             ValueFromPipelineByPropertyName = $true,
             ParameterSetName = 'load')]
         [ValidateNotNullOrEmpty()]
-        [Alias('uri','url')]
+        [Alias('uri', 'url')]
         [string]
         $TopDeskURI,
 
@@ -119,7 +115,7 @@
 
             $script:tdConnected = $false;
             $script:tdAPIVersion = 0;
-            $headers = @{'Content-Type' = 'application/json'}
+            $headers = @{'Content-Type' = 'application/json' }
             $uri = $TopDeskURI + '/tas/api/version'
             $script:tdAPIVersion = (Get-APIResponse -Method 'GET' -url $uri -Headers $headers -tdCredential $script:tdCredential)
             $script:tdConnected = $true;

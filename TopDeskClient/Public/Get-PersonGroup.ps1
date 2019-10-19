@@ -1,5 +1,5 @@
 ﻿function Get-PersonGroup {
-    <#
+  <#
     .Synopsis
 
       Short description
@@ -32,65 +32,65 @@
 
     .LINK
 
-        [Get-BlankAsset](https://github.com/rbury/TopDeskClient/Docs/Get-BlankAsset.md)
+        https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Asset.md
 
   #>
-    [CmdletBinding(DefaultParameterSetName = 'Default',
-        PositionalBinding = $false,
-        HelpUri = 'https://github.com/rbury/TopDeskClient/Docs/Get-BlankAsset.md',
-        ConfirmImpact = 'Medium')]
-    [OutputType([PSObject])]
+  [CmdletBinding(DefaultParameterSetName = 'Default',
+    PositionalBinding = $false,
+    HelpUri = 'https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-BlankAsset.md',
+    ConfirmImpact = 'Medium')]
+  [OutputType([PSObject])]
 
-    Param (
+  Param (
 
-        # ID of person group to retrieve details for
-        [Parameter(Mandatory = $true,
-            ParameterSetName = 'Details',
-            ValueFromPipelineByPropertyName = $true)]
-        [ValidateNotNullOrEmpty()]
-        [Alias('ID')]
-        [string[]]
-        $GroupID,
+    # ID of person group to retrieve details for
+    [Parameter(Mandatory = $true,
+      ParameterSetName = 'Details',
+      ValueFromPipelineByPropertyName = $true)]
+    [ValidateNotNullOrEmpty()]
+    [Alias('ID')]
+    [string[]]
+    $GroupID,
 
-        # Get list of person groups
-        [Parameter(Mandatory = $true,
-            ParameterSetName = 'List')]
-        [switch]
-        $List
+    # Get list of person groups
+    [Parameter(Mandatory = $true,
+      ParameterSetName = 'List')]
+    [switch]
+    $List
 
-    )
+  )
 
-    begin {
+  begin {
 
-        if (!($script:tdConnected)) {
+    if (!($script:tdConnected)) {
 
-            $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("Cannot use TopDesk Client when disconnected.", $null, [System.Management.Automation.ErrorCategory]::InvalidOperation, $null))
+      $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("Cannot use TopDesk Client when disconnected.", $null, [System.Management.Automation.ErrorCategory]::InvalidOperation, $null))
+
+    }
+  }
+
+  process {
+
+    switch ($PSCmdlet.ParameterSetName) {
+
+      'List' {
+
+        $_uri = $script:tdURI + '/tas/api/persongroups/lookup?$all=true'
+        Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers @{'Content-Type' = 'application/json' } -tdCredential $script:tdCredential
+
+      }
+
+      'Details' {
+
+        foreach ($_persongroup in $GroupID) {
+
+          $_uri = $script:tdURI + '/tas/api/persongroups/id/' + $_persongroup
+          Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers @{'Content-Type' = 'application/json' } -tdCredential $script:tdCredential
 
         }
+      }
     }
+  }
 
-    process {
-
-        switch ($PSCmdlet.ParameterSetName) {
-
-            'List' {
-
-                $_uri = $script:tdURI + '/tas/api/persongroups/lookup?$all=true'
-                Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers @{'Content-Type' = 'application/json'} -tdCredential $script:tdCredential
-
-            }
-
-            'Details' {
-
-                foreach ($_persongroup in $GroupID) {
-
-                    $_uri = $script:tdURI + '/tas/api/persongroups/id/' + $_persongroup
-                    Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers @{'Content-Type' = 'application/json'} -tdCredential $script:tdCredential
-
-                }
-            }
-        }
-    }
-
-    end {}
+  end { }
 }

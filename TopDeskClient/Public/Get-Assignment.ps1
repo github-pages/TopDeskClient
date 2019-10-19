@@ -1,5 +1,5 @@
 ﻿function Get-Assignment {
-    <#
+  <#
     .Synopsis
 
       Short description
@@ -32,46 +32,46 @@
 
     .LINK
 
-        [Get-Assignment] (https://github.com/rbury/TopDeskClient/Docs/Get-Assignment.md)
+        https://github.com/rbury/TopDeskClient/blob/master/Docs/Set-Assignment.md
 
   #>
-    [CmdletBinding(DefaultParameterSetName = 'Default',
-        PositionalBinding = $false,
-        HelpUri = 'https://github.com/rbury/TopDeskClient/Docs/Get-Assignment.md',
-        ConfirmImpact = 'Medium')]
-    [OutputType([PSObject])]
+  [CmdletBinding(DefaultParameterSetName = 'Default',
+    PositionalBinding = $false,
+    HelpUri = 'https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Assignment.md',
+    ConfirmImpact = 'Medium')]
+  [OutputType([PSObject])]
 
-    Param (
+  Param (
 
-        # ID of asset to retrieve assignments for
-        [Parameter(Mandatory = $true,
-            ParameterSetName = 'Default',
-            ValueFromPipelineByPropertyName = $true)]
-        [ValidateNotNullOrEmpty()]
-        [Alias('ID')]
-        [string[]]
-        $AssetID
+    # ID of asset to retrieve assignments for
+    [Parameter(Mandatory = $true,
+      ParameterSetName = 'Default',
+      ValueFromPipelineByPropertyName = $true)]
+    [ValidateNotNullOrEmpty()]
+    [Alias('ID')]
+    [string[]]
+    $AssetID
 
-    )
+  )
 
-    begin {
+  begin {
 
-        if (!($script:tdConnected)) {
+    if (!($script:tdConnected)) {
 
-            $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("Cannot use TopDesk Client when disconnected.", $null, [System.Management.Automation.ErrorCategory]::InvalidOperation, $null))
+      $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("Cannot use TopDesk Client when disconnected.", $null, [System.Management.Automation.ErrorCategory]::InvalidOperation, $null))
 
-        }
     }
+  }
 
-    process {
+  process {
 
-        foreach ($_assetID in $AssetID) {
+    foreach ($_assetID in $AssetID) {
 
-            $_uri = $script:tdURI + '/tas/api/assetmgmt/assets/' + $_assetID + '/assignments'
-            Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers @{'Content-Type' = 'application/json'} -tdCredential $script:tdCredential
+      $_uri = $script:tdURI + '/tas/api/assetmgmt/assets/' + $_assetID + '/assignments'
+      Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers @{'Content-Type' = 'application/json' } -tdCredential $script:tdCredential
 
-        }
     }
+  }
 
-    end {}
+  end { }
 }

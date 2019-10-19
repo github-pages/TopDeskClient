@@ -34,12 +34,12 @@
 
     .LINK
 
-        Export-Asset(https://github.com/rbury/TopDeskClient/Docs/Export-Asset.md)
+        https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Asset.md
       
   #>
     [CmdletBinding(DefaultParameterSetName = 'Default',
         PositionalBinding = $false,
-        HelpUri = 'https://github.com/rbury/TopDeskClient/Docs/Export-Asset.md',
+        HelpUri = 'https://github.com/rbury/TopDeskClient/blob/master/Docs/Export-Asset.md',
         ConfirmImpact = 'Medium')]
     [OutputType([NullString])]
 
@@ -80,7 +80,7 @@
         $_path = Split-Path $FilePath
         $_fileName = Split-Path $FilePath -Leaf
 
-        if(-not(Test-Path -Path $_path -PathType Container)) {
+        if (-not(Test-Path -Path $_path -PathType Container)) {
             $null = New-Item -Path $_path -ItemType Container -Force
         }
 
@@ -110,6 +110,6 @@
         }
     }
 
-    end {}
+    end { }
 
 }

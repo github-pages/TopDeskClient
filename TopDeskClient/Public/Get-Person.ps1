@@ -32,12 +32,12 @@
 
     .LINK
 
-        [Get-Person](https://github.com/rbury/TopDeskClient/Docs/Get-Person.md)
+        https://github.com/rbury/TopDeskClient/blob/master/Docs/Set-Person.md
 
   #>
     [CmdletBinding(DefaultParameterSetName = 'Simple',
         PositionalBinding = $false,
-        HelpUri = 'https://github.com/rbury/TopDeskClient/Docs/Get-Person.md',
+        HelpUri = 'https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Person.md',
         ConfirmImpact = 'Medium')]
 
     Param (
@@ -49,7 +49,7 @@
             ValueFromRemainingArguments = $false,
             ValueFromPipelineByPropertyName = $true)]
         [ValidateNotNullOrEmpty()]
-        [Alias('unid','ID')]
+        [Alias('unid', 'ID')]
         [string[]]
         $PersonID,
 
@@ -296,6 +296,6 @@
         }
     }
 
-    end {}
+    end { }
 
 }

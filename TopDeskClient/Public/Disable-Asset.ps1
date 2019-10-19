@@ -51,18 +51,14 @@
 
     .LINK
 
-        https://github.com/rbury/TopDeskClient/Docs/Disable-Asset.md
-
-    .LINK
-
-        https://github.com/rbury/TopDeskClient/Docs/Enable-Asset.md
+        https://github.com/rbury/TopDeskClient/blob/master/Docs/Enable-Asset.md
 
 #>
 
     [CmdletBinding(DefaultParameterSetName = 'Disable',
         SupportsShouldProcess = $true,
         PositionalBinding = $false,
-        HelpUri = 'https://github.com/rbury/TopDeskClient/Docs/Disable-Asset.md',
+        HelpUri = 'https://github.com/rbury/TopDeskClient/blob/master/Docs/Disable-Asset.md',
         ConfirmImpact = 'High')]
     [OutputType([PSObject])]
 
@@ -118,8 +114,8 @@
                 if ($PSBoundParameters.ContainsKey('Force') -or ($PSCmdlet.ShouldProcess("Archive asset with id: $AssetID", 'Archive this Asset?', 'Archive asset'))) {
 
                     $_uri = $Script:tdURI + '/tas/api/assetmgmt/assets/' + $AssetID + '/archive'
-                    $_body = ConvertTo-Json -InputObject (@{'reasonId' = $ReasonID})
-                    $_headerslist = @{'Content-Type' = 'application/json'}
+                    $_body = ConvertTo-Json -InputObject (@{'reasonId' = $ReasonID })
+                    $_headerslist = @{'Content-Type' = 'application/json' }
 
                     Get-APIResponse -Method 'POST' -APIUrl $_uri -body $_body -Headers $_headerslist -tdCredential $script:tdCredential
 
@@ -134,8 +130,8 @@
                 if ($PSBoundParameters.ContainsKey('Force') -or ($PSCmdlet.ShouldProcess("Set status of asset id $AssetID to Impacted", 'Impact this Asset?', 'Impact asset'))) {
 
                     $_uri = $Script:tdURI + '/tas/api/assetmgmt/assets/' + $AssetID
-                    $_body = ConvertTo-Json -InputObject (@{'@status' = 'IMPACTED'})
-                    $_headerslist = @{'Content-Type' = 'application/json'}
+                    $_body = ConvertTo-Json -InputObject (@{'@status' = 'IMPACTED' })
+                    $_headerslist = @{'Content-Type' = 'application/json' }
 
                     Get-APIResponse -Method 'POST' -APIUrl $_uri -body $_body -Headers $_headerslist -tdCredential $script:tdCredential
 
@@ -147,6 +143,6 @@
         }
     }
 
-    end {}
+    end { }
 
 }

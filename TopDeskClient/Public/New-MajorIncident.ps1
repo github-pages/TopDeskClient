@@ -1,6 +1,5 @@
-function New-MajorIncident
-{
-  <#
+function New-MajorIncident {
+    <#
     .Synopsis
 
       Short description
@@ -33,14 +32,13 @@ function New-MajorIncident
 
     .LINK
     
-      The name of a related topic. The value appears on the line below the ".LINK" keyword and must be preceded by a comment symbol # or included in the comment block.
-      Repeat the ".LINK" keyword for each related topic.
+      https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Incident.md
   #>
-    [CmdletBinding(DefaultParameterSetName='byEmail',
-                SupportsShouldProcess=$true,
-                PositionalBinding=$false,
-                HelpUri = 'https://github.com/rbury/TopDeskClient/Docs/New-MajorIncident.md',
-                ConfirmImpact='Medium')]
+    [CmdletBinding(DefaultParameterSetName = 'byEmail',
+        SupportsShouldProcess = $true,
+        PositionalBinding = $false,
+        HelpUri = 'https://github.com/rbury/TopDeskClient/blob/master/Docs/New-MajorIncident.md',
+        ConfirmImpact = 'Medium')]
     [OutputType([String], ParameterSetName = "byEmail")]
 
     Param (
@@ -644,7 +642,7 @@ function New-MajorIncident
         [PSCustomObject] $newIncident = @{
             'majorCall' = $true
         }
-        [System.Collections.ArrayList] $callerList = @{}
+        [System.Collections.ArrayList] $callerList = @{ }
         [bool] $callerSet = $false
 
         switch ($PSCmdlet.ParameterSetName) {
@@ -676,8 +674,8 @@ function New-MajorIncident
             
             'Unregistered' {
                 $null = $callerlist.Add([PSCustomObject]@{
-                    'caller' = @{ 'dynamicName' = $dynamicName }
-                })
+                        'caller' = @{ 'dynamicName' = $dynamicName }
+                    })
                 [bool]$callerSet = $true
                 break
             }
@@ -685,113 +683,122 @@ function New-MajorIncident
             Default { }
         }
 
-        if($PSBoundParameters.Keys.Count -gt 1) {
+        if ($PSBoundParameters.Keys.Count -gt 1) {
             foreach ($item in $PSBoundParameters.GetEnumerator()) {            
                 switch ($item) {
 
                     'branch' {
-                        if($callerSet) {
-                            $null = $callerList.caller.Add( 'branch',$branch )
-                        } else {
+                        if ($callerSet) {
+                            $null = $callerList.caller.Add( 'branch', $branch )
+                        }
+                        else {
                             $null = $callerList.Add( [PSCustomObject]@{
-                                'caller' = @{ 'branch' = $branch }
-                            } )
+                                    'caller' = @{ 'branch' = $branch }
+                                } )
                             $callerSet = $true
                         }
                         break
                     }
 
                     'phoneNumber' {
-                        if($callerSet) {
-                            $null = $callerList.caller.Add( 'phoneNumber',$phoneNumber )
-                        } else {
+                        if ($callerSet) {
+                            $null = $callerList.caller.Add( 'phoneNumber', $phoneNumber )
+                        }
+                        else {
                             $null = $callerList.Add( [PSCustomObject]@{
-                                'caller' = @{ 'phoneNumber' = $phoneNumber }
-                            } )
+                                    'caller' = @{ 'phoneNumber' = $phoneNumber }
+                                } )
                             $callerSet = $true
                         }
                         break
                     }
 
                     'mobileNumber' {
-                        if($callerSet) {
-                            $null = $callerList.caller.Add( 'mobileNumber',$mobileNumber )
-                        } else {
+                        if ($callerSet) {
+                            $null = $callerList.caller.Add( 'mobileNumber', $mobileNumber )
+                        }
+                        else {
                             $null = $callerList.Add( [PSCustomObject]@{
-                                'caller' = @{ 'mobileNumber' = $mobileNumber }
-                            } )
+                                    'caller' = @{ 'mobileNumber' = $mobileNumber }
+                                } )
                             $callerSet = $true
                         }
                         break
                     }
 
                     'email' {
-                        if($callerSet) {
-                            $null = $callerList.caller.Add( 'email',$email )
-                        } else {
+                        if ($callerSet) {
+                            $null = $callerList.caller.Add( 'email', $email )
+                        }
+                        else {
                             $null = $callerList.Add( [PSCustomObject]@{
-                                'caller' = @{ 'email' = $email }
-                            } )
+                                    'caller' = @{ 'email' = $email }
+                                } )
                             $callerSet = $true
                         }
                         break
                     }
 
                     'department' {
-                        if($callerSet) {
-                            $null = $callerList.caller.Add( 'department',$department )
-                        } else {
+                        if ($callerSet) {
+                            $null = $callerList.caller.Add( 'department', $department )
+                        }
+                        else {
                             $null = $callerList.Add( [PSCustomObject]@{
-                                'caller' = @{ 'department' = $department }
-                            } )
+                                    'caller' = @{ 'department' = $department }
+                                } )
                             $callerSet = $true
                         }
                         break
                     }
 
                     'location' {
-                        if($callerSet) {
-                            $null = $callerList.caller.Add( 'location',$location )
-                        } else {
+                        if ($callerSet) {
+                            $null = $callerList.caller.Add( 'location', $location )
+                        }
+                        else {
                             $null = $callerList.Add( [PSCustomObject]@{
-                                'caller' = @{ 'location' = $location }
-                            } )
+                                    'caller' = @{ 'location' = $location }
+                                } )
                             $callerSet = $true
                         }
                         break
                     }
 
                     'budgetHolder' {
-                        if($callerSet) {
-                            $null = $callerList.caller.Add( 'budgetHolder',$budgetHolder )
-                        } else {
+                        if ($callerSet) {
+                            $null = $callerList.caller.Add( 'budgetHolder', $budgetHolder )
+                        }
+                        else {
                             $null = $callerList.Add( [PSCustomObject]@{
-                                'caller' = @{ 'budgetHolder' = $budgetHolder }
-                            } )
+                                    'caller' = @{ 'budgetHolder' = $budgetHolder }
+                                } )
                             $callerSet = $true
                         }
                         break
                     }
 
                     'personExtraFieldA' {
-                        if($callerSet) {
-                            $null = $callerList.caller.Add( 'personExtraFieldA',$personExtraFieldA )
-                        } else {
+                        if ($callerSet) {
+                            $null = $callerList.caller.Add( 'personExtraFieldA', $personExtraFieldA )
+                        }
+                        else {
                             $null = $callerList.Add( [PSCustomObject]@{
-                                'caller' = @{ 'personExtraFieldA' = $personExtraFieldA }
-                            } )
+                                    'caller' = @{ 'personExtraFieldA' = $personExtraFieldA }
+                                } )
                             $callerSet = $true
                         }
                         break
                     }
 
                     'personExtraFieldB' {
-                        if($callerSet) {
-                            $null = $callerList.caller.Add( 'personExtraFieldB',$personExtraFieldB )
-                        } else {
+                        if ($callerSet) {
+                            $null = $callerList.caller.Add( 'personExtraFieldB', $personExtraFieldB )
+                        }
+                        else {
                             $null = $callerList.Add( [PSCustomObject]@{
-                                'caller' = @{ 'personExtraFieldB' = $personExtraFieldB }
-                            } )
+                                    'caller' = @{ 'personExtraFieldB' = $personExtraFieldB }
+                                } )
                             $callerSet = $true
                         }
                         break
@@ -868,9 +875,10 @@ function New-MajorIncident
                     }
 
                     'objectLocationID' {
-                        if(($PSBoundParameters.ContainsKey('objectName')) -or ($PSBoundParameters.ContainsKey('objectID'))) {
+                        if (($PSBoundParameters.ContainsKey('objectName')) -or ($PSBoundParameters.ContainsKey('objectID'))) {
                             Write-Warning -Message "Ignoring objectLocationID parameter, objectID or objectName provided."
-                        } else {
+                        }
+                        else {
                             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'location' -Value @{ 'id' = $objectLocationID }
                         }
                         break
@@ -996,25 +1004,26 @@ function New-MajorIncident
                     }
 
                     'externalLinkID' {
-                        if($PSBoundParameters.ContainsKey('externalLinkType')) {
-                            if($PSBoundParameters.ContainsKey('externalLinkDate')) {
+                        if ($PSBoundParameters.ContainsKey('externalLinkType')) {
+                            if ($PSBoundParameters.ContainsKey('externalLinkDate')) {
                                 Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'externalLink' -Value @{ 'id' = $externalLinkID; 'type' = $externalLinkType; 'date' = $externalLinkDate }
-                            } else {
+                            }
+                            else {
                                 Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'externalLink' -Value @{ 'id' = $externalLinkID; 'type' = $externalLinkType }
                             }
                         }
                         break
                     }
                     
-                    Default {}
+                    Default { }
                 }
 
             }
         }
 
 
-#region removed
-       <#  if($PSBoundParameters.ContainsKey('BranchID')) {
+        #region removed
+        <#  if($PSBoundParameters.ContainsKey('BranchID')) {
             if($callerSet) {
                 $null = $callerlist.caller.Add( 'branch',$branchID )
             } else {
@@ -1025,7 +1034,7 @@ function New-MajorIncident
             }
         } #>
 
-       <#  if($PSBoundParameters.ContainsKey('phoneNumber')) {
+        <#  if($PSBoundParameters.ContainsKey('phoneNumber')) {
             if($callerSet) {
                 $null = $callerList.caller.Add('phoneNumber',$phoneNumber)
             } else {
@@ -1036,7 +1045,7 @@ function New-MajorIncident
             }
         } #>
 
-     <#    if($PSBoundParameters.ContainsKey('mobileNumber')) {
+        <#    if($PSBoundParameters.ContainsKey('mobileNumber')) {
             if($callerSet) {
                 $null = $callerList.caller.Add('mobileNumber',$mobileNumber)
             } else {
@@ -1069,7 +1078,7 @@ function New-MajorIncident
             }
         } #>
         
-       <#  if($PSBoundParameters.ContainsKey('locationID')) {
+        <#  if($PSBoundParameters.ContainsKey('locationID')) {
             if($callerSet) {
                 $null = $callerList.caller.Add('location',$locationID)
             } else {
@@ -1080,7 +1089,7 @@ function New-MajorIncident
             }
         } #>
 
-       <#  if($PSBoundParameters.ContainsKey('budgetHolderID')) {
+        <#  if($PSBoundParameters.ContainsKey('budgetHolderID')) {
             if($callerSet) {
                 $null = $callerList.caller.Add('budgetHolder',$budgetHolderID)
             } else {
@@ -1141,7 +1150,7 @@ function New-MajorIncident
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'callType' -Value $callTypeID
         } #>
 
-       <#  if($PSBoundParameters.ContainsKey('categoryName')) {
+        <#  if($PSBoundParameters.ContainsKey('categoryName')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'category' -Value @{ 'name' = $categoryName }
         } #>
 
@@ -1222,11 +1231,11 @@ function New-MajorIncident
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'processingStatus' -Value @{ 'id' = $processingStatusID }
         } #>
 
-       <#  if($PSBoundParameters.ContainsKey('responded')) { 
+        <#  if($PSBoundParameters.ContainsKey('responded')) { 
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'responded' -Value $responded
         } #>
 
-       <#  if($PSBoundParameters.ContainsKey('responseDate')) {
+        <#  if($PSBoundParameters.ContainsKey('responseDate')) {
             $_newResponseDate = ($responseDate | ConvertTo-ISODate)
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'responseDate' -Value $_newResponseDate
         } #>
@@ -1280,9 +1289,9 @@ function New-MajorIncident
                 Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'externalLink' -Value @{ 'id' = $externalLinkID; 'type' = $externalLinkType }
             }
         } #>
-#endregion
+        #endregion
 
-        if($callerSet) {
+        if ($callerSet) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'caller' -Value $callerList.caller
         }
 
@@ -1290,7 +1299,7 @@ function New-MajorIncident
         $_uri = $script:tdURI + '/tas/api/incidents/'
         $_body = (ConvertTo-Json -InputObject $newIncident -Depth 8 -Compress)
 
-        if($PSCmdlet.ShouldProcess( $_body, 'Create' )) {
+        if ($PSCmdlet.ShouldProcess( $_body, 'Create' )) {
             Get-APIResponse -Method 'POST' -APIurl $_uri -Body $_body -Headers $_headerslist -tdCredential $script:tdCredential
         }
 

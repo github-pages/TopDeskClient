@@ -1,5 +1,5 @@
 ﻿function Get-AssetTemplateList {
-    <#
+  <#
   .Synopsis
 
     Short description
@@ -32,36 +32,40 @@
 
   .LINK
 
-    [Get-AssetTemplate] (https://github.com/rbury/TopDeskClient/Docs/Get-AssetTemplate.md)
+    https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-AssetTemplate.md
+
+  .LINK
+
+    https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Asset.md
 
   #>
-    [CmdletBinding(DefaultParameterSetName = 'Default',
-        PositionalBinding = $false,
-        HelpUri = 'https://github.com/rbury/TopDeskClient/Docs/Get-AssetTemplateList.md',
-        ConfirmImpact = 'Medium')]
+  [CmdletBinding(DefaultParameterSetName = 'Default',
+    PositionalBinding = $false,
+    HelpUri = 'https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-AssetTemplateList.md',
+    ConfirmImpact = 'Medium')]
 
-    Param ()
+  Param ()
 
-    begin {
+  begin {
 
-        if (!($script:tdConnected)) {
+    if (!($script:tdConnected)) {
 
-            $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("Cannot use TopDesk Client when disconnected.", $null, [System.Management.Automation.ErrorCategory]::InvalidOperation, $null))
+      $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("Cannot use TopDesk Client when disconnected.", $null, [System.Management.Automation.ErrorCategory]::InvalidOperation, $null))
 
-        }
     }
+  }
 
-    process {
+  process {
 
-        if ($script:tdConnected) {
+    if ($script:tdConnected) {
 
-            $_uri = $script:tdURI + '/tas/api/assetmgmt/templates'
+      $_uri = $script:tdURI + '/tas/api/assetmgmt/templates'
 
-            Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers @{'Content-Type' = 'application/json'} -tdCredential $script:tdCredential
+      Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers @{'Content-Type' = 'application/json' } -tdCredential $script:tdCredential
 
-            #$_all_Templates = Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers @{'Content-Type' = 'application/json'} -tdCredential $script:tdCredential
+      #$_all_Templates = Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers @{'Content-Type' = 'application/json'} -tdCredential $script:tdCredential
 
-            <# if (($null -ne $_all_Templates) -and ($_all_Templates | Get-Member).Name -icontains 'dataSet') {
+      <# if (($null -ne $_all_Templates) -and ($_all_Templates | Get-Member).Name -icontains 'dataSet') {
 
                 foreach ($template in $_all_Templates.dataSet) {
 
@@ -85,14 +89,14 @@
                 }
             } #>
 
-        }
-        else {
+    }
+    else {
 
-            Write-Warning ("TopDeskClient has not been connected, try using Connect-TopDesk first.")
-
-        }
+      Write-Warning ("TopDeskClient has not been connected, try using Connect-TopDesk first.")
 
     }
 
-    end {}
+  }
+
+  end { }
 }

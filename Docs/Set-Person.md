@@ -1,19 +1,18 @@
 ---
 external help file: TopDeskClient-help.xml
 Module Name: TopDeskClient
-online version: https://github.com/rbury/TopDeskClient/blob/master/docs/Set-Person.md
+online version: https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Person.md
 schema: 2.0.0
 ---
 
 # Set-Person
 
 ## SYNOPSIS
-
-Set information for a person in TopDesk
+Short description
 
 ## SYNTAX
 
-``` Powershell
+```
 Set-Person -PersonID <String> [-surName <String>] [-firstName <String>] [-firstInitials <String>]
  [-prefixes <String>] [-gender <String>] [-employeeNumber <String>] [-networkLoginName <String>]
  [-branch <String>] [-location <String>] [-department <String>] [-language <String>] [-departmentFree <String>]
@@ -28,21 +27,18 @@ Set-Person -PersonID <String> [-surName <String>] [-firstName <String>] [-firstI
 ```
 
 ## DESCRIPTION
-
 Long description
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-
-``` Powershell
+```
 Example of how to use this cmdlet
 ```
 
 ## PARAMETERS
 
 ### -PersonID
-
 ID of person to modify
 
 ```yaml
@@ -58,7 +54,6 @@ Accept wildcard characters: False
 ```
 
 ### -surName
-
 LastName of person
 
 ```yaml
@@ -74,7 +69,6 @@ Accept wildcard characters: False
 ```
 
 ### -firstName
-
 FirstName of person
 
 ```yaml
@@ -90,7 +84,6 @@ Accept wildcard characters: False
 ```
 
 ### -firstInitials
-
 Person initials
 
 ```yaml
@@ -106,7 +99,6 @@ Accept wildcard characters: False
 ```
 
 ### -prefixes
-
 Person prefix
 
 ```yaml
@@ -122,7 +114,6 @@ Accept wildcard characters: False
 ```
 
 ### -gender
-
 Person gender
 
 ```yaml
@@ -138,7 +129,6 @@ Accept wildcard characters: False
 ```
 
 ### -employeeNumber
-
 Person employee number
 
 ```yaml
@@ -154,7 +144,6 @@ Accept wildcard characters: False
 ```
 
 ### -networkLoginName
-
 Network login name
 
 ```yaml
@@ -170,7 +159,6 @@ Accept wildcard characters: False
 ```
 
 ### -branch
-
 Branch
 
 ```yaml
@@ -186,7 +174,6 @@ Accept wildcard characters: False
 ```
 
 ### -location
-
 Location
 
 ```yaml
@@ -202,7 +189,6 @@ Accept wildcard characters: False
 ```
 
 ### -department
-
 Department
 
 ```yaml
@@ -218,7 +204,6 @@ Accept wildcard characters: False
 ```
 
 ### -language
-
 Language
 
 ```yaml
@@ -234,7 +219,6 @@ Accept wildcard characters: False
 ```
 
 ### -departmentFree
-
 Department (only when set to text field)
 
 ```yaml
@@ -250,7 +234,6 @@ Accept wildcard characters: False
 ```
 
 ### -tasLoginName
-
 Person login name
 
 ```yaml
@@ -266,7 +249,6 @@ Accept wildcard characters: False
 ```
 
 ### -password
-
 Person password (5-200 characters)
 
 ```yaml
@@ -282,7 +264,6 @@ Accept wildcard characters: False
 ```
 
 ### -phoneNumber
-
 phone number
 
 ```yaml
@@ -298,7 +279,6 @@ Accept wildcard characters: False
 ```
 
 ### -mobileNumber
-
 Mobile number
 
 ```yaml
@@ -314,7 +294,6 @@ Accept wildcard characters: False
 ```
 
 ### -fax
-
 Fax
 
 ```yaml
@@ -330,7 +309,6 @@ Accept wildcard characters: False
 ```
 
 ### -email
-
 Email address
 
 ```yaml
@@ -346,7 +324,6 @@ Accept wildcard characters: False
 ```
 
 ### -jobTitle
-
 Job Title
 
 ```yaml
@@ -362,7 +339,6 @@ Accept wildcard characters: False
 ```
 
 ### -showBudgetholder
-
 View all requests under own budget holder
 
 ```yaml
@@ -378,7 +354,6 @@ Accept wildcard characters: False
 ```
 
 ### -showDepartment
-
 View all requests under own department
 
 ```yaml
@@ -394,7 +369,6 @@ Accept wildcard characters: False
 ```
 
 ### -showBranch
-
 View all requests under own branch
 
 ```yaml
@@ -410,7 +384,6 @@ Accept wildcard characters: False
 ```
 
 ### -showSubsidiaries
-
 View all requests under own sub-branch (requires showBranch = $true)
 
 ```yaml
@@ -426,7 +399,6 @@ Accept wildcard characters: False
 ```
 
 ### -showAllBranches
-
 Access all branches on forms
 
 ```yaml
@@ -442,7 +414,6 @@ Accept wildcard characters: False
 ```
 
 ### -authorizeAll
-
 Authorize requests for own department/budgetholder/branch/subsidury (requires Manager = $true)
 
 ```yaml
@@ -458,7 +429,6 @@ Accept wildcard characters: False
 ```
 
 ### -authorizeDepartment
-
 Authorize requests for own department (requires Manager = $true)
 
 ```yaml
@@ -474,7 +444,6 @@ Accept wildcard characters: False
 ```
 
 ### -authorizeBudgetHolder
-
 Authorize requests for own budget holder (requires Manager = $true)
 
 ```yaml
@@ -490,7 +459,6 @@ Accept wildcard characters: False
 ```
 
 ### -authorizeBranch
-
 Authorize requests for own branch (requires Manager = $true)
 
 ```yaml
@@ -506,7 +474,6 @@ Accept wildcard characters: False
 ```
 
 ### -authorizeSubsidiaryBranches
-
 Authorize requests for subsidury locations (requires Manager & Branch = $true)
 
 ```yaml
@@ -522,7 +489,6 @@ Accept wildcard characters: False
 ```
 
 ### -optionalFields1
-
 Optional fields 1
 
 ```yaml
@@ -538,7 +504,6 @@ Accept wildcard characters: False
 ```
 
 ### -optionalFields2
-
 Optional fields 2
 
 ```yaml
@@ -554,7 +519,6 @@ Accept wildcard characters: False
 ```
 
 ### -budgetHolder
-
 Budget Holder
 
 ```yaml
@@ -570,7 +534,6 @@ Accept wildcard characters: False
 ```
 
 ### -personExtraFieldA
-
 Extra field A
 
 ```yaml
@@ -586,7 +549,6 @@ Accept wildcard characters: False
 ```
 
 ### -personExtraFieldB
-
 Extra field B
 
 ```yaml
@@ -602,7 +564,6 @@ Accept wildcard characters: False
 ```
 
 ### -isManager
-
 Person is a Manager
 
 ```yaml
@@ -618,7 +579,6 @@ Accept wildcard characters: False
 ```
 
 ### -manager
-
 Manager
 
 ```yaml
@@ -634,7 +594,6 @@ Accept wildcard characters: False
 ```
 
 ### -WhatIf
-
 Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
@@ -651,7 +610,6 @@ Accept wildcard characters: False
 ```
 
 ### -Confirm
-
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
@@ -667,27 +625,20 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### Input - ToDo
-
-The Microsoft .NET Framework types of objects that can be piped to the function or script.
-You can also include a description of the input objects.
-
+### The Microsoft .NET Framework types of objects that can be piped to the function or script.
+### You can also include a description of the input objects.
 ## OUTPUTS
 
-### Output - ToDo
-
-The .NET Framework type of the objects that the cmdlet returns.
-You can also include a description of the returned objects.
-
+### The .NET Framework type of the objects that the cmdlet returns.
+### You can also include a description of the returned objects.
 ## NOTES
-
 Additional information about the function or script.
 
 ## RELATED LINKS
 
-[Set-Person](https://github.com/rbury/TopDeskClient/Docs/Set-Person.md)
+[https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Person.md](https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Person.md)
+

@@ -1,5 +1,4 @@
-function Get-AssetTemplate
-{
+function Get-AssetTemplate {
   <#
     .Synopsis
 
@@ -33,36 +32,36 @@ function Get-AssetTemplate
 
     .LINK
     
-      Get-Asset (https://github.com/rbury/TopDeskClient/Docs/Get-AssetTemplate.md)
+      Get-Asset https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Asset.md
   #>
-    [CmdletBinding(DefaultParameterSetName='Default',
-                PositionalBinding=$false,
-                HelpUri = 'https://github.com/rbury/Docs/Get-AssetTemplate.md',
-                ConfirmImpact='Medium')]
-    [OutputType([PSObject])]
+  [CmdletBinding(DefaultParameterSetName = 'Default',
+    PositionalBinding = $false,
+    HelpUri = 'https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-AssetTemplate.md',
+    ConfirmImpact = 'Medium')]
+  [OutputType([PSObject])]
 
-    Param ()
+  Param ()
 
-    begin {
+  begin {
         
-        if (-not($script:tdConnected)) {
+    if (-not($script:tdConnected)) {
 
-            $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("Cannot use TopDesk Client when disconnected.", $null, [System.Management.Automation.ErrorCategory]::InvalidOperation, $null))
-
-        }
-
-        $_headerslist = @{
-            'Content-Type' = 'application/json'
-        }
-
-        $_uri = $script:tdURI + '/tas/api/assetmgmt/cardTypes/'
-    }
-
-    process {
-
-        Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers $_headerslist -tdCredential $script:tdCredential
+      $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("Cannot use TopDesk Client when disconnected.", $null, [System.Management.Automation.ErrorCategory]::InvalidOperation, $null))
 
     }
 
-    end {}
+    $_headerslist = @{
+      'Content-Type' = 'application/json'
+    }
+
+    $_uri = $script:tdURI + '/tas/api/assetmgmt/cardTypes/'
+  }
+
+  process {
+
+    Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers $_headerslist -tdCredential $script:tdCredential
+
+  }
+
+  end { }
 }

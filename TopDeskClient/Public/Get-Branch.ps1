@@ -32,12 +32,11 @@
 
   .LINK
 
-    [Get-Branch](https://github.com/rbury/TopDeskClient/Docs/Get-Branch.md)
 
 #>
     [CmdletBinding(DefaultParameterSetName = 'Details',
         PositionalBinding = $false,
-        HelpUri = 'https://github.com/rbury/TopDeskClient/Docs/Get-Branch.md',
+        HelpUri = 'https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Branch.md',
         ConfirmImpact = 'Medium')]
 
     Param (
@@ -47,7 +46,7 @@
             ParameterSetName = 'Details',
             ValueFromPipelineByPropertyName = $true)]
         [ValidateNotNullOrEmpty()]
-        [Alias('id','unid')]
+        [Alias('id', 'unid')]
         [string[]]
         $BranchID,
 
@@ -59,8 +58,8 @@
 
         # Branch Name
         [Parameter(Mandatory = $true,
-        ParameterSetName = 'BranchName',
-        ValueFromPipelineByPropertyName = $true)]
+            ParameterSetName = 'BranchName',
+            ValueFromPipelineByPropertyName = $true)]
         [Alias('name')]
         [string]
         $BranchName
@@ -122,5 +121,5 @@
         }
     }
 
-    end {}
+    end { }
 }

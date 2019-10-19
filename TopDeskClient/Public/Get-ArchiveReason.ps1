@@ -1,5 +1,5 @@
 ﻿function Get-ArchiveReason {
-    <#
+  <#
     .Synopsis
 
       Short description
@@ -31,68 +31,66 @@
       Additional information about the function or script.
 
     .LINK
-
-        [Get-ArchiveReason](https://github.com/rbury/TopDeskClient/Docs/Get-ArchiveReason.md)
       
   #>
-    [CmdletBinding(DefaultParameterSetName = 'Default',
-        PositionalBinding = $false,
-        HelpUri = 'https://github.com/rbury/TopDeskClient/Docs/Get-ArchiveReason.md',
-        ConfirmImpact = 'Medium')]
-    [OutputType([PSObject], ParameterSetName = 'Default')]
-    [OutputType([string], ParameterSetName = 'ByName')]
+  [CmdletBinding(DefaultParameterSetName = 'Default',
+    PositionalBinding = $false,
+    HelpUri = 'https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-ArchiveReason.md',
+    ConfirmImpact = 'Medium')]
+  [OutputType([PSObject], ParameterSetName = 'Default')]
+  [OutputType([string], ParameterSetName = 'ByName')]
 
-    Param (
+  Param (
 
-        # Get all resons and ids
-        [Parameter(Mandatory = $false,
-            ParameterSetName = 'Default')]
-        [switch]
-        $All,
+    # Get all resons and ids
+    [Parameter(Mandatory = $false,
+      ParameterSetName = 'Default')]
+    [switch]
+    $All,
 
-        # Archive reason name (returns matching id)
-        [Parameter(Mandatory = $true,
-            ValueFromPipelineByPropertyName = $true,
-            ParameterSetName = 'ByName')]
-        [Alias('Name')]
-        [string]
-        $ReasonName
+    # Archive reason name (returns matching id)
+    [Parameter(Mandatory = $true,
+      ValueFromPipelineByPropertyName = $true,
+      ParameterSetName = 'ByName')]
+    [Alias('Name')]
+    [string]
+    $ReasonName
 
-    )
+  )
 
-    begin {
+  begin {
 
-        if (!($script:tdConnected)) {
+    if (!($script:tdConnected)) {
 
-            $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("Cannot use TopDesk Client when disconnected.", $null, [System.Management.Automation.ErrorCategory]::InvalidOperation, $null))
+      $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("Cannot use TopDesk Client when disconnected.", $null, [System.Management.Automation.ErrorCategory]::InvalidOperation, $null))
 
-        }
+    }
+  }
+
+  process {
+
+    $_uri = $script:tdURI + '/tas/api/archiving-reasons'
+
+    $_headerslist = @{
+      'Content-Type' = 'application/json'
     }
 
-    process {
+    switch ($PSCmdlet.ParameterSetName) {
+      'ByName' {
 
-        $_uri = $script:tdURI + '/tas/api/archiving-reasons'
+        ((Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers $_headerslist -tdCredential $script:tdCredential) | Where-Object { $_.name -eq $ReasonName }).id
+        # $_response.name.Where({$_ -eq $ReasonName})
+        # $_response.name.Where({$_ -eq $ReasonName}).id
 
-        $_headerslist = @{
-            'Content-Type' = 'application/json'
-        }
+      }
+      'Default' {
 
-        switch ($PSCmdlet.ParameterSetName) {
-            'ByName' {
+        Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers $_headerslist -tdCredential $script:tdCredential
 
-                ((Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers $_headerslist -tdCredential $script:tdCredential) | Where-Object {$_.name -eq $ReasonName}).id
-                # $_response.name.Where({$_ -eq $ReasonName})
-                # $_response.name.Where({$_ -eq $ReasonName}).id
-
-            }
-            'Default' {
-
-                Get-APIResponse -Method 'GET' -APIUrl $_uri -Headers $_headerslist -tdCredential $script:tdCredential
-
-            }
-        }
+      }
     }
+  }
 
-    end {}
+  end { }
 
 }
