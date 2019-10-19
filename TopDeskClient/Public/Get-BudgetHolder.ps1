@@ -57,14 +57,14 @@ function Get-BudgetHolder {
   Param(
 
     # Retrieve only budget holders with external link id equal to one of these values
-    [Parameter(Mandatory = $false,
+    [Parameter(Mandatory = $true,
       ValueFromPipelineByPropertyName = $true,
       ParameterSetName = 'ByLink')]
     [string[]]
     $external_link_id,
 
     # Retrieve only budget holders with external link type equal to one of these values
-    [Parameter(Mandatory = $false,
+    [Parameter(Mandatory = $true,
       ValueFromPipelineByPropertyName = $true,
       ParameterSetName = 'ByLink')]
     [string[]]
