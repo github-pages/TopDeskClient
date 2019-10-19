@@ -1,72 +1,62 @@
 ---
 external help file: TopDeskClient-help.xml
 Module Name: TopDeskClient
-online version: https://github.com/rbury/TopDeskClient/blob/master/docs/Get-Asset.md
+online version:
 schema: 2.0.0
 ---
 
 # Get-Asset
 
 ## SYNOPSIS
-
-Retrieve one or more assets from TopDesk
+Short description
 
 ## SYNTAX
 
 ### AllAssets (Default)
-
-``` Powershell
+```
 Get-Asset -AssetType <String> [-OperationalStatus <String>] [-ActiveOnly] [[-AssetFields] <String[]>]
  [-NoAssignments] [<CommonParameters>]
 ```
 
 ### ArchivedAssets
-
-``` Powershell
+```
 Get-Asset -AssetType <String> [-OperationalStatus <String>] [-ArchivedOnly] [[-AssetFields] <String[]>]
  [-NoAssignments] [<CommonParameters>]
 ```
 
 ### NameSearch
-
-``` Powershell
+```
 Get-Asset [[-AssetFields] <String[]>] [-NoAssignments] -Name <String> [<CommonParameters>]
 ```
 
 ### FreeText
-
-``` Powershell
+```
 Get-Asset [[-AssetFields] <String[]>] [-NoAssignments] -SearchString <String> [<CommonParameters>]
 ```
 
 ### LinkSearch
-
-``` Powershell
+```
 Get-Asset [[-AssetFields] <String[]>] [-NoAssignments] -LinkList <Hashtable> [<CommonParameters>]
 ```
 
 ### Filter
-
-``` Powershell
+```
 Get-Asset [[-AssetFields] <String[]>] [-NoAssignments] -Filter <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-
 Long description
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-
-``` Powershell
+```
 Example of how to use this cmdlet
 ```
 
 ## PARAMETERS
 
 ### -AssetType
-
 Asset type to retrieve
 
 ```yaml
@@ -82,7 +72,6 @@ Accept wildcard characters: False
 ```
 
 ### -OperationalStatus
-
 limit to operational status
 
 ```yaml
@@ -98,7 +87,6 @@ Accept wildcard characters: False
 ```
 
 ### -ActiveOnly
-
 Limit to active only
 
 ```yaml
@@ -114,7 +102,6 @@ Accept wildcard characters: False
 ```
 
 ### -ArchivedOnly
-
 Limit to archived only
 
 ```yaml
@@ -130,7 +117,6 @@ Accept wildcard characters: False
 ```
 
 ### -AssetFields
-
 Fields to retrieve
 
 ```yaml
@@ -146,7 +132,6 @@ Accept wildcard characters: False
 ```
 
 ### -NoAssignments
-
 Exclude Assignments?
 
 ```yaml
@@ -162,7 +147,6 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-
 Search by name
 
 ```yaml
@@ -178,7 +162,6 @@ Accept wildcard characters: False
 ```
 
 ### -SearchString
-
 Free text search
 
 ```yaml
@@ -194,7 +177,6 @@ Accept wildcard characters: False
 ```
 
 ### -LinkList
-
 List of linked ids
 
 ```yaml
@@ -210,7 +192,6 @@ Accept wildcard characters: False
 ```
 
 ### -Filter
-
 Filter string (limited simple odata filter)
 
 ```yaml
@@ -226,25 +207,20 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### Input - PSCustomObject
-
-[PSCustomObject]
-
+### The Microsoft .NET Framework types of objects that can be piped to the function or script.
+### You can also include a description of the input objects.
 ## OUTPUTS
 
-### Output - PSCustomObject
-
-[PSCustomObject]
-
+### The .NET Framework type of the objects that the cmdlet returns.
+### You can also include a description of the returned objects.
 ## NOTES
-
 Additional information about the function or script.
 
 ## RELATED LINKS
 
-[Get-Asset](https://github.com/rbury/TopDeskClient/blob/master/docs/Get-Asset.md)
+[Get-Asset (https://github.com/rbury/TopDeskClient/Docs/Get-Asset.md)]()
+
