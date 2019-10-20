@@ -8,11 +8,12 @@ schema: 2.0.0
 # Set-Person
 
 ## SYNOPSIS
+
 Short description
 
 ## SYNTAX
 
-```
+``` Powershell
 Set-Person -PersonID <String> [-surName <String>] [-firstName <String>] [-firstInitials <String>]
  [-prefixes <String>] [-gender <String>] [-employeeNumber <String>] [-networkLoginName <String>]
  [-branch <String>] [-location <String>] [-department <String>] [-language <String>] [-departmentFree <String>]
@@ -27,21 +28,24 @@ Set-Person -PersonID <String> [-surName <String>] [-firstName <String>] [-firstI
 ```
 
 ## DESCRIPTION
+
 Long description
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
-Example of how to use this cmdlet
+
+``` Powershell
+Set-Person -PersonID '12345-12345-12345-1234'
 ```
 
 ## PARAMETERS
 
 ### -PersonID
+
 ID of person to modify
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases: id
@@ -54,9 +58,10 @@ Accept wildcard characters: False
 ```
 
 ### -surName
+
 LastName of person
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases: LastName
@@ -69,9 +74,10 @@ Accept wildcard characters: False
 ```
 
 ### -firstName
+
 FirstName of person
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases: Name, GivenName
@@ -84,9 +90,10 @@ Accept wildcard characters: False
 ```
 
 ### -firstInitials
+
 Person initials
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
@@ -99,9 +106,10 @@ Accept wildcard characters: False
 ```
 
 ### -prefixes
+
 Person prefix
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
@@ -114,9 +122,10 @@ Accept wildcard characters: False
 ```
 
 ### -gender
+
 Person gender
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
@@ -129,9 +138,10 @@ Accept wildcard characters: False
 ```
 
 ### -employeeNumber
+
 Person employee number
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases: EmployeeID
@@ -144,9 +154,10 @@ Accept wildcard characters: False
 ```
 
 ### -networkLoginName
+
 Network login name
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases: username
@@ -159,9 +170,10 @@ Accept wildcard characters: False
 ```
 
 ### -branch
+
 Branch
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
@@ -174,9 +186,10 @@ Accept wildcard characters: False
 ```
 
 ### -location
+
 Location
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
@@ -189,9 +202,10 @@ Accept wildcard characters: False
 ```
 
 ### -department
+
 Department
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases: dept
@@ -204,9 +218,10 @@ Accept wildcard characters: False
 ```
 
 ### -language
+
 Language
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases: lang
@@ -219,9 +234,10 @@ Accept wildcard characters: False
 ```
 
 ### -departmentFree
+
 Department (only when set to text field)
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
@@ -234,9 +250,10 @@ Accept wildcard characters: False
 ```
 
 ### -tasLoginName
+
 Person login name
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases: Login
@@ -249,9 +266,10 @@ Accept wildcard characters: False
 ```
 
 ### -password
+
 Person password (5-200 characters)
 
-```yaml
+``` yaml
 Type: SecureString
 Parameter Sets: (All)
 Aliases:
@@ -264,9 +282,10 @@ Accept wildcard characters: False
 ```
 
 ### -phoneNumber
+
 phone number
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases: Phone
@@ -279,9 +298,10 @@ Accept wildcard characters: False
 ```
 
 ### -mobileNumber
+
 Mobile number
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases: cell, mobile
@@ -294,9 +314,10 @@ Accept wildcard characters: False
 ```
 
 ### -fax
+
 Fax
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
@@ -309,9 +330,10 @@ Accept wildcard characters: False
 ```
 
 ### -email
+
 Email address
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
@@ -324,9 +346,10 @@ Accept wildcard characters: False
 ```
 
 ### -jobTitle
+
 Job Title
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
@@ -339,9 +362,10 @@ Accept wildcard characters: False
 ```
 
 ### -showBudgetholder
+
 View all requests under own budget holder
 
-```yaml
+``` yaml
 Type: Boolean
 Parameter Sets: (All)
 Aliases:
@@ -354,9 +378,10 @@ Accept wildcard characters: False
 ```
 
 ### -showDepartment
+
 View all requests under own department
 
-```yaml
+``` yaml
 Type: Boolean
 Parameter Sets: (All)
 Aliases:
@@ -369,9 +394,10 @@ Accept wildcard characters: False
 ```
 
 ### -showBranch
+
 View all requests under own branch
 
-```yaml
+``` yaml
 Type: Boolean
 Parameter Sets: (All)
 Aliases:
@@ -384,9 +410,10 @@ Accept wildcard characters: False
 ```
 
 ### -showSubsidiaries
+
 View all requests under own sub-branch (requires showBranch = $true)
 
-```yaml
+``` yaml
 Type: Boolean
 Parameter Sets: (All)
 Aliases:
@@ -399,9 +426,10 @@ Accept wildcard characters: False
 ```
 
 ### -showAllBranches
+
 Access all branches on forms
 
-```yaml
+``` yaml
 Type: Boolean
 Parameter Sets: (All)
 Aliases:
@@ -414,9 +442,10 @@ Accept wildcard characters: False
 ```
 
 ### -authorizeAll
+
 Authorize requests for own department/budgetholder/branch/subsidury (requires Manager = $true)
 
-```yaml
+``` yaml
 Type: Boolean
 Parameter Sets: (All)
 Aliases:
@@ -429,9 +458,10 @@ Accept wildcard characters: False
 ```
 
 ### -authorizeDepartment
+
 Authorize requests for own department (requires Manager = $true)
 
-```yaml
+``` yaml
 Type: Boolean
 Parameter Sets: (All)
 Aliases:
@@ -444,9 +474,10 @@ Accept wildcard characters: False
 ```
 
 ### -authorizeBudgetHolder
+
 Authorize requests for own budget holder (requires Manager = $true)
 
-```yaml
+``` yaml
 Type: Boolean
 Parameter Sets: (All)
 Aliases:
@@ -459,9 +490,10 @@ Accept wildcard characters: False
 ```
 
 ### -authorizeBranch
+
 Authorize requests for own branch (requires Manager = $true)
 
-```yaml
+``` yaml
 Type: Boolean
 Parameter Sets: (All)
 Aliases:
@@ -474,9 +506,10 @@ Accept wildcard characters: False
 ```
 
 ### -authorizeSubsidiaryBranches
+
 Authorize requests for subsidury locations (requires Manager & Branch = $true)
 
-```yaml
+``` yaml
 Type: Boolean
 Parameter Sets: (All)
 Aliases:
@@ -489,9 +522,10 @@ Accept wildcard characters: False
 ```
 
 ### -optionalFields1
+
 Optional fields 1
 
-```yaml
+``` yaml
 Type: PSObject
 Parameter Sets: (All)
 Aliases:
@@ -504,9 +538,10 @@ Accept wildcard characters: False
 ```
 
 ### -optionalFields2
+
 Optional fields 2
 
-```yaml
+``` yaml
 Type: PSObject
 Parameter Sets: (All)
 Aliases:
@@ -519,9 +554,10 @@ Accept wildcard characters: False
 ```
 
 ### -budgetHolder
+
 Budget Holder
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
@@ -534,9 +570,10 @@ Accept wildcard characters: False
 ```
 
 ### -personExtraFieldA
+
 Extra field A
 
-```yaml
+``` yaml
 Type: Hashtable
 Parameter Sets: (All)
 Aliases:
@@ -549,9 +586,10 @@ Accept wildcard characters: False
 ```
 
 ### -personExtraFieldB
+
 Extra field B
 
-```yaml
+``` yaml
 Type: Hashtable
 Parameter Sets: (All)
 Aliases:
@@ -564,9 +602,10 @@ Accept wildcard characters: False
 ```
 
 ### -isManager
+
 Person is a Manager
 
-```yaml
+``` yaml
 Type: Boolean
 Parameter Sets: (All)
 Aliases:
@@ -579,9 +618,10 @@ Accept wildcard characters: False
 ```
 
 ### -manager
+
 Manager
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
@@ -594,10 +634,11 @@ Accept wildcard characters: False
 ```
 
 ### -WhatIf
+
 Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
-```yaml
+``` yaml
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
@@ -610,9 +651,10 @@ Accept wildcard characters: False
 ```
 
 ### -Confirm
+
 Prompts you for confirmation before running the cmdlet.
 
-```yaml
+``` yaml
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
@@ -625,20 +667,24 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### The Microsoft .NET Framework types of objects that can be piped to the function or script.
-### You can also include a description of the input objects.
+The Microsoft . NET Framework types of objects that can be piped to the function or script.
+You can also include a description of the input objects.
+
 ## OUTPUTS
 
-### The .NET Framework type of the objects that the cmdlet returns.
-### You can also include a description of the returned objects.
+The . NET Framework type of the objects that the cmdlet returns.
+You can also include a description of the returned objects.
+
 ## NOTES
-Additional information about the function or script.
+
+None.
 
 ## RELATED LINKS
 
-[https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Person.md](https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Person.md)
+[Get-Person](https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Person.md)
 

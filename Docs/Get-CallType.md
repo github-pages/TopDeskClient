@@ -1,32 +1,32 @@
 ---
 external help file: TopDeskClient-help.xml
 Module Name: TopDeskClient
-online version:
+online version: https://developers.topdesk.com/documentation/index.html#api-General-GetListOfCallTypes
 schema: 2.0.0
 ---
 
-# Get-AssetTemplate
+# Get-CallType
 
 ## SYNOPSIS
 
-Short description
+Get list of Call Types
 
 ## SYNTAX
 
 ``` Powershell
-Get-AssetTemplate [<CommonParameters>]
+Get-CallType [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Long description
+This command will return the list of call types name and ID.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
 ``` Powershell
-Get-AssetTemplate
+Get-CallType
 ```
 
 ## PARAMETERS
@@ -37,13 +37,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-The Microsoft . NET Framework types of objects that can be piped to the function or script.
-You can also include a description of the input objects.
+None.
 
 ## OUTPUTS
 
-The . NET Framework type of the objects that the cmdlet returns.
-You can also include a description of the returned objects.
+[PSCustomObject]
+Properties include id and name of each call type
 
 ## NOTES
 
@@ -51,5 +50,5 @@ None.
 
 ## RELATED LINKS
 
-[Get-Asset](https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Asset.md)
+[TopDeskAPI - GetListOfCallTypes](https://developers.topdesk.com/documentation/index.html#api-General-GetListOfCallTypes)
 

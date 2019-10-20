@@ -1,32 +1,32 @@
 ---
 external help file: TopDeskClient-help.xml
 Module Name: TopDeskClient
-online version:
+online version: https://developers.topdesk.com/documentation/index.html#api-General-GetListOfEntryTypes
 schema: 2.0.0
 ---
 
-# Get-AssetTemplate
+# Get-EntryType
 
 ## SYNOPSIS
 
-Short description
+Get list of incident entry types
 
 ## SYNTAX
 
 ``` Powershell
-Get-AssetTemplate [<CommonParameters>]
+Get-EntryType [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Long description
+This command will return the list of entry types name and id.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
 ``` Powershell
-Get-AssetTemplate
+Get-EntryType
 ```
 
 ## PARAMETERS
@@ -37,13 +37,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-The Microsoft . NET Framework types of objects that can be piped to the function or script.
-You can also include a description of the input objects.
+None.
 
 ## OUTPUTS
 
-The . NET Framework type of the objects that the cmdlet returns.
-You can also include a description of the returned objects.
+[PSCustomObject]
+Properties include id and name of each entry type
 
 ## NOTES
 
@@ -51,5 +50,5 @@ None.
 
 ## RELATED LINKS
 
-[Get-Asset](https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Asset.md)
+[TopDeskAPI - GetListOfEntryTypes](https://developers.topdesk.com/documentation/index.html#api-General-GetListOfEntryTypes)
 

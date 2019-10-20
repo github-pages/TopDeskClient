@@ -1,32 +1,32 @@
 ---
 external help file: TopDeskClient-help.xml
 Module Name: TopDeskClient
-online version:
+online version: https://developers.topdesk.com/documentation/index.html#api-General-GetListOfStatuses
 schema: 2.0.0
 ---
 
-# Get-AssetTemplate
+# Get-ProcessingStatus
 
 ## SYNOPSIS
 
-Short description
+Get list of processing statuses
 
 ## SYNTAX
 
 ``` Powershell
-Get-AssetTemplate [<CommonParameters>]
+Get-ProcessingStatus [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Long description
+This command will return the list of processing statuses name, id, onHold, processingState, response and default.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
 ``` Powershell
-Get-AssetTemplate
+Get-ProcessingStatus
 ```
 
 ## PARAMETERS
@@ -37,13 +37,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-The Microsoft . NET Framework types of objects that can be piped to the function or script.
-You can also include a description of the input objects.
+None.
 
 ## OUTPUTS
 
-The . NET Framework type of the objects that the cmdlet returns.
-You can also include a description of the returned objects.
+[PSCustomObject]
+Properties include name, id, onHold, processingStatus, response and default
 
 ## NOTES
 
@@ -51,5 +50,5 @@ None.
 
 ## RELATED LINKS
 
-[Get-Asset](https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Asset.md)
+[TopDeskAPI - GetListOfStatuses](https://developers.topdesk.com/documentation/index.html#api-General-GetListOfStatuses)
 
