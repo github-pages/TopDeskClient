@@ -6,7 +6,7 @@ function Get-SubCategory {
 
     .DESCRIPTION
 
-      This command will return the list of subcategories name and id.
+      This command will return the list of subcategories name, id and category.
 
     .EXAMPLE
 
@@ -19,7 +19,7 @@ function Get-SubCategory {
     .OUTPUTS
 
       [PSCustomObject]
-      Properties include id and name of each category
+      Properties include id and name of each subcategory and the parent category it belongs to
 
     .NOTES
 
