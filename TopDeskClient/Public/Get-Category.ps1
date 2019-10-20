@@ -6,7 +6,7 @@ function Get-Category {
 
     .DESCRIPTION
 
-      This command wil return the list of categories name and id.
+      This command will return the list of categories name and id.
 
     .EXAMPLE
 
