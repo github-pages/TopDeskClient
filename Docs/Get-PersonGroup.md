@@ -8,41 +8,48 @@ schema: 2.0.0
 # Get-PersonGroup
 
 ## SYNOPSIS
+
 Short description
 
 ## SYNTAX
 
 ### Default (Default)
-```
+
+``` Powershell
 Get-PersonGroup [<CommonParameters>]
 ```
 
 ### Details
-```
+
+``` Powershell
 Get-PersonGroup -GroupID <String[]> [<CommonParameters>]
 ```
 
 ### List
-```
+
+``` Powershell
 Get-PersonGroup [-List] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
+
 Long description
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
-Example of how to use this cmdlet
+
+``` Powershell
+Get-PersonGroup -List
 ```
 
 ## PARAMETERS
 
 ### -GroupID
+
 ID of person group to retrieve details for
 
-```yaml
+``` yaml
 Type: String[]
 Parameter Sets: Details
 Aliases: ID
@@ -55,9 +62,10 @@ Accept wildcard characters: False
 ```
 
 ### -List
+
 Get list of person groups
 
-```yaml
+``` yaml
 Type: SwitchParameter
 Parameter Sets: List
 Aliases:
@@ -70,20 +78,24 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### The Microsoft .NET Framework types of objects that can be piped to the function or script.
-### You can also include a description of the input objects.
+The Microsoft . NET Framework types of objects that can be piped to the function or script.
+You can also include a description of the input objects.
+
 ## OUTPUTS
 
-### The .NET Framework type of the objects that the cmdlet returns.
-### You can also include a description of the returned objects.
+The . NET Framework type of the objects that the cmdlet returns.
+You can also include a description of the returned objects.
+
 ## NOTES
-Additional information about the function or script.
+
+None.
 
 ## RELATED LINKS
 
-[https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Asset.md](https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Asset.md)
+[Get-Asset](https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Asset.md)
 

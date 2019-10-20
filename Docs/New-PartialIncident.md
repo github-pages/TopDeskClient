@@ -8,12 +8,14 @@ schema: 2.0.0
 # New-PartialIncident
 
 ## SYNOPSIS
-Short description
+
+Create a new partial incident
 
 ## SYNTAX
 
 ### Default (Default)
-```
+
+``` Powershell
 New-PartialIncident -mainIncident <String> [-briefDescription <String>] [-request <String>] [-action <String>]
  [-actionInvisibleForCaller <Boolean>] [-entryType <String>] [-categoryName <String>]
  [-subcategoryName <String>] [-externalNumber <String>] [-duration <String>] [-targetDate <DateTime>]
@@ -26,7 +28,8 @@ New-PartialIncident -mainIncident <String> [-briefDescription <String>] [-reques
 ```
 
 ### byID
-```
+
+``` Powershell
 New-PartialIncident -mainIncident <String> [-briefDescription <String>] [-request <String>] [-action <String>]
  [-actionInvisibleForCaller <Boolean>] [-entryType <String>] [-categoryID <String>] [-subcategoryID <String>]
  [-externalNumber <String>] [-duration <String>] [-targetDate <DateTime>] [-sla <String>] [-onHold <Boolean>]
@@ -38,22 +41,25 @@ New-PartialIncident -mainIncident <String> [-briefDescription <String>] [-reques
 ```
 
 ## DESCRIPTION
+
 Long description
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-```
-Example of how to use this cmdlet
+
+``` Powershell
+New-PartialIncedent -mainIncident '12345-12345-12345-1234'
 ```
 
 ## PARAMETERS
 
 ### -mainIncident
+
 Main incident id, required for creating a partial incident.
 Must be accessable, open, unarchived second line incident.
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
@@ -66,9 +72,10 @@ Accept wildcard characters: False
 ```
 
 ### -briefDescription
+
 brief Description of incident
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
@@ -81,9 +88,10 @@ Accept wildcard characters: False
 ```
 
 ### -request
+
 initial request - can include html tags (\<i\>\<em\>\<b\>\<strong\>\<u\>\<a\>\<br\>\<p\>\<div\>\<img\>) \<img\> must be 450x450 or smaller, base64 encoded (gif, png, bmp, pcx, iff, ras, pnm, psd, jpg)
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
@@ -96,9 +104,10 @@ Accept wildcard characters: False
 ```
 
 ### -action
+
 initial action - can include html tags (\<i\>\<em\>\<b\>\<strong\>\<u\>\<a\>\<br\>\<p\>\<div\>\<img\>) \<img\> must be 450x450 or smaller, base64 encoded (gif, png, bmp, pcx, iff, ras, pnm, psd, jpg)
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
@@ -111,9 +120,10 @@ Accept wildcard characters: False
 ```
 
 ### -actionInvisibleForCaller
+
 Make action invisible - Default = $false
 
-```yaml
+``` yaml
 Type: Boolean
 Parameter Sets: (All)
 Aliases:
@@ -126,9 +136,10 @@ Accept wildcard characters: False
 ```
 
 ### -entryType
+
 Entry type by id
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
@@ -141,9 +152,10 @@ Accept wildcard characters: False
 ```
 
 ### -categoryID
+
 Category by id
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: byID
 Aliases:
@@ -156,9 +168,10 @@ Accept wildcard characters: False
 ```
 
 ### -categoryName
+
 Category by name
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: Default
 Aliases:
@@ -171,9 +184,10 @@ Accept wildcard characters: False
 ```
 
 ### -subcategoryID
+
 Subcategory by id
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: byID
 Aliases:
@@ -186,9 +200,10 @@ Accept wildcard characters: False
 ```
 
 ### -subcategoryName
+
 Subcategory by name
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: Default
 Aliases:
@@ -201,9 +216,10 @@ Accept wildcard characters: False
 ```
 
 ### -externalNumber
+
 External number
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
@@ -216,9 +232,10 @@ Accept wildcard characters: False
 ```
 
 ### -duration
+
 duration by ID
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
@@ -231,9 +248,10 @@ Accept wildcard characters: False
 ```
 
 ### -targetDate
+
 Target Date
 
-```yaml
+``` yaml
 Type: DateTime
 Parameter Sets: (All)
 Aliases:
@@ -246,9 +264,10 @@ Accept wildcard characters: False
 ```
 
 ### -sla
+
 sla by ID
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
@@ -261,10 +280,11 @@ Accept wildcard characters: False
 ```
 
 ### -onHold
+
 On hold.
 On hold date will be filled accordingly
 
-```yaml
+``` yaml
 Type: Boolean
 Parameter Sets: (All)
 Aliases:
@@ -277,9 +297,10 @@ Accept wildcard characters: False
 ```
 
 ### -operator
+
 operator by ID
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
@@ -292,9 +313,10 @@ Accept wildcard characters: False
 ```
 
 ### -operatorGroup
+
 operatorGroup by ID
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
@@ -307,9 +329,10 @@ Accept wildcard characters: False
 ```
 
 ### -supplier
+
 supplier by ID
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
@@ -322,9 +345,10 @@ Accept wildcard characters: False
 ```
 
 ### -processingStatus
+
 processingStatus by ID
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
@@ -337,9 +361,10 @@ Accept wildcard characters: False
 ```
 
 ### -responded
+
 Whether the incident is responded
 
-```yaml
+``` yaml
 Type: Boolean
 Parameter Sets: (All)
 Aliases:
@@ -352,9 +377,10 @@ Accept wildcard characters: False
 ```
 
 ### -responseDate
+
 responseDate
 
-```yaml
+``` yaml
 Type: DateTime
 Parameter Sets: (All)
 Aliases:
@@ -367,9 +393,10 @@ Accept wildcard characters: False
 ```
 
 ### -completed
+
 Whether the incident is completed
 
-```yaml
+``` yaml
 Type: Boolean
 Parameter Sets: (All)
 Aliases:
@@ -382,9 +409,10 @@ Accept wildcard characters: False
 ```
 
 ### -completedDate
+
 Completed Date
 
-```yaml
+``` yaml
 Type: DateTime
 Parameter Sets: (All)
 Aliases:
@@ -397,9 +425,10 @@ Accept wildcard characters: False
 ```
 
 ### -closureCode
+
 Closure Code by ID
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
@@ -412,9 +441,10 @@ Accept wildcard characters: False
 ```
 
 ### -costs
+
 Costs
 
-```yaml
+``` yaml
 Type: Single
 Parameter Sets: (All)
 Aliases:
@@ -427,9 +457,10 @@ Accept wildcard characters: False
 ```
 
 ### -feedbackRating
+
 Rate incident, only available for closed incidents
 
-```yaml
+``` yaml
 Type: Int32
 Parameter Sets: (All)
 Aliases:
@@ -442,9 +473,10 @@ Accept wildcard characters: False
 ```
 
 ### -feedbackMessage
+
 Leave feedback message on incident, only available for closed incidents and when feedbackRating is given
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
@@ -457,9 +489,10 @@ Accept wildcard characters: False
 ```
 
 ### -optionalFields1
+
 Free fields Tab 1
 
-```yaml
+``` yaml
 Type: Hashtable
 Parameter Sets: (All)
 Aliases:
@@ -472,9 +505,10 @@ Accept wildcard characters: False
 ```
 
 ### -optionalFields2
+
 Free fields Tab 2
 
-```yaml
+``` yaml
 Type: Hashtable
 Parameter Sets: (All)
 Aliases:
@@ -487,9 +521,10 @@ Accept wildcard characters: False
 ```
 
 ### -externalLinkID
+
 Link to an external system - Identifier as supplied by the external system
 
-```yaml
+``` yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
@@ -502,9 +537,10 @@ Accept wildcard characters: False
 ```
 
 ### -externalLinkType
+
 Link to an external system - Integer to identify the external system by
 
-```yaml
+``` yaml
 Type: Int32
 Parameter Sets: (All)
 Aliases:
@@ -517,9 +553,10 @@ Accept wildcard characters: False
 ```
 
 ### -externalLinkDate
+
 Date of the last synchronization
 
-```yaml
+``` yaml
 Type: DateTime
 Parameter Sets: (All)
 Aliases:
@@ -532,10 +569,11 @@ Accept wildcard characters: False
 ```
 
 ### -WhatIf
+
 Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
-```yaml
+``` yaml
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
@@ -548,9 +586,10 @@ Accept wildcard characters: False
 ```
 
 ### -Confirm
+
 Prompts you for confirmation before running the cmdlet.
 
-```yaml
+``` yaml
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
@@ -563,20 +602,24 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### The Microsoft .NET Framework types of objects that can be piped to the function or script.
-### You can also include a description of the input objects.
+The Microsoft . NET Framework types of objects that can be piped to the function or script.
+You can also include a description of the input objects.
+
 ## OUTPUTS
 
-### The .NET Framework type of the objects that the cmdlet returns.
-### You can also include a description of the returned objects.
+The . NET Framework type of the objects that the cmdlet returns.
+You can also include a description of the returned objects.
+
 ## NOTES
-Additional information about the function or script.
+
+None.
 
 ## RELATED LINKS
 
-[https://github.com/rbury/TopDeskClient/blob/master/Docs/New-Incident.md](https://github.com/rbury/TopDeskClient/blob/master/Docs/New-Incident.md)
+[New-Incident](https://github.com/rbury/TopDeskClient/blob/master/Docs/New-Incident.md)
 
