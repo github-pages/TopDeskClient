@@ -1,6 +1,6 @@
 ---
 Module Name: TopDeskClient
-Module Guid: 79d0a56d-ceec-4b91-9874-9e0009ac1e2a 79d0a56d-ceec-4b91-9874-9e0009ac1e2a
+Module Guid: 79d0a56d-ceec-4b91-9874-9e0009ac1e2a
 Download Help Link: {{ Update Download Link }}
 Help Version: {{ Please enter version of help manually (X.X.X.X) format }}
 Locale: en-US
@@ -56,6 +56,21 @@ Locale: en-US
 ### [Get-BudgetHolder](Get-BudgetHolder.md)
 {{ Fill in the Description }}
 
+### [Get-CallType](Get-CallType.md)
+{{ Fill in the Description }}
+
+### [Get-Category](Get-Category.md)
+{{ Fill in the Description }}
+
+### [Get-ClosureCode](Get-ClosureCode.md)
+{{ Fill in the Description }}
+
+### [Get-EntryType](Get-EntryType.md)
+{{ Fill in the Description }}
+
+### [Get-Impact](Get-Impact.md)
+{{ Fill in the Description }}
+
 ### [Get-Incident](Get-Incident.md)
 {{ Fill in the Description }}
 
@@ -66,6 +81,15 @@ Locale: en-US
 {{ Fill in the Description }}
 
 ### [Get-PersonGroup](Get-PersonGroup.md)
+{{ Fill in the Description }}
+
+### [Get-Priority](Get-Priority.md)
+{{ Fill in the Description }}
+
+### [Get-ProcessingStatus](Get-ProcessingStatus.md)
+{{ Fill in the Description }}
+
+### [Get-SubCategory](Get-SubCategory.md)
 {{ Fill in the Description }}
 
 ### [New-Incident](New-Incident.md)
