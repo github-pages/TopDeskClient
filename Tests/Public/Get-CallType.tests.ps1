@@ -9,7 +9,7 @@ Describe Get-CallType {
 
             It "Should throw when client is disconnected" {
                 $script:TDConnected = $false
-                { New-Incident -callerLookupEmail 'test@test.testing' } | Should -Throw
+                { Get-CallType } | Should -Throw
             }
 
             It "Should NOT have performed any API calls" {
