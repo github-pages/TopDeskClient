@@ -8,42 +8,36 @@ schema: 2.0.0
 # Get-ArchiveReason
 
 ## SYNOPSIS
-
 Short description
 
 ## SYNTAX
 
 ### Default (Default)
-
-``` Powershell
+```
 Get-ArchiveReason [-All] [<CommonParameters>]
 ```
 
 ### ByName
-
-``` Powershell
+```
 Get-ArchiveReason -ReasonName <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-
 Long description
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-
-``` Powershell
-Get-ArchiveReason
+```
+Example of how to use this cmdlet
 ```
 
 ## PARAMETERS
 
 ### -All
-
 Get all resons and ids
 
-``` yaml
+```yaml
 Type: SwitchParameter
 Parameter Sets: Default
 Aliases:
@@ -56,10 +50,9 @@ Accept wildcard characters: False
 ```
 
 ### -ReasonName
-
 Archive reason name (returns matching id)
 
-``` yaml
+```yaml
 Type: String
 Parameter Sets: ByName
 Aliases: Name
@@ -72,22 +65,17 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-The Microsoft . NET Framework types of objects that can be piped to the function or script.
-You can also include a description of the input objects.
-
+### The Microsoft .NET Framework types of objects that can be piped to the function or script.
+### You can also include a description of the input objects.
 ## OUTPUTS
 
-The . NET Framework type of the objects that the cmdlet returns.
-You can also include a description of the returned objects.
-
+### The .NET Framework type of the objects that the cmdlet returns.
+### You can also include a description of the returned objects.
 ## NOTES
-
-None.
+Additional information about the function or script.
 
 ## RELATED LINKS
-
