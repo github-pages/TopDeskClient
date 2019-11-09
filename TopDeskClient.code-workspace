@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+    ],
+    "settings": {
+        "powershell.codeFormatting.autoCorrectAliases": true,
+        "powershell.codeFormatting.useCorrectCasing": true,
+        "code-eol.highlightExtraWhitespace": true,
+        "code-eol.highlightNonDefault": true,
+        "xmlTools.removeCommentsOnMinify": true
+    }
+}
