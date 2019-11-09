@@ -38,6 +38,7 @@ task GenDocs {
         $null = Remove-Item "$env:BHBuildOutput/$env:BHProjectName/en-US" -Recurse -Force
     }
     Import-Module "$env:BHBuildOutPut/$env:BHProjectName/$env:BHProjectName.psd1" -Force
+
     #Update-MarkdownHelp "$env:BHProjectPath/Docs" -ErrorAction SilentlyContinue
     New-MarkdownHelp -Module $env:BHProjectName -OutputFolder "$env:BHBuildOutput/$env:BHProjectName/en-US" -WithModulePage -ErrorAction SilentlyContinue
     New-ExternalHelp -OutputPath "$env:BHBuildOutput/$env:BHProjectName/en-US" -Path "$env:BHBuildOutput/$env:BHProjectName/en-US" -ShowProgress -Force -ErrorAction SilentlyContinue
