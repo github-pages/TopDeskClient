@@ -113,15 +113,25 @@ function New-Incident {
         [string]
         $email,
 
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Override the Department of the caller")]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Override the Department of the caller")]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Override the Department of the caller")]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Override the Department of the caller")]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Override the Department of the caller")]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Department of the unregistered caller")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Override the caller Department by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Override the caller Department by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Override the caller Department by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Override the caller Department by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Override the caller Department by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Override the caller Department by Name")]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $departmentName,
+
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Override the caller Department by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Override the caller Department by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Override the caller Department by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Override the caller Department by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Override the caller Department by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Override the caller Department by Id")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $department,
+        $departmentId,
 
         [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Override the Location of the caller")]
         [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Override the Location of the caller")]
@@ -688,13 +698,25 @@ function New-Incident {
             }
         }
 
-        if ($PSBoundParameters.ContainsKey('department')) {
+        if ($PSBoundParameters.ContainsKey('departmentName')) {
             if ($callerSet) {
-                $null = $callerList.caller.Add('department', $department)
+                $null = $callerList.caller.Add('department', @{ 'name' = $departmentName })
             }
             else {
                 $null = $callerList.Add([PSCustomObject]@{
-                        'caller' = @{'department' = $department }
+                        'caller' = @{'department' = @{ 'name' = $departmentName} }
+                    })
+                $callerSet = $true
+            }
+        }
+
+        if ($PSBoundParameters.ContainsKey('departmentId')) {
+            if ($callerSet) {
+                $null = $callerList.caller.Add('department', @{ 'id' = $departmentId })
+            }
+            else {
+                $null = $callerList.Add([PSCustomObject]@{
+                        'caller' = @{'department' = @{ 'id' = $departmentId} }
                     })
                 $callerSet = $true
             }
