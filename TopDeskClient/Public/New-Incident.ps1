@@ -387,6 +387,16 @@ function New-Incident {
         [string]
         $impactId,
 
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "urgency by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "urgency by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "urgency by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "urgency by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "urgency by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "urgency by Name")]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $urgencyName,
+
         [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "urgency by ID")]
         [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "urgency by ID")]
         [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "urgency by ID")]
@@ -395,7 +405,7 @@ function New-Incident {
         [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "urgency by ID")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $urgency,
+        $urgencyId,
 
         [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "priority by ID")]
         [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "priority by ID")]
@@ -931,8 +941,12 @@ function New-Incident {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'impact' -Value @{'id' = $impactId }
         }
 
-        if ($PSBoundParameters.ContainsKey('urgency')) {
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'urgency' -Value @{'id' = $urgency }
+        if ($PSBoundParameters.ContainsKey('urgencyName')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'urgency' -Value @{'id' = $urgencyName }
+        }
+
+        if ($PSBoundParameters.ContainsKey('urgencyId')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'urgency' -Value @{'id' = $urgencyId }
         }
 
         if ($PSBoundParameters.ContainsKey('priority')) {
