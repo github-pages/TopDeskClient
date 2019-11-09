@@ -69,14 +69,16 @@ task PreTest {
     Import-Module $env:BHPSModuleManifest -Force
 
     $invokePesterParams = @{
-        OutputFile   = "$env:Common_TestResultsDirectory/TEST-Results-$($env:BHProjectName).xml"
-        OutputFormat = 'NUnitXml'
-        Strict       = $true
-        PassThru     = $true
-        Verbose      = $false
-        EnableExit   = $false
-        CodeCoverage = (Get-ChildItem $env:BHModulePath -Recurse -Include '*.psm1', '*.ps1' -Exclude '*.Tests.*').FullName
-        Script       = (Get-ChildItem -Path "$env:BHProjectPath/Tests" -Recurse -Include '*.tests.ps1' -Exclude "$env:BHProjectName.tests.ps1" -Depth 5 -Force)
+        OutputFile                   = "$env:Common_TestResultsDirectory/TEST-Results-$($env:BHProjectName).xml"
+        OutputFormat                 = 'NUnitXml'
+        Strict                       = $true
+        PassThru                     = $true
+        Verbose                      = $false
+        EnableExit                   = $false
+        CodeCoverage                 = (Get-ChildItem $env:BHModulePath -Recurse -Include '*.psm1', '*.ps1' -Exclude '*.Tests.*').FullName
+        CodeCoverageOutputFile       = "$env:Common_TestResultsDirectory/Coverage-$($env:BHProjectName).xml"
+        CodeCoverageOutputFileFormat = 'JaCoCo'
+        Script                       = (Get-ChildItem -Path "$env:BHProjectPath/Tests" -Recurse -Include '*.tests.ps1' -Exclude "$env:BHProjectName.tests.ps1" -Depth 5 -Force)
     }
 
     $testResults = Invoke-Pester @invokePesterParams;
@@ -109,7 +111,7 @@ task Build {
     }
 
     $null = New-Item -Path  "$env:BHBuildOutput/$env:BHProjectName/$env:BHProjectName.psm1" -Force
-@'
+    @'
     Set-StrictMode -Version latest
 
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
