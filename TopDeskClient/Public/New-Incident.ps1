@@ -618,8 +618,6 @@ function New-Incident {
                 [bool]$callerSet = $true
                 break
             }
-
-            Default { }
         }
 
         if ($PSBoundParameters.ContainsKey('BranchID')) {
