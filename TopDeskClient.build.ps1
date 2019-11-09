@@ -70,13 +70,10 @@ task PreTest {
         Script       = (Get-ChildItem -Path "$env:BHProjectPath/Tests" -Recurse -Include '*.tests.ps1' -Exclude "$env:BHProjectName.tests.ps1" -Depth 5 -Force)
     }
 
-    # Save Test Results as NUnitXml
     $testResults = Invoke-Pester @invokePesterParams;
 
-    # Save Test Results as JSON
     $testresults | ConvertTo-Json | Set-Content "$env:Common_TestResultsDirectory/PesterResults.json"
 
-    # Fail Build if Coverage is under requirement
     $overallCoverage = [Math]::Floor(($testResults.CodeCoverage.NumberOfCommandsExecuted / $testResults.CodeCoverage.NumberOfCommandsAnalyzed) * 100)
     assert($overallCoverage -ge $Compliance) ('Code Coverage: "{0}", build requirement: "{1}"' -f $overallCoverage, $Compliance)
 
