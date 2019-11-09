@@ -1,3 +1,8 @@
+<#
+.Synopsis
+	Build script (https://github.com/rbury/TopDeskClent)
+#>
+
 $Compliance = 1
 
 Get-Item env:BH* | Remove-Item -ErrorAction SilentlyContinue
@@ -12,22 +17,31 @@ task Clean {
     if (Get-Module $env:BHProjectName) {
         Remove-Module $env:BHProjectName
     }
-    
+
     if (Test-Path -Path "$env:BHBuildOutput" ) {
         $null = Remove-Item "$env:BHBuildOutput" -Recurse -Force
     }
+
     $null = New-Item "$env:BHBuildOutput/$env:BHProjectName" -ItemType Directory -Force
 
     if (Test-Path -Path "$env:BHProjectPath/Tests/Results") {
         $null = Remove-Item "$env:BHProjectPath/Tests/Results" -Recurse -Force
     }
+
     $null = New-Item "$env:BHProjectPath/Tests/Results" -ItemType Directory -Force
 
 }
 
 task GenDocs {
 
-    New-ExternalHelp "$env:BHProjectPath/Docs" -OutputPath "$env:BHBuildOutput/$env:BHProjectName/en-US" -Force -ErrorAction SilentlyContinue
+    if (Test-Path -Path "$env:BHBuildOutput/$env:BHProjectName/en-US" ) {
+        $null = Remove-Item "$env:BHBuildOutput/$env:BHProjectName/en-US" -Recurse -Force
+    }
+    Import-Module "$env:BHBuildOutPut/$env:BHProjectName/$env:BHProjectName.psd1" -Force
+    #Update-MarkdownHelp "$env:BHProjectPath/Docs" -ErrorAction SilentlyContinue
+    New-MarkdownHelp -Module $env:BHProjectName -OutputFolder "$env:BHBuildOutput/$env:BHProjectName/en-US" -WithModulePage -ErrorAction SilentlyContinue
+    New-ExternalHelp -OutputPath "$env:BHBuildOutput/$env:BHProjectName/en-US" -Path "$env:BHBuildOutput/$env:BHProjectName/en-US" -ShowProgress -Force -ErrorAction SilentlyContinue
+    $null = Remove-Item "$env:BHBuildOutput/$env:BHProjectName/en-US/*.md" -Recurse -Force
 
 }
 
@@ -41,7 +55,6 @@ task Analyze {
 
     $saResults = Invoke-ScriptAnalyzer @scriptAnalyzerParams
 
-    # Save Analyze Results as JSON
     $saResults | ConvertTo-Json | Set-Content "$env:Common_TestResultsDirectory/AnalysisResults.json"
 
     if ($saResults) {
@@ -65,13 +78,10 @@ task PreTest {
         Script       = (Get-ChildItem -Path "$env:BHProjectPath/Tests" -Recurse -Include '*.tests.ps1' -Exclude "$env:BHProjectName.tests.ps1" -Depth 5 -Force)
     }
 
-    # Save Test Results as NUnitXml
     $testResults = Invoke-Pester @invokePesterParams;
 
-    # Save Test Results as JSON
     $testresults | ConvertTo-Json | Set-Content "$env:Common_TestResultsDirectory/PesterResults.json"
 
-    # Fail Build if Coverage is under requirement
     $overallCoverage = [Math]::Floor(($testResults.CodeCoverage.NumberOfCommandsExecuted / $testResults.CodeCoverage.NumberOfCommandsAnalyzed) * 100)
     assert($overallCoverage -ge $Compliance) ('Code Coverage: "{0}", build requirement: "{1}"' -f $overallCoverage, $Compliance)
 
@@ -86,9 +96,9 @@ task Test {
     $res = Invoke-Pester -Script "$env:BHProjectPath/Tests/$env:BHProjectName.tests.ps1" -PassThru
 
     if ($res.FailedCount -gt 0) {
-        
+
         throw "$($res.FailedCount) tests failed."
-    
+
     }
 }
 
@@ -114,7 +124,7 @@ task Build {
     $Public | Get-Content | Add-Content "$env:BHBuildOutput/$env:BHProjectName/$env:BHProjectName.psm1" -Force
     $PublicFunctions = $Public.BaseName
     $newVersion = (& GitVersion.exe /output json /showvariable MajorMinorPatch)
-    
+
     #Update-ModuleManifest -Path "$env:BHBuildOutput/$env:BHProjectName/$env:BHProjectName.psd1" -ModuleVersion $newVersion -FunctionsToExport $PublicFunctions
     Copy-Item -Path "$env:BHPSModuleManifest" -Destination "$env:BHBuildOutput/$env:BHProjectName/" -Force
 
@@ -123,7 +133,7 @@ task Build {
 }
 
 task Help {
-    Remove-Module $env:BHProjectName -ErrorAction SilentlyContinue
+    #Remove-Module $env:BHProjectName -ErrorAction SilentlyContinue
     Import-Module "$env:BHBuildOutPut/$env:BHProjectName/$env:BHProjectName.psd1" -Force
     Update-MarkdownHelp "$env:BHProjectPath/docs" -ErrorAction SilentlyContinue
 }
@@ -135,3 +145,5 @@ task Archive {
 task regularBuild Clean, PreTest, Build, Analyze, Test
 
 task fullBuild Clean, PreTest, Build, Analyze, Test, GenDocs, Archive
+
+task Testing PreTest, Analyze, Test
