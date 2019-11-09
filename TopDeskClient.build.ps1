@@ -12,7 +12,7 @@ task Clean {
     if (Get-Module $env:BHProjectName) {
         Remove-Module $env:BHProjectName
     }
-    
+
     if (Test-Path -Path "$env:BHBuildOutput" ) {
         $null = Remove-Item "$env:BHBuildOutput" -Recurse -Force
     }
@@ -27,7 +27,13 @@ task Clean {
 
 task GenDocs {
 
-    New-ExternalHelp "$env:BHProjectPath/Docs" -OutputPath "$env:BHBuildOutput/$env:BHProjectName/en-US" -Force -ErrorAction SilentlyContinue
+    if (Test-Path -Path "$env:BHBuildOutput/$env:BHProjectName/en-US" ) {
+        $null = Remove-Item "$env:BHBuildOutput/$env:BHProjectName/en-US" -Recurse -Force
+    }
+    Import-Module "$env:BHBuildOutPut/$env:BHProjectName/$env:BHProjectName.psd1" -Force
+    New-MarkdownHelp -Module $env:BHProjectName -OutputFolder "$env:BHBuildOutput/$env:BHProjectName/en-US" -WithModulePage
+    New-ExternalHelp -OutputPath "$env:BHBuildOutput/$env:BHProjectName/en-US" -Path "$env:BHBuildOutput/$env:BHProjectName/en-US" -ShowProgress -Force -ErrorAction SilentlyContinue
+    $null = Remove-Item "$env:BHBuildOutput/$env:BHProjectName/en-US/*.md" -Recurse -Force
 
 }
 
@@ -86,9 +92,9 @@ task Test {
     $res = Invoke-Pester -Script "$env:BHProjectPath/Tests/$env:BHProjectName.tests.ps1" -PassThru
 
     if ($res.FailedCount -gt 0) {
-        
+
         throw "$($res.FailedCount) tests failed."
-    
+
     }
 }
 
@@ -114,7 +120,7 @@ task Build {
     $Public | Get-Content | Add-Content "$env:BHBuildOutput/$env:BHProjectName/$env:BHProjectName.psm1" -Force
     $PublicFunctions = $Public.BaseName
     $newVersion = (& GitVersion.exe /output json /showvariable MajorMinorPatch)
-    
+
     #Update-ModuleManifest -Path "$env:BHBuildOutput/$env:BHProjectName/$env:BHProjectName.psd1" -ModuleVersion $newVersion -FunctionsToExport $PublicFunctions
     Copy-Item -Path "$env:BHPSModuleManifest" -Destination "$env:BHBuildOutput/$env:BHProjectName/" -Force
 
