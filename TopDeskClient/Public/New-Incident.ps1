@@ -163,15 +163,25 @@ function New-Incident {
         [string]
         $budgetHolderId,
 
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Override the Person extra a of the caller")]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Override the Person extra a of the caller")]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Override the Person extra a of the caller")]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Override the Person extra a of the caller")]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Override the Person extra a of the caller")]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Person extra a of the unregistered caller")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Override the caller Person extra a by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Override the caller Person extra a by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Override the caller Person extra a by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Override the caller Person extra a by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Override the caller Person extra a by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "caller Person extra a by Name")]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $personExtraFieldAName,
+
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Override the caller Person extra a by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Override the caller Person extra a by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Override the caller Person extra a by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Override the caller Person extra a by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Override the caller Person extra a by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "caller Person extra a by Id")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $personExtraFieldA,
+        $personExtraFieldAId,
 
         [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Override the Person extra b of the caller")]
         [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Override the Person extra b of the caller")]
@@ -768,13 +778,25 @@ function New-Incident {
             }
         }
 
-        if ($PSBoundParameters.ContainsKey('personExtraFieldA')) {
+        if ($PSBoundParameters.ContainsKey('personExtraFieldAName')) {
             if ($callerSet) {
-                $null = $callerList.caller.Add('personExtraFieldA', $personExtraFieldA)
+                $null = $callerList.caller.Add('personExtraFieldA', @{ 'name' = $personExtraFieldAName } )
             }
             else {
                 $null = $callerList.Add([PSCustomObject]@{
-                        'caller' = @{'personExtraFieldA' = $personExtraFieldA }
+                        'caller' = @{'personExtraFieldA' = @{ 'name' = $personExtraFieldAName } }
+                    })
+                $callerSet = $true
+            }
+        }
+
+        if ($PSBoundParameters.ContainsKey('personExtraFieldAId')) {
+            if ($callerSet) {
+                $null = $callerList.caller.Add('personExtraFieldA', @{ 'id' = $personExtraFieldAId } )
+            }
+            else {
+                $null = $callerList.Add([PSCustomObject]@{
+                        'caller' = @{'personExtraFieldA' = @{ 'id' = $personExtraFieldAId } }
                     })
                 $callerSet = $true
             }
