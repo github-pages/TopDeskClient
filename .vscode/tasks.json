@@ -1,0 +1,59 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Module - Regular Build",
+            "type": "shell",
+            "command": ".\\build.ps1",
+            "args": [
+                "-Scope",
+                "CurrentUser",
+                "-Task",
+                "regularBuild"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Test Module",
+            "type": "shell",
+            "command": ".\\build.ps1",
+            "args": [
+                "-Scope",
+                "CurrentUser",
+                "-Task",
+                "Testing"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Generate Docs",
+            "type": "shell",
+            "command": ".\\build.ps1",
+            "args": [
+                "-Scope",
+                "CurrentUser",
+                "-Task",
+                "GenDocs"
+            ]
+        },
+        {
+            "label": "Update MD Help",
+            "type": "shell",
+            "command": ".\\build.ps1",
+            "args": [
+                "-Scope",
+                "CurrentUser",
+                "-Task",
+                "Help"
+            ]
+        }
+    ]
+}
