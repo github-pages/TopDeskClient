@@ -2,19 +2,17 @@ function New-Incident {
     <#
     .Synopsis
 
-      Short description
+      Create a new Incident.
 
     .DESCRIPTION
 
-      Long description
-
-    .PARAMETER <Parameter-Name>
-
-      The description of a parameter.
+      This cmdlet will create a new incident in the connected TopDesk environment.
 
     .EXAMPLE
 
-      Example of how to use this cmdlet
+      New-Incident -CallerLookupEmail employee1@contoso.com -status SecondLine -BreifDescriptoin 'Problem with my printer' -Request 'Blank pages printing instead of document.' -CategoryName 'Hardware' -SubCategoryName 'Printer' -ObjectName 'MyPrinter01'
+
+      Create a new 2nd line incident for caller with email employee1@contoso.com, filling in the brief description with 'Problem with my printer', initial request 'Blank pages printing instead of document' under Hardware / Printer category / subcategory and involve asset 'MyPrinter01'.
 
     .INPUTS
 
@@ -31,10 +29,11 @@ function New-Incident {
       Additional information about the function or script.
 
     .LINK
-    
+
       https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Incident.md
 
   #>
+
     [CmdletBinding(DefaultParameterSetName = 'byEmail',
         PositionalBinding = $false,
         HelpUri = 'https://github.com/rbury/TopDeskClient/blob/master/Docs/New-Incident.md',
@@ -636,7 +635,7 @@ function New-Incident {
             $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("externalLinkType must be provided when using externalLinkID", $null, [System.Management.Automation.ErrorCategory]::InvalidOperation, $null))
 
         }
-        
+
     }
 
     process {
@@ -671,7 +670,7 @@ function New-Incident {
                 Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'callerLookup' -Value @{ 'loginName' = $callerLookupLoginName }
                 break
             }
-            
+
             'Unregistered' {
                 $null = $callerlist.Add([PSCustomObject]@{
                         'caller' = @{ 'dynamicName' = $dynamicName }
@@ -679,7 +678,7 @@ function New-Incident {
                 [bool]$callerSet = $true
                 break
             }
-           
+
             Default { }
         }
 
@@ -742,7 +741,7 @@ function New-Incident {
                 $callerSet = $true
             }
         }
-        
+
         if ($PSBoundParameters.ContainsKey('location')) {
             if ($callerSet) {
                 $null = $callerList.caller.Add('location', $location)
@@ -881,31 +880,31 @@ function New-Incident {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'targetDate' -Value $_newTargetDate
         }
 
-        if ($PSBoundParameters.ContainsKey('sla')) { 
+        if ($PSBoundParameters.ContainsKey('sla')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'sla' -Value @{ 'id' = $sla }
         }
 
-        if ($PSBoundParameters.ContainsKey('onHold')) { 
+        if ($PSBoundParameters.ContainsKey('onHold')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'onHold' -Value $onHold
         }
 
-        if ($PSBoundParameters.ContainsKey('operator')) { 
+        if ($PSBoundParameters.ContainsKey('operator')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'operator' -Value @{ 'id' = $operator }
         }
 
-        if ($PSBoundParameters.ContainsKey('operatorgroup')) { 
+        if ($PSBoundParameters.ContainsKey('operatorgroup')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'operatorGroup' -Value @{ 'id' = $operatorGroupID }
         }
 
-        if ($PSBoundParameters.ContainsKey('supplier')) { 
+        if ($PSBoundParameters.ContainsKey('supplier')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'supplier' -Value @{ 'id' = $supplierID }
         }
 
-        if ($PSBoundParameters.ContainsKey('processingStatus')) { 
+        if ($PSBoundParameters.ContainsKey('processingStatus')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'processingStatus' -Value @{ 'id' = $processingStatusID }
         }
 
-        if ($PSBoundParameters.ContainsKey('responded')) { 
+        if ($PSBoundParameters.ContainsKey('responded')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'responded' -Value $responded
         }
 
@@ -914,7 +913,7 @@ function New-Incident {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'responseDate' -Value $_newResponseDate
         }
 
-        if ($PSBoundParameters.ContainsKey('completed')) { 
+        if ($PSBoundParameters.ContainsKey('completed')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'completed' -Value $completed
         }
 
@@ -932,11 +931,11 @@ function New-Incident {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'closedDate' -Value $_newClosedDate
         }
 
-        if ($PSBoundParameters.ContainsKey('closureCode')) { 
+        if ($PSBoundParameters.ContainsKey('closureCode')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'closureCode' -Value @{ 'id' = $closureCode }
         }
 
-        if ($PSBoundParameters.ContainsKey('costs')) { 
+        if ($PSBoundParameters.ContainsKey('costs')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'costs' -Value $costs
         }
 
@@ -944,15 +943,15 @@ function New-Incident {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'feedbackRating' -Value $feedbackRating
         }
 
-        if ($PSBoundParameters.ContainsKey('feedbackMessage')) { 
+        if ($PSBoundParameters.ContainsKey('feedbackMessage')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'feedbackMessage' -Value $feedbackMessage
         }
 
-        if ($PSBoundParameters.ContainsKey('optionalFields1')) { 
+        if ($PSBoundParameters.ContainsKey('optionalFields1')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'optionalFields1' -Value $optionalFields1
         }
 
-        if ($PSBoundParameters.ContainsKey('optionalFields2')) { 
+        if ($PSBoundParameters.ContainsKey('optionalFields2')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'optionalFields1' -Value $optionalFields2
         }
 
