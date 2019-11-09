@@ -43,7 +43,7 @@ steps:
   condition: always()
   inputs:
     codeCoverageTool: 'JaCoCo'
-    summaryFileLocation: '$(Common.TestResultsDirectory)/TEST-*.xml'
+    summaryFileLocation: '$(Common.TestResultsDirectory)/Coverage-*.xml'
 
 - task: CopyFiles@2
   displayName: 'Copy Files to: Build '
