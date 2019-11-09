@@ -230,15 +230,25 @@ function New-Incident {
         [string]
         $entryTypeId,
 
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Call type by id")]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Call type by id")]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Call type by id")]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Call type by id")]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Call type by id")]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Call type by id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Call type Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Call type Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Call type Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Call type Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Call type Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Call type Name")]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $callTypeName,
+
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Call type id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Call type id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Call type id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Call type id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Call type id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Call type id")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $callType,
+        $callTypeId,
 
         [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Category by id")]
         [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Category by id")]
@@ -770,8 +780,12 @@ function New-Incident {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'entryType' -Value @{ 'id' = $entryTypeId }
         }
 
-        if ($PSBoundParameters.ContainsKey('callType')) {
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'callType' -Value @{ 'id' = $callType }
+        if ($PSBoundParameters.ContainsKey('callTypeName')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'callType' -Value @{ 'name' = $callTypeName }
+        }
+
+        if ($PSBoundParameters.ContainsKey('callTypeId')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'callType' -Value @{ 'id' = $callTypeId }
         }
 
         if ($PSBoundParameters.ContainsKey('categoryName')) {
