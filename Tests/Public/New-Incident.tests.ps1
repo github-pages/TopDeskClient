@@ -26,7 +26,7 @@ Describe "New-Incident" {
         }
 
         Context "Calling with parameters" {
-            
+
             $script:TDConnected = $true
             $param1 = 'A1234567-4444-4444-4444-121212121212'
             $param2 = 'secondLine'
@@ -34,14 +34,15 @@ Describe "New-Incident" {
             $baseURI = '/tas/api/incidents/'
 
             Context "CallerbyID" {
-                
+
                 $body = @{
                     'callerLookup' = @{ 'id' = $param1 }
                     'status' = $param2
                 }
                 $jsonbody = (ConvertTo-Json -InputObject $body -Depth 8 -Compress)
 
-                Mock -CommandName Get-APIResponse -MockWith { return $null } -ParameterFilter { ($_uri -eq '/tas/api/incidents/'  -and $_body -eq '{"callerLookup":{"id":"A1234567-4444-4444-4444-121212121212"},"status":"secondLine"}' ) } -Verifiable
+                #Mock -CommandName Get-APIResponse -MockWith { return $null } -ParameterFilter { ($_uri -eq '/tas/api/incidents/'  -and $_body -eq '{"callerLookup":{"id":"A1234567-4444-4444-4444-121212121212"},"status":"secondLine"}' ) } -Verifiable
+                Mock -CommandName Get-APIResponse -MockWith { return $null } -ParameterFilter { ($_uri -and $_uri -eq $baseURI) -and ($_body -and $_body -eq $jsonbody ) } -Verifiable
                 $result = New-Incident -callerLookupID $param1 -status $param2
 
                 It "Should perform an API call" {
@@ -51,14 +52,16 @@ Describe "New-Incident" {
             }
 
             Context "CallerbyEmail" {
-                
+
                 $body = @{
                     'callerLookup' = @{ 'email' = $param3 }
                     'status' = $param2
                     'briefDescription' = 'By email test'
                 }
-                
-                Mock -CommandName Get-APIResponse -MockWith { return $null } -ParameterFilter { $_uri -and '/tas/api/incidents/' -eq $baseURI;  $_body -and $_body -eq '{"status":"secondLine","briefDescription":"By email test","callerLookup":{"email":"myoperator@mytest.test"}}' } -Verifiable
+                $jsonbody = (ConvertTo-Json -InputObject $body -Depth 8 -Compress)
+
+                #Mock -CommandName Get-APIResponse -MockWith { return $null } -ParameterFilter { $_uri -and '/tas/api/incidents/' -eq $baseURI;  $_body -and $_body -eq '{"status":"secondLine","briefDescription":"By email test","callerLookup":{"email":"myoperator@mytest.test"}}' } -Verifiable
+                Mock -CommandName Get-APIResponse -MockWith { return $null } -ParameterFilter { ($_uri -and $_uri -eq $baseURI) -and ($_body -and $_body -eq $jsonbody ) } -Verifiable
                 $result = New-Incident -callerLookupEmail $param3 -status $param2
 
                 It "Should perform an API call" {
@@ -74,12 +77,14 @@ Describe "New-Incident" {
                     'status' = 'firstline'
                     'externalNumber' = '131313'
                 }
+                $jsonbody = (ConvertTo-Json -InputObject $body -Depth 8 -Compress)
 
-                Mock -CommandName Get-APIResponse -MockWith {} -ParameterFilter { ($_uri -eq $baseURI) -and ($_body -eq '{"callerLookup":{"employeeNumber":"1234567"},"status":"firstline","externalNumber":"131313"}') } -Verifiable
+                #Mock -CommandName Get-APIResponse -MockWith {} -ParameterFilter { ($_uri -eq $baseURI) -and ($_body -eq '{"callerLookup":{"employeeNumber":"1234567"},"status":"firstline","externalNumber":"131313"}') } -Verifiable
+                Mock -CommandName Get-APIResponse -MockWith { return $null } -ParameterFilter { ($_uri -and $_uri -eq $baseURI) -and ($_body -and $_body -eq $jsonbody ) } -Verifiable
                 $result = New-Incident -callerLookupEmployeeNumber 1234567 -status 'firstline' -externalNumber '131313'
 
                 It "Should perform an API call" {
-                    Assert-VerifiableMock 
+                    Assert-VerifiableMock
                     $result | Should -be $null
                 }
             }
@@ -123,7 +128,7 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'byEmployee'
                     $param.ParameterSets.byEmployee.IsMandatory | Should -Be $true
                     $param.ParameterSets.byEmployee.ValueFromPipelineByPropertyName | Should -Be $false
-                    
+
                     $param.ParameterType.Name | Should -Be 'string'
 
                 }
@@ -198,7 +203,7 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.Unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.Unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-                    
+
                     $param.ParameterType.Name | Should -Be 'string'
 
                 }
@@ -213,7 +218,7 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.Unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.Unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-                    
+
                     $param.ParameterType.Name | Should -Be 'string'
 
                 }
@@ -228,22 +233,37 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.Unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.Unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-                    
+
                     $param.ParameterType.Name | Should -Be 'string'
 
                 }
             }
 
-            Context "department" {
+            Context "departmentId" {
 
-                $param = (Get-Command $FunctionName).Parameters['department']
+                $param = (Get-Command $FunctionName).Parameters['departmentId']
 
                 It "Should maintain compatibility" {
 
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.Unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.Unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-                    
+
+                    $param.ParameterType.Name | Should -Be 'string'
+
+                }
+            }
+
+            Context "departmentName" {
+
+                $param = (Get-Command $FunctionName).Parameters['departmentName']
+
+                It "Should maintain compatibility" {
+
+                    $param.ParameterSets.Keys | Should -Contain 'unregistered'
+                    $param.ParameterSets.Unregistered.IsMandatory | Should -Be $false
+                    $param.ParameterSets.Unregistered.ValueFromPipelineByPropertyName | Should -Be $false
+
                     $param.ParameterType.Name | Should -Be 'string'
 
                 }
@@ -258,52 +278,97 @@ Describe "New-Incident" {
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.Unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.Unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-                    
+
                     $param.ParameterType.Name | Should -Be 'string'
 
                 }
             }
 
-            Context "budgetHolder" {
+            Context "budgetHolderId" {
 
-                $param = (Get-Command $FunctionName).Parameters['budgetHolder']
+                $param = (Get-Command $FunctionName).Parameters['budgetHolderId']
 
                 It "Should maintain compatibility" {
 
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.Unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.Unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-                    
+
                     $param.ParameterType.Name | Should -Be 'string'
 
                 }
             }
 
-            Context "personExtraFieldA" {
+            Context "budgetHolderName" {
 
-                $param = (Get-Command $FunctionName).Parameters['personExtraFieldA']
+                $param = (Get-Command $FunctionName).Parameters['budgetHolderName']
 
                 It "Should maintain compatibility" {
 
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.Unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.Unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-                    
+
                     $param.ParameterType.Name | Should -Be 'string'
 
                 }
             }
 
-            Context "personExtraFieldB" {
+            Context "personExtraFieldAId" {
 
-                $param = (Get-Command $FunctionName).Parameters['personExtraFieldB']
+                $param = (Get-Command $FunctionName).Parameters['personExtraFieldAId']
 
                 It "Should maintain compatibility" {
 
                     $param.ParameterSets.Keys | Should -Contain 'unregistered'
                     $param.ParameterSets.Unregistered.IsMandatory | Should -Be $false
                     $param.ParameterSets.Unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-                    
+
+                    $param.ParameterType.Name | Should -Be 'string'
+
+                }
+            }
+
+            Context "personExtraFieldAName" {
+
+                $param = (Get-Command $FunctionName).Parameters['personExtraFieldAName']
+
+                It "Should maintain compatibility" {
+
+                    $param.ParameterSets.Keys | Should -Contain 'unregistered'
+                    $param.ParameterSets.Unregistered.IsMandatory | Should -Be $false
+                    $param.ParameterSets.Unregistered.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterType.Name | Should -Be 'string'
+
+                }
+            }
+
+            Context "personExtraFieldBId" {
+
+                $param = (Get-Command $FunctionName).Parameters['personExtraFieldBId']
+
+                It "Should maintain compatibility" {
+
+                    $param.ParameterSets.Keys | Should -Contain 'unregistered'
+                    $param.ParameterSets.Unregistered.IsMandatory | Should -Be $false
+                    $param.ParameterSets.Unregistered.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterType.Name | Should -Be 'string'
+
+                }
+            }
+
+            Context "personExtraFieldBName" {
+
+                $param = (Get-Command $FunctionName).Parameters['personExtraFieldBName']
+
+                It "Should maintain compatibility" {
+
+                    $param.ParameterSets.Keys | Should -Contain 'unregistered'
+                    $param.ParameterSets.Unregistered.IsMandatory | Should -Be $false
+                    $param.ParameterSets.Unregistered.ValueFromPipelineByPropertyName | Should -Be $false
+
                     $param.ParameterType.Name | Should -Be 'string'
 
                 }
@@ -483,9 +548,9 @@ Describe "New-Incident" {
                 }
             }
 
-            Context "entryType" {
+            Context "entryTypeId" {
 
-                $param = (Get-Command $FunctionName).Parameters['entryType']
+                $param = (Get-Command $FunctionName).Parameters['entryTypeId']
 
                 It "Should maintain compatibility" {
 
@@ -518,9 +583,79 @@ Describe "New-Incident" {
                 }
             }
 
-            Context "callType" {
+            Context "entryTypeName" {
 
-                $param = (Get-Command $FunctionName).Parameters['callType']
+                $param = (Get-Command $FunctionName).Parameters['entryTypeName']
+
+                It "Should maintain compatibility" {
+
+                    $param.ParameterSets.Keys | Should -Contain 'byID'
+                    $param.ParameterSets.byID.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byID.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byEmail'
+                    $param.ParameterSets.byEmail.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byEmail.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byEmployee'
+                    $param.ParameterSets.byEmployee.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byEmployee.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byNetwork'
+                    $param.ParameterSets.byNetwork.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byNetwork.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byLogin'
+                    $param.ParameterSets.byLogin.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byLogin.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'unregistered'
+                    $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
+                    $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterType.Name | Should -Be 'string'
+
+                }
+            }
+
+            Context "callTypeId" {
+
+                $param = (Get-Command $FunctionName).Parameters['callTypeId']
+
+                It "Should maintain compatibility" {
+
+                    $param.ParameterSets.Keys | Should -Contain 'byID'
+                    $param.ParameterSets.byID.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byID.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byEmail'
+                    $param.ParameterSets.byEmail.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byEmail.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byEmployee'
+                    $param.ParameterSets.byEmployee.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byEmployee.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byNetwork'
+                    $param.ParameterSets.byNetwork.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byNetwork.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byLogin'
+                    $param.ParameterSets.byLogin.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byLogin.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'unregistered'
+                    $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
+                    $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterType.Name | Should -Be 'string'
+
+                }
+            }
+
+            Context "callTypeName" {
+
+                $param = (Get-Command $FunctionName).Parameters['callTypeName']
 
                 It "Should maintain compatibility" {
 
@@ -833,44 +968,9 @@ Describe "New-Incident" {
                 }
             }
 
-            Context "impact" {
+            Context "impactId" {
 
-                $param = (Get-Command $FunctionName).Parameters['impact']
-
-                It "Should maintain compatibility" {
-
-                    $param.ParameterSets.Keys | Should -Contain 'byID'
-                    $param.ParameterSets.byID.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byID.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmail'
-                    $param.ParameterSets.byEmail.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmail.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byEmployee'
-                    $param.ParameterSets.byEmployee.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byEmployee.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byNetwork'
-                    $param.ParameterSets.byNetwork.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byNetwork.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'byLogin'
-                    $param.ParameterSets.byLogin.IsMandatory | Should -Be $false
-                    $param.ParameterSets.byLogin.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterSets.Keys | Should -Contain 'unregistered'
-                    $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
-                    $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
-
-                    $param.ParameterType.Name | Should -Be 'string'
-
-                }
-            }
-
-            Context "urgency" {
-
-                $param = (Get-Command $FunctionName).Parameters['urgency']
+                $param = (Get-Command $FunctionName).Parameters['impactId']
 
                 It "Should maintain compatibility" {
 
@@ -903,9 +1003,9 @@ Describe "New-Incident" {
                 }
             }
 
-            Context "priority" {
+            Context "impactName" {
 
-                $param = (Get-Command $FunctionName).Parameters['priority']
+                $param = (Get-Command $FunctionName).Parameters['impactName']
 
                 It "Should maintain compatibility" {
 
@@ -938,9 +1038,184 @@ Describe "New-Incident" {
                 }
             }
 
-            Context "duration" {
+            Context "urgencyId" {
 
-                $param = (Get-Command $FunctionName).Parameters['duration']
+                $param = (Get-Command $FunctionName).Parameters['urgencyId']
+
+                It "Should maintain compatibility" {
+
+                    $param.ParameterSets.Keys | Should -Contain 'byID'
+                    $param.ParameterSets.byID.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byID.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byEmail'
+                    $param.ParameterSets.byEmail.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byEmail.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byEmployee'
+                    $param.ParameterSets.byEmployee.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byEmployee.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byNetwork'
+                    $param.ParameterSets.byNetwork.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byNetwork.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byLogin'
+                    $param.ParameterSets.byLogin.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byLogin.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'unregistered'
+                    $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
+                    $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterType.Name | Should -Be 'string'
+
+                }
+            }
+
+            Context "urgencyName" {
+
+                $param = (Get-Command $FunctionName).Parameters['urgencyName']
+
+                It "Should maintain compatibility" {
+
+                    $param.ParameterSets.Keys | Should -Contain 'byID'
+                    $param.ParameterSets.byID.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byID.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byEmail'
+                    $param.ParameterSets.byEmail.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byEmail.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byEmployee'
+                    $param.ParameterSets.byEmployee.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byEmployee.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byNetwork'
+                    $param.ParameterSets.byNetwork.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byNetwork.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byLogin'
+                    $param.ParameterSets.byLogin.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byLogin.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'unregistered'
+                    $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
+                    $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterType.Name | Should -Be 'string'
+
+                }
+            }
+
+            Context "priorityId" {
+
+                $param = (Get-Command $FunctionName).Parameters['priorityId']
+
+                It "Should maintain compatibility" {
+
+                    $param.ParameterSets.Keys | Should -Contain 'byID'
+                    $param.ParameterSets.byID.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byID.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byEmail'
+                    $param.ParameterSets.byEmail.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byEmail.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byEmployee'
+                    $param.ParameterSets.byEmployee.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byEmployee.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byNetwork'
+                    $param.ParameterSets.byNetwork.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byNetwork.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byLogin'
+                    $param.ParameterSets.byLogin.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byLogin.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'unregistered'
+                    $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
+                    $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterType.Name | Should -Be 'string'
+
+                }
+            }
+
+            Context "priorityName" {
+
+                $param = (Get-Command $FunctionName).Parameters['priorityName']
+
+                It "Should maintain compatibility" {
+
+                    $param.ParameterSets.Keys | Should -Contain 'byID'
+                    $param.ParameterSets.byID.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byID.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byEmail'
+                    $param.ParameterSets.byEmail.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byEmail.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byEmployee'
+                    $param.ParameterSets.byEmployee.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byEmployee.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byNetwork'
+                    $param.ParameterSets.byNetwork.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byNetwork.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byLogin'
+                    $param.ParameterSets.byLogin.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byLogin.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'unregistered'
+                    $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
+                    $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterType.Name | Should -Be 'string'
+
+                }
+            }
+
+            Context "durationId" {
+
+                $param = (Get-Command $FunctionName).Parameters['durationId']
+
+                It "Should maintain compatibility" {
+
+                    $param.ParameterSets.Keys | Should -Contain 'byID'
+                    $param.ParameterSets.byID.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byID.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byEmail'
+                    $param.ParameterSets.byEmail.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byEmail.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byEmployee'
+                    $param.ParameterSets.byEmployee.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byEmployee.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byNetwork'
+                    $param.ParameterSets.byNetwork.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byNetwork.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byLogin'
+                    $param.ParameterSets.byLogin.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byLogin.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'unregistered'
+                    $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
+                    $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterType.Name | Should -Be 'string'
+
+                }
+            }
+
+            Context "durationName" {
+
+                $param = (Get-Command $FunctionName).Parameters['durationName']
 
                 It "Should maintain compatibility" {
 
@@ -1183,9 +1458,44 @@ Describe "New-Incident" {
                 }
             }
 
-            Context "processingStatus" {
+            Context "processingStatusId" {
 
-                $param = (Get-Command $FunctionName).Parameters['processingStatus']
+                $param = (Get-Command $FunctionName).Parameters['processingStatusId']
+
+                It "Should maintain compatibility" {
+
+                    $param.ParameterSets.Keys | Should -Contain 'byID'
+                    $param.ParameterSets.byID.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byID.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byEmail'
+                    $param.ParameterSets.byEmail.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byEmail.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byEmployee'
+                    $param.ParameterSets.byEmployee.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byEmployee.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byNetwork'
+                    $param.ParameterSets.byNetwork.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byNetwork.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byLogin'
+                    $param.ParameterSets.byLogin.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byLogin.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'unregistered'
+                    $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
+                    $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterType.Name | Should -Be 'string'
+
+                }
+            }
+
+            Context "processingStatusName" {
+
+                $param = (Get-Command $FunctionName).Parameters['processingStatusName']
 
                 It "Should maintain compatibility" {
 
@@ -1428,9 +1738,44 @@ Describe "New-Incident" {
                 }
             }
 
-            Context "closureCode" {
+            Context "closureCodeId" {
 
-                $param = (Get-Command $FunctionName).Parameters['closureCode']
+                $param = (Get-Command $FunctionName).Parameters['closureCodeId']
+
+                It "Should maintain compatibility" {
+
+                    $param.ParameterSets.Keys | Should -Contain 'byID'
+                    $param.ParameterSets.byID.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byID.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byEmail'
+                    $param.ParameterSets.byEmail.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byEmail.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byEmployee'
+                    $param.ParameterSets.byEmployee.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byEmployee.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byNetwork'
+                    $param.ParameterSets.byNetwork.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byNetwork.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byLogin'
+                    $param.ParameterSets.byLogin.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byLogin.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'unregistered'
+                    $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
+                    $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterType.Name | Should -Be 'string'
+
+                }
+            }
+
+            Context "closureCodeName" {
+
+                $param = (Get-Command $FunctionName).Parameters['closureCodeName']
 
                 It "Should maintain compatibility" {
 
@@ -1634,7 +1979,7 @@ Describe "New-Incident" {
                     $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
 
                     $param.ParameterType.Name | Should -Be 'hashtable'
-                    
+
                 }
             }
 
