@@ -579,6 +579,16 @@ function New-Incident {
         [datetime]
         $closedDate,
 
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Closure Code by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Closure Code by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Closure Code by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Closure Code by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Closure Code by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Closure Code by Name")]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $closureCodeName,
+
         [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Closure Code by ID")]
         [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Closure Code by ID")]
         [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Closure Code by ID")]
@@ -587,7 +597,7 @@ function New-Incident {
         [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Closure Code by ID")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $closureCode,
+        $closureCodeId,
 
         [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Costs")]
         [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Costs")]
@@ -1055,8 +1065,12 @@ function New-Incident {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'closedDate' -Value $_newClosedDate
         }
 
-        if ($PSBoundParameters.ContainsKey('closureCode')) {
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'closureCode' -Value @{ 'id' = $closureCode }
+        if ($PSBoundParameters.ContainsKey('closureCodeName')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'closureCode' -Value @{ 'name' = $closureCodeName }
+        }
+
+        if ($PSBoundParameters.ContainsKey('closureCodeId')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'closureCode' -Value @{ 'id' = $closureCodeId }
         }
 
         if ($PSBoundParameters.ContainsKey('costs')) {
