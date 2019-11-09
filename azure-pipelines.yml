@@ -38,6 +38,13 @@ steps:
     searchFolder: '$(Common.TestResultsDirectory)'
     mergeTestResults: true
 
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish Code Coverage Results'
+  condition: always()
+  inputs:
+    codeCoverageTool: 'JaCoCo'
+    summaryFileLocation: '$(Common.TestResultsDirectory)/TEST-*.xml'
+
 - task: CopyFiles@2
   displayName: 'Copy Files to: Build '
   inputs:
