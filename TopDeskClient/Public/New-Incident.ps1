@@ -210,6 +210,16 @@ function New-Incident {
         [bool]
         $actionInvisibleForCaller,
 
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Entry type Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Entry type Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Entry type Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Entry type Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Entry type Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Entry type Name")]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $entryTypeName,
+
         [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Entry type by id")]
         [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Entry type by id")]
         [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Entry type by id")]
@@ -218,7 +228,7 @@ function New-Incident {
         [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Entry type by id")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $entryType,
+        $entryTypeId,
 
         [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Call type by id")]
         [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Call type by id")]
@@ -752,8 +762,12 @@ function New-Incident {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'actionInvisibleForCaller' -Value $actionInvisibleForCaller
         }
 
-        if ($PSBoundParameters.ContainsKey('entryType')) {
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'entryType' -Value @{ 'id' = $entryType }
+        if ($PSBoundParameters.ContainsKey('entryTypeName')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'entryType' -Value @{ 'name' = $entryTypeName }
+        }
+
+        if ($PSBoundParameters.ContainsKey('entryTypeId')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'entryType' -Value @{ 'id' = $entryTypeId }
         }
 
         if ($PSBoundParameters.ContainsKey('callType')) {
