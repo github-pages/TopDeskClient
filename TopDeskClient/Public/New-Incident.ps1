@@ -2,19 +2,17 @@ function New-Incident {
     <#
     .Synopsis
 
-      Short description
+      Create a new Incident.
 
     .DESCRIPTION
 
-      Long description
-
-    .PARAMETER <Parameter-Name>
-
-      The description of a parameter.
+      This cmdlet will create a new incident in the connected TopDesk environment.
 
     .EXAMPLE
 
-      Example of how to use this cmdlet
+      New-Incident -CallerLookupEmail employee1@contoso.com -status SecondLine -BreifDescriptoin 'Problem with my printer' -Request 'Blank pages printing instead of document.' -CategoryName 'Hardware' -SubCategoryName 'Printer' -ObjectName 'MyPrinter01'
+
+      Create a new 2nd line incident for caller with email employee1@contoso.com, filling in the brief description with 'Problem with my printer', initial request 'Blank pages printing instead of document' under Hardware / Printer category / subcategory and involve asset 'MyPrinter01'.
 
     .INPUTS
 
@@ -31,593 +29,657 @@ function New-Incident {
       Additional information about the function or script.
 
     .LINK
-    
+
       https://github.com/rbury/TopDeskClient/blob/master/Docs/Get-Incident.md
 
   #>
+
     [CmdletBinding(DefaultParameterSetName = 'byEmail',
         PositionalBinding = $false,
         HelpUri = 'https://github.com/rbury/TopDeskClient/blob/master/Docs/New-Incident.md',
         ConfirmImpact = 'Medium',
-        SupportsShouldProcess)]
+        SupportsShouldProcess = $true)]
     [OutputType([PSCustomObject])]
 
     Param (
 
-        # The id of the Person to fill in as this incident's caller
-        [Parameter(Mandatory = $true, ParameterSetName = 'byID')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'byID', HelpMessage = "The id of the Person to fill in as this incident's caller")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
         $callerLookupID,
 
-        # The email of the Person to fill in as this incident's caller
-        [Parameter(Mandatory = $true, ParameterSetName = 'byEmail')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'byEmail', HelpMessage = "The email of the Person to fill in as this incident's caller")]
         [ValidateLength(1, 100)]
         [string]
         $callerLookupEmail,
 
-        # The employee number of the Person to fill in as this incident's caller
-        [Parameter(Mandatory = $true, ParameterSetName = 'byEmployee')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'byEmployee', HelpMessage = "The employee number of the Person to fill in as this incident's caller")]
         [ValidateLength(1, 20)]
         [string]
         $callerLookupEmployeeNumber,
 
-        # The network login name of the Person to fill in as this incident's caller
-        [Parameter(Mandatory = $true, ParameterSetName = 'byNetwork')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'byNetwork', HelpMessage = "The network login name of the Person to fill in as this incident's caller")]
         [ValidateLength(1, 100)]
         [string]
         $callerLookupNetworkLoginName,
 
-        # The login name of the Person to fill in as this incident's caller
-        [Parameter(Mandatory = $true, ParameterSetName = 'byLogin')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'byLogin', HelpMessage = "The login name of the Person to fill in as this incident's caller")]
         [ValidateLength(1, 100)]
         [string]
         $callerLookupLoginName,
 
-        # Unregistered - Dynamic Name of the caller
-        [Parameter(Mandatory = $true, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'unregistered', HelpMessage = "Unregistered - Dynamic Name of the caller")]
         [ValidateLength(1, 109)]
         [string]
         $dynamicName,
 
-        # Unregistered / override registered - The caller branch by id
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Override registered branch id of the caller")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Override registered branch id of the caller")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Override registered branch id of the caller")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Override registered branch id of the caller")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Override registered branch id of the caller")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Branch id of the unregistered caller")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
         $branch,
 
-        # Unregistered / override registered - Phone number of the caller
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Override the Phone number of the caller")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Override the Phone number of the caller")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Override the Phone number of the caller")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Override the Phone number of the caller")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Override the Phone number of the caller")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Phone number of the unregistered caller")]
         [ValidateLength(1, 25)]
         [string]
         $phoneNumber,
 
-        # Unregistered / override registered - Mobile phone number of the caller
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Override the Mobile phone number of the caller")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Override the Mobile phone number of the caller")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Override the Mobile phone number of the caller")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Override the Mobile phone number of the caller")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Override the Mobile phone number of the caller")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Mobile phone number of the unregistered caller")]
         [ValidateLength(1, 25)]
         [string]
         $mobileNumber,
 
-        # Unregistered / override registered - Email of the caller
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Override the Email of the caller")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Override the Email of the caller")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Override the Email of the caller")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Override the Email of the caller")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Override the Email of the caller")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Email of the unregistered caller")]
         [ValidateLength(1, 100)]
         [string]
         $email,
 
-        # Unregistered / override registered - Department of the caller by id
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Override the caller Department by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Override the caller Department by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Override the caller Department by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Override the caller Department by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Override the caller Department by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "caller Department by Name")]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $departmentName,
+
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Override the caller Department by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Override the caller Department by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Override the caller Department by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Override the caller Department by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Override the caller Department by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "caller Department by Id")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $department,
+        $departmentId,
 
-        # Unregistered / override registered - Location of the caller by id
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Override the Location of the caller")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Override the Location of the caller")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Override the Location of the caller")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Override the Location of the caller")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Override the Location of the caller")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Location of the unregistered caller")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
         $location,
 
-        # Unregistered / override registered - Budget holder of the caller by id
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Override the caller Budget holder by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Override the caller Budget holder by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Override the caller Budget holder by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Override the caller Budget holder by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Override the caller Budget holder by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "caller Budget holder by Name")]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $budgetHolderName,
+
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Override the caller Budget holder by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Override the caller Budget holder by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Override the caller Budget holder by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Override the caller Budget holder by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Override the caller Budget holder by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "caller Budget holder by Id")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $budgetHolder,
+        $budgetHolderId,
 
-        # Unregistered / override registered - Person extra a of the caller by id
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Override the caller Person extra a by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Override the caller Person extra a by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Override the caller Person extra a by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Override the caller Person extra a by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Override the caller Person extra a by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "caller Person extra a by Name")]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $personExtraFieldAName,
+
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Override the caller Person extra a by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Override the caller Person extra a by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Override the caller Person extra a by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Override the caller Person extra a by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Override the caller Person extra a by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "caller Person extra a by Id")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $personExtraFieldA,
+        $personExtraFieldAId,
 
-        # Unregistered / override registered - Person extra b of the caller by id
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Override the caller Person extra b by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Override the caller Person extra b by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Override the caller Person extra b by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Override the caller Person extra b by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Override the caller Person extra b by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "caller Person extra b by Name")]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $personExtraFieldBName,
+
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Override the caller Person extra b by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Override the caller Person extra b by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Override the caller Person extra b by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Override the caller Person extra b by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Override the caller Person extra b by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "caller Person extra b by Id")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $personExtraFieldB,
+        $personExtraFieldBId,
 
-        # status of incident (firstLine, secondLine, partial), Default = firstline
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "status of incident (firstLine, secondLine, partial), Default = firstline")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "status of incident (firstLine, secondLine, partial), Default = firstline")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "status of incident (firstLine, secondLine, partial), Default = firstline")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "status of incident (firstLine, secondLine, partial), Default = firstline")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "status of incident (firstLine, secondLine, partial), Default = firstline")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "status of incident (firstLine, secondLine, partial), Default = firstline")]
         [ValidateSet('firstLine', 'secondLine', 'partial')]
         [string]
         $status,
 
-        # brief Description of incident
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "brief Description of incident")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "brief Description of incident")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "brief Description of incident")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "brief Description of incident")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "brief Description of incident")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "brief Description of incident")]
         [ValidateLength(1, 80)]
         [string]
         $briefDescription,
 
-        # initial request - can include html tags (<i><em><b><strong><u><a><br><p><div><img>) <img> must be 450x450 or smaller, base64 encoded (gif, png, bmp, pcx, iff, ras, pnm, psd, jpg)
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "initial request - can include html tags (<i><em><b><strong><u><a><br><p><div><img>) <img> must be 450x450 or smaller, base64 encoded (gif, png, bmp, pcx, iff, ras, pnm, psd, jpg)")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "initial request - can include html tags (<i><em><b><strong><u><a><br><p><div><img>) <img> must be 450x450 or smaller, base64 encoded (gif, png, bmp, pcx, iff, ras, pnm, psd, jpg)")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "initial request - can include html tags (<i><em><b><strong><u><a><br><p><div><img>) <img> must be 450x450 or smaller, base64 encoded (gif, png, bmp, pcx, iff, ras, pnm, psd, jpg)")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "initial request - can include html tags (<i><em><b><strong><u><a><br><p><div><img>) <img> must be 450x450 or smaller, base64 encoded (gif, png, bmp, pcx, iff, ras, pnm, psd, jpg)")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "initial request - can include html tags (<i><em><b><strong><u><a><br><p><div><img>) <img> must be 450x450 or smaller, base64 encoded (gif, png, bmp, pcx, iff, ras, pnm, psd, jpg)")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "initial request - can include html tags (<i><em><b><strong><u><a><br><p><div><img>) <img> must be 450x450 or smaller, base64 encoded (gif, png, bmp, pcx, iff, ras, pnm, psd, jpg)")]
         [string]
         $request,
 
-        # initial action - can include html tags (<i><em><b><strong><u><a><br><p><div><img>) <img> must be 450x450 or smaller, base64 encoded (gif, png, bmp, pcx, iff, ras, pnm, psd, jpg)
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "initial action - can include html tags (<i><em><b><strong><u><a><br><p><div><img>) <img> must be 450x450 or smaller, base64 encoded (gif, png, bmp, pcx, iff, ras, pnm, psd, jpg)")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "initial action - can include html tags (<i><em><b><strong><u><a><br><p><div><img>) <img> must be 450x450 or smaller, base64 encoded (gif, png, bmp, pcx, iff, ras, pnm, psd, jpg)")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "initial action - can include html tags (<i><em><b><strong><u><a><br><p><div><img>) <img> must be 450x450 or smaller, base64 encoded (gif, png, bmp, pcx, iff, ras, pnm, psd, jpg)")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "initial action - can include html tags (<i><em><b><strong><u><a><br><p><div><img>) <img> must be 450x450 or smaller, base64 encoded (gif, png, bmp, pcx, iff, ras, pnm, psd, jpg)")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "initial action - can include html tags (<i><em><b><strong><u><a><br><p><div><img>) <img> must be 450x450 or smaller, base64 encoded (gif, png, bmp, pcx, iff, ras, pnm, psd, jpg)")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "initial action - can include html tags (<i><em><b><strong><u><a><br><p><div><img>) <img> must be 450x450 or smaller, base64 encoded (gif, png, bmp, pcx, iff, ras, pnm, psd, jpg)")]
         [string]
         $action,
 
-        # Make action invisible - Default = $false
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Make action invisible - Default = false")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Make action invisible - Default = false")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Make action invisible - Default = false")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Make action invisible - Default = false")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Make action invisible - Default = false")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Make action invisible - Default = false")]
         [bool]
         $actionInvisibleForCaller,
 
-        # Entry type by id
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Entry type Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Entry type Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Entry type Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Entry type Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Entry type Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Entry type Name")]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $entryTypeName,
+
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Entry type id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Entry type id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Entry type id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Entry type id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Entry type id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Entry type id")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $entryType,
+        $entryTypeId,
 
-        # Call type by id
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Call type Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Call type Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Call type Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Call type Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Call type Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Call type Name")]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $callTypeName,
+
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Call type id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Call type id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Call type id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Call type id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Call type id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Call type id")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $callType,
+        $callTypeId,
 
-        # Category by id
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Category by id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Category by id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Category by id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Category by id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Category by id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Category by id")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
         $categoryID,
 
-        # Category by name
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Category by name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Category by name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Category by name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Category by name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Category by name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Category by name")]
         [string]
         $categoryName,
 
-        # Subcategory by id
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Subcategory by id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Subcategory by id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Subcategory by id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Subcategory by id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Subcategory by id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Subcategory by id")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
         $subcategoryID,
 
-        # Subcategory by name
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Subcategory by name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Subcategory by name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Subcategory by name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Subcategory by name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Subcategory by name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Subcategory by name")]
         [string]
         $subcategoryName,
 
-        # External number
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "External number")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "External number")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "External number")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "External number")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "External number")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "External number")]
         [ValidateLength(1, 60)]
         [string]
         $externalNumber,
 
-        # Object by ID
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Object by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Object by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Object by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Object by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Object by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Object by ID")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
         $objectID,
 
-        # Object by Name
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Object by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Object by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Object by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Object by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Object by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Object by Name")]
         [string]
         $objectName,
 
-        # Object Location by id
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Object Location by id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Object Location by id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Object Location by id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Object Location by id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Object Location by id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Object Location by id")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
         $objectLocationID,
 
-        # impact by ID
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "impact by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "impact by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "impact by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "impact by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "impact by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "impact by Name")]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $impactName,
+
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "impact by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "impact by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "impact by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "impact by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "impact by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "impact by ID")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $impact,
+        $impactId,
 
-        # urgency by ID
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "urgency by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "urgency by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "urgency by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "urgency by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "urgency by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "urgency by Name")]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $urgencyName,
+
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "urgency by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "urgency by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "urgency by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "urgency by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "urgency by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "urgency by ID")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $urgency,
+        $urgencyId,
 
-        # priority by ID
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "priority by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "priority by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "priority by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "priority by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "priority by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "priority by Name")]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $priorityName,
+
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "priority by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "priority by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "priority by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "priority by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "priority by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "priority by ID")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $priority,
+        $priorityId,
 
-        # duration by ID
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "duration by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "duration by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "duration by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "duration by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "duration by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "duration by Name")]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $durationName,
+
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "duration by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "duration by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "duration by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "duration by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "duration by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "duration by ID")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $duration,
+        $durationId,
 
-        # Target Date
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Target Date")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Target Date")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Target Date")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Target Date")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Target Date")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Target Date")]
         [datetime]
         $targetDate,
 
-        # sla by ID
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "sla by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "sla by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "sla by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "sla by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "sla by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "sla by ID")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
         $sla,
 
-        # On hold. On hold date will be filled accordingly
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "On hold. On hold date will be filled accordingly")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "On hold. On hold date will be filled accordingly")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "On hold. On hold date will be filled accordingly")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "On hold. On hold date will be filled accordingly")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "On hold. On hold date will be filled accordingly")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "On hold. On hold date will be filled accordingly")]
         [bool]
         $onHold,
 
-        # operator by ID
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "operator by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "operator by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "operator by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "operator by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "operator by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "operator by ID")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
         $operator,
 
-        # operatorGroup by ID
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "operatorGroup by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "operatorGroup by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "operatorGroup by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "operatorGroup by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "operatorGroup by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "operatorGroup by ID")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
         $operatorGroup,
 
-        # supplier by ID
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "supplier by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "supplier by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "supplier by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "supplier by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "supplier by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "supplier by ID")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
         $supplier,
 
-        # processingStatus by ID
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "processingStatus by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "processingStatus by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "processingStatus by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "processingStatus by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "processingStatus by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "processingStatus by Name")]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $processingStatusName,
+
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "processingStatus by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "processingStatus by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "processingStatus by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "processingStatus by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "processingStatus by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "processingStatus by ID")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $processingStatus,
+        $processingStatusId,
 
-        # Whether the incident is responded
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Whether the incident is responded")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Whether the incident is responded")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Whether the incident is responded")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Whether the incident is responded")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Whether the incident is responded")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Whether the incident is responded")]
         [bool]
         $responded,
 
-        # responseDate
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "responseDate")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "responseDate")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "responseDate")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "responseDate")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "responseDate")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "responseDate")]
         [datetime]
         $responseDate,
 
-        # Whether the incident is completed
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Whether the incident is completed")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Whether the incident is completed")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Whether the incident is completed")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Whether the incident is completed")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Whether the incident is completed")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Whether the incident is completed")]
         [bool]
         $completed,
 
-        # Completed Date
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Completed Date")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Completed Date")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Completed Date")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Completed Date")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Completed Date")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Completed Date")]
         [datetime]
         $completedDate,
 
-        # Whether the incident is closed
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Whether the incident is closed")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Whether the incident is closed")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Whether the incident is closed")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Whether the incident is closed")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Whether the incident is closed")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Whether the incident is closed")]
         [bool]
         $closed,
 
-        # Closed Date
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Closed Date")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Closed Date")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Closed Date")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Closed Date")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Closed Date")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Closed Date")]
         [datetime]
         $closedDate,
 
-        # Closure Code by ID
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Closure Code by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Closure Code by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Closure Code by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Closure Code by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Closure Code by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Closure Code by Name")]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $closureCodeName,
+
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Closure Code by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Closure Code by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Closure Code by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Closure Code by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Closure Code by ID")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Closure Code by ID")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $closureCode,
+        $closureCodeId,
 
-        # Costs
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Costs")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Costs")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Costs")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Costs")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Costs")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Costs")]
         [float]
         $costs,
 
-        # Rate incident, only available for closed incidents
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Rate incident, only available for closed incidents")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Rate incident, only available for closed incidents")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Rate incident, only available for closed incidents")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Rate incident, only available for closed incidents")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Rate incident, only available for closed incidents")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Rate incident, only available for closed incidents")]
         [ValidateSet(1, 2, 3, 4, 5)]
         [int]
         $feedbackRating,
 
-        # Leave feedback message on incident, only available for closed incidents and when feedbackRating is given
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Leave feedback message on incident, only available for closed incidents and when feedbackRating is given")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Leave feedback message on incident, only available for closed incidents and when feedbackRating is given")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Leave feedback message on incident, only available for closed incidents and when feedbackRating is given")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Leave feedback message on incident, only available for closed incidents and when feedbackRating is given")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Leave feedback message on incident, only available for closed incidents and when feedbackRating is given")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Leave feedback message on incident, only available for closed incidents and when feedbackRating is given")]
         [string]
         $feedbackMessage,
 
-        # Incident is attached to a Major Call
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Incident is attached to a Major Call")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Incident is attached to a Major Call")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Incident is attached to a Major Call")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Incident is attached to a Major Call")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Incident is attached to a Major Call")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Incident is attached to a Major Call")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
         $majorCallObject,
 
-        # Free fields Tab 1
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Free fields Tab 1")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Free fields Tab 1")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Free fields Tab 1")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Free fields Tab 1")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Free fields Tab 1")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Free fields Tab 1")]
         [hashtable]
         $optionalFields1,
 
-        # Free fields Tab 2
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Free fields Tab 2")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Free fields Tab 2")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Free fields Tab 2")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Free fields Tab 2")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Free fields Tab 2")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Free fields Tab 2")]
         [hashtable]
         $optionalFields2,
 
-        # Link to an external system - Identifier as supplied by the external system
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Link to an external system - Identifier as supplied by the external system")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Link to an external system - Identifier as supplied by the external system")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Link to an external system - Identifier as supplied by the external system")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Link to an external system - Identifier as supplied by the external system")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Link to an external system - Identifier as supplied by the external system")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Link to an external system - Identifier as supplied by the external system")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
         $externalLinkID,
 
-        # Link to an external system - Integer to identify the external system by
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Link to an external system - Integer to identify the external system by")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Link to an external system - Integer to identify the external system by")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Link to an external system - Integer to identify the external system by")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Link to an external system - Integer to identify the external system by")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Link to an external system - Integer to identify the external system by")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Link to an external system - Integer to identify the external system by")]
         [int]
         $externalLinkType,
 
-        # Date of the last synchronization
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Date of the last synchronization")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Date of the last synchronization")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Date of the last synchronization")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Date of the last synchronization")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Date of the last synchronization")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Date of the last synchronization")]
         [datetime]
         $externalLinkDate
 
@@ -626,17 +688,14 @@ function New-Incident {
     begin {
 
         if (!($script:tdConnected)) {
-
             $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("Cannot use TopDesk Client when disconnected.", $null, [System.Management.Automation.ErrorCategory]::ConnectionError, $null))
-
         }
 
+        #TODO: Move this to parameter validation
         if (($PSBoundParameters.ContainsKey('externalLinkID')) -and (!($PSBoundParameters.ContainsKey('externalLinkType')))) {
-
             $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("externalLinkType must be provided when using externalLinkID", $null, [System.Management.Automation.ErrorCategory]::InvalidOperation, $null))
-
         }
-        
+
     }
 
     process {
@@ -671,7 +730,7 @@ function New-Incident {
                 Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'callerLookup' -Value @{ 'loginName' = $callerLookupLoginName }
                 break
             }
-            
+
             'Unregistered' {
                 $null = $callerlist.Add([PSCustomObject]@{
                         'caller' = @{ 'dynamicName' = $dynamicName }
@@ -679,8 +738,6 @@ function New-Incident {
                 [bool]$callerSet = $true
                 break
             }
-           
-            Default { }
         }
 
         if ($PSBoundParameters.ContainsKey('BranchID')) {
@@ -731,18 +788,30 @@ function New-Incident {
             }
         }
 
-        if ($PSBoundParameters.ContainsKey('department')) {
+        if ($PSBoundParameters.ContainsKey('departmentName')) {
             if ($callerSet) {
-                $null = $callerList.caller.Add('department', $department)
+                $null = $callerList.caller.Add('department', @{ 'name' = $departmentName })
             }
             else {
                 $null = $callerList.Add([PSCustomObject]@{
-                        'caller' = @{'department' = $department }
+                        'caller' = @{'department' = @{ 'name' = $departmentName} }
                     })
                 $callerSet = $true
             }
         }
-        
+
+        if ($PSBoundParameters.ContainsKey('departmentId')) {
+            if ($callerSet) {
+                $null = $callerList.caller.Add('department', @{ 'id' = $departmentId })
+            }
+            else {
+                $null = $callerList.Add([PSCustomObject]@{
+                        'caller' = @{'department' = @{ 'id' = $departmentId} }
+                    })
+                $callerSet = $true
+            }
+        }
+
         if ($PSBoundParameters.ContainsKey('location')) {
             if ($callerSet) {
                 $null = $callerList.caller.Add('location', $location)
@@ -755,37 +824,73 @@ function New-Incident {
             }
         }
 
-        if ($PSBoundParameters.ContainsKey('budgetHolder')) {
+        if ($PSBoundParameters.ContainsKey('budgetHolderName')) {
             if ($callerSet) {
-                $null = $callerList.caller.Add('budgetHolder', $budgetHolder)
+                $null = $callerList.caller.Add('budgetHolder', @{ 'name' = $budgetHolderName })
             }
             else {
                 $null = $callerList.Add([PSCustomObject]@{
-                        'caller' = @{'budgetHolder' = $budgetHolder }
+                        'caller' = @{'budgetHolder' = @{ 'name' = $budgetHolderName } }
                     })
                 $callerSet = $true
             }
         }
 
-        if ($PSBoundParameters.ContainsKey('personExtraFieldA')) {
+        if ($PSBoundParameters.ContainsKey('budgetHolderId')) {
             if ($callerSet) {
-                $null = $callerList.caller.Add('personExtraFieldA', $personExtraFieldA)
+                $null = $callerList.caller.Add('budgetHolder', @{ 'id' = $budgetHolderId })
             }
             else {
                 $null = $callerList.Add([PSCustomObject]@{
-                        'caller' = @{'personExtraFieldA' = $personExtraFieldA }
+                        'caller' = @{'budgetHolder' = @{ 'id' = $budgetHolderId } }
                     })
                 $callerSet = $true
             }
         }
 
-        if ($PSBoundParameters.ContainsKey('personExtraFieldB')) {
+        if ($PSBoundParameters.ContainsKey('personExtraFieldAName')) {
             if ($callerSet) {
-                $null = $callerList.caller.Add('personExtraFieldB', $personExtraFieldB)
+                $null = $callerList.caller.Add('personExtraFieldA', @{ 'name' = $personExtraFieldAName } )
             }
             else {
                 $null = $callerList.Add([PSCustomObject]@{
-                        'caller' = @{'personExtraFieldB' = $personExtraFieldB }
+                        'caller' = @{'personExtraFieldA' = @{ 'name' = $personExtraFieldAName } }
+                    })
+                $callerSet = $true
+            }
+        }
+
+        if ($PSBoundParameters.ContainsKey('personExtraFieldAId')) {
+            if ($callerSet) {
+                $null = $callerList.caller.Add('personExtraFieldA', @{ 'id' = $personExtraFieldAId } )
+            }
+            else {
+                $null = $callerList.Add([PSCustomObject]@{
+                        'caller' = @{'personExtraFieldA' = @{ 'id' = $personExtraFieldAId } }
+                    })
+                $callerSet = $true
+            }
+        }
+
+        if ($PSBoundParameters.ContainsKey('personExtraFieldBName')) {
+            if ($callerSet) {
+                $null = $callerList.caller.Add('personExtraFieldB', @{'name' = $personExtraFieldBName })
+            }
+            else {
+                $null = $callerList.Add([PSCustomObject]@{
+                        'caller' = @{'personExtraFieldB' = @{'name' = $personExtraFieldBName } }
+                    })
+                $callerSet = $true
+            }
+        }
+
+        if ($PSBoundParameters.ContainsKey('personExtraFieldBId')) {
+            if ($callerSet) {
+                $null = $callerList.caller.Add('personExtraFieldB', @{'id' = $personExtraFieldBId })
+            }
+            else {
+                $null = $callerList.Add([PSCustomObject]@{
+                        'caller' = @{'personExtraFieldB' = @{'id' = $personExtraFieldBId } }
                     })
                 $callerSet = $true
             }
@@ -815,12 +920,20 @@ function New-Incident {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'actionInvisibleForCaller' -Value $actionInvisibleForCaller
         }
 
-        if ($PSBoundParameters.ContainsKey('entryType')) {
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'entryType' -Value @{ 'id' = $entryType }
+        if ($PSBoundParameters.ContainsKey('entryTypeName')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'entryType' -Value @{ 'name' = $entryTypeName }
         }
 
-        if ($PSBoundParameters.ContainsKey('callType')) {
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'callType' -Value @{ 'id' = $callType }
+        if ($PSBoundParameters.ContainsKey('entryTypeId')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'entryType' -Value @{ 'id' = $entryTypeId }
+        }
+
+        if ($PSBoundParameters.ContainsKey('callTypeName')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'callType' -Value @{ 'name' = $callTypeName }
+        }
+
+        if ($PSBoundParameters.ContainsKey('callTypeId')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'callType' -Value @{ 'id' = $callTypeId }
         }
 
         if ($PSBoundParameters.ContainsKey('categoryName')) {
@@ -860,20 +973,36 @@ function New-Incident {
             }
         }
 
-        if ($PSBoundParameters.ContainsKey('impact')) {
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'impact' -Value @{'id' = $impact }
+        if ($PSBoundParameters.ContainsKey('impactName')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'impact' -Value @{'name' = $impactName }
         }
 
-        if ($PSBoundParameters.ContainsKey('urgency')) {
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'urgency' -Value @{'id' = $urgency }
+        if ($PSBoundParameters.ContainsKey('impactId')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'impact' -Value @{'id' = $impactId }
         }
 
-        if ($PSBoundParameters.ContainsKey('priority')) {
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'priority' -Value @{ 'id' = $priority }
+        if ($PSBoundParameters.ContainsKey('urgencyName')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'urgency' -Value @{'id' = $urgencyName }
         }
 
-        if ($PSBoundParameters.ContainsKey('duration')) {
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'duration' -Value @{ 'id' = $duration }
+        if ($PSBoundParameters.ContainsKey('urgencyId')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'urgency' -Value @{'id' = $urgencyId }
+        }
+
+        if ($PSBoundParameters.ContainsKey('priorityName')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'priority' -Value @{ 'name' = $priorityName }
+        }
+
+        if ($PSBoundParameters.ContainsKey('priorityId')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'priority' -Value @{ 'id' = $priorityId }
+        }
+
+        if ($PSBoundParameters.ContainsKey('durationName')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'duration' -Value @{ 'id' = $durationName }
+        }
+
+        if ($PSBoundParameters.ContainsKey('durationId')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'duration' -Value @{ 'id' = $durationId }
         }
 
         if ($PSBoundParameters.ContainsKey('targetDate')) {
@@ -881,31 +1010,35 @@ function New-Incident {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'targetDate' -Value $_newTargetDate
         }
 
-        if ($PSBoundParameters.ContainsKey('sla')) { 
+        if ($PSBoundParameters.ContainsKey('sla')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'sla' -Value @{ 'id' = $sla }
         }
 
-        if ($PSBoundParameters.ContainsKey('onHold')) { 
+        if ($PSBoundParameters.ContainsKey('onHold')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'onHold' -Value $onHold
         }
 
-        if ($PSBoundParameters.ContainsKey('operator')) { 
+        if ($PSBoundParameters.ContainsKey('operator')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'operator' -Value @{ 'id' = $operator }
         }
 
-        if ($PSBoundParameters.ContainsKey('operatorgroup')) { 
+        if ($PSBoundParameters.ContainsKey('operatorgroup')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'operatorGroup' -Value @{ 'id' = $operatorGroupID }
         }
 
-        if ($PSBoundParameters.ContainsKey('supplier')) { 
+        if ($PSBoundParameters.ContainsKey('supplier')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'supplier' -Value @{ 'id' = $supplierID }
         }
 
-        if ($PSBoundParameters.ContainsKey('processingStatus')) { 
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'processingStatus' -Value @{ 'id' = $processingStatusID }
+        if ($PSBoundParameters.ContainsKey('processingStatusName')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'processingStatus' -Value @{ 'name' = $processingStatusName }
         }
 
-        if ($PSBoundParameters.ContainsKey('responded')) { 
+        if ($PSBoundParameters.ContainsKey('processingStatusId')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'processingStatus' -Value @{ 'id' = $processingStatusId }
+        }
+
+        if ($PSBoundParameters.ContainsKey('responded')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'responded' -Value $responded
         }
 
@@ -914,7 +1047,7 @@ function New-Incident {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'responseDate' -Value $_newResponseDate
         }
 
-        if ($PSBoundParameters.ContainsKey('completed')) { 
+        if ($PSBoundParameters.ContainsKey('completed')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'completed' -Value $completed
         }
 
@@ -932,11 +1065,15 @@ function New-Incident {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'closedDate' -Value $_newClosedDate
         }
 
-        if ($PSBoundParameters.ContainsKey('closureCode')) { 
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'closureCode' -Value @{ 'id' = $closureCode }
+        if ($PSBoundParameters.ContainsKey('closureCodeName')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'closureCode' -Value @{ 'name' = $closureCodeName }
         }
 
-        if ($PSBoundParameters.ContainsKey('costs')) { 
+        if ($PSBoundParameters.ContainsKey('closureCodeId')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'closureCode' -Value @{ 'id' = $closureCodeId }
+        }
+
+        if ($PSBoundParameters.ContainsKey('costs')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'costs' -Value $costs
         }
 
@@ -944,15 +1081,15 @@ function New-Incident {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'feedbackRating' -Value $feedbackRating
         }
 
-        if ($PSBoundParameters.ContainsKey('feedbackMessage')) { 
+        if ($PSBoundParameters.ContainsKey('feedbackMessage')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'feedbackMessage' -Value $feedbackMessage
         }
 
-        if ($PSBoundParameters.ContainsKey('optionalFields1')) { 
+        if ($PSBoundParameters.ContainsKey('optionalFields1')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'optionalFields1' -Value $optionalFields1
         }
 
-        if ($PSBoundParameters.ContainsKey('optionalFields2')) { 
+        if ($PSBoundParameters.ContainsKey('optionalFields2')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'optionalFields1' -Value $optionalFields2
         }
 

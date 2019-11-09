@@ -1,3 +1,8 @@
+<#
+.Synopsis
+	Build script (https://github.com/rbury/TopDeskClent)
+#>
+
 $Compliance = 1
 
 Get-Item env:BH* | Remove-Item -ErrorAction SilentlyContinue
@@ -16,11 +21,13 @@ task Clean {
     if (Test-Path -Path "$env:BHBuildOutput" ) {
         $null = Remove-Item "$env:BHBuildOutput" -Recurse -Force
     }
+
     $null = New-Item "$env:BHBuildOutput/$env:BHProjectName" -ItemType Directory -Force
 
     if (Test-Path -Path "$env:BHProjectPath/Tests/Results") {
         $null = Remove-Item "$env:BHProjectPath/Tests/Results" -Recurse -Force
     }
+
     $null = New-Item "$env:BHProjectPath/Tests/Results" -ItemType Directory -Force
 
 }
@@ -31,7 +38,9 @@ task GenDocs {
         $null = Remove-Item "$env:BHBuildOutput/$env:BHProjectName/en-US" -Recurse -Force
     }
     Import-Module "$env:BHBuildOutPut/$env:BHProjectName/$env:BHProjectName.psd1" -Force
-    New-MarkdownHelp -Module $env:BHProjectName -OutputFolder "$env:BHBuildOutput/$env:BHProjectName/en-US" -WithModulePage
+
+    #Update-MarkdownHelp "$env:BHProjectPath/Docs" -ErrorAction SilentlyContinue
+    New-MarkdownHelp -Module $env:BHProjectName -OutputFolder "$env:BHBuildOutput/$env:BHProjectName/en-US" -WithModulePage -ErrorAction SilentlyContinue
     New-ExternalHelp -OutputPath "$env:BHBuildOutput/$env:BHProjectName/en-US" -Path "$env:BHBuildOutput/$env:BHProjectName/en-US" -ShowProgress -Force -ErrorAction SilentlyContinue
     $null = Remove-Item "$env:BHBuildOutput/$env:BHProjectName/en-US/*.md" -Recurse -Force
 
@@ -125,7 +134,7 @@ task Build {
 }
 
 task Help {
-    Remove-Module $env:BHProjectName -ErrorAction SilentlyContinue
+    #Remove-Module $env:BHProjectName -ErrorAction SilentlyContinue
     Import-Module "$env:BHBuildOutPut/$env:BHProjectName/$env:BHProjectName.psd1" -Force
     Update-MarkdownHelp "$env:BHProjectPath/docs" -ErrorAction SilentlyContinue
 }
@@ -138,4 +147,4 @@ task regularBuild Clean, PreTest, Build, Analyze, Test
 
 task fullBuild Clean, PreTest, Build, Analyze, Test, GenDocs, Archive
 
-task Testing PreTest, Analyze, Test
+task Testing Clean, PreTest, Analyze

@@ -1,34 +1,31 @@
-﻿[
+﻿{
+    "workbench.iconTheme": "vscode-icons",
+    "powershell.codeFormatting.useCorrectCasing": true,
+    "terminal.integrated.fontFamily": "monospace",
+    "powershell.codeFormatting.autoCorrectAliases": true,
+    "files.defaultLanguage": "powershell",
+    "powershell.powerShellExePath": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "powershell.scriptAnalysis.settingsPath": "./PSScriptAnalyzerSettings.psd1",
+    "powershell.integratedConsole.focusConsoleOnExecute": true,
+    "powershell.integratedConsole.showOnStartup": true,
+    "[powershell]": {
+        "editor.renderWhitespace": "all",
+        "editor.renderControlCharacters": true,
+        "files.trimTrailingWhitespace": true,
+        "files.encoding": "utf8bom",
+        "files.autoGuessEncoding": true,
+        "editor.tabCompletion": "on"
+    },
+    "xml.fileAssociations": [
     {
-        "workbench.iconTheme": "vscode-icons",
-        "powershell.codeFormatting.useCorrectCasing": true,
-        "terminal.integrated.fontFamily": "monospace",
-        "powershell.codeFormatting.autoCorrectAliases": true,
-        "files.defaultLanguage": "powershell",
-        "powershell.powerShellExePath": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-        "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-        "powershell.scriptAnalysis.settingsPath": "./PSScriptAnalyzerSettings.psd1",
-        "powershell.integratedConsole.focusConsoleOnExecute": true,
-        "powershell.integratedConsole.showOnStartup": false,
-        "[powershell]": {
-            "editor.renderWhitespace": "all",
-            "editor.renderControlCharacters": true,
-            "files.trimTrailingWhitespace": true,
-            "files.encoding": "utf8bom",
-            "files.autoGuessEncoding": true,
-            "editor.tabCompletion": "on"
-        },
-        "xml.fileAssociations": [
-            {
-                "systemId": "https://raw.githubusercontent.com/PowerShell/PowerShell/master/src/Schemas/Format.xsd",
-                "pattern": "**/*.Format.ps1xml"
-            },
-            {
-                "systemId": "https://raw.githubusercontent.com/PowerShell/PowerShell/master/src/Schemas/Types.xsd",
-                "pattern": "**/*.Types.ps1xml"
-            }
-        ],
-        "window.zoomLevel": 0,
-        "files.trimTrailingWhitespace": true
+        "systemId": "https://raw.githubusercontent.com/PowerShell/PowerShell/master/src/Schemas/Format.xsd",
+        "pattern": "**/*.Format.ps1xml"
+    },
+    {
+        "systemId": "https://raw.githubusercontent.com/PowerShell/PowerShell/master/src/Schemas/Types.xsd",
+        "pattern": "**/*.Types.ps1xml"
     }
-]
+    ],
+    "window.zoomLevel": 0
+}
