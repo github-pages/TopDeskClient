@@ -118,7 +118,7 @@ function New-Incident {
         [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Override the caller Department by Name")]
         [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Override the caller Department by Name")]
         [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Override the caller Department by Name")]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Override the caller Department by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "caller Department by Name")]
         [ValidateNotNullOrEmpty()]
         [string]
         $departmentName,
@@ -128,7 +128,7 @@ function New-Incident {
         [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Override the caller Department by Id")]
         [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Override the caller Department by Id")]
         [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Override the caller Department by Id")]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Override the caller Department by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "caller Department by Id")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
         $departmentId,
@@ -143,15 +143,25 @@ function New-Incident {
         [string]
         $location,
 
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Override the Budget holder of the caller")]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Override the Budget holder of the caller")]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Override the Budget holder of the caller")]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Override the Budget holder of the caller")]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Override the Budget holder of the caller")]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Budget holder of the unregistered caller")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Override the caller Budget holder by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Override the caller Budget holder by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Override the caller Budget holder by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Override the caller Budget holder by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Override the caller Budget holder by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "caller Budget holder by Name")]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $budgetHolderName,
+
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Override the caller Budget holder by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Override the caller Budget holder by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Override the caller Budget holder by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Override the caller Budget holder by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Override the caller Budget holder by Id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "caller Budget holder by Id")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $budgetHolder,
+        $budgetHolderId,
 
         [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Override the Person extra a of the caller")]
         [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Override the Person extra a of the caller")]
@@ -734,13 +744,25 @@ function New-Incident {
             }
         }
 
-        if ($PSBoundParameters.ContainsKey('budgetHolder')) {
+        if ($PSBoundParameters.ContainsKey('budgetHolderName')) {
             if ($callerSet) {
-                $null = $callerList.caller.Add('budgetHolder', $budgetHolder)
+                $null = $callerList.caller.Add('budgetHolder', @{ 'name' = $budgetHolderName })
             }
             else {
                 $null = $callerList.Add([PSCustomObject]@{
-                        'caller' = @{'budgetHolder' = $budgetHolder }
+                        'caller' = @{'budgetHolder' = @{ 'name' = $budgetHolderName } }
+                    })
+                $callerSet = $true
+            }
+        }
+
+        if ($PSBoundParameters.ContainsKey('budgetHolderId')) {
+            if ($callerSet) {
+                $null = $callerList.caller.Add('budgetHolder', @{ 'id' = $budgetHolderId })
+            }
+            else {
+                $null = $callerList.Add([PSCustomObject]@{
+                        'caller' = @{'budgetHolder' = @{ 'id' = $budgetHolderId } }
                     })
                 $callerSet = $true
             }
