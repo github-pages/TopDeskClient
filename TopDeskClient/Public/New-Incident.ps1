@@ -505,6 +505,16 @@ function New-Incident {
         [string]
         $supplier,
 
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "processingStatus by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "processingStatus by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "processingStatus by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "processingStatus by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "processingStatus by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "processingStatus by Name")]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $processingStatusName,
+
         [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "processingStatus by ID")]
         [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "processingStatus by ID")]
         [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "processingStatus by ID")]
@@ -513,7 +523,7 @@ function New-Incident {
         [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "processingStatus by ID")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $processingStatus,
+        $processingStatusId,
 
         [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Whether the incident is responded")]
         [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Whether the incident is responded")]
@@ -1010,8 +1020,12 @@ function New-Incident {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'supplier' -Value @{ 'id' = $supplierID }
         }
 
-        if ($PSBoundParameters.ContainsKey('processingStatus')) {
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'processingStatus' -Value @{ 'id' = $processingStatusID }
+        if ($PSBoundParameters.ContainsKey('processingStatusName')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'processingStatus' -Value @{ 'name' = $processingStatusName }
+        }
+
+        if ($PSBoundParameters.ContainsKey('processingStatusId')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'processingStatus' -Value @{ 'id' = $processingStatusId }
         }
 
         if ($PSBoundParameters.ContainsKey('responded')) {
