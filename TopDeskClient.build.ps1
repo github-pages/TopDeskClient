@@ -47,7 +47,6 @@ task Analyze {
 
     $saResults = Invoke-ScriptAnalyzer @scriptAnalyzerParams
 
-    # Save Analyze Results as JSON
     $saResults | ConvertTo-Json | Set-Content "$env:Common_TestResultsDirectory/AnalysisResults.json"
 
     if ($saResults) {
