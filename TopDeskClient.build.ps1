@@ -137,3 +137,5 @@ task Archive {
 task regularBuild Clean, PreTest, Build, Analyze, Test
 
 task fullBuild Clean, PreTest, Build, Analyze, Test, GenDocs, Archive
+
+task Testing PreTest, Analyze, Test
