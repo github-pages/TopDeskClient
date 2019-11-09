@@ -33,3 +33,10 @@ steps:
     testResultsFormat: NUnit
     searchFolder: '$(Common.TestResultsDirectory)'
     mergeTestResults: true
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish Code Coverage Results'
+  condition: always()
+  inputs:
+    codeCoverageTool: 'JaCoCo'
+    summaryFileLocation: '$(Common.TestResultsDirectory)/Coverage-*.xml'
