@@ -220,12 +220,12 @@ function New-Incident {
         [string]
         $entryTypeName,
 
-        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Entry type by id")]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Entry type by id")]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Entry type by id")]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Entry type by id")]
-        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Entry type by id")]
-        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Entry type by id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Entry type id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Entry type id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Entry type id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Entry type id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Entry type id")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Entry type id")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
         $entryTypeId,
