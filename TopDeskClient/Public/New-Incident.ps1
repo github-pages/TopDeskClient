@@ -427,6 +427,16 @@ function New-Incident {
         [string]
         $priorityId,
 
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "duration by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "duration by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "duration by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "duration by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "duration by Name")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "duration by Name")]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $durationName,
+
         [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "duration by ID")]
         [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "duration by ID")]
         [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "duration by ID")]
@@ -435,7 +445,7 @@ function New-Incident {
         [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "duration by ID")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $duration,
+        $durationId,
 
         [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Target Date")]
         [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Target Date")]
@@ -967,8 +977,12 @@ function New-Incident {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'priority' -Value @{ 'id' = $priorityId }
         }
 
-        if ($PSBoundParameters.ContainsKey('duration')) {
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'duration' -Value @{ 'id' = $duration }
+        if ($PSBoundParameters.ContainsKey('durationName')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'duration' -Value @{ 'id' = $durationName }
+        }
+
+        if ($PSBoundParameters.ContainsKey('durationId')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'duration' -Value @{ 'id' = $durationId }
         }
 
         if ($PSBoundParameters.ContainsKey('targetDate')) {
