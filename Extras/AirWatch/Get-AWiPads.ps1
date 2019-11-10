@@ -33,7 +33,7 @@ $awHeader = @{
 }
 
 # Perform a Rest Call
-function Get-APIResponse {
+function Get-AWAPIResponse {
 
     [CmdletBinding()]
     param (
@@ -71,7 +71,7 @@ function Get-APIResponse {
             }
         }
         else {
-            $Request = Invoke-RestMethod -Method GET -Uri $Uri -Headers $Headers -ErrorVariable RestError;   
+            $Request = Invoke-RestMethod -Method GET -Uri $Uri -Headers $Headers -ErrorVariable RestError;
         }
 
         if(!$RestError) {
@@ -110,7 +110,7 @@ function Get-AWiPads {
         $APIUri
     )
     try {
-        Get-APIResponse -Uri $APIUri -Headers $Headers -APIName "AirWatch";
+        Get-AWAPIResponse -Uri $APIUri -Headers $Headers -APIName "AirWatch";
     }
     catch {
         $SyncLog.Add("Error loading iPads from AirWatch") | Out-Null;
@@ -130,7 +130,7 @@ $AWDevListUri = $awconsoleURL + "/API/mdm/devices/search?pagesize=" + $lookupLim
 $AWiPads = Get-AWiPads -Headers $awHeader -APIUri $AWDevListUri
 
 if(($null -ne $AWiPads) -and ($AWiPads -ne "")) {
-    
+
     $TotalDevices = ($AWiPads.Devices.Count);
     Write-Verbose "$($TotalDevices) loaded from AirWatch";
 
@@ -160,7 +160,7 @@ if(($null -ne $AWiPads) -and ($AWiPads -ne "")) {
                                                                     @{Name='SEA';Expression={if($_.LocationGroupName.Trim() -eq "SEA"){'TRUE'}}}
 
     $iPads | Export-Csv -Path $iPadExport -NoTypeInformation;
-    
+
     # Sync Log
     if($SyncLog.Count -gt 0) {
         Write-Verbose "=====================  Sync Log  =====================";
