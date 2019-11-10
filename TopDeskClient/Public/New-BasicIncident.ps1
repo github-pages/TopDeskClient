@@ -226,7 +226,7 @@ function New-BasicIncident {
                 $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("The supplied Operator Group name was not found in list of operator groups.", $null, [System.Management.Automation.ErrorCategory]::ObjectNotFound, $null))
             }
         }
-        if ($PSCmdlet.ShouldProcess("Incident", "Create")) {
+        if ($PSCmdlet.ShouldProcess("Incident - $($BriefDescription)", "Create")) {
             New-Incident @params
         }
     }
