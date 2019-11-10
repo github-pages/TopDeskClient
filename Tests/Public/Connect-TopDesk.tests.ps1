@@ -1,7 +1,6 @@
 Import-Module $PSScriptRoot\..\..\TopDeskClient\TopDeskClient.psd1 -Force
 
 Describe Connect-TopDesk {
-    Import-Module C:\Users\rbury\source\repos\TopDeskClient\TopDeskClient\TopDeskClient.psd1 -Force
     InModuleScope -ModuleName TopDeskClient {
 
         $FunctionName = 'Connect-TopDesk'
