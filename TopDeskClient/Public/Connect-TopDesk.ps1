@@ -110,7 +110,7 @@
             }
 
             if ($script:tdCredential -eq [pscredential]::Empty) {
-                $script:tdCredential = Get-tdCredentail;
+                $script:tdCredential = Get-tdCredential;
             }
 
             $script:tdConnected = $false;
@@ -118,7 +118,7 @@
             $headers = @{'Content-Type' = 'application/json' }
             $uri = $TopDeskURI + '/tas/api/version'
             $script:tdAPIVersion = (Get-APIResponse -Method 'GET' -url $uri -Headers $headers -tdCredential $script:tdCredential)
-            if ($null -ne ($script:tdAPIVersion.version)) {
+            if ($null -ne ($script:tdAPIVersion | Get-Member -Name version)) {
                 $script:tdConnected = $true;
             }
             else {

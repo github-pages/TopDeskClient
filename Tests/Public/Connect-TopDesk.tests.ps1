@@ -4,25 +4,21 @@ Describe Connect-TopDesk {
     InModuleScope -ModuleName TopDeskClient {
 
         $FunctionName = 'Connect-TopDesk'
-        Mock -CommandName  Get-APIResponse -MockWith {return (New-Object -TypeName psobject -ArgumentList @{version = "1.0.0"})}
-        Mock -CommandName Get-tdCredentail -MockWith {return ([pscredential]::new('test',(ConvertTo-SecureString -String 'test' -AsPlainText -Force)))}
+        Mock -CommandName Get-APIResponse -ModuleName 'TopDeskClient' -MockWith { return ([PSCustomObject]@{version = "1.0.0" }) }
+        Mock -CommandName Get-tdCredential -ModuleName 'TopDeskClient' -MockWith { return ([pscredential]::new('test', (ConvertTo-SecureString -String 'test' -AsPlainText -Force))) }
 
         Context "Connectiing to tenant" {
-            
-            It "Returns $false for invalid URLs" {
 
+            It "Returns $false for invalid URLs" {
                 Connect-TopDesk -uri 'badurltest' -ErrorAction SilentlyContinue | Should -Be $false
-    
             }
-    
+
             It "Connects when provided valid URL" {
-    
-                Connect-TopDesk -uri 'https://scdsb.topdesk.net' | Should -Be $true
-                Assert-MockCalled -CommandName Get-tdCredentail -Times 1 -Exactly
-                Assert-MockCalled -CommandName Get-APIResponse -Times 1 -Exactly
-                
+
+                Connect-TopDesk -uri 'https://test.topdesk.net' | Should -Be $true
+                Assert-MockCalled -CommandName Get-tdCredential -Times 1 -Exactly -Scope It
+                Assert-MockCalled -CommandName Get-APIResponse -Times 1 -Exactly -Scope It
             }
-            
         }
 
         Context "Required Parameters" {
@@ -47,7 +43,7 @@ Describe Connect-TopDesk {
                 ((Get-Command $FunctionName).Parameters['Load'].Attributes | Where-Object { $_ -is [parameter] }).Mandatory | Should Be $true
 
             }
-            
-        } 
+
+        }
     }
 }
