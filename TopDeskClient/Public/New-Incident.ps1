@@ -1023,7 +1023,7 @@ function New-Incident {
         }
 
         if ($PSBoundParameters.ContainsKey('operatorgroup')) {
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'operatorGroup' -Value @{ 'id' = $operatorGroupID }
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'operatorGroup' -Value @{ 'id' = $operatorGroup }
         }
 
         if ($PSBoundParameters.ContainsKey('supplier')) {
