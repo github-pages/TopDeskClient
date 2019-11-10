@@ -38,6 +38,7 @@ function New-BasicIncident {
         HelpUri = "https://github.com/rbury/TopDeskClient/blob/master/Docs/New-BasicIncident.md",
         ConfirmImpact = 'Medium')]
     [OutputType([PSCustomObject], ParameterSetName = "Default")]
+
     Param (
         [Parameter(Mandatory = $true,
             ValueFromPipelineByPropertyName = $true,
