@@ -118,7 +118,12 @@
             $headers = @{'Content-Type' = 'application/json' }
             $uri = $TopDeskURI + '/tas/api/version'
             $script:tdAPIVersion = (Get-APIResponse -Method 'GET' -url $uri -Headers $headers -tdCredential $script:tdCredential)
-            $script:tdConnected = $true;
+            if ($null -ne ($script:tdAPIVersion.version)) {
+                $script:tdConnected = $true;
+            }
+            else {
+                $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("TopDesk instance not found at provided URL.", $null, [System.Management.Automation.ErrorCategory]::ObjectNotFound, $null))
+            }
             $script:tdURI = $TopDeskURI.Trim('/')
 
             if ($PSBoundParameters.ContainsKey('Save')) {
@@ -141,7 +146,7 @@
         return $false
 
     }
-    
+
     return $script:tdConnected
 
 }
