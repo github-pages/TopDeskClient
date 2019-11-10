@@ -220,7 +220,7 @@ function New-BasicIncident {
         if ($PSBoundParameters.ContainsKey('OperatorGroup')) {
             $OperatorGroupobj = (Get-OperatorGroup).results | Where-Object {$_.name -ieq $OperatorGroup}
             if ($null -ne $OperatorGroupobj) {
-                $params.Add('operatorGroup', $OperatorGroup.id)
+                $params.Add('operatorGroup', $OperatorGroupobj.id)
             }
             else {
                 $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("The supplied Operator Group name was not found in list of operator groups.", $null, [System.Management.Automation.ErrorCategory]::ObjectNotFound, $null))
