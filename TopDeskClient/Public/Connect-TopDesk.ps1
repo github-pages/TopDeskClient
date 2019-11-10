@@ -110,7 +110,7 @@
             }
 
             if ($script:tdCredential -eq [pscredential]::Empty) {
-                $script:tdCredential = Get-tdCredentail;
+                $script:tdCredential = Get-tdCredential;
             }
 
             $script:tdConnected = $false;
