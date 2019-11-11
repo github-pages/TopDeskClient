@@ -155,7 +155,14 @@ function New-BasicIncident {
         ParameterSetName = 'Default',
         HelpMessage = 'Major Call Number')]
         [string]
-        $MajorCallNumber
+        $MajorCallNumber,
+
+        [Parameter(Mandatory = $false,
+        ValueFromPipelineByPropertyName = $true,
+        ParameterSetName = 'Default',
+        HelpMessage = 'Major Call Id')]
+        [string]
+        $MajorCallId
     )
 
     begin {
