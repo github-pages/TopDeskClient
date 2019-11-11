@@ -1898,9 +1898,44 @@ Describe "New-Incident" {
                 }
             }
 
-            Context "majorCallObject" {
+            Context "majorCallId" {
 
-                $param = (Get-Command $FunctionName).Parameters['majorCallObject']
+                $param = (Get-Command $FunctionName).Parameters['majorCallId']
+
+                It "Should maintain compatibility" {
+
+                    $param.ParameterSets.Keys | Should -Contain 'byID'
+                    $param.ParameterSets.byID.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byID.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byEmail'
+                    $param.ParameterSets.byEmail.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byEmail.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byEmployee'
+                    $param.ParameterSets.byEmployee.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byEmployee.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byNetwork'
+                    $param.ParameterSets.byNetwork.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byNetwork.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'byLogin'
+                    $param.ParameterSets.byLogin.IsMandatory | Should -Be $false
+                    $param.ParameterSets.byLogin.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterSets.Keys | Should -Contain 'unregistered'
+                    $param.ParameterSets.unregistered.IsMandatory | Should -Be $false
+                    $param.ParameterSets.unregistered.ValueFromPipelineByPropertyName | Should -Be $false
+
+                    $param.ParameterType.Name | Should -Be 'string'
+
+                }
+            }
+
+            Context "majorCallNumber" {
+
+                $param = (Get-Command $FunctionName).Parameters['majorCallNumber']
 
                 It "Should maintain compatibility" {
 

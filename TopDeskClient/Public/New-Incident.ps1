@@ -635,7 +635,17 @@ function New-Incident {
         [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Incident is attached to a Major Call")]
         [ValidatePattern('[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')]
         [string]
-        $majorCallObject,
+        $majorCallId,
+
+        [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Incident is attached to a Major Call")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Incident is attached to a Major Call")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byEmployee', HelpMessage = "Incident is attached to a Major Call")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byNetwork', HelpMessage = "Incident is attached to a Major Call")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'byLogin', HelpMessage = "Incident is attached to a Major Call")]
+        [Parameter(Mandatory = $false, ParameterSetName = 'unregistered', HelpMessage = "Incident is attached to a Major Call")]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $majorCallNumber,
 
         [Parameter(Mandatory = $false, ParameterSetName = 'byID', HelpMessage = "Free fields Tab 1")]
         [Parameter(Mandatory = $false, ParameterSetName = 'byEmail', HelpMessage = "Free fields Tab 1")]
@@ -1075,6 +1085,14 @@ function New-Incident {
 
         if ($PSBoundParameters.ContainsKey('costs')) {
             Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'costs' -Value $costs
+        }
+
+        if ($PSBoundParameters.ContainsKey('MajorCallId')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'MajorCallObject' -Value @{ 'id' = $majorCallId}
+        }
+
+        if ($PSBoundParameters.ContainsKey('MajorCallNumber')) {
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'MajorCallObject' -Value @{ 'number' = $majorCallNumber}
         }
 
         if ($PSBoundParameters.ContainsKey('feedbackRating')) {
