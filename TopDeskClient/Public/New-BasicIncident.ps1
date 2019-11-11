@@ -148,7 +148,14 @@ function New-BasicIncident {
             ParameterSetName = 'Default',
             HelpMessage = 'Name ofoperator group')]
         [string]
-        $OperatorGroup
+        $OperatorGroup,
+
+        [Parameter(Mandatory = $false,
+        ValueFromPipelineByPropertyName = $true,
+        ParameterSetName = 'Default',
+        HelpMessage = 'Major Call Number')]
+        [string]
+        $MajorCallNumber
     )
 
     begin {
@@ -226,6 +233,9 @@ function New-BasicIncident {
             else {
                 $PSCmdlet.ThrowTerminatingError([System.Management.Automation.ErrorRecord]::new("The supplied Operator Group name was not found in list of operator groups.", $null, [System.Management.Automation.ErrorCategory]::ObjectNotFound, $null))
             }
+        }
+        if ($PSBoundParameters.ContainsKey('MajorCallNumber')) {
+            $params.Add('majorCallNumber', $MajorCallNumber)
         }
         if ($PSCmdlet.ShouldProcess("Incident - $($BriefDescription)", "Create")) {
             New-Incident @params

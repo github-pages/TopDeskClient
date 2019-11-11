@@ -286,6 +286,18 @@ Describe "New-BasicIncident" {
                     $param.ParameterType.Name | Should -Be 'string'
                 }
             }
+
+            Context "MajorCallNumber" {
+                $param = (Get-Command $FunctionName).Parameters['MajorCallNumber']
+
+                It "Should maintain compatibility" {
+                    $param.ParameterSets.Keys | Should -Contain 'Default'
+                    $param.ParameterSets.Default.IsMandatory | Should -Be $false
+                    $param.ParameterSets.Default.ValueFromPipelineByPropertyName | Should -Be $true
+
+                    $param.ParameterType.Name | Should -Be 'string'
+                }
+            }
         }
     }
 }
