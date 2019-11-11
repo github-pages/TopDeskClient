@@ -235,7 +235,10 @@ function New-BasicIncident {
             }
         }
         if ($PSBoundParameters.ContainsKey('MajorCallNumber')) {
-            $params.Add('majorCallNumber', $MajorCallNumber)
+            $params.Add('MajorCallNumber', $MajorCallNumber)
+        }
+        if ($PSBoundParameters.ContainsKey('MajorCallId')) {
+            $params.Add('MajorCallId', $MajorCallId)
         }
         if ($PSCmdlet.ShouldProcess("Incident - $($BriefDescription)", "Create")) {
             New-Incident @params
