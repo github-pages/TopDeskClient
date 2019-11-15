@@ -1092,7 +1092,7 @@ function New-Incident {
         }
 
         if ($PSBoundParameters.ContainsKey('MajorCallNumber')) {
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'majorCallObject' -Value @{ 'number' = $majorCallNumber}
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'majorCallObject' -Value @{ 'name' = $majorCallNumber}
         }
 
         if ($PSBoundParameters.ContainsKey('feedbackRating')) {
