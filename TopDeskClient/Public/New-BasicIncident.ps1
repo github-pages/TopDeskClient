@@ -155,7 +155,14 @@ function New-BasicIncident {
         ParameterSetName = 'Default',
         HelpMessage = 'Major Call Number')]
         [string]
-        $MajorCallNumber
+        $MajorCallNumber,
+
+        [Parameter(Mandatory = $false,
+        ValueFromPipelineByPropertyName = $true,
+        ParameterSetName = 'Default',
+        HelpMessage = 'Major Call Id')]
+        [string]
+        $MajorCallId
     )
 
     begin {
@@ -235,7 +242,10 @@ function New-BasicIncident {
             }
         }
         if ($PSBoundParameters.ContainsKey('MajorCallNumber')) {
-            $params.Add('majorCallNumber', $MajorCallNumber)
+            $params.Add('MajorCallNumber', $MajorCallNumber)
+        }
+        if ($PSBoundParameters.ContainsKey('MajorCallId')) {
+            $params.Add('MajorCallId', $MajorCallId)
         }
         if ($PSCmdlet.ShouldProcess("Incident - $($BriefDescription)", "Create")) {
             New-Incident @params

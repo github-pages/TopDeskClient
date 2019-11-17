@@ -1088,11 +1088,11 @@ function New-Incident {
         }
 
         if ($PSBoundParameters.ContainsKey('MajorCallId')) {
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'MajorCallObject' -Value @{ 'id' = $majorCallId}
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'majorCallObject' -Value @{ 'id' = $majorCallId}
         }
 
         if ($PSBoundParameters.ContainsKey('MajorCallNumber')) {
-            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'MajorCallObject' -Value @{ 'number' = $majorCallNumber}
+            Add-Member -InputObject $newIncident -MemberType NoteProperty -Name 'majorCallObject' -Value @{ 'name' = $majorCallNumber}
         }
 
         if ($PSBoundParameters.ContainsKey('feedbackRating')) {
@@ -1125,6 +1125,7 @@ function New-Incident {
         $_body = (ConvertTo-Json -InputObject $newIncident -Depth 8 -Compress)
 
         if ($PSCmdlet.ShouldProcess( $_body, 'Create' )) {
+            Write-Verbose ("Calling {0} with {1}" -f $_uri, $_body)
             Get-APIResponse -Method 'POST' -APIurl $_uri -Body $_body -Headers $_headerslist -tdCredential $script:tdCredential
         }
 
