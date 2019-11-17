@@ -179,8 +179,8 @@ task Archive {
     Compress-Archive -Path "$env:BHBuildOutput/$env:BHProjectName" -DestinationPath "$env:BHBuildOutput/$env:BHProjectName.zip"
 }
 
-task regularBuild Clean, PreTest, Build, Analyze, Test
+task regularBuild Clean, Build, Analyze, Test
 
-task fullBuild Clean, Build, Analyze, Test, GenDocs, Archive
+task fullBuild Clean, PreTest, Build, ReleaseNotes, Analyze, Test, GenDocs, Archive
 
 task Testing Clean, PreTest, Analyze
