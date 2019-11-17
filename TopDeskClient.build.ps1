@@ -3,7 +3,7 @@
 	Build script (https://github.com/rbury/TopDeskClent)
 #>
 
-$Compliance = 1
+$Compliance = 50
 
 Get-Item env:BH* | Remove-Item -ErrorAction SilentlyContinue
 Set-BuildEnvironment -ErrorAction Stop
@@ -133,6 +133,40 @@ task Build {
 
     Set-ModuleFunction -Name "$env:BHBuildOutput/$env:BHProjectName/$env:BHProjectName.psd1" -FunctionsToExport $PublicFunctions
     Update-Metadata -Path "$env:BHBuildOutput/$env:BHProjectName/$env:BHProjectName.psd1" -PropertyName ModuleVersion -Value $newVersion
+}
+
+task Bump {
+    $vpatch = gitversion.exe /output json /showvariable Patch
+    $vmaj = gitversion.exe /output json /showvariable Major
+    $vmin = gitversion.exe /output json /showvariable Minor
+    $ver = "$vmaj.$vmin.$([int]$vpatch+1)"
+    Update-Metadata -Path "$env:BHPSModuleManifest" -Value $ver
+    $tagVersion = Get-Metadata -Path "$env:BHPSModuleManifest"
+    & git.exe tag -a $tagVersion -m "version $tagVersion"
+}
+
+task MajorBump {
+    $vpatch = gitversion.exe /output json /showvariable Patch
+    $vmaj = gitversion.exe /output json /showvariable Major
+    $vmin = gitversion.exe /output json /showvariable Minor
+    $ver = "$([int]$vmaj+1).$vmin.$vpatch"
+    Update-Metadata -Path "$env:BHPSModuleManifest" -Value $ver
+    $tagVersion = Get-Metadata -Path "$env:BHPSModuleManifest"
+    & git.exe tag -a $tagVersion -m "version $tagVersion"
+}
+
+task MinorBump {
+    $vpatch = gitversion.exe /output json /showvariable Patch
+    $vmaj = gitversion.exe /output json /showvariable Major
+    $vmin = gitversion.exe /output json /showvariable Minor
+    $ver = "$vmaj.$([int]$vmin+1).$vpatch"
+    Update-Metadata -Path "$env:BHPSModuleManifest" -Value $ver
+    $tagVersion = Get-Metadata -Path "$env:BHPSModuleManifest"
+    & git.exe tag -a $tagVersion -m "version $tagVersion"
+}
+
+task ReleaseNotes {
+    Update-Metadata -Path "$env:BHPSModuleManifest" -Property ReleaseNotes -Value (Get-Content -Path "$env:BHProjectPath/ReleaseNotes.md")
 }
 
 task Help {
