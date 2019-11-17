@@ -3,7 +3,7 @@
 	Build script (https://github.com/rbury/TopDeskClent)
 #>
 
-$Compliance = 1
+$Compliance = 50
 
 Get-Item env:BH* | Remove-Item -ErrorAction SilentlyContinue
 Set-BuildEnvironment -ErrorAction Stop
