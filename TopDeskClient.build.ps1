@@ -141,6 +141,22 @@ task Bump {
     & git.exe tag -a $tagVersion -m "version $tagVersion"
 }
 
+task MajorBump {
+    Update-Metadata -Path "$env:BHPSModuleManifest"
+    $tagVersion = Get-Metadata -Path "$env:BHPSModuleManifest"
+    & git.exe tag -a $tagVersion -m "version $tagVersion"
+}
+
+task MinorBump {
+    Update-Metadata -Path "$env:BHPSModuleManifest"
+    $tagVersion = Get-Metadata -Path "$env:BHPSModuleManifest"
+    & git.exe tag -a $tagVersion -m "version $tagVersion"
+}
+
+task ReleaseNotes {
+    Update-Metadata -Path "$env:BHPSModuleManifest" -Property ReleaseNotes -Value (Get-Content -Path "$env:BHProjectPath/ReleaseNotes.md")
+}
+
 task Help {
     #Remove-Module $env:BHProjectName -ErrorAction SilentlyContinue
     Import-Module "$env:BHBuildOutPut/$env:BHProjectName/$env:BHProjectName.psd1" -Force
