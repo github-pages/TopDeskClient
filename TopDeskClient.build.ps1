@@ -136,19 +136,31 @@ task Build {
 }
 
 task Bump {
-    Update-Metadata -Path "$env:BHPSModuleManifest"
+    $vpatch = gitversion.exe /output json /showvariable Patch
+    $vmaj = gitversion.exe /output json /showvariable Major
+    $vmin = gitversion.exe /output json /showvariable Minor
+    $ver = "$vmaj.$vmin.$([int]$vpatch+1)"
+    Update-Metadata -Path "$env:BHPSModuleManifest" -Value $ver
     $tagVersion = Get-Metadata -Path "$env:BHPSModuleManifest"
     & git.exe tag -a $tagVersion -m "version $tagVersion"
 }
 
 task MajorBump {
-    Update-Metadata -Path "$env:BHPSModuleManifest"
+    $vpatch = gitversion.exe /output json /showvariable Patch
+    $vmaj = gitversion.exe /output json /showvariable Major
+    $vmin = gitversion.exe /output json /showvariable Minor
+    $ver = "$([int]$vmaj+1).$vmin.$vpatch"
+    Update-Metadata -Path "$env:BHPSModuleManifest" -Value $ver
     $tagVersion = Get-Metadata -Path "$env:BHPSModuleManifest"
     & git.exe tag -a $tagVersion -m "version $tagVersion"
 }
 
 task MinorBump {
-    Update-Metadata -Path "$env:BHPSModuleManifest"
+    $vpatch = gitversion.exe /output json /showvariable Patch
+    $vmaj = gitversion.exe /output json /showvariable Major
+    $vmin = gitversion.exe /output json /showvariable Minor
+    $ver = "$vmaj.$([int]$vmin+1).$vpatch"
+    Update-Metadata -Path "$env:BHPSModuleManifest" -Value $ver
     $tagVersion = Get-Metadata -Path "$env:BHPSModuleManifest"
     & git.exe tag -a $tagVersion -m "version $tagVersion"
 }
