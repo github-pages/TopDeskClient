@@ -135,6 +135,12 @@ task Build {
     Update-Metadata -Path "$env:BHBuildOutput/$env:BHProjectName/$env:BHProjectName.psd1" -PropertyName ModuleVersion -Value $newVersion
 }
 
+task Bump {
+    Update-Metadata -Path "$env:BHPSModuleManifest"
+    $tagVersion = Get-Metadata -Path "$env:BHPSModuleManifest"
+    & git.exe tag -a $tagVersion -m "version $tagVersion"
+}
+
 task Help {
     #Remove-Module $env:BHProjectName -ErrorAction SilentlyContinue
     Import-Module "$env:BHBuildOutPut/$env:BHProjectName/$env:BHProjectName.psd1" -Force
@@ -147,6 +153,6 @@ task Archive {
 
 task regularBuild Clean, PreTest, Build, Analyze, Test
 
-task fullBuild Clean, PreTest, Build, Analyze, Test, GenDocs, Archive
+task fullBuild Clean, PreTest, Bump, Build, Analyze, Test, GenDocs, Archive
 
 task Testing Clean, PreTest, Analyze
