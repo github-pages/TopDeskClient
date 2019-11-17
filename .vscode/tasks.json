@@ -54,6 +54,39 @@
                 "-Task",
                 "Help"
             ]
+        },
+        {
+            "label": "Bump Version",
+            "type": "shell",
+            "command": ".\\build.ps1",
+            "args": [
+                "-Scope",
+                "CurrentUser",
+                "-Task",
+                "Bump"
+            ]
+        },
+        {
+            "label": "Bump Minor",
+            "type": "shell",
+            "command": ".\\build.ps1",
+            "args": [
+                "-Scope",
+                "CurrentUser",
+                "-Task",
+                "MinorBump"
+            ]
+        },
+        {
+            "label": "Bump Major",
+            "type": "shell",
+            "command": ".\\build.ps1",
+            "args": [
+                "-Scope",
+                "CurrentUser",
+                "-Task",
+                "MajorBump"
+            ]
         }
     ]
 }
