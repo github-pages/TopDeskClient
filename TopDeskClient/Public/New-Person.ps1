@@ -317,7 +317,7 @@ function New-Person {
       if ($P -inotin 'password','Debug', 'ErrorAction', 'ErrorVariable', 'InformationAction', 'InformationVariable', 'OutVariable', 'OutBuffer', 'PipelineVariable', 'Verbose', 'WarningAction', 'WarningVariable', 'WhatIf', 'Confirm') {
         $null = Add-Member -InputObject $person -MemberType NoteProperty -Name $p -Value $psboundparameters.$p
       } elseif ($p -eq 'password') {
-        $null = Add-Member -InputObject $person -MemberType NoteProperty -Name $p -Value [string]([System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($password)))
+        $null = Add-Member -InputObject $person -MemberType NoteProperty -Name $p -Value ([string]([System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($password))))
       }
     }
 
