@@ -324,6 +324,7 @@ function New-Person {
           }
           'branch' {
             $null = Add-Member -InputObject $person -MemberType NoteProperty -Name 'branch' -Value (@{"id"=$branch})
+            break
           }
         }
       }
