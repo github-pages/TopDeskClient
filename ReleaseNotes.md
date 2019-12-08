@@ -1,5 +1,12 @@
 # TopDeskClient
 
+## v0.2.5
+
+### Features
+
+- **Add support for Creating a new Person**
+  - New-Person
+
 ## v0.2.4
 
 ### Features
