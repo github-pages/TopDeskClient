@@ -151,7 +151,6 @@ function New-Person {
       ValueFromPipelineByPropertyName = $true,
       ParameterSetName = 'Default')]
     [ValidateNotNullOrEmpty()]
-    [ValidateLength(1, 200)]
     [securestring]
     $password,
 
