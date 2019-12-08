@@ -314,10 +314,18 @@ function New-Person {
     $person = [PSCustomObject]@{ }
 
     foreach ($p in $psboundparameters.Keys) {
-      if ($P -inotin 'password','Debug', 'ErrorAction', 'ErrorVariable', 'InformationAction', 'InformationVariable', 'OutVariable', 'OutBuffer', 'PipelineVariable', 'Verbose', 'WarningAction', 'WarningVariable', 'WhatIf', 'Confirm') {
+      if ($P -inotin 'branch','password','Debug', 'ErrorAction', 'ErrorVariable', 'InformationAction', 'InformationVariable', 'OutVariable', 'OutBuffer', 'PipelineVariable', 'Verbose', 'WarningAction', 'WarningVariable', 'WhatIf', 'Confirm') {
         $null = Add-Member -InputObject $person -MemberType NoteProperty -Name $p -Value $psboundparameters.$p
-      } elseif ($p -eq 'password') {
-        $null = Add-Member -InputObject $person -MemberType NoteProperty -Name $p -Value ([string]([System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($password))))
+      } else {
+        switch ($p) {
+          'password' {
+            $null = Add-Member -InputObject $person -MemberType NoteProperty -Name 'password' -Value ([string]([System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($password))))
+            break
+          }
+          'branch' {
+            $null = Add-Member -InputObject $person -MemberType NoteProperty -Name 'branch' -Value (@{"id"=$branch})
+          }
+        }
       }
     }
 
