@@ -315,8 +315,10 @@ function New-Person {
     $person = [PSCustomObject]@{ }
 
     foreach ($p in $psboundparameters.Keys) {
-      if ($P -inotin 'Debug', 'ErrorAction', 'ErrorVariable', 'InformationAction', 'InformationVariable', 'OutVariable', 'OutBuffer', 'PipelineVariable', 'Verbose', 'WarningAction', 'WarningVariable', 'WhatIf', 'Confirm') {
-        $null = $params.Add($p, $psboundparameters.$p)
+      if ($P -inotin 'password','Debug', 'ErrorAction', 'ErrorVariable', 'InformationAction', 'InformationVariable', 'OutVariable', 'OutBuffer', 'PipelineVariable', 'Verbose', 'WarningAction', 'WarningVariable', 'WhatIf', 'Confirm') {
+        $null = $person.Add($p, $psboundparameters.$p)
+      } elseif ($p -eq 'password') {
+        $null = $person.Add('password', [string]([System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($password))) )
       }
     }
 
