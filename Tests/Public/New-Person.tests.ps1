@@ -31,6 +31,15 @@ InModuleScope -ModuleName TopDeskClient {
             } | New-Person | Should -Be $null
             Assert-VerifiableMock
         }
+
+        It "Should perform an API call - password" {
+            $password = ConvertTo-SecureString -String 'testpassword' -AsPlainText -Force
+            [PSCustomObject]@{
+                surName = 'test'
+                password = $password
+            } | New-Person | Should -Be $null
+            Assert-VerifiableMock
+        }
     }
 
     Context "Parameters" {
@@ -43,7 +52,7 @@ InModuleScope -ModuleName TopDeskClient {
                     (Get-Command $FunctionName).DefaultParameterSet | Should -Be 'Default'
                 }
                 It "Should have 35 parameters in the default set" {
-                    (Get-Command $FunctionName).ParameterSets.Where({$_.Name -eq 'Default'}).Parameters.Count | Should -Be 35
+                    (Get-Command $FunctionName).ParameterSets.Where({$_.Name -eq 'Default'}).Parameters.Count | Should -Be 48
                 }
             }
         }
